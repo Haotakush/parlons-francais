@@ -1,7 +1,7 @@
 // Service worker : garde l'appli en mémoire pour qu'elle marche sans internet.
 // Après chaque modification de l'appli, augmenter le numéro de version ci-dessous (v5 -> v6...).
-const CACHE = "parlons-v6";
-const AUDIO_CACHE = "parlons-audio-v2"; // les fichiers audio ne changent pas : on les garde
+const CACHE = "parlons-v7";
+const AUDIO_CACHE = "parlons-audio-v3"; // les fichiers audio ne changent pas : on les garde
 const FILES = ["./", "./index.html", "./css/style.css", "./js/contenu.js", "./js/lecons.js", "./js/app.js", "./manifest.webmanifest", "./audio/index.js",
   "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png"];
 

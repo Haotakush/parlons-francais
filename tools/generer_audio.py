@@ -21,6 +21,20 @@ CLE = os.environ.get("GOOGLE_TTS_KEY", "").strip()
 API = "https://texttospeech.googleapis.com/v1/text:synthesize"
 
 
+# Règle de prononciation : la voix lit mal une apostrophe suivie de é, è ou ê
+# (« l'école » sonne faux). On envoie le mot collé (« lécole ») et un point pour les mots seuls.
+# Le texte affiché dans l'appli ne change pas : seul ce qui est envoyé à la voix est modifié.
+ELISION_E = re.compile(r"(\w)['’]([éèêÉÈÊ])")
+
+
+def texte_pour_la_voix(t):
+    if ELISION_E.search(t):
+        t = ELISION_E.sub(r"\1\2", t)
+        if not re.search(r"[.?!]$", t):
+            t += "."
+    return t
+
+
 def synth(texte, voix, sortie):
     corps = {"input": {"text": texte}, "voice": {"languageCode": "fr-FR", "name": voix}, "audioConfig": {"audioEncoding": "MP3"}}
     req = urllib.request.Request(API, data=json.dumps(corps).encode(), headers={"Content-Type": "application/json", "x-goog-api-key": CLE})
@@ -69,7 +83,8 @@ def main():
         f = os.path.join(RACINE, "audio", v, f"{n}.mp3")
         os.makedirs(os.path.dirname(f), exist_ok=True)
         # Les sons très courts sont parfois muets : on essaie avec de la ponctuation.
-        for essai, texte in enumerate([t, t + ".", t + " !", "« " + t + " »."]):
+        v0 = texte_pour_la_voix(t)
+        for essai, texte in enumerate([v0, v0 + ".", v0 + " !", "« " + v0 + " »."]):
             for k in range(5):
                 try:
                     n_car = synth(texte, VOIX[v], f)

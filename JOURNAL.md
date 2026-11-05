@@ -4,6 +4,19 @@ Une entrée par séance de travail, la plus récente en haut. Pour chaque séanc
 
 ---
 
+## 2026-11-05 (fin d'après-midi) — Correction des apostrophes (v6.1)
+
+**Fait**
+- Eric a repéré que les mots avec apostrophe + é/è (l'école, j'étais, l'écharpe) étaient mal lus. Après un test d'écoute en 2 essais, la solution retenue est d'envoyer le mot collé à la voix (« lécole »). 23 textes ont été régénérés.
+- Bug corrigé : 3 exercices « Compléter » ajoutaient un espace après l'apostrophe (« L' hiver »).
+- La règle est désormais appliquée automatiquement par `tools/generer_audio.py` et documentée dans `docs/AUDIO.md`.
+
+**Appris**
+- Les voix Chirp 3 HD lisent bien l'hôpital ou l'ordonnance, mais pas une apostrophe suivie de é, è ou ê.
+- L'apostrophe typographique (’) ne change rien.
+
+---
+
 ## 2026-11-05 (après-midi) — Les 8 thèmes (v6)
 
 **Fait**

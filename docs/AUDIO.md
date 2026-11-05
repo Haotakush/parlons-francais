@@ -32,6 +32,14 @@ Ensuite : écouter les nouveaux fichiers, augmenter `CACHE` dans `sw.js`, faire 
 
 Les anciens fichiers gardent leur numéro : on ne renumérote jamais.
 
+## Règles de prononciation (appliquées automatiquement par le script)
+
+- **Apostrophe suivie de é, è ou ê** (l'école, j'étais, l'écharpe) : la voix les lit mal. Le script envoie le mot collé (« lécole », « jétais »), avec un point final pour un mot seul. L'appli affiche toujours la bonne orthographe. Validé à l'oreille par Eric le 2026-11-05.
+- **Sons purs** (a, é, ch…) : la voix lit le nom de la lettre, d'où les enregistrements d'Eric dans `audio/sons/`.
+- **Mots très courts muets** : le script réessaie avec de la ponctuation (« a. », « è ! »).
+
+Pour refaire un fichier qui sonne mal : supprimer `audio/kore/<n>.mp3` et `audio/charon/<n>.mp3` (le numéro est dans `audio/index.js`), puis relancer le script.
+
 ## Réenregistrer un son pur
 
 1. Avec le Dictaphone du téléphone, dire chaque son, en laissant **environ 3 secondes de silence** entre deux sons. Ne rien dire d'autre.

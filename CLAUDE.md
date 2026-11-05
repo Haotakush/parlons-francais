@@ -64,6 +64,8 @@ Navigation par « hash » (`#/sons`, `#/cat/garage`, `#/lecon`…). Chaque page 
 - Voix : Google Cloud TTS **Chirp 3 HD**, `fr-FR-Chirp3-HD-Kore` et `fr-FR-Chirp3-HD-Charon`. Ne jamais utiliser Gemini-TTS (payant dès le premier caractère).
 - La clé API passe par la variable d'environnement `GOOGLE_TTS_KEY`. **Elle n'est jamais écrite dans un fichier du dépôt.** Conseiller à Eric de supprimer la clé après usage.
 - Ne jamais renuméroter ni supprimer les fichiers existants de `audio/`, et ne pas toucher à `audio/sons/` sans nouvel enregistrement d'Eric.
+- Règles de prononciation dans `docs/AUDIO.md` (par exemple : apostrophe + é/è/ê, le mot est envoyé collé à la voix). Toujours générer l'audio avec `tools/generer_audio.py`, qui les applique.
+- Quand un fichier audio existant est remplacé, augmenter aussi `AUDIO_CACHE` dans `sw.js`, sinon les téléphones gardent l'ancien son.
 
 **Service worker**
 - À chaque modification de `index.html`, `css/`, `js/` : **augmenter `CACHE` dans `sw.js`** (`parlons-v5` → `parlons-v6`…). Sinon, les téléphones gardent l'ancienne version.

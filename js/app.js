@@ -415,7 +415,7 @@ const prochaineLecon = () => ALL_LECONS.find(l => !leconFaite(l.id)) || null;
 /* Texte complet d'un exercice (ce qui est lu à voix haute) */
 function exoTexte(e){
   if(e.type === "choisir") return e.juste;
-  if(e.type === "completer") return e.phrase.replace("___", e.reponse);
+  if(e.type === "completer") return e.phrase.replace("___", e.reponse).replace(/(['’]) /g, "$1");
   return e.phrase;
 }
 const speakable = t => t.replace(/\s*→\s*/g, ", ");
