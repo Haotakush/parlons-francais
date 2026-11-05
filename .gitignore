@@ -1,0 +1,9 @@
+# Clés et secrets : ne jamais les mettre dans le dépôt
+.env
+*.key
+gkey
+# Fichiers temporaires
+__pycache__/
+*.tmp.mp3
+.DS_Store
+Thumbs.db
