@@ -29,7 +29,8 @@ index.html            La page : charge css/style.css, puis audio/index.js, js/co
 css/style.css         Le design. Couleurs en variables CSS (:root), mode sombre automatique
 js/contenu.js         Le contenu de base : SONS, HOMOPHONES, CONSTRUIRE, CONNECTEURS, VERBES, TEMPS, CATEGORIES, QUIZ, ORDRE
 js/lecons.js          Les 8 thèmes et leurs 52 leçons (THEMES) : règle, astuce, pour retenir, exemples, exercices + explications
-js/app.js             Outils, lecture audio, profils, leçon du jour, composants, pages, navigation
+js/app.js             Outils, lecture audio, profils {id, nom, genre}, leçon du jour, composants, pages, navigation
+                      Onglets : accueil (Aujourd'hui), apprendre, pratiquer, profil. Sous-pages avec pageHead() (bouton retour).
 audio/index.js        Correspondance texte → numéro de fichier (généré par tools/generer_audio.py)
 audio/kore/, charon/  Voix Google (femme / homme), un MP3 par texte
 audio/sons/           Les 20 sons enregistrés à la main par Eric (gros boutons de la page Sons)

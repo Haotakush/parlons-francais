@@ -4,6 +4,25 @@ Une entrée par séance de travail, la plus récente en haut. Pour chaque séanc
 
 ---
 
+## 2026-11-05 — v7 : nouvelle organisation, première version testée par les parents
+
+**Fait**
+- Premier lancement en 2 étapes : le prénom, puis « vous êtes une femme / un homme » (la personne qui apprend) et le choix de la voix. On peut ajouter une deuxième personne tout de suite.
+- 4 onglets : **Aujourd'hui** · **Apprendre** · **Pratiquer** · **Profil**.
+- Aujourd'hui : bonjour, série de jours, minutes du jour, grande carte « Leçon du jour », puis la prochaine leçon des thèmes. Les réglages ne sont plus sur l'accueil.
+- Apprendre : les 8 thèmes en cartes de couleur avec un anneau de progression. Chaque thème montre un chemin de leçons (faite, en cours, à venir).
+- Pratiquer : 6 cartes (Sons, Situations, Quiz, Remettre dans l'ordre, Conjugaison, Mes favoris), chacune avec un bouton retour.
+- Profil : statistiques (jours de suite, leçons faites, temps total), réglages (prénom, je suis, voix, vitesse), changer ou ajouter une personne, installer l'appli.
+- Les anciens profils sans « femme / homme » voient un message sur l'accueil pour le choisir.
+- Quelques messages s'accordent maintenant (« vous êtes allée jusqu'au bout », « très forte »).
+- Vérifié avec Playwright : premier lancement, 2 personnes, toutes les pages, ancien profil, mode sombre, aucune erreur.
+
+**Décidé**
+- « Femme / homme » concerne la personne qui apprend. La voix est un réglage séparé, choisie par défaut selon la réponse.
+- C'est la version que Eric fait tester aux parents.
+
+---
+
 ## 2026-11-05 (fin d'après-midi) — Correction des apostrophes (v6.1)
 
 **Fait**

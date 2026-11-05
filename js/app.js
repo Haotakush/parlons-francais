@@ -254,7 +254,7 @@ function loadProfil(){
   favs = new Set(pget("favs", []));
 }
 function saveProfils(list){
-  profils = list.map((x, i) => ({id: x.id || ("p" + Date.now().toString(36) + i), nom: x.nom.trim()})).filter(x => x.nom);
+  profils = list.map((x, i) => ({id: x.id || ("p" + Date.now().toString(36) + i), nom: x.nom.trim(), genre: x.genre || null})).filter(x => x.nom);
   store.set("profils", profils);
   if(!profils.some(x => x.id === profil)) profil = profils[0] && profils[0].id;
   store.set("profil", profil);
@@ -518,85 +518,237 @@ function exercice(e, onAnswer){
 const app = document.getElementById("app");
 let deferredInstall = null;
 
-function profilForm(intro, bouton){
-  const vals = [0, 1].map(i => (profils[i] && profils[i].nom) || "");
-  const inputs = vals.map((v, i) => el("input", {type:"text", id:"nom" + i, value: v, maxlength:"30", autocomplete:"off", autocapitalize:"words",
-    placeholder: i === 0 ? "Votre prénom" : "Facultatif", class:"field"}));
-  const err = el("div");
-  const submit = () => {
-    const noms = inputs.map(x => x.value.trim());
-    if(!noms[0] && !noms[1]){ err.replaceChildren(el("div", {class:"note ko"}, ic("alert"), "Écrivez au moins un prénom.")); inputs[0].focus(); return; }
-    saveProfils(noms.map((nom, i) => ({id: profils[i] && profils[i].id, nom})).filter(x => x.nom));
-    location.hash = "#/"; render();
-  };
-  return el("form", {class:"stack", onsubmit: e => { e.preventDefault(); submit(); }},
-    intro,
-    el("div", {class:"card stack", style:"gap:14px"},
-      el("div", {class:"setting"}, el("label", {for:"nom0"}, "Premier prénom"), inputs[0]),
-      el("div", {class:"setting"}, el("label", {for:"nom1"}, "Deuxième prénom"), inputs[1]),
-      el("p", {class:"soft", style:"margin:0"}, "Les prénoms restent sur ce téléphone. Ils ne sont envoyés nulle part.")),
-    err,
-    el("button", {class:"btn", type:"submit"}, bouton));
+/* ---------- Premier lancement et personnes ---------- */
+Object.assign(ICON, {
+  sun: P('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'),
+  bookOpen: P('<path d="M2 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H2zM22 5h-7a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h8z"/>'),
+  user: P('<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>'),
+  userPlus: P('<circle cx="10" cy="8" r="4"/><path d="M2 21a8 8 0 0 1 16 0M20 8v6M23 11h-6"/>'),
+  femme: P('<circle cx="12" cy="7" r="4"/><path d="M5 21v-1a7 7 0 0 1 14 0v1"/><path d="M9 14l3 4 3-4"/>', 'width="40" height="40" stroke-width="1.8"'),
+  homme: P('<circle cx="12" cy="7" r="4"/><path d="M5 21v-1a7 7 0 0 1 14 0v1"/>', 'width="40" height="40" stroke-width="1.8"'),
+  plus: P('<path d="M12 5v14M5 12h14"/>', 'width="18" height="18"'),
+  flameFill: '<svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c1 4 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-6 1-9z"/></svg>'
+});
+function go(h){ if(location.hash === h) render(); else location.hash = h; }
+const genreProfil = () => (profils.find(x => x.id === profil) || {}).genre || null;
+const accord = (m, f) => genreProfil() === "f" ? f : m;
+const initiale = nom => (nom || "?").trim().charAt(0).toUpperCase();
+const GENRES = {f: "Une femme", h: "Un homme"};
+function majProfil(champs){
+  profils = profils.map(x => x.id === profil ? Object.assign({}, x, champs) : x);
+  store.set("profils", profils);
+}
+function ajouterProfil(nom, genre, v){
+  const id = "p" + Date.now().toString(36);
+  profils = profils.concat([{id, nom: nom.trim(), genre}]);
+  store.set("profils", profils);
+  switchProfil(id);
+  voix = v; pset("voix", v);
+  return id;
+}
+function tempsTotal(){
+  let s = 0;
+  try{ const pre = "p_" + profil + "_temps_"; for(let i = 0; i < localStorage.length; i++){ const k = localStorage.key(i); if(k.startsWith(pre)) s += Number(localStorage.getItem(k)) || 0; } }catch(e){}
+  const m = Math.round(s / 60);
+  return m < 60 ? m + " min" : Math.floor(m / 60) + " h " + String(m % 60).padStart(2, "0");
+}
+function stepsBar(n, tot, back){
+  return el("div", {class:"row", style:"gap:12px"},
+    back ? el("button", {class:"iconbtn", type:"button", "aria-label":"Retour", html: ICON.back, onclick: back}) : null,
+    el("div", {class:"lessonbar", "aria-label":"Étape " + n + " sur " + tot}, Array.from({length: tot}, (_, k) => el("div", {class: k < n ? "on" : null}))),
+    el("span", {class:"soft", style:"font-weight:600"}, n + " / " + tot));
+}
+
+/* Le parcours d'accueil : prénom → homme ou femme (+ voix). Sert aussi à ajouter une personne. */
+function parcoursProfil(onFini, ajout){
+  let etape = 1, nom = "", genre = null, v = null;
+  const wrap = el("div", {class:"stack", style:"min-height:calc(100dvh - 44px)"});
+  function draw(){
+    stopAll();
+    if(etape === 1){
+      const input = el("input", {type:"text", id:"prenom", class:"field big", value: nom, maxlength:"30", autocomplete:"off", autocapitalize:"words", placeholder:"Votre prénom"});
+      const err = el("div");
+      const suivant = () => {
+        nom = input.value.trim();
+        if(!nom){ err.replaceChildren(el("div", {class:"note ko"}, ic("alert"), "Écrivez votre prénom.")); input.focus(); return; }
+        etape = 2; draw();
+      };
+      wrap.replaceChildren(...[
+        stepsBar(1, 2, ajout ? () => history.back() : null),
+        el("div", {class:"stack", style:"gap:10px;margin-top:24px"},
+          el("span", {class:"onb-ic", html: ICON.user.replace('width="22" height="22"', 'width="32" height="32"')}),
+          el("h1", {style:"font-size:32px;margin-top:8px"}, ajout ? "Qui d'autre apprend ?" : "Comment vous appelez-vous ?"),
+          el("p", {class:"muted", style:"margin:0"}, "Le prénom s'affichera dans l'appli. Il reste sur ce téléphone.")),
+        el("form", {class:"setting", onsubmit: e => { e.preventDefault(); suivant(); }}, el("label", {for:"prenom"}, "Prénom"), input),
+        err, el("div", {class:"grow"}),
+        el("button", {class:"btn", type:"button", onclick: suivant}, "Continuer", el("span", {html: ICON.next}))].filter(Boolean));
+      setTimeout(() => input.focus(), 50);
+    } else {
+      const carte = (g) => el("button", {type:"button", class:"genre" + (genre === g ? " on" : ""), "aria-pressed": String(genre === g), onclick:() => {
+          genre = g; if(!v) v = g === "f" ? "femme" : "homme"; draw(); }},
+        genre === g ? el("span", {class:"tick", html: ICON.checkSm}) : null,
+        el("span", {html: ICON[g === "f" ? "femme" : "homme"]}), el("b", null, GENRES[g]));
+      const voixBox = genre ? el("div", {class:"card stack", style:"gap:12px"},
+        el("div", {class:"row", style:"justify-content:space-between"}, el("b", null, "La voix de l'appli"), el("span", {class:"soft"}, "modifiable plus tard")),
+        seg([["femme","Voix de femme"],["homme","Voix d'homme"]], v, k => { v = k; draw(); }, "Voix"),
+        el("button", {class:"btn outline", type:"button", onclick:() => { const old = voix; voix = v; speak("Bonjour, je vais vous aider à parler français."); voix = old; }},
+          el("span", {html: ICON.play}), "Écouter la voix")) : null;
+      const fini = () => {
+        if(ajout || profils.length){ ajouterProfil(nom, genre, v); }
+        else { profils = [{id: "p" + Date.now().toString(36), nom, genre}]; store.set("profils", profils); switchProfil(profils[0].id); voix = v; pset("voix", v); }
+        onFini();
+      };
+      wrap.replaceChildren(...[
+        stepsBar(2, 2, () => { etape = 1; draw(); }),
+        el("div", {class:"stack", style:"gap:8px;margin-top:8px"},
+          el("h1", {style:"font-size:30px"}, nom + ", vous êtes…"),
+          el("p", {class:"muted", style:"margin:0"}, "Pour bien accorder les phrases : « je suis prête » ou « je suis prêt ».")),
+        el("div", {class:"stats"}, carte("f"), carte("h")),
+        voixBox, el("div", {class:"grow"}),
+        el("button", {class:"btn", type:"button", disabled: !genre, onclick: fini}, "Commencer"),
+        !ajout && !profils.length && genre ? el("button", {class:"btn outline", type:"button", onclick:() => {
+          ajouterProfil(nom, genre, v); go("#/ajouter"); }}, el("span", {html: ICON.plus}), "Ajouter une autre personne") : null].filter(Boolean));
+    }
+    window.scrollTo(0, 0);
+  }
+  draw();
+  return wrap;
 }
 
 const PAGES = {
   bienvenue(){
-    return {kids:[profilForm(el("div", {class:"stack", style:"gap:10px;margin-top:20px"},
-      el("div", {class:"done", html: ICON.chat.replace('width="22" height="22"', 'width="44" height="44"')}),
-      el("h1", {style:"text-align:center"}, "Bienvenue"),
-      el("p", {class:"muted", style:"text-align:center;margin:0"}, "Qui va apprendre avec l'application ? Écrivez un ou deux prénoms.")), "Commencer")]};
+    document.body.classList.add("immersive");
+    return {kids:[parcoursProfil(() => { go("#/"); }, false)]};
   },
 
-  profils(){
-    return {kids:[pageHead("Les prénoms"), profilForm(el("p", {class:"muted", style:"margin:0"},
-      "Modifiez les prénoms. Si vous effacez un prénom, sa progression et ses favoris restent enregistrés sur le téléphone."), "Enregistrer")]};
+  ajouter(){
+    document.body.classList.add("immersive");
+    if(profils.length >= MAX_PROFILS){ setTimeout(() => go("#/personnes")); return PAGES.personnes(); }
+    return {kids:[parcoursProfil(() => { go("#/"); }, true)]};
   },
+
+  profils(){ return PAGES.personnes(); },
 
   accueil(){
     const plan = lessonPlan(today()), st = lessonState();
     const total = plan.steps.length - 1, idx = Math.min(st.idx, total);
     const finished = st.idx >= total;
-    const groupNow = finished ? 4 : STEP_GROUP(plan.steps[idx]);
-    const desc = "Le son « " + plan.son.son + " », l'homophone " + plan.homo.titre + " et " + plan.phrases.length + " phrases utiles.";
+    const pct = Math.round(idx / total * 100);
+    const nx = prochaineLecon();
     const kids = [
-      el("div", {class:"row", style:"justify-content:space-between;flex-wrap:wrap"},
-        el("span", {class:"muted", style:"font-size:15px;font-weight:600"}, dateText()),
-        profils.length > 1 ? seg(profils.map(x => [x.id, x.nom]), profil, k => { switchProfil(k); render(); }, "Qui apprend ?") : null),
-      el("h1", {style:"font-size:34px;letter-spacing:-.8px"}, "Bonjour " + nomProfil()),
-      el("div", {class:"card lesson stack", style:"gap:14px"},
-        el("div", {class:"row", style:"justify-content:space-between"},
-          el("span", {class:"badge"}, "Leçon du jour"),
-          el("span", {class:"muted", style:"font-size:14px;font-weight:600"}, finished ? "Terminée" : "Étape " + (groupNow + 1) + " sur 4")),
-        el("div", {class:"stack", style:"gap:6px"}, el("h3", null, plan.cat.titre), el("span", {class:"muted"}, desc)),
-        el("div", {class:"bar", role:"progressbar", "aria-label":"Progression de la leçon", "aria-valuenow": String(Math.round(idx / total * 100)), "aria-valuemin":"0", "aria-valuemax":"100"},
-          el("div", {style:"width:" + Math.round(idx / total * 100) + "%"})),
-        el("a", {href:"#/lecon", class:"btn"}, el("span", {html: ICON.play}),
-          finished ? "Refaire la leçon" : idx === 0 ? "Commencer la leçon" : "Continuer la leçon")),
+      el("div", {class:"row", style:"justify-content:space-between;align-items:center"},
+        el("div", {class:"stack", style:"gap:2px"},
+          el("span", {class:"muted", style:"font-size:15px;font-weight:600"}, dateText()),
+          el("h1", {style:"font-size:32px;letter-spacing:-.8px"}, "Bonjour " + nomProfil())),
+        el("a", {href:"#/personnes", class:"avatar", "aria-label":"Changer de personne"}, initiale(nomProfil()))),
+      genreProfil() ? null : el("a", {href:"#/reglage/genre", class:"note warm", style:"color:inherit"}, ic("info"), "Nouveau : dites-nous si vous êtes une femme ou un homme, pour bien accorder les phrases."),
       el("div", {class:"stats"},
-        el("div", {class:"stat"}, el("span", null, "Série"), el("b", null, streak() + (streak() > 1 ? " jours" : " jour"))),
-        el("div", {class:"stat"}, el("span", null, "Aujourd'hui"), el("b", null, minutesToday() + " min"))),
-      (() => { const nx = prochaineLecon(); return el("a", {href: nx ? "#/lecont/" + nx.id : "#/apprendre", class:"card row", style:"color:var(--fg)"},
-        el("span", {class:"lic", style:"display:inline-flex;color:var(--primary)", html: ICON.book}),
-        el("span", {class:"grow stack", style:"gap:2px"}, el("b", null, nx ? "Apprendre : " + nx.titre : "Apprendre"),
-          el("span", {class:"soft"}, nx ? nx.theme.titre + " · " + ALL_LECONS.filter(l => leconFaite(l.id)).length + " leçons sur " + ALL_LECONS.length : "Toutes les leçons sont faites")),
-        ic("chev", "chev")); })(),
-      el("h2", null, "Situations"),
-      el("div", {class:"list"}, CATEGORIES.filter(c => c.groupe !== "tous").map(c => listRow("#/cat/" + c.id, ICON_CAT[c.id] || "chat", c.titre)),
-        listRow("#/phrases", "chat", "Tous les jours", "Politesse, téléphone, rendez-vous…")),
-      el("h2", null, "Réglages"),
-      el("div", {class:"card stack", style:"gap:14px"},
-        el("div", {class:"setting"}, el("label", null, "Voix"),
-          seg([["femme","Femme"],["homme","Homme"]], voix, k => { voix = k; pset("voix", k); render(); speak("Bonjour, je vais vous aider à parler français."); }, "Voix")),
-        el("div", {class:"setting"}, el("label", null, "Vitesse"),
-          seg([[false,"Normale"],[true,"Lente"]], slow, k => { slow = k; pset("slow", k); render(); }, "Vitesse")),
-        el("p", {class:"soft", style:"margin:0"}, "Ces réglages sont propres à " + nomProfil() + "."),
-        el("a", {href:"#/profils", class:"btn outline"}, "Modifier les prénoms"))
+        el("div", {class:"stat flame"}, el("span", {class:"row", style:"gap:10px"}, el("span", {html: ICON.flameFill}),
+          el("span", {class:"stack", style:"gap:0"}, el("b", null, streak() + (streak() > 1 ? " jours" : " jour")), el("span", null, "de suite")))),
+        el("div", {class:"stat"}, el("span", {class:"row", style:"gap:10px"}, el("span", {style:"color:var(--primary);display:inline-flex", html: ICON.clock}),
+          el("span", {class:"stack", style:"gap:0"}, el("b", null, minutesToday() + " min"), el("span", null, "aujourd'hui"))))),
+      el("a", {href:"#/lecon", class:"hero"},
+        el("div", {class:"row", style:"justify-content:space-between"}, el("span", {class:"hero-k"}, "Leçon du jour"), el("span", {class:"hero-pill"}, finished ? "Terminée" : "20 min")),
+        el("span", {class:"hero-t"}, plan.cat.titre),
+        el("span", {class:"hero-d"}, "Un son, un homophone, " + plan.phrases.length + " phrases et un petit quiz."),
+        el("div", {class:"hero-bar"}, el("div", {style:"width:" + pct + "%"})),
+        el("span", {class:"hero-btn"}, el("span", {html: ICON.play}), finished ? "Refaire la leçon" : idx === 0 ? "Commencer" : "Continuer")),
+      el("h2", null, "Ensuite"),
+      nx ? el("a", {href:"#/lecont/" + nx.id, class:"card row", style:"color:var(--fg);gap:14px"},
+          el("span", {class:"tile-ic th-" + nx.theme.id, html: ICON[nx.theme.icone] || ICON.book}),
+          el("span", {class:"grow stack", style:"gap:3px"},
+            el("span", {class:"soft", style:"font-weight:600"}, nx.theme.titre + " · leçon " + (nx.theme.lecons.indexOf(nx) + 1)),
+            el("b", {style:"font-size:18px"}, nx.titre)),
+          ic("chev", "chev"))
+        : el("div", {class:"note"}, ic("info"), "Bravo, toutes les leçons des thèmes sont faites !")
     ];
     if(deferredInstall) kids.push(el("button", {class:"btn outline", type:"button", onclick: async () => {
       deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; render();
     }}, el("span", {html: ICON.download}), "Installer l'appli sur le téléphone"));
-    if(!("speechSynthesis" in window) && !window.AUDIO_INDEX) kids.unshift(el("div", {class:"note ko"}, "La voix n'est pas disponible. Ouvrez l'appli avec Chrome."));
     return {kids};
+  },
+
+  pratiquer(){
+    const tuiles = [
+      ["#/sons", "sound", "Sons", "20 sons à répéter", "mots"],
+      ["#/phrases", "chat", "Situations", "École, médecin, garage…", "phrases"],
+      ["#/quiz", "target", "Quiz", "Les mots qui se ressemblent", "homophones"],
+      ["#/ordre", "puzzle", "Remettre dans l'ordre", "5 phrases", "verbes"],
+      ["#/conjugaison", "pencil", "Conjugaison", "16 verbes, 4 temps", "passe"],
+      ["#/favoris", "star", "Mes favoris", favs.size + " phrase" + (favs.size > 1 ? "s" : "") + " gardée" + (favs.size > 1 ? "s" : ""), "orthographe"]
+    ];
+    return {kids:[el("h1", null, "Pratiquer"),
+      el("p", {class:"muted", style:"margin:0"}, "Écouter, répéter, s'entraîner librement."),
+      el("div", {class:"tiles"}, tuiles.map(([href, icon, titre, sous, th]) =>
+        el("a", {href, class:"tile th-" + th}, el("span", {class:"tile-ic", html: ICON[icon]}),
+          el("span", {class:"stack", style:"gap:2px"}, el("b", null, titre), el("span", {class:"tile-s"}, sous)))))]};
+  },
+
+  profil(){
+    const nbL = ALL_LECONS.filter(l => leconFaite(l.id)).length;
+    const ligne = (href, icon, label, val) => el("a", {href}, ic(icon, "lic"), el("span", {class:"grow"}, label),
+      val ? el("span", {class:"soft", style:"font-size:15px"}, val) : null, ic("chev", "chev"));
+    const autre = profils.find(x => x.id !== profil);
+    return {kids:[
+      el("div", {class:"row", style:"gap:14px"},
+        el("span", {class:"avatar big"}, initiale(nomProfil())),
+        el("div", {class:"stack", style:"gap:2px"}, el("h1", {style:"font-size:26px"}, nomProfil()),
+          el("span", {class:"soft"}, genreProfil() ? GENRES[genreProfil()] : "Profil"))),
+      el("div", {class:"stats3"},
+        el("div", {class:"stat flame"}, el("b", null, String(streak())), el("span", null, "jours de suite")),
+        el("div", {class:"stat"}, el("b", null, String(nbL)), el("span", null, "leçons faites")),
+        el("div", {class:"stat"}, el("b", null, tempsTotal()), el("span", null, "au total"))),
+      el("h2", {class:"soft", style:"font-size:15px"}, "Réglages"),
+      el("div", {class:"list"},
+        ligne("#/reglage/prenom", "pencil", "Prénom", nomProfil()),
+        ligne("#/reglage/genre", "user", "Je suis", genreProfil() ? GENRES[genreProfil()] : "À choisir"),
+        ligne("#/reglage/voix", "sound", "Voix", voix === "homme" ? "Homme" : "Femme"),
+        ligne("#/reglage/vitesse", "clock", "Vitesse", slow ? "Lente" : "Normale")),
+      el("h2", {class:"soft", style:"font-size:15px"}, "Sur ce téléphone"),
+      el("div", {class:"list"},
+        ligne("#/personnes", "userPlus", autre ? "Changer de personne" : "Ajouter une personne", autre ? autre.nom : ""),
+        deferredInstall ? el("button", {type:"button", onclick: async () => { deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; render(); }},
+          ic("download", "lic"), el("span", {class:"grow"}, "Installer l'appli"), ic("chev", "chev")) : null)]};
+  },
+
+  reglage(quoi){
+    const fini = () => { location.hash = "#/profil"; };
+    if(quoi === "prenom"){
+      const input = el("input", {type:"text", id:"prenom", class:"field big", value: nomProfil(), maxlength:"30", autocomplete:"off", autocapitalize:"words"});
+      return {kids:[pageHead("Prénom"), el("form", {class:"setting", onsubmit: e => { e.preventDefault(); if(input.value.trim()){ majProfil({nom: input.value.trim()}); fini(); } }},
+        el("label", {for:"prenom"}, "Prénom"), input, el("button", {class:"btn", type:"submit", style:"margin-top:12px"}, "Enregistrer"))]};
+    }
+    if(quoi === "genre"){
+      const carte = g => el("button", {type:"button", class:"genre" + (genreProfil() === g ? " on" : ""), onclick:() => { majProfil({genre: g}); fini(); }},
+        genreProfil() === g ? el("span", {class:"tick", html: ICON.checkSm}) : null, el("span", {html: ICON[g === "f" ? "femme" : "homme"]}), el("b", null, GENRES[g]));
+      return {kids:[pageHead("Je suis"), el("p", {class:"muted", style:"margin:0"}, "Pour bien accorder les phrases et les messages."), el("div", {class:"stats"}, carte("f"), carte("h"))]};
+    }
+    if(quoi === "voix"){
+      const box = el("div", {class:"stack"});
+      const draw = () => box.replaceChildren(
+        seg([["femme","Voix de femme"],["homme","Voix d'homme"]], voix, k => { voix = k; pset("voix", k); draw(); speak("Bonjour, je vais vous aider à parler français."); }, "Voix"),
+        el("button", {class:"btn outline", type:"button", onclick:() => speak("Bonjour, je vais vous aider à parler français.")}, el("span", {html: ICON.play}), "Écouter la voix"));
+      draw();
+      return {kids:[pageHead("Voix"), el("p", {class:"muted", style:"margin:0"}, "La voix qui lit les mots et les phrases."), box]};
+    }
+    if(quoi === "vitesse"){
+      const box = el("div", {class:"stack"});
+      const draw = () => box.replaceChildren(
+        seg([[false,"Normale"],[true,"Lente"]], slow, k => { slow = k; pset("slow", k); draw(); speak("Bonjour, je vais vous aider à parler français."); }, "Vitesse"));
+      draw();
+      return {kids:[pageHead("Vitesse"), el("p", {class:"muted", style:"margin:0"}, "En vitesse lente, la voix parle plus doucement."), box]};
+    }
+    return PAGES.profil();
+  },
+
+  personnes(){
+    return {kids:[pageHead("Qui apprend ?"),
+      el("p", {class:"muted", style:"margin:0"}, "Chaque personne a sa progression, ses favoris et ses réglages."),
+      el("div", {class:"list"}, profils.map(x => el("button", {type:"button", onclick:() => { switchProfil(x.id); go("#/"); }},
+        el("span", {class:"avatar sm"}, initiale(x.nom)),
+        el("span", {class:"grow"}, x.nom, el("div", {class:"soft", style:"font-weight:400"}, x.genre ? GENRES[x.genre] : "")),
+        x.id === profil ? el("span", {class:"badge"}, "En cours") : ic("chev", "chev")))),
+      profils.length < MAX_PROFILS ? el("a", {href:"#/ajouter", class:"btn outline"}, el("span", {html: ICON.plus}), "Ajouter une personne") : null]};
   },
 
   lecon(){
@@ -683,7 +835,7 @@ const PAGES = {
       if(s.t === "fin"){
         body = [el("div", {class:"done", html: ICON.check}),
           el("h1", {style:"text-align:center"}, "Bravo " + nomProfil() + " !"),
-          el("p", {class:"muted", style:"text-align:center;margin:0"}, "La leçon du jour est terminée. Revenez demain pour une nouvelle leçon."),
+          el("p", {class:"muted", style:"text-align:center;margin:0"}, "La leçon du jour est terminée. Vous êtes " + accord("allé", "allée") + " jusqu'au bout ! Revenez demain pour une nouvelle leçon."),
           el("div", {class:"stats"},
             el("div", {class:"stat"}, el("span", null, "Série"), el("b", null, streak() + (streak() > 1 ? " jours" : " jour"))),
             el("div", {class:"stat"}, el("span", null, "Aujourd'hui"), el("b", null, minutesToday() + " min")))];
@@ -706,7 +858,7 @@ const PAGES = {
       pset("sonTab", tab); pset("sonPick", pick);
       const tabs = seg([["voyelles","Voyelles"],["nasales","Nasales"],["autres","Autres"],["paires","Paires"]], tab, k => { tab = k; pick = 0; stopAll(); draw(); }, "Famille de sons");
       if(tab === "paires"){
-        wrap.replaceChildren(el("h1", null, "Les sons"), tabs,
+        wrap.replaceChildren(pageHead("Les sons"), tabs,
           el("p", {class:"muted", style:"margin:0"}, "Écoutez les deux mots, puis répétez-les."),
           ...SONS.paires.map(p => el("div", {class:"card"},
             el("h2", {style:"margin-bottom:6px"}, p.titre),
@@ -730,7 +882,7 @@ const PAGES = {
       const grid = el("div", {class:"songrid"}, list.map((x, k) =>
         el("button", {type:"button", class: k === pick ? "on" : null, "aria-pressed": String(k === pick), onclick:() => { pick = k; draw(); speak(x.rec ? "rec:" + x.rec : x.mots[0]); }},
           el("b", null, x.son), el("span", null, x.mots[0]))));
-      wrap.replaceChildren(el("h1", null, "Les sons"), tabs, detail, grid);
+      wrap.replaceChildren(pageHead("Les sons"), tabs, detail, grid);
       preloadPage();
     }
     draw();
@@ -740,7 +892,7 @@ const PAGES = {
   phrases(){
     const grp = (titre, g) => [el("h2", null, titre), el("div", {class:"list"},
       CATEGORIES.filter(c => c.groupe === g).map(c => listRow("#/cat/" + c.id, ICON_CAT[c.id] || "chat", c.titre)))];
-    return {kids:[el("h1", null, "Phrases"),
+    return {kids:[pageHead("Situations"),
       el("p", {class:"muted", style:"margin:0"}, "Des phrases prêtes à écouter et à répéter."),
       ...grp("Tous les jours", "tous"), ...grp("À la maison et en ville", "maison"), ...grp("Au travail", "travail"),
       el("div", {class:"list"}, listRow("#/favoris", "star", "Mes favoris"))]};
@@ -783,47 +935,37 @@ const PAGES = {
   },
 
   apprendre(){
-    const next = prochaineLecon();
+    const faites = ALL_LECONS.filter(l => leconFaite(l.id)).length;
     return {kids:[el("h1", null, "Apprendre"),
-      el("p", {class:"muted", style:"margin:0"}, "8 thèmes pour tout apprendre, une petite leçon à la fois."),
-      next ? el("a", {href:"#/lecont/" + next.id, class:"card stack", style:"gap:10px;color:var(--fg)"},
-        el("span", {class:"badge"}, "Prochaine leçon"),
-        el("b", {style:"font-size:20px"}, next.titre),
-        el("span", {class:"muted"}, next.theme.titre),
-        el("span", {class:"btn"}, el("span", {html: ICON.play}), "Commencer")) : el("div", {class:"note"}, ic("info"), "Bravo, toutes les leçons sont faites ! Vous pouvez les refaire quand vous voulez."),
-      el("h2", null, "Les thèmes"),
-      el("div", {class:"list"}, THEMES.map((t, i) => {
-        const n = nbFaites(t), tot = t.lecons.length;
-        return el("a", {href:"#/theme/" + t.id}, el("span", {class:"lic", style:"display:inline-flex", html: ICON[t.icone] || ICON.book}),
-          el("span", {class:"grow stack", style:"gap:6px"},
-            el("span", null, (i + 1) + ". " + t.titre),
-            el("span", {class:"row", style:"gap:8px"},
-              el("span", {class:"bar grow"}, el("div", {style:"width:" + Math.round(n / tot * 100) + "%"})),
-              el("span", {class:"soft", style:"font-size:13px;white-space:nowrap"}, n + " / " + tot))),
-          ic("chev", "chev"));
-      })),
-      el("h2", null, "Révisions"),
-      el("div", {class:"list"},
-        listRow("#/conjugaison", "pencil", "Tableau de conjugaison", "16 verbes, 4 temps"),
-        listRow("#/quiz", "target", "Quiz homophones", "10 questions"),
-        listRow("#/ordre", "puzzle", "Remettre dans l'ordre", "5 phrases"),
-        listRow("#/favoris", "star", "Mes favoris"))]};
+      el("p", {class:"muted", style:"margin:0"}, faites + " leçon" + (faites > 1 ? "s" : "") + " faite" + (faites > 1 ? "s" : "") + " sur " + ALL_LECONS.length),
+      el("div", {class:"tiles"}, THEMES.map(t => {
+        const n = nbFaites(t), tot = t.lecons.length, c = 100.5;
+        return el("a", {href:"#/theme/" + t.id, class:"tile th-" + t.id},
+          el("span", {class:"row", style:"justify-content:space-between;align-items:flex-start"},
+            el("span", {class:"tile-ic", html: ICON[t.icone] || ICON.book}),
+            el("span", {class:"ring", html: '<svg width="40" height="40" viewBox="0 0 40 40" role="img" aria-label="' + n + ' leçons sur ' + tot + '"><circle cx="20" cy="20" r="16" fill="none" stroke="var(--ring-bg)" stroke-width="5"/>' + (n ? '<circle cx="20" cy="20" r="16" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-dasharray="' + (c * n / tot).toFixed(1) + ' 101" transform="rotate(-90 20 20)"/>' : '') + '<text x="20" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="currentColor">' + n + '/' + tot + '</text></svg>'})),
+          el("b", null, t.titre));
+      }))]};
   },
 
   theme(id){
     const t = THEMES.find(x => x.id === id);
     if(!t) return PAGES.apprendre();
-    const n = nbFaites(t);
-    return {kids:[pageHead(t.titre),
-      el("p", {class:"soft", style:"margin:0"}, t.officiel),
-      el("div", {class:"row"}, el("div", {class:"bar grow"}, el("div", {style:"width:" + Math.round(n / t.lecons.length * 100) + "%"})),
-        el("span", {class:"soft"}, n + " leçon" + (n > 1 ? "s" : "") + " sur " + t.lecons.length)),
-      el("div", {class:"list"}, t.lecons.map((l, i) => {
-        const fait = leconFaite(l.id);
-        return el("a", {href:"#/lecont/" + l.id},
-          el("span", {class:"num" + (fait ? " ok" : ""), html: fait ? ICON.checkSm : String(i + 1)}),
-          el("span", {class:"grow"}, l.titre, el("div", {class:"soft", style:"font-weight:400"}, fait ? "Faite · à refaire quand vous voulez" : "8 exercices")),
-          ic("chev", "chev"));
+    const n = nbFaites(t), courante = t.lecons.find(l => !leconFaite(l.id));
+    const OFFS = [0, 70, -50, 60, -70, 40, -40, 60];
+    return {kids:[
+      el("div", {class:"theme-head th-" + t.id},
+        el("div", {class:"row", style:"gap:12px"},
+          el("button", {class:"iconbtn", type:"button", "aria-label":"Retour", html: ICON.back, onclick: goBack}),
+          el("span", {class:"tile-s", style:"font-weight:600"}, "Thème " + (THEMES.indexOf(t) + 1) + " · " + t.officiel)),
+        el("h1", {style:"font-size:28px"}, t.titre),
+        el("div", {class:"row"}, el("div", {class:"bar grow theme-bar"}, el("div", {style:"width:" + Math.round(n / t.lecons.length * 100) + "%"})),
+          el("b", {style:"font-size:13px"}, n + " / " + t.lecons.length))),
+      el("div", {class:"path"}, t.lecons.map((l, i) => {
+        const fait = leconFaite(l.id), cur = l === courante;
+        return el("a", {href:"#/lecont/" + l.id, class:"node th-" + t.id + (fait ? " done" : cur ? " cur" : ""), style:"transform:translateX(" + OFFS[i % OFFS.length] + "px)"},
+          el("span", {class:"dot", html: fait ? ICON.check.replace('width="44" height="44"', 'width="28" height="28"') : cur ? ICON.play : String(i + 1)}),
+          el("span", {class:"lab"}, cur ? (i + 1) + " · " + l.titre : l.titre));
       }))]};
   },
 
@@ -954,7 +1096,7 @@ const PAGES = {
       if(i >= items.length){
         wrap.replaceChildren(pageHead("Quiz homophones"), el("div", {class:"card stack center"},
           el("span", {class:"muted"}, "Terminé !"), el("div", {class:"score"}, score + " / " + items.length),
-          el("p", {style:"margin:0"}, score >= 8 ? "Bravo !" : score >= 5 ? "C'est bien, continuez !" : "Relisez les astuces et réessayez."),
+          el("p", {style:"margin:0"}, score >= 8 ? "Bravo, vous êtes très " + accord("fort", "forte") + " !" : score >= 5 ? "C'est bien, continuez !" : "Relisez les astuces et réessayez."),
           el("button", {class:"btn", type:"button", onclick:() => render()}, "Recommencer"),
           el("a", {class:"btn outline", href:"#/homophones"}, "Revoir les astuces")));
         return;
@@ -1040,10 +1182,12 @@ const PAGES = {
 /* =========================================================
    NAVIGATION
    ========================================================= */
-const TABS = [["accueil","#/","home","Accueil"],["sons","#/sons","sound","Sons"],["phrases","#/phrases","chat","Phrases"],["apprendre","#/apprendre","book","Apprendre"]];
-const TAB_OF = {bienvenue:"", profils:"accueil", accueil:"accueil", lecon:"accueil", sons:"sons", phrases:"phrases", cat:"phrases", favoris:"phrases",
+const TABS = [["accueil","#/","sun","Aujourd'hui"],["apprendre","#/apprendre","bookOpen","Apprendre"],["pratiquer","#/pratiquer","target","Pratiquer"],["profil","#/profil","user","Profil"]];
+const TAB_OF = {bienvenue:"", ajouter:"", accueil:"accueil", lecon:"accueil",
   grammaire:"apprendre", apprendre:"apprendre", theme:"apprendre", lecont:"apprendre",
-  homophones:"apprendre", construire:"apprendre", conjugaison:"apprendre", quiz:"apprendre", ordre:"apprendre"};
+  pratiquer:"pratiquer", sons:"pratiquer", phrases:"pratiquer", cat:"pratiquer", favoris:"pratiquer",
+  homophones:"pratiquer", construire:"pratiquer", conjugaison:"pratiquer", quiz:"pratiquer", ordre:"pratiquer",
+  profil:"profil", profils:"profil", personnes:"profil", reglage:"profil"};
 const tabsEl = document.getElementById("tabs");
 tabsEl.replaceChildren(...TABS.map(([k, href, icon, label]) =>
   el("a", {class:"tab", href, "data-tab": k}, el("span", {html: ICON[icon]}), label)));

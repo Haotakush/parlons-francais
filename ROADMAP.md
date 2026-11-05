@@ -12,6 +12,7 @@ Les priorités sont décidées par Eric. Rien n'est commencé sans un plan valid
 | v4 | 2026-11-05 | Nouveau design inspiré de shadcn/ui, leçon du jour guidée, icônes dessinées, 4 onglets |
 | v5 | 2026-11-05 | Projet sur GitHub, code découpé en fichiers, documentation, prénoms tapés par les utilisateurs, profils séparés |
 | v6 | 2026-11-05 | Onglet **Apprendre** : 8 thèmes, 52 leçons (règle, astuce, moyen mnémotechnique, exemples, 8 exercices expliqués), niveau A2–B1, audio de toutes les phrases |
+| v7 | 2026-11-05 | Premier lancement (prénom, femme/homme, voix), onglets Aujourd'hui · Apprendre · Pratiquer · Profil, thèmes en cartes et chemin de leçons. **Première version testée par les parents** |
 
 ## Maintenant
 

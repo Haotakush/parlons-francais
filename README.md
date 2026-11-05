@@ -11,12 +11,12 @@ Une application web gratuite (PWA) pour aider des adultes qui parlent déjà un 
 - **Phrases** par situation : la politesse, le téléphone, les rendez-vous, l'école, le médecin, la mairie, les courses, le garage. Les mots en orange se changent d'un toucher.
 - **Apprendre** : 8 thèmes et 52 leçons de niveau A2–B1 (faire des phrases, les mots du quotidien, les verbes, masculin/féminin/pluriel, les mots qui se ressemblent, le passé, l'orthographe, la ponctuation). Chaque leçon contient une règle, une astuce, un moyen mnémotechnique, des exemples et 8 exercices expliqués. Plus les révisions : tableau de conjugaison, quiz, phrases à remettre dans l'ordre.
 - Voix naturelles au choix (femme ou homme), vitesse lente, favoris.
-- 1 ou 2 profils, avec un prénom tapé au premier lancement. Chacun a sa progression.
+- 1 ou 2 personnes : au premier lancement, on tape son prénom et on dit si on est une femme ou un homme. Chacun a sa progression.
 - Fonctionne **hors ligne** et s'installe sur l'écran d'accueil.
 
 ## Installer sur un téléphone
 
-- **Android (Chrome)** : ouvrir le lien, puis ⋮ → **Installer l'application** (ou le bouton « Installer » en bas de l'accueil).
+- **Android (Chrome)** : ouvrir le lien, puis ⋮ → **Installer l'application** (ou « Installer l'appli » dans l'onglet Profil).
 - **iPhone (Safari)** : ouvrir le lien, puis le bouton **Partager** → **Sur l'écran d'accueil**.
 
 ## Mettre en ligne (GitHub Pages)
