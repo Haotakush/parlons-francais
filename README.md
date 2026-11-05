@@ -9,7 +9,7 @@ Une application web gratuite (PWA) pour aider des adultes qui parlent déjà un 
 - **Leçon du jour** guidée d'environ 20 minutes : un son, un homophone, 5 phrases d'une situation, un petit quiz.
 - **Sons** : voyelles, sons nasaux, consonnes et paires à ne pas confondre (rue / roue…).
 - **Phrases** par situation : la politesse, le téléphone, les rendez-vous, l'école, le médecin, la mairie, les courses, le garage. Les mots en orange se changent d'un toucher.
-- **Grammaire** : construire une phrase, conjugaison (16 verbes, 4 temps), homophones, quiz et phrases à remettre dans l'ordre.
+- **Apprendre** : 8 thèmes et 52 leçons de niveau A2–B1 (faire des phrases, les mots du quotidien, les verbes, masculin/féminin/pluriel, les mots qui se ressemblent, le passé, l'orthographe, la ponctuation). Chaque leçon contient une règle, une astuce, un moyen mnémotechnique, des exemples et 8 exercices expliqués. Plus les révisions : tableau de conjugaison, quiz, phrases à remettre dans l'ordre.
 - Voix naturelles au choix (femme ou homme), vitesse lente, favoris.
 - 1 ou 2 profils, avec un prénom tapé au premier lancement. Chacun a sa progression.
 - Fonctionne **hors ligne** et s'installe sur l'écran d'accueil.

@@ -4,6 +4,28 @@ Une entrée par séance de travail, la plus récente en haut. Pour chaque séanc
 
 ---
 
+## 2026-11-05 (après-midi) — Les 8 thèmes (v6)
+
+**Fait**
+- Programme complet rédigé avec Eric dans un document Claude : 8 thèmes, 52 leçons, 416 exercices, chacun avec son explication et chaque leçon avec un moyen mnémotechnique.
+- Contenu converti automatiquement en `js/lecons.js`, puis nouvel onglet **Apprendre** : la liste des thèmes avec leur progression, la liste des leçons, et le lecteur de leçon (règle → exemples → 8 exercices → bravo).
+- 3 types d'exercices partagés : choisir la phrase juste, compléter, remettre dans l'ordre. L'explication s'affiche après chaque réponse.
+- La leçon du jour propose ensuite la prochaine leçon de thème. La progression est séparée pour chaque profil.
+- Audio : 656 nouvelles phrases × 2 voix (32 699 caractères, gratuit).
+
+**Décidé**
+- Titres simples dans l'appli (« Faire des phrases »), titres officiels en petit. Niveau A2–B1.
+- Podcast Français Facile sert de référence et d'inspiration, mais on ne copie ni leurs textes ni leurs audios (dépôt public sous licence libre).
+- Eric vérifie le contenu directement dans l'appli déployée.
+
+**Appris**
+- Aucune banque d'audio libre ne couvre la conjugaison complète (Lingua Libre, Shtooka, Tatoeba). La solution libre serait de la faire enregistrer sur Lingua Libre.
+
+**À faire**
+- Déployer, relire les 52 leçons dans l'appli, faire tester aux parents.
+
+---
+
 ## 2026-11-05 — Sons enregistrés, nouveau design, passage sur GitHub
 
 **Fait**

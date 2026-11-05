@@ -83,7 +83,7 @@ def main():
                 return n_car
         echecs.append((t, v)); return n_car
 
-    with ThreadPoolExecutor(2) as ex:
+    with ThreadPoolExecutor(int(os.environ.get("TTS_THREADS", "2"))) as ex:
         for n in ex.map(faire, travaux):
             total += n
 

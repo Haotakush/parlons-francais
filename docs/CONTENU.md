@@ -45,6 +45,26 @@ Pour une icône, ajouter l'`id` dans `ICON_CAT` (`js/app.js`).
 | `QUIZ` | Phrases à trous `___` avec deux choix et la bonne réponse |
 | `ORDRE` | Phrases à remettre dans l'ordre |
 
+## Les leçons des 8 thèmes (`js/lecons.js`)
+
+Chaque thème contient une liste de `lecons`. Une leçon ressemble à ceci :
+```js
+{
+ "id": "phrases-2", "titre": "Dire non",
+ "mots": [["la cuisine", "la pièce où on prépare les repas"]],   // seulement pour le vocabulaire
+ "tableau": null,                                                 // ou un tableau [[en-têtes], [ligne], ...]
+ "regle": "Pour dire non, on met **ne** avant le verbe...",
+ "astuce": "...", "retenir": "...",
+ "exemples": ["Je **ne** sais **pas**.", "..."],
+ "exercices": [
+  {"type": "choisir", "consigne": "", "juste": "Je ne comprends pas.", "faux": "Je ne pas comprends.", "expl": "..."},
+  {"type": "completer", "phrase": "Je ___ suis pas d'accord.", "reponse": "ne", "choix": ["ne", "n'", "pas"], "expl": "..."},
+  {"type": "ordre", "phrase": "Je ne parle pas bien français.", "expl": "..."}
+ ]
+}
+```
+Le premier élément de `choix` est la bonne réponse : l'appli mélange les choix toute seule.
+
 ## Après une modification
 
 1. Ouvrir l'appli en local et vérifier le résultat (voir `README.md`).

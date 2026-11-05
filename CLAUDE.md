@@ -25,9 +25,10 @@ Exception : une correction minuscule et sans risque (une faute de frappe) peut s
 Aucune étape de compilation, aucun framework, aucune dépendance à installer : du HTML, du CSS et du JavaScript « à la main ».
 
 ```
-index.html            La page : charge css/style.css, puis audio/index.js, js/contenu.js, js/app.js (dans cet ordre)
+index.html            La page : charge css/style.css, puis audio/index.js, js/contenu.js, js/lecons.js, js/app.js (dans cet ordre)
 css/style.css         Le design. Couleurs en variables CSS (:root), mode sombre automatique
-js/contenu.js         TOUT le contenu : SONS, HOMOPHONES, CONSTRUIRE, CONNECTEURS, VERBES, TEMPS, CATEGORIES, QUIZ, ORDRE
+js/contenu.js         Le contenu de base : SONS, HOMOPHONES, CONSTRUIRE, CONNECTEURS, VERBES, TEMPS, CATEGORIES, QUIZ, ORDRE
+js/lecons.js          Les 8 thèmes et leurs 52 leçons (THEMES) : règle, astuce, pour retenir, exemples, exercices + explications
 js/app.js             Outils, lecture audio, profils, leçon du jour, composants, pages, navigation
 audio/index.js        Correspondance texte → numéro de fichier (généré par tools/generer_audio.py)
 audio/kore/, charon/  Voix Google (femme / homme), un MP3 par texte
@@ -55,7 +56,8 @@ Navigation par « hash » (`#/sons`, `#/cat/garage`, `#/lecon`…). Chaque page 
 - Toujours utiliser les variables CSS existantes plutôt que des couleurs en dur.
 
 **Contenu**
-- Ajouter ou modifier du texte **uniquement dans `js/contenu.js`** (format : `docs/CONTENU.md`).
+- Ajouter ou modifier du texte **uniquement dans `js/contenu.js` ou `js/lecons.js`** (format : `docs/CONTENU.md`).
+- Chaque leçon de thème suit toujours le même modèle : règle, astuce, pour retenir, exemples, 8 exercices (choisir / compléter / ordre), chacun avec une explication. Ne pas inventer un nouveau type d'exercice sans l'accord d'Eric.
 - Après un changement de texte prononcé : régénérer l'audio (`docs/AUDIO.md`). Sinon, l'appli utilise la voix du téléphone, qui est moins bonne.
 
 **Audio**

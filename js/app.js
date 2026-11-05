@@ -181,6 +181,11 @@ function allSpeechTexts(){
   ORDRE.forEach(add);
   Object.keys(VERBES).forEach(v => TEMPS.forEach(t => conj(v, t.id).forEach(add)));
   add("Bonjour, je vais vous aider à parler français.");
+  if(typeof ALL_LECONS !== "undefined") ALL_LECONS.forEach(l => {
+    l.mots.forEach(([m]) => add(m));
+    l.exemples.forEach(x => add(x));
+    l.exercices.forEach(e => add(speakable(exoTexte(e))));
+  });
   return [...out].filter(Boolean);
 }
 
@@ -390,6 +395,126 @@ function goBack(){ if(history.length > 1) history.back(); else location.hash = "
 /* =========================================================
    PAGES
    ========================================================= */
+/* =========================================================
+   APPRENDRE : les 8 thèmes (contenu dans js/lecons.js)
+   ========================================================= */
+Object.assign(ICON, {
+  scale: P('<path d="M12 3v18M5 21h14M6 7h12M6 7l-3 7a3 3 0 0 0 6 0zM18 7l-3 7a3 3 0 0 0 6 0z"/>'),
+  spell: P('<path d="M3 16l3.5-9L10 16M4.3 13h4.4"/><path d="M13 13l3 3 5-6"/>'),
+  quote: P('<path d="M7 7h4v4c0 3-2 5-4 6M15 7h4v4c0 3-2 5-4 6"/>'),
+  checkSm: P('<path d="M5 12l5 5L20 7"/>', 'width="18" height="18" stroke-width="2.6"'),
+  lock: P('<circle cx="12" cy="12" r="9"/>', 'width="18" height="18"')
+});
+const ALL_LECONS = THEMES.flatMap(t => t.lecons.map(l => Object.assign(l, {theme: t})));
+const leconsFaites = () => pget("lecons", {});
+const leconFaite = id => !!leconsFaites()[id];
+function marquerLecon(id){ const f = leconsFaites(); f[id] = today(); pset("lecons", f); }
+const nbFaites = t => t.lecons.filter(l => leconFaite(l.id)).length;
+const prochaineLecon = () => ALL_LECONS.find(l => !leconFaite(l.id)) || null;
+
+/* Texte complet d'un exercice (ce qui est lu à voix haute) */
+function exoTexte(e){
+  if(e.type === "choisir") return e.juste;
+  if(e.type === "completer") return e.phrase.replace("___", e.reponse);
+  return e.phrase;
+}
+const speakable = t => t.replace(/\s*→\s*/g, ", ");
+
+/* Petit rendu markdown : paragraphes, listes « - », gras ** */
+function mdBlock(md){
+  const out = el("div", {class:"md"});
+  md.split(/\n\s*\n/).forEach(par => {
+    const lines = par.split("\n").filter(l => l.trim());
+    if(!lines.length) return;
+    if(lines.every(l => /^\s*-\s/.test(l))){
+      out.append(el("ul", null, lines.map(l => el("li", {html: nbsp(fmt(l.replace(/^\s*-\s/, "")))}))));
+    } else {
+      out.append(el("p", {html: nbsp(fmt(lines.join(" ")))}));
+    }
+  });
+  return out;
+}
+function tableBlock(rows){
+  return el("div", {class:"tablewrap"}, el("table", {class:"tbl"},
+    el("thead", null, el("tr", null, rows[0].map(c => el("th", {html: fmt(c)})))),
+    el("tbody", null, rows.slice(1).map(r => el("tr", null, r.map((c, i) => el(i ? "td" : "th", {html: fmt(c)})))))));
+}
+
+/* Un exercice : choisir / compléter / remettre dans l'ordre.
+   onAnswer(juste) est appelé une fois, après la réponse. */
+function exercice(e, onAnswer){
+  const full = exoTexte(e);
+  pageTexts.add(speakable(full));
+  const fb = el("div", {class:"stack", style:"gap:10px"});
+  const feedback = good => {
+    fb.replaceChildren(
+      el("div", {class: "note" + (good ? "" : " ko")}, ic(good ? "info" : "alert"),
+        el("span", {html: good ? "Bravo, c'est juste !" : "La bonne réponse : « " + esc(full) + " »"})),
+      el("div", {class:"card expl"}, el("b", null, "Pourquoi ?"), el("p", {html: nbsp(fmt(e.expl))})));
+    speak(speakable(full));
+    onAnswer(good);
+  };
+  if(e.type === "choisir" || e.type === "completer"){
+    let answered = false, choices;
+    const opts = e.type === "choisir" ? shuffle([e.juste, e.faux]) : shuffle(e.choix);
+    const right = e.type === "choisir" ? e.juste : e.reponse;
+    choices = opts.map(c => {
+      const b = el("button", {class:"choice" + (e.type === "choisir" ? " long" : ""), type:"button"}, c);
+      b.addEventListener("click", () => {
+        if(answered) return; answered = true;
+        const good = c === right;
+        b.classList.add(good ? "ok" : "ko");
+        if(!good) choices.find(x => x.textContent === right).classList.add("ok");
+        feedback(good);
+      });
+      return b;
+    });
+    const parts = e.type === "completer" ? e.phrase.split("___") : null;
+    return el("div", {class:"stack"},
+      el("h1", {style:"font-size:24px"}, e.type === "choisir" ? (!e.consigne ? "Quelle phrase est juste ?" : /^(la|le|les)\b/.test(e.consigne) ? "Choisissez " + e.consigne : "Quelle phrase est juste, " + e.consigne + " ?") : "Complétez la phrase"),
+      parts ? el("div", {class:"card"}, el("div", {class:"qsentence"}, parts[0], el("span", {class:"blank"}, "?"), parts[1] || "")) : null,
+      el("div", {class: e.type === "choisir" ? "stack" : "choices", style: e.type === "choisir" ? "gap:10px" : null}, choices),
+      fb);
+  }
+  // remettre dans l'ordre
+  const tokenize = s => s.split(" ").reduce((acc, w) => {
+    if(/^[?!:;,.]$/.test(w) && acc.length) acc[acc.length - 1] += " " + w; else acc.push(w);
+    return acc;
+  }, []);
+  const words = tokenize(e.phrase);
+  let bank = shuffle(words.map((w, k) => ({w, k})));
+  if(words.length > 1 && bank.every((b, k) => b.k === k)) bank.reverse();
+  let answer = [], done = false;
+  const ansBox = el("div", {class:"answer"}), bankBox = el("div", {class:"bank"}), row = el("div", {class:"stats"});
+  function draw(){
+    ansBox.replaceChildren(...answer.map((b, idx) => el("button", {class:"word", type:"button", onclick:() => { if(done) return; answer.splice(idx, 1); bank.push(b); draw(); }}, b.w)));
+    bankBox.replaceChildren(...bank.map((b, idx) => el("button", {class:"word", type:"button", onclick:() => { if(done) return; bank.splice(idx, 1); answer.push(b); draw(); }}, b.w)));
+  }
+  let essais = 0;
+  function check(){
+    if(bank.length){ fb.replaceChildren(el("div", {class:"note warm"}, ic("info"), "Placez tous les mots.")); return; }
+    const good = answer.map(b => b.w).join(" ") === words.join(" ");
+    essais++;
+    if(good || essais >= 2){
+      done = true;
+      if(!good){ answer = words.map((w, k) => ({w, k})); bank = []; draw(); }
+      ansBox.className = "answer " + (good ? "ok" : "ko");
+      row.replaceChildren();
+      feedback(good);
+    } else {
+      ansBox.className = "answer"; void ansBox.offsetWidth; ansBox.className = "answer ko";
+      fb.replaceChildren(el("div", {class:"note ko"}, ic("alert"), "Pas tout à fait. Écoutez la phrase et réessayez."));
+    }
+  }
+  row.append(
+    el("button", {class:"btn outline", type:"button", onclick:() => speak(e.phrase)}, el("span", {html: ICON.sound}), "Écouter"),
+    el("button", {class:"btn", type:"button", onclick: check}, "Vérifier"));
+  draw();
+  return el("div", {class:"stack"},
+    el("h1", {style:"font-size:24px"}, "Remettez les mots dans l'ordre"),
+    ansBox, bankBox, row, fb);
+}
+
 const app = document.getElementById("app");
 let deferredInstall = null;
 
@@ -450,6 +575,11 @@ const PAGES = {
       el("div", {class:"stats"},
         el("div", {class:"stat"}, el("span", null, "Série"), el("b", null, streak() + (streak() > 1 ? " jours" : " jour"))),
         el("div", {class:"stat"}, el("span", null, "Aujourd'hui"), el("b", null, minutesToday() + " min"))),
+      (() => { const nx = prochaineLecon(); return el("a", {href: nx ? "#/lecont/" + nx.id : "#/apprendre", class:"card row", style:"color:var(--fg)"},
+        el("span", {class:"lic", style:"display:inline-flex;color:var(--primary)", html: ICON.book}),
+        el("span", {class:"grow stack", style:"gap:2px"}, el("b", null, nx ? "Apprendre : " + nx.titre : "Apprendre"),
+          el("span", {class:"soft"}, nx ? nx.theme.titre + " · " + ALL_LECONS.filter(l => leconFaite(l.id)).length + " leçons sur " + ALL_LECONS.length : "Toutes les leçons sont faites")),
+        ic("chev", "chev")); })(),
       el("h2", null, "Situations"),
       el("div", {class:"list"}, CATEGORIES.filter(c => c.groupe !== "tous").map(c => listRow("#/cat/" + c.id, ICON_CAT[c.id] || "chat", c.titre)),
         listRow("#/phrases", "chat", "Tous les jours", "Politesse, téléphone, rendez-vous…")),
@@ -557,7 +687,10 @@ const PAGES = {
           el("div", {class:"stats"},
             el("div", {class:"stat"}, el("span", null, "Série"), el("b", null, streak() + (streak() > 1 ? " jours" : " jour"))),
             el("div", {class:"stat"}, el("span", null, "Aujourd'hui"), el("b", null, minutesToday() + " min")))];
-        foot = el("div", {class:"footer"}, el("a", {href:"#/", class:"btn"}, "Retour à l'accueil"));
+        const nx = prochaineLecon();
+        foot = el("div", {class:"footer"},
+          nx ? el("a", {href:"#/lecont/" + nx.id, class:"btn"}, "Continuer avec : " + nx.titre) : null,
+          el("a", {href:"#/", class: nx ? "btn outline" : "btn", style: nx ? "margin-top:10px" : null}, "Retour à l'accueil"));
       }
       wrap.replaceChildren(top, ...body, el("div", {class:"grow"}), foot);
       window.scrollTo(0, 0);
@@ -649,19 +782,117 @@ const PAGES = {
       : [el("div", {class:"empty"}, "Pas encore de favoris. Touchez l'étoile à côté d'une phrase pour la garder ici.")])]};
   },
 
-  grammaire(){
-    return {kids:[el("h1", null, "Grammaire"),
-      el("p", {class:"muted", style:"margin:0"}, "Choisissez ce que vous voulez travailler."),
+  apprendre(){
+    const next = prochaineLecon();
+    return {kids:[el("h1", null, "Apprendre"),
+      el("p", {class:"muted", style:"margin:0"}, "8 thèmes pour tout apprendre, une petite leçon à la fois."),
+      next ? el("a", {href:"#/lecont/" + next.id, class:"card stack", style:"gap:10px;color:var(--fg)"},
+        el("span", {class:"badge"}, "Prochaine leçon"),
+        el("b", {style:"font-size:20px"}, next.titre),
+        el("span", {class:"muted"}, next.theme.titre),
+        el("span", {class:"btn"}, el("span", {html: ICON.play}), "Commencer")) : el("div", {class:"note"}, ic("info"), "Bravo, toutes les leçons sont faites ! Vous pouvez les refaire quand vous voulez."),
+      el("h2", null, "Les thèmes"),
+      el("div", {class:"list"}, THEMES.map((t, i) => {
+        const n = nbFaites(t), tot = t.lecons.length;
+        return el("a", {href:"#/theme/" + t.id}, el("span", {class:"lic", style:"display:inline-flex", html: ICON[t.icone] || ICON.book}),
+          el("span", {class:"grow stack", style:"gap:6px"},
+            el("span", null, (i + 1) + ". " + t.titre),
+            el("span", {class:"row", style:"gap:8px"},
+              el("span", {class:"bar grow"}, el("div", {style:"width:" + Math.round(n / tot * 100) + "%"})),
+              el("span", {class:"soft", style:"font-size:13px;white-space:nowrap"}, n + " / " + tot))),
+          ic("chev", "chev"));
+      })),
+      el("h2", null, "Révisions"),
       el("div", {class:"list"},
-        listRow("#/construire", "blocks", "Construire une phrase", "L'ordre des mots, dire non, poser une question"),
-        listRow("#/conjugaison", "pencil", "Conjugaison", "16 verbes, 4 temps"),
-        listRow("#/homophones", "letters", "Les homophones", "a / à, et / est, son / sont…")),
-      el("h2", null, "S'entraîner"),
-      el("div", {class:"list"},
+        listRow("#/conjugaison", "pencil", "Tableau de conjugaison", "16 verbes, 4 temps"),
         listRow("#/quiz", "target", "Quiz homophones", "10 questions"),
         listRow("#/ordre", "puzzle", "Remettre dans l'ordre", "5 phrases"),
         listRow("#/favoris", "star", "Mes favoris"))]};
   },
+
+  theme(id){
+    const t = THEMES.find(x => x.id === id);
+    if(!t) return PAGES.apprendre();
+    const n = nbFaites(t);
+    return {kids:[pageHead(t.titre),
+      el("p", {class:"soft", style:"margin:0"}, t.officiel),
+      el("div", {class:"row"}, el("div", {class:"bar grow"}, el("div", {style:"width:" + Math.round(n / t.lecons.length * 100) + "%"})),
+        el("span", {class:"soft"}, n + " leçon" + (n > 1 ? "s" : "") + " sur " + t.lecons.length)),
+      el("div", {class:"list"}, t.lecons.map((l, i) => {
+        const fait = leconFaite(l.id);
+        return el("a", {href:"#/lecont/" + l.id},
+          el("span", {class:"num" + (fait ? " ok" : ""), html: fait ? ICON.checkSm : String(i + 1)}),
+          el("span", {class:"grow"}, l.titre, el("div", {class:"soft", style:"font-weight:400"}, fait ? "Faite · à refaire quand vous voulez" : "8 exercices")),
+          ic("chev", "chev"));
+      }))]};
+  },
+
+  lecont(id){
+    const l = ALL_LECONS.find(x => x.id === id);
+    if(!l) return PAGES.apprendre();
+    document.body.classList.add("immersive");
+    const steps = [{t:"regle"}, {t:"exemples"}, ...l.exercices.map((e, i) => ({t:"exo", e, i})), {t:"fin"}];
+    let idx = 0, score = 0;
+    const wrap = el("div", {class:"stack", style:"min-height:calc(100vh - 44px);min-height:calc(100dvh - 44px)"});
+    function draw(){
+      stopAll();
+      const s = steps[idx];
+      const top = el("div", {class:"row", style:"gap:14px"},
+        el("a", {href:"#/theme/" + l.theme.id, class:"iconbtn", "aria-label":"Fermer la leçon", html: ICON.x}),
+        el("div", {class:"bar grow", role:"progressbar", "aria-label":"Progression", "aria-valuenow": String(Math.round(idx / (steps.length - 1) * 100)), "aria-valuemin":"0", "aria-valuemax":"100"},
+          el("div", {style:"width:" + Math.round(idx / (steps.length - 1) * 100) + "%"})));
+      const nextBtn = (label, enabled = true) => el("button", {class:"btn", type:"button", disabled: !enabled, onclick:() => { idx++; draw(); }}, label, el("span", {html: ICON.next}));
+      let body = [], footBtn;
+      const kicker = txt => el("span", {class:"muted", style:"font-size:14px;font-weight:600"}, txt);
+      if(s.t === "regle"){
+        body = [kicker(l.theme.titre), el("h1", {style:"font-size:27px"}, l.titre)];
+        if(l.mots.length) body.push(el("div", {class:"list"}, l.mots.map(([m, d]) => {
+          pageTexts.add(m);
+          return el("button", {type:"button", onclick:() => speak(m)}, ic("soundSm", "lic"),
+            el("span", {class:"grow"}, el("b", null, m), el("div", {class:"soft", style:"font-weight:400"}, d)));
+        })));
+        if(l.tableau) body.push(tableBlock(l.tableau));
+        body.push(el("div", {class:"card stack", style:"gap:8px"}, el("h2", null, "La règle"), mdBlock(l.regle)));
+        if(l.astuce) body.push(el("div", {class:"note warm"}, ic("info"), el("div", null, el("b", null, "Astuce : "), mdBlock(l.astuce))));
+        if(l.retenir) body.push(el("div", {class:"note"}, ic("info"), el("div", null, el("b", null, "Pour retenir : "), mdBlock(l.retenir))));
+        footBtn = nextBtn("Voir les exemples");
+      }
+      if(s.t === "exemples"){
+        body = [kicker("Les exemples"), el("h1", {style:"font-size:27px"}, "Écoutez, puis répétez"),
+          el("div", {class:"card"}, l.exemples.map(x => exLine(x))),
+          el("p", {class:"soft", style:"margin:0"}, "Touchez une phrase pour l'écouter.")];
+        footBtn = nextBtn("Commencer les exercices");
+        setTimeout(() => speakSeq(l.exemples.map(x => x.replace(/\*\*/g, ""))), 400);
+      }
+      if(s.t === "exo"){
+        const fbtn = nextBtn(s.i === l.exercices.length - 1 ? "Terminer" : "Suivant", false);
+        body = [kicker("Exercice " + (s.i + 1) + " sur " + l.exercices.length),
+          exercice(s.e, good => { if(good) score++; fbtn.disabled = false; })];
+        footBtn = fbtn;
+      }
+      if(s.t === "fin"){
+        marquerLecon(l.id);
+        const t = l.theme, pos = t.lecons.indexOf(l), suivante = t.lecons[pos + 1] || prochaineLecon();
+        body = [el("div", {class:"done", html: ICON.check}),
+          el("h1", {style:"text-align:center"}, "Bravo " + nomProfil() + " !"),
+          el("p", {class:"muted", style:"text-align:center;margin:0"}, "Leçon « " + l.titre + " » terminée."),
+          el("div", {class:"score"}, score + " / " + l.exercices.length),
+          el("p", {class:"soft", style:"text-align:center;margin:0"}, score >= 6 ? "Très bien, vous avez compris la règle." : "Relisez la règle et refaites la leçon demain, ça va venir.")];
+        footBtn = suivante && suivante.id !== l.id
+          ? el("a", {href:"#/lecont/" + suivante.id, class:"btn"}, "Leçon suivante : " + suivante.titre)
+          : el("a", {href:"#/apprendre", class:"btn"}, "Retour aux thèmes");
+      }
+      const foot = el("div", {class:"footer"}, footBtn,
+        s.t === "fin" ? el("a", {href:"#/theme/" + l.theme.id, class:"btn outline", style:"margin-top:10px"}, "Retour au thème") : null);
+      wrap.replaceChildren(top, ...body, el("div", {class:"grow"}), foot);
+      window.scrollTo(0, 0);
+      setTimeout(preloadPage, 50);
+    }
+    draw();
+    return {kids:[wrap]};
+  },
+
+  grammaire(){ return PAGES.apprendre(); },
 
   homophones(){
     return {kids:[pageHead("Les homophones"),
@@ -809,9 +1040,10 @@ const PAGES = {
 /* =========================================================
    NAVIGATION
    ========================================================= */
-const TABS = [["accueil","#/","home","Accueil"],["sons","#/sons","sound","Sons"],["phrases","#/phrases","chat","Phrases"],["grammaire","#/grammaire","book","Grammaire"]];
+const TABS = [["accueil","#/","home","Accueil"],["sons","#/sons","sound","Sons"],["phrases","#/phrases","chat","Phrases"],["apprendre","#/apprendre","book","Apprendre"]];
 const TAB_OF = {bienvenue:"", profils:"accueil", accueil:"accueil", lecon:"accueil", sons:"sons", phrases:"phrases", cat:"phrases", favoris:"phrases",
-  grammaire:"grammaire", homophones:"grammaire", construire:"grammaire", conjugaison:"grammaire", quiz:"grammaire", ordre:"grammaire"};
+  grammaire:"apprendre", apprendre:"apprendre", theme:"apprendre", lecont:"apprendre",
+  homophones:"apprendre", construire:"apprendre", conjugaison:"apprendre", quiz:"apprendre", ordre:"apprendre"};
 const tabsEl = document.getElementById("tabs");
 tabsEl.replaceChildren(...TABS.map(([k, href, icon, label]) =>
   el("a", {class:"tab", href, "data-tab": k}, el("span", {html: ICON[icon]}), label)));
