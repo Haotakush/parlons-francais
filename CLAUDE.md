@@ -36,11 +36,23 @@ audio/kore/, charon/  Voix Google (femme / homme), un MP3 par texte
 audio/sons/           Les 20 sons enregistrés à la main par Eric (gros boutons de la page Sons)
 sw.js                 Service worker : fonctionnement hors ligne
 manifest.webmanifest  Installation sur l'écran d'accueil
-tools/                Scripts Python : lister les textes, générer l'audio, découper un enregistrement
+beta/                 La version BÊTA (adresse /beta/) : copie de index.html, css/, js/, sw.js, manifest pour tester
+                      les nouveautés avant les parents. Données à part (clés « beta_ »), audio partagé (../audio/).
+                      beta/js/exercices.js : exercices en plus (généré, ne pas modifier à la main)
+tools/                Scripts Python : lister les textes, générer l'audio, découper un enregistrement,
+                      construire_exercices.py (vérifie tools/exercices/*.json et écrit beta/js/exercices.js)
 docs/                 CONTENU.md (ajouter du contenu), AUDIO.md (les voix)
 ```
 
 Navigation par « hash » (`#/sons`, `#/cat/garage`, `#/lecon`…). Chaque page est une fonction de l'objet `PAGES` dans `js/app.js`.
+
+## Version bêta et version normale
+
+- Les parents utilisent la version normale (racine). Eric teste la bêta : `https://haotakush.github.io/parlons-francais/beta/`.
+- Toute nouveauté se fait **d'abord dans `beta/`**. On ne touche à la racine que quand Eric a validé la bêta.
+- Passer la bêta en version normale : copier `beta/css` et `beta/js` à la racine, ajouter `js/exercices.js` dans `index.html`
+  et `sw.js` de la racine, augmenter `CACHE`. Le code détecte la bêta avec `window.BETA` (défini dans `beta/index.html`).
+- Les deux service workers ne suppriment que leurs propres copies (préfixes `parlons-v` et `parlons-beta-`).
 
 ## Règles à respecter
 

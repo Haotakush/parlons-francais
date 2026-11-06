@@ -21,9 +21,13 @@ async def main():
         async with async_playwright() as p:
             nav = await p.chromium.launch()
             page = await nav.new_page()
-            await page.goto(f"http://localhost:{PORT}/")
-            await page.wait_for_timeout(500)
-            textes = await page.evaluate("allSpeechTexts()")
+            textes = []
+            # La version normale et la version bêta : on garde tous les textes des deux
+            for chemin in ("/", "/beta/"):
+                await page.goto(f"http://localhost:{PORT}{chemin}")
+                await page.wait_for_timeout(500)
+                for t in await page.evaluate("allSpeechTexts()"):
+                    if t not in textes: textes.append(t)
             await nav.close()
     finally:
         serveur.terminate()

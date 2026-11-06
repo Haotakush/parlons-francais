@@ -1,6 +1,6 @@
 // Service worker : garde l'appli en mémoire pour qu'elle marche sans internet.
 // Après chaque modification de l'appli, augmenter le numéro de version ci-dessous (v5 -> v6...).
-const CACHE = "parlons-v8";
+const CACHE = "parlons-v9";
 const AUDIO_CACHE = "parlons-audio-v3"; // les fichiers audio ne changent pas : on les garde
 const FILES = ["./", "./index.html", "./css/style.css", "./js/contenu.js", "./js/lecons.js", "./js/app.js", "./manifest.webmanifest", "./audio/index.js",
   "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png"];
@@ -12,13 +12,14 @@ self.addEventListener("install", e => {
 
 self.addEventListener("activate", e => {
   e.waitUntil(caches.keys().then(keys => Promise.all(
-    keys.filter(k => k !== CACHE && k !== AUDIO_CACHE).map(k => caches.delete(k)))));
+    keys.filter(k => !k.startsWith("parlons-beta-") && k !== CACHE && k !== AUDIO_CACHE).map(k => caches.delete(k)))));
   self.clients.claim();
 });
 
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
   const url = new URL(e.request.url);
+  if (url.pathname.includes("/beta/") && !url.pathname.endsWith(".mp3")) return; // la version bêta a son propre service worker
 
   // Fichiers audio : d'abord la copie en mémoire (rapide, hors ligne), sinon internet.
   if (url.pathname.includes("/audio/") && url.pathname.endsWith(".mp3")) {

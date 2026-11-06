@@ -4,6 +4,27 @@ Une entrée par séance de travail, la plus récente en haut. Pour chaque séanc
 
 ---
 
+## 2026-11-06 — v8 (bêta) : version bêta, nouveaux exercices, Mes erreurs
+
+**Retours des parents (v7)**
+- Ils ont parfois du mal à lire : il faudrait pouvoir écouter les consignes et les leçons.
+- Pas assez d'exercices, pas assez variés. On ne sait pas toujours par où commencer ni pourquoi faire une leçon.
+
+**Fait**
+- Version bêta à l'adresse `/beta/` pour Eric. Les parents restent sur la v7. Données séparées, audio partagé.
+- 3 nouveaux types d'exercices : écouter et choisir, vrai ou faux, associer.
+- Une réserve d'exercices par leçon. La leçon en tire 8 au hasard en variant les types.
+- Bouton « S'entraîner » sur chaque thème (10 exercices des leçons faites).
+- Mes erreurs : chaque exercice raté est gardé, il est corrigé après 2 réussites de suite. Compteur « erreurs corrigées » dans le Profil.
+- Thème 1 « Faire des phrases » : 136 exercices en plus (25 par leçon au lieu de 8), vérifiés par `tools/construire_exercices.py`.
+- Audio généré pour les nouvelles phrases.
+
+**Décidé**
+- Les nouveautés passent d'abord par la bêta. Le thème 1 sert de test : les 7 autres thèmes suivront quand Eric aura validé les formats.
+- Reportés : lecture à voix haute des consignes et des leçons, tuto, « À quoi ça sert ? », refonte de l'ergonomie.
+
+---
+
 ## 2026-11-05 — v7 : nouvelle organisation, première version testée par les parents
 
 **Fait**

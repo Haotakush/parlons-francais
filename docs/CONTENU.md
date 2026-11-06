@@ -65,6 +65,26 @@ Chaque thème contient une liste de `lecons`. Une leçon ressemble à ceci :
 ```
 Le premier élément de `choix` est la bonne réponse : l'appli mélange les choix toute seule.
 
+## Les exercices en plus (`tools/exercices/*.json`)
+
+Chaque leçon a ses 8 exercices de départ (dans `js/lecons.js`) et une réserve d'exercices en plus, un fichier par thème.
+L'appli tire **8 exercices au hasard** à chaque leçon, en variant les types. Le bouton « S'entraîner » d'un thème en tire 10.
+
+```json
+{"phrases-1": [
+  {"type": "ecouter", "phrase": "Je répare le moteur.", "faux": ["Le moteur je répare."], "expl": "..."},
+  {"type": "vraifaux", "phrase": "Arrive le bus à huit heures.", "vrai": false, "correction": "Le bus arrive à huit heures.", "expl": "..."},
+  {"type": "associer", "consigne": "Reliez qui et ce qu'il fait", "paires": [["Le médecin", "soigne les malades."], ["...", "..."]], "expl": "..."}
+]}
+```
+- `ecouter` : l'appli lit `phrase`, la personne choisit la bonne écriture parmi `phrase` et `faux`.
+- `vraifaux` : la phrase est-elle juste ? Si `vrai` vaut `false`, il faut la `correction`.
+- `associer` : 3 à 5 paires, chaque mot une seule fois.
+- `choisir`, `completer`, `ordre` : comme dans les leçons.
+
+Après une modification : `python3 tools/construire_exercices.py` (il vérifie tout et refuse les erreurs),
+puis générer l'audio. Un exercice raté va dans « Mes erreurs » ; il en sort après 2 réussites de suite.
+
 ## Après une modification
 
 1. Ouvrir l'appli en local et vérifier le résultat (voir `README.md`).
