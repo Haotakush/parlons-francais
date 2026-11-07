@@ -187,8 +187,10 @@ function allSpeechTexts(){
   if(typeof ALL_LECONS !== "undefined") ALL_LECONS.forEach(l => {
     l.mots.forEach(([m]) => add(m));
     l.exemples.forEach(x => add(x));
-    l.pool.forEach(e => exoTextes(e).forEach(t => add(speakable(t))));
+    l.pool.forEach(e => exoAudio(e).forEach(t => add(speakable(t))));
   });
+  if(typeof TEXTES_FIXES !== "undefined") TEXTES_FIXES.forEach(add);
+  if(typeof UNITES !== "undefined") UNITES.forEach(u => u.but.forEach(add));
   return [...out].filter(Boolean);
 }
 
@@ -630,11 +632,248 @@ function exercice(e, onAnswer){
     ansBox, bankBox, row, fb);
 }
 
+
+/* =========================================================
+   LE PARCOURS (unités de js/parcours.js)
+   ========================================================= */
+const NOEUDS = [];
+UNITES.forEach((u, n) => {
+  u.n = n; u.noeuds = [];
+  const ls = u.lecons.map(id => ALL_LECONS.find(l => l.id === id)).filter(Boolean);
+  const mid = Math.ceil(ls.length / 2);
+  ls.forEach((l, i) => {
+    u.noeuds.push({k:"lecon", id: l.id, titre: l.titre, href: "#/lecont/" + l.id, l});
+    if(i === mid - 1) (u.situations || []).forEach(sid => {
+      const c = CATEGORIES.find(x => x.id === sid);
+      if(c) u.noeuds.push({k:"situation", id: sid, titre: c.titre, href: "#/situ/" + sid});
+    });
+  });
+  u.noeuds.push({k:"revision", id: "u" + n, titre: "Révision de l'unité", href: "#/revision/" + n});
+  u.noeuds.forEach(x => { x.u = u; NOEUDS.push(x); });
+});
+const CLE_NOEUD = {situation: "situations", revision: "revisions"};
+const noeudFait = x => x.k === "lecon" ? leconFaite(x.id) : pget(CLE_NOEUD[x.k], []).includes(x.id);
+function marquerNoeud(k, id){ const s = pget(CLE_NOEUD[k], []); if(!s.includes(id)){ s.push(id); pset(CLE_NOEUD[k], s); } }
+const noeudCourant = () => NOEUDS.find(x => !noeudFait(x)) || null;
+const uniteCourante = () => (noeudCourant() || NOEUDS[NOEUDS.length - 1]).u;
+const noeudSuivant = () => noeudCourant();
+
+function cheminUnite(u){
+  const cur = noeudCourant(), iCur = cur ? NOEUDS.indexOf(cur) : NOEUDS.length;
+  const OFFS = [0, 55, -45, 50, -55, 35, -35, 50, -20, 30];
+  return el("div", {class:"ppath"}, u.noeuds.map((x, i) => {
+    const fait = noeudFait(x), estCur = x === cur, ouvert = NOEUDS.indexOf(x) <= iCur;
+    const icone = fait ? ICON.checkSm : estCur ? ICON.play : !ouvert ? ICON.cadenas : x.k === "revision" ? ICON.star : x.k === "situation" ? ICON.chat : ICON.book;
+    return el(ouvert ? "a" : "div", {href: ouvert ? x.href : null,
+        class: "pnode k-" + x.k + (fait ? " fait" : estCur ? " cur" : ouvert ? " open" : " lock"),
+        style: "transform:translateX(" + OFFS[i % OFFS.length] + "px)",
+        "aria-label": x.titre + (fait ? " : faite" : !ouvert ? " : pas encore ouverte" : "")},
+      estCur ? el("span", {class:"bulle"}, x.titre) : null,
+      el("span", {class:"dot", html: icone}),
+      !estCur ? el("span", {class:"lab"}, x.titre) : null);
+  }));
+}
+
+/* =========================================================
+   LES EXERCICES, UN ÉCRAN À LA FOIS (comme Duolingo)
+   Consigne lue à voix haute, bouton Vérifier en bas, bandeau vert ou rouge.
+   ========================================================= */
+const TEXTES_FIXES = ["Bravo !", "Pas tout à fait.",
+  "Touchez la phrase juste.", "Touchez le mot qui manque.", "Écoutez. Remettez les mots dans l'ordre.",
+  "Écoutez. Touchez la bonne phrase.", "Écoutez. Cette phrase est-elle juste ?",
+  "Chaque jour, appuyez sur Continuer.", "L'appli choisit la leçon pour vous.", "Une leçon dure 10 minutes.",
+  "Vous pouvez tout écouter.", "Touchez le haut-parleur.", "Les consignes sont lues à voix haute.",
+  "Vos erreurs reviennent.", "Dans Réviser, refaites vos erreurs.", "Réussies 2 fois, elles sont corrigées."];
+function consigneDe(e){
+  switch(e.type){
+    case "choisir": return !e.consigne ? "Touchez la phrase juste." : /^(la|le|les)\b/.test(e.consigne) ? "Touchez " + e.consigne + "." : "Touchez la phrase juste, " + e.consigne + ".";
+    case "completer": return "Touchez le mot qui manque.";
+    case "ordre": return "Écoutez. Remettez les mots dans l'ordre.";
+    case "ecouter": return "Écoutez. Touchez la bonne phrase.";
+    case "vraifaux": return "Écoutez. Cette phrase est-elle juste ?";
+    case "associer": return (e.consigne || "Reliez les paires") + ".";
+  }
+  return "";
+}
+const enonceDe = e => e.type === "completer" ? e.phrase.replace("___", "…").replace(/(['’]) /g, "$1")
+  : ["ordre", "ecouter", "vraifaux"].includes(e.type) ? e.phrase : null;
+/* Tous les textes qu'on peut entendre pendant un exercice (pour générer l'audio) */
+function exoAudio(e){
+  const t = [...exoTextes(e), consigneDe(e), enonceDe(e)];
+  if(e.type === "choisir") t.push(e.faux);
+  return t.filter(Boolean);
+}
+const spkBtn = (onclick, label, cls) => el("button", {class:"spk" + (cls ? " " + cls : ""), type:"button", "aria-label": label || "Écouter", html: ICON.sound, onclick});
+
+function exo(e, cb){
+  const consigne = consigneDe(e), enonce = enonceDe(e);
+  exoAudio(e).forEach(t => pageTexts.add(speakable(t)));
+  const lire = () => speakSeq([consigne, enonce].filter(Boolean));
+  const tete = el("div", {class:"row", style:"justify-content:space-between;align-items:flex-start;gap:12px"},
+    el("h1", {class:"consigne"}, consigne), spkBtn(lire, "Écouter la consigne"));
+  let choix = null, fige = false;
+  const boxes = [];
+  const options = (list, cls, avecSon, onPick) => list.map(o => {
+    const v = typeof o === "string" ? o : o.v, label = typeof o === "string" ? o : o.label;
+    const b = el("button", {class:"choice" + (cls ? " " + cls : ""), type:"button"}, label);
+    b.dataset.v = v;
+    b.addEventListener("click", () => {
+      if(fige) return;
+      boxes.forEach(z => z.classList.remove("sel")); b.classList.add("sel");
+      choix = v; if(onPick) onPick(v); cb.ready(true);
+    });
+    boxes.push(b);
+    return avecSon ? el("div", {class:"optrow"}, spkBtn(() => speak(label), "Écouter cette phrase", "sm"), b) : b;
+  });
+  const juger = right => {
+    fige = true;
+    boxes.forEach(b => { b.classList.remove("sel"); if(b.dataset.v === right) b.classList.add("ok"); else if(b.dataset.v === choix) b.classList.add("ko"); });
+    return choix === right;
+  };
+  const res = {consigne, enonce, auto: false, autoEnonce: e.type === "ecouter" || e.type === "vraifaux"};
+
+  if(e.type === "choisir"){
+    res.node = el("div", {class:"stack"}, tete, el("div", {class:"stack", style:"gap:10px"}, options(shuffle([e.juste, e.faux]), "long", true)));
+    res.verifier = () => ({good: juger(e.juste)});
+  } else if(e.type === "completer"){
+    const parts = e.phrase.split("___");
+    const trou = el("span", {class:"blank"}, "?");
+    res.node = el("div", {class:"stack"}, tete,
+      el("div", {class:"card row", style:"gap:12px"}, spkBtn(() => speak(enonce), "Écouter la phrase"),
+        el("div", {class:"qsentence grow"}, parts[0], trou, parts[1] || "")),
+      el("div", {class:"choices"}, options(shuffle(e.choix), "", false, v => { trou.textContent = v; trou.classList.add("on"); })));
+    res.verifier = () => ({good: juger(e.reponse)});
+  } else if(e.type === "ecouter"){
+    res.node = el("div", {class:"stack"}, tete,
+      el("button", {class:"listen", type:"button", "aria-label":"Écouter la phrase", onclick:() => speak(e.phrase)}, el("span", {html: ICON.sound}), "Écouter"),
+      el("div", {class:"stack", style:"gap:10px"}, options(shuffle([e.phrase, ...e.faux]), "long", false)));
+    res.verifier = () => ({good: juger(e.phrase)});
+  } else if(e.type === "vraifaux"){
+    res.node = el("div", {class:"stack"}, tete,
+      el("div", {class:"card row", style:"gap:12px"}, spkBtn(() => speak(e.phrase), "Écouter la phrase"),
+        el("div", {class:"qsentence grow", style:"font-size:21px"}, e.phrase)),
+      el("div", {class:"choices"}, options([{v:"vrai", label:"Juste"}, {v:"faux", label:"Fausse"}], "", false)));
+    res.verifier = () => {
+      const good = juger(e.vrai ? "vrai" : "faux");
+      return {good, msg: e.vrai ? (good ? null : "Cette phrase est juste.")
+        : "La phrase juste : <b>" + esc(e.correction) + "</b>"};
+    };
+  } else if(e.type === "associer"){
+    res.auto = true;
+    const gauche = shuffle(e.paires.map((p, k) => ({t: p[0], k}))), droite = shuffle(e.paires.map((p, k) => ({t: p[1], k})));
+    let pick = null, faits = 0, fautes = 0;
+    const btn = (x, cote) => {
+      const b = el("button", {class:"pair", type:"button"}, x.t);
+      b.addEventListener("click", () => {
+        if(b.classList.contains("ok")) return;
+        speak(x.t);
+        if(!pick || pick.cote === cote){ if(pick) pick.b.classList.remove("sel"); pick = {x, cote, b}; b.classList.add("sel"); return; }
+        if(pick.x.k === x.k){
+          b.classList.add("ok"); pick.b.classList.remove("sel"); pick.b.classList.add("ok"); pick = null; faits++;
+          if(faits === e.paires.length) cb.fini(fautes === 0, fautes === 0 ? null : "Fini ! Avec " + pluriel(fautes, "erreur") + ".");
+        } else {
+          fautes++;
+          const a = pick.b; a.classList.remove("sel"); pick = null;
+          [a, b].forEach(z => { z.classList.add("ko"); setTimeout(() => z.classList.remove("ko"), 600); });
+        }
+      });
+      return b;
+    };
+    res.node = el("div", {class:"stack"}, tete,
+      el("p", {class:"soft", style:"margin:0"}, "Touchez un mot à gauche, puis le mot qui va avec à droite."),
+      el("div", {class:"assoc"}, el("div", {class:"stack", style:"gap:10px"}, gauche.map(x => btn(x, "g"))), el("div", {class:"stack", style:"gap:10px"}, droite.map(x => btn(x, "d")))));
+  } else { // ordre
+    const tokenize = t => t.split(" ").reduce((acc, w) => { if(/^[?!:;,.]$/.test(w) && acc.length) acc[acc.length - 1] += " " + w; else acc.push(w); return acc; }, []);
+    const words = tokenize(e.phrase);
+    let bank = shuffle(words.map((w, k) => ({w, k})));
+    if(words.length > 1 && bank.every((b, k) => b.k === k)) bank.reverse();
+    let answer = [];
+    const ansBox = el("div", {class:"answer"}), bankBox = el("div", {class:"bank"});
+    const draw = () => {
+      ansBox.replaceChildren(...answer.map((b, i) => el("button", {class:"word", type:"button", onclick:() => { if(fige) return; answer.splice(i, 1); bank.push(b); draw(); }}, b.w)));
+      bankBox.replaceChildren(...bank.map((b, i) => el("button", {class:"word", type:"button", onclick:() => { if(fige) return; bank.splice(i, 1); answer.push(b); draw(); }}, b.w)));
+      cb.ready(!bank.length);
+    };
+    draw();
+    res.node = el("div", {class:"stack"}, tete,
+      el("button", {class:"btn outline", type:"button", onclick:() => speak(e.phrase)}, el("span", {html: ICON.sound}), "Écouter la phrase"),
+      ansBox, bankBox);
+    res.verifier = () => {
+      fige = true;
+      const good = answer.map(b => b.w).join(" ") === words.join(" ");
+      if(!good){ answer = words.map((w, k) => ({w, k})); bank = []; draw(); }
+      ansBox.className = "answer " + (good ? "ok" : "ko");
+      return {good};
+    };
+  }
+  return res;
+}
+
+/* Une série d'exercices. o.fermer : où va la croix. o.fin(score, total) → {body:[…], foot:[…]} */
+function serie(exos, o){
+  document.body.classList.add("immersive");
+  let idx = 0, score = 0;
+  const wrap = el("div", {class:"stack serie"});
+  function top(){
+    return el("div", {class:"row", style:"gap:14px"},
+      el("a", {href: o.fermer, class:"iconbtn", "aria-label":"Arrêter", html: ICON.x}),
+      el("div", {class:"bar grow big", role:"progressbar", "aria-label":"Progression"}, el("div", {style:"width:" + Math.round(idx / exos.length * 100) + "%"})));
+  }
+  function draw(){
+    stopAll();
+    if(idx >= exos.length){
+      const f = o.fin(score, exos.length);
+      wrap.replaceChildren(top(), ...f.body, el("div", {class:"grow"}), el("div", {class:"footer"}, ...f.foot));
+      window.scrollTo(0, 0);
+      return;
+    }
+    const e = exos[idx];
+    const foot = el("div", {class:"footer exo-foot"});
+    const verif = el("button", {class:"btn", type:"button", disabled: true}, "Vérifier");
+    const resultat = (good, msg) => {
+      if(good) score++;
+      noterReponse(e, good);
+      const full = exoTexte(e);
+      const dire = [good ? "Bravo !" : "Pas tout à fait.", full].filter(Boolean);
+      foot.className = "footer exo-foot sheet " + (good ? "ok" : "ko");
+      foot.replaceChildren(...[
+        el("div", {class:"row", style:"justify-content:space-between;gap:12px"},
+          el("b", {class:"sheet-t"}, el("span", {class:"sheet-ic", html: good ? ICON.checkSm : ICON.x}), good ? "Bravo !" : "Pas tout à fait"),
+          spkBtn(() => speakSeq(dire), "Écouter")),
+        msg || (!good && full) ? el("div", {class:"sheet-m", html: msg || "La bonne réponse : <b>" + esc(full) + "</b>"}) : null,
+        el("div", {class:"sheet-why"}, el("span", {class:"k"}, "Pourquoi ?"), el("p", {html: nbsp(fmt(e.expl))})),
+        !good ? el("p", {class:"sheet-note"}, "Cet exercice reviendra dans Réviser.") : null,
+        el("button", {class:"btn", type:"button", onclick:() => { idx++; draw(); }}, idx === exos.length - 1 ? "Terminer" : "Continuer")].filter(Boolean));
+      speakSeq(dire);
+    };
+    const x = exo(e, {ready: r => { verif.disabled = !r; }, fini: resultat});
+    verif.addEventListener("click", () => { const r = x.verifier(); if(r) resultat(r.good, r.msg); });
+    foot.append(x.auto ? el("p", {class:"soft", style:"text-align:center;margin:0"}, "Reliez toutes les paires.") : verif);
+    wrap.replaceChildren(top(), x.node, el("div", {class:"grow"}), foot);
+    window.scrollTo(0, 0);
+    setTimeout(preloadPage, 50);
+    if(pget("lireConsignes", true)) setTimeout(() => speakSeq([x.consigne, ...(x.autoEnonce ? [x.enonce] : [])].filter(Boolean)), 350);
+  }
+  draw();
+  return wrap;
+}
+const finSerie = (score, total, texte) => [el("div", {class:"done", html: ICON.check}),
+  el("h1", {style:"text-align:center"}, score * 2 >= total ? "Bravo " + nomProfil() + " !" : "C'est fini !"),
+  el("div", {class:"score"}, score + " / " + total),
+  texte ? el("p", {class:"muted", style:"text-align:center;margin:0"}, texte) : null];
+const boutonSuite = () => {
+  const nx = noeudSuivant();
+  return nx ? el("a", {href: nx.href, class:"btn"}, el("span", {html: ICON.play}), "Continuer : " + nx.titre)
+    : el("a", {href:"#/", class:"btn"}, "Retour au parcours");
+};
+
 const app = document.getElementById("app");
 let deferredInstall = null;
 
 /* ---------- Premier lancement et personnes ---------- */
 Object.assign(ICON, {
+  cadenas: P('<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>'),
+  map: P('<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>'),
   sun: P('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'),
   bookOpen: P('<path d="M2 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H2zM22 5h-7a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h8z"/>'),
   user: P('<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>'),
@@ -745,47 +984,122 @@ const PAGES = {
   profils(){ return PAGES.personnes(); },
 
   accueil(){
-    const plan = lessonPlan(today()), st = lessonState();
-    const total = plan.steps.length - 1, idx = Math.min(st.idx, total);
-    const finished = st.idx >= total;
-    const pct = Math.round(idx / total * 100);
-    const nx = prochaineLecon();
-    const kids = [
-      el("div", {class:"row", style:"justify-content:space-between;align-items:center"},
-        el("div", {class:"stack", style:"gap:2px"},
-          el("span", {class:"muted", style:"font-size:15px;font-weight:600"}, dateText()),
-          el("h1", {style:"font-size:32px;letter-spacing:-.8px"}, "Bonjour " + nomProfil()),
+    if(!pget("tuto", false)){ setTimeout(() => go("#/tuto")); return {kids:[]}; }
+    const cur = noeudCourant(), u = uniteCourante();
+    const faits = u.noeuds.filter(noeudFait).length, total = u.noeuds.length;
+    const suivante = UNITES[u.n + 1], nE = listeErreurs().length;
+    return {kids:[
+      el("div", {class:"row", style:"justify-content:space-between;align-items:center;gap:10px"},
+        el("div", {class:"stack", style:"gap:4px"},
+          el("h1", {style:"font-size:27px;letter-spacing:-.5px"}, "Bonjour " + nomProfil()),
           window.BETA ? el("span", {class:"badge warm"}, "Version bêta") : null),
-        el("a", {href:"#/personnes", class:"avatar", "aria-label":"Changer de personne"}, initiale(nomProfil()))),
-      genreProfil() ? null : el("a", {href:"#/reglage/genre", class:"note warm", style:"color:inherit"}, ic("info"), "Nouveau : dites-nous si vous êtes une femme ou un homme, pour bien accorder les phrases."),
-      el("div", {class:"stats"},
-        el("div", {class:"stat flame"}, el("span", {class:"row", style:"gap:10px"}, el("span", {html: ICON.flameFill}),
-          el("span", {class:"stack", style:"gap:0"}, el("b", null, streak() + (streak() > 1 ? " jours" : " jour")), el("span", null, "de suite")))),
-        el("div", {class:"stat"}, el("span", {class:"row", style:"gap:10px"}, el("span", {style:"color:var(--primary);display:inline-flex", html: ICON.clock}),
-          el("span", {class:"stack", style:"gap:0"}, el("b", null, minutesToday() + " min"), el("span", null, "aujourd'hui"))))),
-      el("a", {href:"#/lecon", class:"hero"},
-        el("div", {class:"row", style:"justify-content:space-between"}, el("span", {class:"hero-k"}, "Leçon du jour"), el("span", {class:"hero-pill"}, finished ? "Terminée" : "20 min")),
-        el("span", {class:"hero-t"}, plan.cat.titre),
-        el("span", {class:"hero-d"}, "Un son, un homophone, " + plan.phrases.length + " phrases et un petit quiz."),
-        el("div", {class:"hero-bar"}, el("div", {style:"width:" + pct + "%"})),
-        el("span", {class:"hero-btn"}, el("span", {html: ICON.play}), finished ? "Refaire la leçon" : idx === 0 ? "Commencer" : "Continuer")),
-      listeErreurs().length ? el("a", {href:"#/entrainer/erreurs", class:"card row", style:"color:var(--fg);gap:14px"},
+        streak() ? el("span", {class:"streak", "aria-label": pluriel(streak(), "jour") + " de suite"}, el("span", {html: ICON.flameFill}), pluriel(streak(), "jour")) : null),
+      genreProfil() ? null : el("a", {href:"#/reglage/genre", class:"note warm", style:"color:inherit"}, ic("info"), "Dites-nous si vous êtes une femme ou un homme."),
+      el("div", {class:"hero"},
+        el("div", {class:"row", style:"justify-content:space-between;gap:10px"},
+          el("span", {class:"hero-k"}, "Unité " + (u.n + 1) + " · " + u.titre),
+          el("a", {href:"#/guide/" + u.n, class:"hero-guide"}, el("span", {html: ICON.bookOpen}), "Le guide")),
+        el("span", {class:"hero-d"}, u.but.flatMap((t, i) => i ? [el("br"), t] : [t])),
+        el("div", {class:"hero-bar", "aria-label": faits + " étapes sur " + total}, el("div", {style:"width:" + Math.round(faits / total * 100) + "%"})),
+        cur ? el("a", {href: cur.href, class:"hero-btn"}, el("span", {html: ICON.play}), "Continuer")
+          : el("span", {class:"hero-btn"}, "Tout est fini, bravo !")),
+      nE ? el("a", {href:"#/entrainer/erreurs", class:"card row", style:"color:var(--fg);gap:14px"},
           el("span", {class:"tile-ic err-ic", html: ICON.replay}),
-          el("span", {class:"grow stack", style:"gap:3px"}, el("b", {style:"font-size:18px"}, pluriel(listeErreurs().length, "erreur") + " à refaire"),
-            el("span", {class:"soft"}, "Refaites-les pour les corriger.")), ic("chev", "chev")) : null,
-      el("h2", null, "Ensuite"),
-      nx ? el("a", {href:"#/lecont/" + nx.id, class:"card row", style:"color:var(--fg);gap:14px"},
-          el("span", {class:"tile-ic th-" + nx.theme.id, html: ICON[nx.theme.icone] || ICON.book}),
-          el("span", {class:"grow stack", style:"gap:3px"},
-            el("span", {class:"soft", style:"font-weight:600"}, nx.theme.titre + " · leçon " + (nx.theme.lecons.indexOf(nx) + 1)),
-            el("b", {style:"font-size:18px"}, nx.titre)),
-          ic("chev", "chev"))
-        : el("div", {class:"note"}, ic("info"), "Bravo, toutes les leçons des thèmes sont faites !")
-    ];
-    if(deferredInstall) kids.push(el("button", {class:"btn outline", type:"button", onclick: async () => {
-      deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; render();
-    }}, el("span", {html: ICON.download}), "Installer l'appli sur le téléphone"));
-    return {kids};
+          el("span", {class:"grow stack", style:"gap:3px"}, el("b", {style:"font-size:18px"}, pluriel(nE, "erreur") + " à refaire"),
+            el("span", {class:"soft"}, "Dans Réviser.")), ic("chev", "chev")) : null,
+      cheminUnite(u),
+      suivante ? el("div", {class:"card row locked", style:"gap:12px"},
+        el("span", {class:"tile-ic", html: ICON.cadenas}),
+        el("span", {class:"stack", style:"gap:2px"}, el("b", null, "Unité " + (u.n + 2) + " · " + suivante.titre),
+          el("span", {class:"soft"}, "S'ouvre après l'unité " + (u.n + 1)))) : null
+    ]};
+  },
+
+  tuto(){
+    document.body.classList.add("immersive");
+    const ecrans = [
+      {t:"Chaque jour, appuyez sur Continuer.", l:["L'appli choisit la leçon pour vous.", "Une leçon dure 10 minutes."], ic: ICON.play},
+      {t:"Vous pouvez tout écouter.", l:["Touchez le haut-parleur.", "Les consignes sont lues à voix haute."], ic: ICON.sound},
+      {t:"Vos erreurs reviennent.", l:["Dans Réviser, refaites vos erreurs.", "Réussies 2 fois, elles sont corrigées."], ic: ICON.replay}];
+    let i = 0;
+    const wrap = el("div", {class:"stack", style:"min-height:calc(100dvh - 44px)"});
+    const fini = () => { pset("tuto", true); go("#/"); };
+    function draw(){
+      stopAll();
+      const x = ecrans[i];
+      [x.t, ...x.l].forEach(t => pageTexts.add(t));
+      wrap.replaceChildren(
+        el("div", {class:"row", style:"justify-content:space-between"},
+          el("div", {class:"dots"}, ecrans.map((_, k) => el("span", {class: k === i ? "on" : null}))),
+          el("button", {class:"linkbtn", type:"button", onclick: fini}, "Passer")),
+        el("div", {class:"tuto-ill", html: x.ic}),
+        el("h1", {style:"font-size:29px"}, x.t),
+        el("div", {class:"stack", style:"gap:6px"}, x.l.map(t => el("p", {class:"falc"}, t))),
+        el("button", {class:"btn outline", type:"button", style:"align-self:flex-start", onclick:() => speakSeq([x.t, ...x.l])}, el("span", {html: ICON.sound}), "Écouter"),
+        el("div", {class:"grow"}),
+        el("button", {class:"btn", type:"button", onclick:() => { if(i < ecrans.length - 1){ i++; draw(); } else fini(); }}, i < ecrans.length - 1 ? "Suivant" : "Commencer", el("span", {html: ICON.next})));
+      setTimeout(preloadPage, 50);
+      setTimeout(() => speakSeq([x.t, ...x.l]), 400);
+    }
+    draw();
+    return {kids:[wrap]};
+  },
+
+  unite(n){
+    const u = UNITES[Number(n)];
+    if(!u) return PAGES.accueil();
+    return {kids:[pageHead("Unité " + (u.n + 1) + " · " + u.titre),
+      el("p", {class:"falc", style:"margin:0"}, u.but.flatMap((t, i) => i ? [el("br"), t] : [t])),
+      el("a", {href:"#/guide/" + u.n, class:"btn outline"}, el("span", {html: ICON.bookOpen}), "Le guide de l'unité"),
+      cheminUnite(u)]};
+  },
+
+  guide(n){
+    const u = UNITES[Number(n)];
+    if(!u) return PAGES.accueil();
+    const ls = u.noeuds.filter(x => x.k === "lecon").map(x => x.l);
+    return {kids:[pageHead("Le guide"), el("h1", null, "Unité " + (u.n + 1) + " · " + u.titre),
+      el("p", {class:"muted", style:"margin:0"}, "Les règles de l'unité, à relire quand vous voulez."),
+      ...ls.map(l => el("div", {class:"card stack", style:"gap:10px"},
+        el("div", {class:"row", style:"justify-content:space-between;gap:10px"}, el("h2", null, l.titre),
+          el("a", {href:"#/lecont/" + l.id, class:"soft", style:"font-weight:600"}, "Leçon")),
+        mdBlock(l.regle),
+        l.astuce ? el("div", {class:"note warm"}, ic("info"), el("div", null, el("b", null, "Astuce : "), mdBlock(l.astuce))) : null))]};
+  },
+
+  situ(id){
+    const r = PAGES.cat(id);
+    return {kids:[...r.kids, el("div", {class:"footer"},
+      el("button", {class:"btn", type:"button", onclick:() => { marquerNoeud("situation", id); go("#/"); }}, el("span", {html: ICON.checkSm}), "J'ai fini"))]};
+  },
+
+  revision(n){
+    const u = UNITES[Number(n)];
+    if(!u) return PAGES.accueil();
+    const pool = u.noeuds.filter(x => x.k === "lecon").flatMap(x => x.l.pool);
+    return {kids:[serie(tirer(pool, 10), {fermer:"#/", fin:(sc, tot) => {
+      marquerNoeud("revision", "u" + u.n);
+      return {body: finSerie(sc, tot, "Révision de l'unité " + (u.n + 1) + " terminée."), foot:[boutonSuite()]};
+    }})]};
+  },
+
+  reviser(){
+    const nE = listeErreurs().length, corr = pget("corrigees", 0);
+    const commencees = UNITES.filter(u => u.noeuds.some(noeudFait));
+    return {kids:[el("h1", null, "Réviser"),
+      el(nE ? "a" : "div", {href: nE ? "#/entrainer/erreurs" : null, class:"err-card"},
+        el("div", {class:"row", style:"gap:14px"}, el("span", {class:"err-big", html: ICON.replay}),
+          el("span", {class:"stack", style:"gap:2px"}, el("b", {style:"font-size:21px"}, "Mes erreurs"),
+            el("span", null, nE ? pluriel(nE, "exercice") + " à refaire" : "Aucune erreur à refaire"))),
+        nE ? el("span", {class:"err-btn"}, el("span", {html: ICON.play}), "Commencer") : null,
+        corr ? el("span", {style:"font-size:14px"}, "Déjà " + pluriel(corr, "erreur") + " " + (corr > 1 ? "corrigées" : "corrigée") + ". Bravo !") : null),
+      commencees.length ? el("h2", null, "Refaire une unité") : null,
+      commencees.length ? el("div", {class:"list"}, commencees.map(u => el("a", {href:"#/unite/" + u.n},
+        el("span", {class:"avatar sm" + (u.noeuds.every(noeudFait) ? "" : " grey")}, String(u.n + 1)),
+        el("span", {class:"grow"}, u.titre), ic("chev", "chev")))) : null,
+      el("h2", null, "Écouter et répéter"),
+      el("div", {class:"tiles"}, [["#/sons", "sound", "Les sons", "mots"], ["#/phrases", "chat", "Les phrases", "phrases"], ["#/favoris", "star", "Mes favoris", "orthographe"], ["#/conjugaison", "pencil", "Conjugaison", "passe"]].map(([href, icon, titre, th]) =>
+        el("a", {href, class:"tile small th-" + th}, el("span", {class:"tile-ic", html: ICON[icon]}), el("b", null, titre))))]};
   },
 
   pratiquer(){
@@ -829,7 +1143,9 @@ const PAGES = {
         ligne("#/reglage/prenom", "pencil", "Prénom", nomProfil()),
         ligne("#/reglage/genre", "user", "Je suis", genreProfil() ? GENRES[genreProfil()] : "À choisir"),
         ligne("#/reglage/voix", "sound", "Voix", voix === "homme" ? "Homme" : "Femme"),
-        ligne("#/reglage/vitesse", "clock", "Vitesse", slow ? "Lente" : "Normale")),
+        ligne("#/reglage/vitesse", "clock", "Vitesse", slow ? "Lente" : "Normale"),
+        ligne("#/reglage/consignes", "soundSm", "Lire les consignes", pget("lireConsignes", true) ? "Oui" : "Non"),
+        ligne("#/tuto", "help", "Revoir le tuto", "")),
       el("h2", {class:"soft", style:"font-size:15px"}, "Sur ce téléphone"),
       el("div", {class:"list"},
         ligne("#/personnes", "userPlus", autre ? "Changer de personne" : "Ajouter une personne", autre ? autre.nom : ""),
@@ -856,6 +1172,14 @@ const PAGES = {
         el("button", {class:"btn outline", type:"button", onclick:() => speak("Bonjour, je vais vous aider à parler français.")}, el("span", {html: ICON.play}), "Écouter la voix"));
       draw();
       return {kids:[pageHead("Voix"), el("p", {class:"muted", style:"margin:0"}, "La voix qui lit les mots et les phrases."), box]};
+    }
+    if(quoi === "consignes"){
+      const box = el("div", {class:"stack"});
+      const draw = () => box.replaceChildren(
+        seg([[true,"Oui"],[false,"Non"]], pget("lireConsignes", true), k => { pset("lireConsignes", k); draw(); }, "Lire les consignes"));
+      draw();
+      return {kids:[pageHead("Lire les consignes"), el("p", {class:"falc", style:"margin:0"}, "Oui : la consigne de chaque exercice est lue à voix haute.", el("br"), "Le bouton haut-parleur marche toujours.")]
+        .concat([box])};
     }
     if(quoi === "vitesse"){
       const box = el("div", {class:"stack"});
@@ -1098,63 +1422,46 @@ const PAGES = {
 
   lecont(id){
     const l = ALL_LECONS.find(x => x.id === id);
-    if(!l) return PAGES.apprendre();
+    if(!l) return PAGES.accueil();
     document.body.classList.add("immersive");
     const exos = tirer(l.pool, 8);
-    const steps = [{t:"regle"}, {t:"exemples"}, ...exos.map((e, i) => ({t:"exo", e, i})), {t:"fin"}];
-    let idx = 0, score = 0;
+    let etape = 0;
     const wrap = el("div", {class:"stack", style:"min-height:calc(100vh - 44px);min-height:calc(100dvh - 44px)"});
     function draw(){
       stopAll();
-      const s = steps[idx];
       const top = el("div", {class:"row", style:"gap:14px"},
-        el("a", {href:"#/theme/" + l.theme.id, class:"iconbtn", "aria-label":"Fermer la leçon", html: ICON.x}),
-        el("div", {class:"bar grow", role:"progressbar", "aria-label":"Progression", "aria-valuenow": String(Math.round(idx / (steps.length - 1) * 100)), "aria-valuemin":"0", "aria-valuemax":"100"},
-          el("div", {style:"width:" + Math.round(idx / (steps.length - 1) * 100) + "%"})));
-      const nextBtn = (label, enabled = true) => el("button", {class:"btn", type:"button", disabled: !enabled, onclick:() => { idx++; draw(); }}, label, el("span", {html: ICON.next}));
-      let body = [], footBtn;
+        el("a", {href:"#/", class:"iconbtn", "aria-label":"Fermer la leçon", html: ICON.x}),
+        el("div", {class:"bar grow big"}, el("div", {style:"width:0%"})));
       const kicker = txt => el("span", {class:"muted", style:"font-size:14px;font-weight:600"}, txt);
-      if(s.t === "regle"){
-        body = [kicker(l.theme.titre), el("h1", {style:"font-size:27px"}, l.titre)];
+      let body = [], label;
+      if(etape === 0){
+        body = [kicker("La règle"), el("h1", {style:"font-size:27px"}, l.titre)];
         if(l.mots.length) body.push(el("div", {class:"list"}, l.mots.map(([m, d]) => {
           pageTexts.add(m);
           return el("button", {type:"button", onclick:() => speak(m)}, ic("soundSm", "lic"),
             el("span", {class:"grow"}, el("b", null, m), el("div", {class:"soft", style:"font-weight:400"}, d)));
         })));
         if(l.tableau) body.push(tableBlock(l.tableau));
-        body.push(el("div", {class:"card stack", style:"gap:8px"}, el("h2", null, "La règle"), mdBlock(l.regle)));
+        body.push(el("div", {class:"card stack", style:"gap:8px"}, mdBlock(l.regle)));
         if(l.astuce) body.push(el("div", {class:"note warm"}, ic("info"), el("div", null, el("b", null, "Astuce : "), mdBlock(l.astuce))));
-        if(l.retenir) body.push(el("div", {class:"note"}, ic("info"), el("div", null, el("b", null, "Pour retenir : "), mdBlock(l.retenir))));
-        footBtn = nextBtn("Voir les exemples");
-      }
-      if(s.t === "exemples"){
+        label = "Voir les exemples";
+      } else {
         body = [kicker("Les exemples"), el("h1", {style:"font-size:27px"}, "Écoutez, puis répétez"),
           el("div", {class:"card"}, l.exemples.map(x => exLine(x))),
           el("p", {class:"soft", style:"margin:0"}, "Touchez une phrase pour l'écouter.")];
-        footBtn = nextBtn("Commencer les exercices");
+        label = "Commencer les exercices";
         setTimeout(() => speakSeq(l.exemples.map(x => x.replace(/\*\*/g, ""))), 400);
       }
-      if(s.t === "exo"){
-        const fbtn = nextBtn(s.i === exos.length - 1 ? "Terminer" : "Suivant", false);
-        body = [kicker("Exercice " + (s.i + 1) + " sur " + exos.length),
-          exercice(s.e, good => { if(good) score++; fbtn.disabled = false; })];
-        footBtn = fbtn;
-      }
-      if(s.t === "fin"){
-        marquerLecon(l.id);
-        const t = l.theme, pos = t.lecons.indexOf(l), suivante = t.lecons[pos + 1] || prochaineLecon();
-        body = [el("div", {class:"done", html: ICON.check}),
-          el("h1", {style:"text-align:center"}, "Bravo " + nomProfil() + " !"),
-          el("p", {class:"muted", style:"text-align:center;margin:0"}, "Leçon « " + l.titre + " » terminée."),
-          el("div", {class:"score"}, score + " / " + exos.length),
-          el("p", {class:"soft", style:"text-align:center;margin:0"}, score >= 6 ? "Très bien, vous avez compris la règle." : "Relisez la règle et refaites la leçon demain, ça va venir.")];
-        footBtn = suivante && suivante.id !== l.id
-          ? el("a", {href:"#/lecont/" + suivante.id, class:"btn"}, "Leçon suivante : " + suivante.titre)
-          : el("a", {href:"#/apprendre", class:"btn"}, "Retour aux thèmes");
-      }
-      const foot = el("div", {class:"footer"}, footBtn,
-        s.t === "fin" ? el("a", {href:"#/theme/" + l.theme.id, class:"btn outline", style:"margin-top:10px"}, "Retour au thème") : null);
-      wrap.replaceChildren(top, ...body, el("div", {class:"grow"}), foot);
+      const go_ = () => {
+        if(etape === 0){ etape = 1; draw(); return; }
+        wrap.replaceChildren(serie(exos, {fermer:"#/", fin:(sc, tot) => {
+          marquerLecon(l.id);
+          return {body: finSerie(sc, tot, "Leçon « " + l.titre + " » terminée."),
+            foot:[boutonSuite(), el("a", {href:"#/", class:"btn outline", style:"margin-top:10px"}, "Retour au parcours")]};
+        }}));
+      };
+      wrap.replaceChildren(top, ...body, el("div", {class:"grow"}),
+        el("div", {class:"footer"}, el("button", {class:"btn", type:"button", onclick: go_}, label, el("span", {html: ICON.next}))));
       window.scrollTo(0, 0);
       setTimeout(preloadPage, 50);
     }
@@ -1166,7 +1473,7 @@ const PAGES = {
   entrainer(arg){
     let exos, titre, retour;
     if(arg === "erreurs"){
-      exos = shuffle(listeErreurs().map(id => EXOS[id])).slice(0, 10); titre = "Mes erreurs"; retour = "#/pratiquer";
+      exos = shuffle(listeErreurs().map(id => EXOS[id])).slice(0, 10); titre = "Mes erreurs"; retour = "#/reviser";
     } else {
       const t = THEMES.find(x => x.id === arg);
       if(!t) return PAGES.apprendre();
@@ -1177,40 +1484,16 @@ const PAGES = {
       el("h2", {style:"text-align:center"}, "Aucune erreur à refaire"),
       el("p", {class:"muted", style:"text-align:center;margin:0"}, "Quand vous ratez un exercice, il arrive ici. Réussissez-le 2 fois de suite pour le corriger."),
       el("p", {class:"soft", style:"text-align:center;margin:0"}, pluriel(pget("corrigees", 0), "erreur") + " déjà " + (pget("corrigees", 0) > 1 ? "corrigées" : "corrigée") + ".")]};
-    document.body.classList.add("immersive");
-    let idx = 0, score = 0;
-    const avant = listeErreurs().length, corrAvant = pget("corrigees", 0);
-    const wrap = el("div", {class:"stack", style:"min-height:calc(100vh - 44px);min-height:calc(100dvh - 44px)"});
-    function draw(){
-      stopAll();
-      const top = el("div", {class:"row", style:"gap:14px"},
-        el("a", {href: retour, class:"iconbtn", "aria-label":"Arrêter", html: ICON.x}),
-        el("div", {class:"bar grow", role:"progressbar", "aria-label":"Progression"}, el("div", {style:"width:" + Math.round(idx / exos.length * 100) + "%"})));
-      let body, foot;
-      if(idx < exos.length){
-        const e = exos[idx];
-        const fbtn = el("button", {class:"btn", type:"button", disabled: true, onclick:() => { idx++; draw(); }}, idx === exos.length - 1 ? "Terminer" : "Suivant", el("span", {html: ICON.next}));
-        body = [el("span", {class:"muted", style:"font-size:14px;font-weight:600"}, titre + " · " + (idx + 1) + " sur " + exos.length + " · " + e.lecon.titre),
-          exercice(e, good => { if(good) score++; fbtn.disabled = false; })];
-        foot = el("div", {class:"footer"}, fbtn);
-      } else {
-        const corr = pget("corrigees", 0) - corrAvant, reste = listeErreurs().length;
-        body = [el("div", {class:"done", html: ICON.check}),
-          el("h1", {style:"text-align:center"}, score * 2 >= exos.length ? "Bravo " + nomProfil() + " !" : "Série terminée"),
-          el("div", {class:"score"}, score + " / " + exos.length),
-          arg === "erreurs"
-            ? el("p", {class:"muted", style:"text-align:center;margin:0"}, (corr ? pluriel(corr, "erreur") + " " + (corr > 1 ? "corrigées" : "corrigée") + " aujourd'hui. " : "") + (reste ? "Encore " + reste + " à refaire. Une erreur est corrigée quand elle est réussie 2 fois de suite." : "Toutes vos erreurs sont corrigées !"))
-            : el("p", {class:"muted", style:"text-align:center;margin:0"}, score >= 8 ? "Très bien, vous maîtrisez ce thème." : "Continuez à vous entraîner, ça va venir.")];
-        foot = el("div", {class:"footer"},
-          el("button", {class:"btn", type:"button", onclick:() => render()}, el("span", {html: ICON.replay}), "Recommencer"),
-          el("a", {href: retour, class:"btn outline", style:"margin-top:10px"}, "Retour"));
-      }
-      wrap.replaceChildren(top, ...body, el("div", {class:"grow"}), foot);
-      window.scrollTo(0, 0);
-      setTimeout(preloadPage, 50);
-    }
-    draw();
-    return {kids:[wrap]};
+    const corrAvant = pget("corrigees", 0);
+    return {kids:[serie(exos, {fermer: retour, fin:(sc, tot) => {
+      const corr = pget("corrigees", 0) - corrAvant, reste = listeErreurs().length;
+      const txt = arg === "erreurs"
+        ? (corr ? pluriel(corr, "erreur") + " " + (corr > 1 ? "corrigées" : "corrigée") + ". " : "") + (reste ? "Encore " + reste + " à refaire." : "Toutes vos erreurs sont corrigées !")
+        : null;
+      return {body: finSerie(sc, tot, txt), foot:[
+        el("button", {class:"btn", type:"button", onclick:() => render()}, el("span", {html: ICON.replay}), "Recommencer"),
+        el("a", {href: retour, class:"btn outline", style:"margin-top:10px"}, "Retour")]};
+    }})]};
   },
 
   grammaire(){ return PAGES.apprendre(); },
@@ -1361,12 +1644,12 @@ const PAGES = {
 /* =========================================================
    NAVIGATION
    ========================================================= */
-const TABS = [["accueil","#/","sun","Aujourd'hui"],["apprendre","#/apprendre","bookOpen","Apprendre"],["pratiquer","#/pratiquer","target","Pratiquer"],["profil","#/profil","user","Profil"]];
-const TAB_OF = {bienvenue:"", ajouter:"", accueil:"accueil", lecon:"accueil",
-  grammaire:"apprendre", apprendre:"apprendre", theme:"apprendre", lecont:"apprendre",
-  pratiquer:"pratiquer", sons:"pratiquer", phrases:"pratiquer", cat:"pratiquer", favoris:"pratiquer",
-  homophones:"pratiquer", construire:"pratiquer", conjugaison:"pratiquer", quiz:"pratiquer", ordre:"pratiquer",
-  entrainer:"pratiquer", profil:"profil", profils:"profil", personnes:"profil", reglage:"profil"};
+const TABS = [["accueil","#/","map","Parcours"],["reviser","#/reviser","replay","Réviser"],["profil","#/profil","user","Profil"]];
+const TAB_OF = {bienvenue:"", ajouter:"", tuto:"", accueil:"accueil", lecon:"accueil", unite:"accueil", guide:"accueil", situ:"accueil", revision:"accueil", lecont:"accueil",
+  grammaire:"reviser", apprendre:"reviser", theme:"reviser", reviser:"reviser",
+  pratiquer:"reviser", sons:"reviser", phrases:"reviser", cat:"reviser", favoris:"reviser", entrainer:"reviser",
+  homophones:"reviser", construire:"reviser", conjugaison:"reviser", quiz:"reviser", ordre:"reviser",
+  profil:"profil", profils:"profil", personnes:"profil", reglage:"profil"};
 const tabsEl = document.getElementById("tabs");
 tabsEl.replaceChildren(...TABS.map(([k, href, icon, label]) =>
   el("a", {class:"tab", href, "data-tab": k}, el("span", {html: ICON[icon]}), label)));

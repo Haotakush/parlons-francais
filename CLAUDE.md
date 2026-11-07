@@ -39,6 +39,8 @@ manifest.webmanifest  Installation sur l'écran d'accueil
 beta/                 La version BÊTA (adresse /beta/) : copie de index.html, css/, js/, sw.js, manifest pour tester
                       les nouveautés avant les parents. Données à part (clés « beta_ »), audio partagé (../audio/).
                       beta/js/exercices.js : exercices en plus (généré, ne pas modifier à la main)
+                      beta/js/parcours.js : les 10 unités du parcours (UNITES). Onglets de la bêta : Parcours, Réviser, Profil.
+                      Exercices : exo() + serie() (un écran à la fois, Vérifier, bandeau). Consignes : consigneDe().
 tools/                Scripts Python : lister les textes, générer l'audio, découper un enregistrement,
                       construire_exercices.py (vérifie tools/exercices/*.json et écrit beta/js/exercices.js)
 docs/                 CONTENU.md (ajouter du contenu), AUDIO.md (les voix)

@@ -14,14 +14,16 @@ Les priorités sont décidées par Eric. Rien n'est commencé sans un plan valid
 | v6 | 2026-11-05 | Onglet **Apprendre** : 8 thèmes, 52 leçons (règle, astuce, moyen mnémotechnique, exemples, 8 exercices expliqués), niveau A2–B1, audio de toutes les phrases |
 | v7 | 2026-11-05 | Premier lancement (prénom, femme/homme, voix), onglets Aujourd'hui · Apprendre · Pratiquer · Profil, thèmes en cartes et chemin de leçons. **Première version testée par les parents** |
 | v8 (bêta) | 2026-11-06 | Version bêta, 3 nouveaux types d'exercices, réserve d'exercices tirés au hasard, S'entraîner, Mes erreurs. Thème 1 complet (25 exercices par leçon) |
+| v9 (bêta) | 2026-11-07 | Un seul parcours de 10 unités, 3 onglets, exercices un écran à la fois avec « Vérifier », consignes et énoncés lus à voix haute, tuto |
 
 ## Maintenant
 
 - [ ] Eric teste la bêta (nouveaux exercices du thème 1, S'entraîner, Mes erreurs)
 - [ ] Exercices en plus pour les thèmes 2 à 8 (25 par leçon)
-- [ ] Écouter les consignes, les règles, les astuces et les explications (bouton + réglage « Lire les consignes à voix haute »)
-- [ ] Petit tuto au premier lancement, phrase « À quoi ça sert ? » sur chaque thème et leçon
-- [ ] Refonte de l'ergonomie : moins d'informations d'un coup, ouvrir les contenus petit à petit (à préparer avec des maquettes)
+- [x] Écouter les consignes et les énoncés des exercices (v9 bêta)
+- [ ] Réécrire en FALC les règles, astuces et explications, puis les rendre écoutables
+- [x] Petit tuto au premier lancement (v9 bêta) ; « À quoi ça sert ? » = le but de chaque unité
+- [x] Refonte de l'ergonomie : un seul parcours qui s'ouvre petit à petit (v9 bêta)
 - [ ] Passer la bêta validée en version normale pour les parents
 
 ## Prochaines idées (sans ordre de priorité pour l'instant)

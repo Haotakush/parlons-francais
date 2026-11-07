@@ -4,6 +4,28 @@ Une entrée par séance de travail, la plus récente en haut. Pour chaque séanc
 
 ---
 
+## 2026-11-07 — v9 (bêta) : un seul parcours, exercices un écran à la fois, consignes lues
+
+**Retours d'Eric**
+- Trop d'informations d'un coup. S'inspirer de Duolingo et Babbel. Les explications sont trop compliquées pour le public.
+- Ne pas organiser par les 8 thèmes, ni par situations (« trop situationnel »). Pouvoir écouter les consignes et les énoncés.
+
+**Fait (dans la bêta)**
+- 10 unités dans un seul parcours (`beta/js/parcours.js`), de la plus facile à la plus difficile. Chaque unité mélange des leçons des 8 thèmes, une ou deux situations de la vie et finit par une révision.
+- Accueil = Mon parcours : un grand bouton Continuer, le chemin de l'unité, les étapes suivantes fermées par un cadenas.
+- 3 onglets : Parcours, Réviser (Mes erreurs, refaire une unité, sons, phrases, favoris, conjugaison), Profil.
+- Exercices un écran à la fois : on choisit, puis « Vérifier » en bas. Bandeau vert ou rouge avec la bonne réponse et « Pourquoi ? ».
+- Chaque consigne est lue à voix haute (réglage « Lire les consignes » dans le Profil). Bouton haut-parleur pour la consigne, la phrase de l'exercice et chaque phrase à choisir.
+- Le guide de l'unité : les règles de l'unité, à relire.
+- Tuto de 3 écrans au premier lancement, lu à voix haute (« Revoir le tuto » dans le Profil).
+- Audio généré pour les consignes, les énoncés, les phrases à choisir et le tuto.
+
+**Décidé**
+- L'écran « Pourquoi voulez-vous apprendre ? » de la maquette n'est pas fait, puisque le parcours n'est plus organisé par situations.
+- Prochaine étape : réécrire en FALC les règles et les explications, puis générer leur audio. Ensuite seulement, écrire les exercices des autres thèmes.
+
+---
+
 ## 2026-11-06 — v8 (bêta) : version bêta, nouveaux exercices, Mes erreurs
 
 **Retours des parents (v7)**
