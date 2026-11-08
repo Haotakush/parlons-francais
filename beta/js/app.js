@@ -82,6 +82,7 @@ const audioCache = new Map();
 let pageTexts = new Set();
 function audioUrl(text){
   if(text.startsWith("rec:")) return AUDIO_BASE + "sons/" + text.slice(4) + ".mp3";
+  if(window.PLUME_AUDIO && PLUME_AUDIO[text]) return AUDIO_BASE + "plume/" + PLUME_AUDIO[text] + ".mp3";
   const idx = window.AUDIO_INDEX && window.AUDIO_INDEX[cleanForSpeech(text)];
   return idx == null ? null : AUDIO_BASE + VOIX[voix].id + "/" + idx + ".mp3";
 }
@@ -542,17 +543,20 @@ const plumeTete = a => el("img", {src: "img/plume-tete-" + a + ".webp", alt: "",
 const PL_BONJOUR = ["Bonjour, je suis Plume !", "Je vais vous aider à parler français."];
 const PL_DEVISE = ["On apprend à son rythme,", "un mot après l'autre !"];
 const PL_AUCUNE = ["Aucune erreur à refaire.", "Bravo, continuez comme ça !"];
+/* Plume dit une réplique : avec sa voix (fichier ElevenLabs) si elle existe, sinon ligne par ligne */
+const parlePlume = textes => { const t = textes.join(" "); if(window.PLUME_AUDIO && PLUME_AUDIO[t]) speak(t); else speakSeq(textes); };
+const auHasard = l => l[Math.floor(Math.random() * l.length)];
 /* Plume parle : son image + une bulle avec le texte et un haut-parleur */
 function plumeDit(att, textes, cls){
   return el("div", {class:"avec-plume"}, plume(att, cls || "coucou"),
     el("div", {class:"bulle-plume"},
       el("p", null, el("span", {class:"nom"}, "Plume"), ...textes.flatMap((t, i) => i ? [el("br"), t] : [t])),
-      spkBtn(() => speakSeq(textes), "Écouter Plume", "sm")));
+      spkBtn(() => parlePlume(textes), "Écouter Plume", "sm")));
 }
 const astucePlume = md => el("div", {class:"astuce-plume"}, plumeTete("complice"),
   el("div", null, el("b", {class:"k"}, "L'astuce de Plume"), mdBlock(md)));
-const ASTUCE = "L'astuce de Plume.", HINT_ASSOC = "Touchez un mot à gauche, puis le mot qui va avec à droite.", ECOUTEZ = "Écoutez, puis répétez.";
-const TEXTES_FIXES = ["Bravo !", "Pas tout à fait.", ...PL_BONJOUR, ...PL_DEVISE, ...PL_AUCUNE, ASTUCE, HINT_ASSOC, ECOUTEZ,
+const ASTUCE = "J'ai une astuce pour vous !", HINT_ASSOC = "Touchez un mot à gauche, puis le mot qui va avec à droite.", ECOUTEZ = "Écoutez, puis répétez.";
+const TEXTES_FIXES = ["Bravo !", "Pas tout à fait.", ...(typeof PLUME_TEXTES !== "undefined" ? PLUME_TEXTES : []), ...PL_BONJOUR, ...PL_DEVISE, ...PL_AUCUNE, ASTUCE, HINT_ASSOC, ECOUTEZ,
   "Touchez la phrase juste.", "Touchez le mot qui manque.", "Écoutez. Remettez les mots dans l'ordre.",
   "Écoutez. Touchez la bonne phrase.", "Écoutez. Cette phrase est-elle juste ?",
   "Chaque jour, appuyez sur Continuer.", "L'appli choisit la leçon pour vous.", "Une leçon dure 10 minutes.",
@@ -710,12 +714,13 @@ function serie(exos, o){
       if(good) score++;
       noterReponse(e, good);
       const full = exoTexte(e);
-      const dire = [good ? "Bravo !" : "Pas tout à fait.", full].filter(Boolean);
+      const verdict = auHasard(good ? PLUME.juste : PLUME.faux);
+      const dire = [verdict, full].filter(Boolean);
       const pourquoi = lu(e.expl);
       foot.className = "footer exo-foot sheet " + (good ? "ok" : "ko");
       foot.replaceChildren(...[
         el("div", {class:"row", style:"justify-content:space-between;gap:12px"},
-          el("b", {class:"sheet-t"}, plumeTete(good ? "bravo" : "reflexion"), good ? "Bravo !" : "Pas tout à fait"),
+          el("b", {class:"sheet-t"}, plumeTete(good ? "bravo" : "reflexion"), verdict),
           spkBtn(() => speakSeq([...dire, pourquoi]), "Écouter")),
         msg || (!good && full) ? el("div", {class:"sheet-m", html: msg || "La bonne réponse : <b>" + esc(full) + "</b>"}) : null,
         el("div", {class:"sheet-why"},
@@ -736,10 +741,12 @@ function serie(exos, o){
   draw();
   return wrap;
 }
-const finSerie = (score, total, texte) => [plume(score * 2 >= total ? "joie" : "bravo", (score * 2 >= total ? "saute" : "entre") + " fin-plume"),
+const finSerie = (score, total, texte) => { const bien = score * 2 >= total, ligne = auHasard(bien ? PLUME.fin : PLUME.finmoy);
+  setTimeout(() => speak(ligne), 500);
+  return [plume(bien ? "joie" : "bravo", (bien ? "saute" : "entre") + " fin-plume"), el("p", {class:"fin-dit"}, ligne),
   el("h1", {style:"text-align:center"}, score * 2 >= total ? "Bravo " + nomProfil() + " !" : "C'est fini !"),
   el("div", {class:"score"}, score + " / " + total),
-  texte ? el("p", {class:"muted", style:"text-align:center;margin:0"}, texte) : null];
+  texte ? el("p", {class:"muted", style:"text-align:center;margin:0"}, texte) : null]; };
 const boutonSuite = () => {
   const nx = noeudSuivant();
   return nx ? el("a", {href: nx.href, class:"btn"}, el("span", {html: ICON.play}), "Continuer : " + nx.titre)
@@ -917,11 +924,11 @@ const PAGES = {
         plume(x.p, x.a + " tuto-plume"),
         el("h1", {style:"font-size:29px"}, x.t),
         el("div", {class:"stack", style:"gap:6px"}, x.l.map(t => el("p", {class:"falc"}, t))),
-        el("button", {class:"btn outline", type:"button", style:"align-self:flex-start", onclick:() => speakSeq([x.t, ...x.l])}, el("span", {html: ICON.sound}), "Écouter"),
+        el("button", {class:"btn outline", type:"button", style:"align-self:flex-start", onclick:() => parlePlume(x.l[0].startsWith("Bonjour") ? [x.l[0], x.t, ...x.l.slice(1)] : [x.t, ...x.l])}, el("span", {html: ICON.sound}), "Écouter"),
         el("div", {class:"grow"}),
         el("button", {class:"btn", type:"button", onclick:() => { if(i < ecrans.length - 1){ i++; draw(); } else fini(); }}, i < ecrans.length - 1 ? "Suivant" : "Commencer", el("span", {html: ICON.next})));
       setTimeout(preloadPage, 50);
-      setTimeout(() => speakSeq([x.t, ...x.l]), 400);
+      setTimeout(() => parlePlume(x.l[0].startsWith("Bonjour") ? [x.l[0], x.t, ...x.l.slice(1)] : [x.t, ...x.l]), 400);
     }
     draw();
     return {kids:[wrap]};

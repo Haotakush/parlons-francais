@@ -4,6 +4,22 @@ Une entrée par séance de travail, la plus récente en haut. Pour chaque séanc
 
 ---
 
+## 2026-11-08 — v11.1 (bêta) : Plume parle (préparation de sa voix)
+
+**Décidé avec Eric**
+- La voix de Plume : ElevenLabs, voix « Manon - Serious & spontaneous French », modèle eleven_v4, avec des intonations ([warmly], [excited]…).
+- Compte gratuit, usage non commercial. Pour économiser : Plume ne dit que des phrases clés (5 façons de dire « juste », 5 pour « pas encore », la fin de leçon, l'accueil, le tuto, l'astuce). Les « Pourquoi ? » restent avec la voix Google.
+
+**Fait**
+- 22 répliques écrites dans `tools/plume/repliques.json` (texte affiché + texte avec intonations).
+- `tools/construire_plume.py` → `beta/js/plume.js`. L'appli joue `audio/plume/<id>.mp3` quand il existe, sinon la voix Google.
+- Le bandeau de réponse et la fin de leçon choisissent une réplique de Plume au hasard.
+
+**À faire**
+- Générer les 22 fichiers avec ElevenLabs (les générations gratuites étaient occupées).
+
+---
+
 ## 2026-11-08 — v11 (bêta) : Plume, la mascotte, et les couleurs de Plume
 
 **Demande d'Eric**
