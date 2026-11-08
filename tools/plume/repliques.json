@@ -1,24 +1,134 @@
 [
- {"id":"juste-1","groupe":"juste","texte":"Bravo !","prompt":"[excited] Bravo !"},
- {"id":"juste-2","groupe":"juste","texte":"Oui, c'est juste !","prompt":"[happy] Oui, c'est juste !"},
- {"id":"juste-3","groupe":"juste","texte":"Très bien, continuez comme ça !","prompt":"[warmly] Très bien… continuez comme ça !"},
- {"id":"juste-4","groupe":"juste","texte":"Parfait !","prompt":"[laughs softly] Parfait !"},
- {"id":"juste-5","groupe":"juste","texte":"Super, bien joué !","prompt":"[excited] Super… bien joué !"},
- {"id":"faux-1","groupe":"faux","texte":"Pas tout à fait… Regardons pourquoi.","prompt":"[softly] Pas tout à fait… [warmly] Regardons pourquoi."},
- {"id":"faux-2","groupe":"faux","texte":"Presque ! On regarde ensemble ?","prompt":"[curious] Presque ! [warmly] On regarde ensemble ?"},
- {"id":"faux-3","groupe":"faux","texte":"Ce n'est pas grave, on apprend !","prompt":"[warmly] Ce n'est pas grave… on apprend !"},
- {"id":"faux-4","groupe":"faux","texte":"Oups ! Ça arrive à tout le monde.","prompt":"[chuckles] Oups ! [warmly] Ça arrive à tout le monde."},
- {"id":"faux-5","groupe":"faux","texte":"Pas encore… Voici l'explication.","prompt":"[softly] Pas encore… [pause] Voici l'explication."},
- {"id":"fin-1","groupe":"fin","texte":"Bravo, leçon terminée ! Je suis fière de vous.","prompt":"[excited] Bravo, leçon terminée ! [warmly] Je suis fière de vous."},
- {"id":"fin-2","groupe":"fin","texte":"Vous avez réussi ! On continue demain ?","prompt":"[happy] Vous avez réussi ! [mischievously] On continue demain ?"},
- {"id":"fin-3","groupe":"fin","texte":"Encore une leçon de faite. Bravo !","prompt":"[warmly] Encore une leçon de faite… [excited] Bravo !"},
- {"id":"finmoy-1","groupe":"finmoy","texte":"Bien essayé ! Chaque erreur vous fait avancer.","prompt":"[warmly] Bien essayé ! [softly] Chaque erreur vous fait avancer."},
- {"id":"finmoy-2","groupe":"finmoy","texte":"C'est fini ! Refaites la leçon pour progresser.","prompt":"[warmly] C'est fini ! [encouraging] Refaites la leçon pour progresser."},
- {"id":"bonjour","groupe":"","texte":"Bonjour, je suis Plume ! Je vais vous aider à parler français.","prompt":"[happy] Bonjour, je suis Plume ! [warmly] Je vais vous aider à parler français."},
- {"id":"devise","groupe":"","texte":"On apprend à son rythme, un mot après l'autre !","prompt":"[warmly] On apprend à son rythme… [happy] un mot après l'autre !"},
- {"id":"aucune","groupe":"","texte":"Aucune erreur à refaire. Bravo, continuez comme ça !","prompt":"[surprised] Aucune erreur à refaire. [excited] Bravo, continuez comme ça !"},
- {"id":"astuce","groupe":"","texte":"J'ai une astuce pour vous !","prompt":"[mischievously] J'ai une astuce pour vous !"},
- {"id":"tuto-1","groupe":"","texte":"Bonjour, je suis Plume ! Chaque jour, appuyez sur Continuer. L'appli choisit la leçon pour vous. Une leçon dure 10 minutes.","prompt":"[happy] Bonjour, je suis Plume ! [warmly] Chaque jour, appuyez sur Continuer. L'appli choisit la leçon pour vous. [short pause] Une leçon dure 10 minutes."},
- {"id":"tuto-2","groupe":"","texte":"Vous pouvez tout écouter. Touchez le haut-parleur. Les consignes sont lues à voix haute.","prompt":"[warmly] Vous pouvez tout écouter. [short pause] Touchez le haut-parleur. Les consignes sont lues à voix haute."},
- {"id":"tuto-3","groupe":"","texte":"Vos erreurs reviennent. Dans Réviser, refaites vos erreurs. Réussies 2 fois, elles sont corrigées.","prompt":"[mischievously] Vos erreurs reviennent… [warmly] Dans Réviser, refaites vos erreurs. Réussies 2 fois, elles sont corrigées."}
+ {
+  "id": "juste-1",
+  "groupe": "juste",
+  "texte": "Bravo !",
+  "prompt": "[excited] Bravo !"
+ },
+ {
+  "id": "juste-2",
+  "groupe": "juste",
+  "texte": "Oui, c'est juste !",
+  "prompt": "[happy] Oui, c'est juste !"
+ },
+ {
+  "id": "juste-3",
+  "groupe": "juste",
+  "texte": "Très bien, continuez comme ça !",
+  "prompt": "[warmly] Très bien… continuez comme ça !"
+ },
+ {
+  "id": "juste-4",
+  "groupe": "juste",
+  "texte": "Parfait, c'est exactement ça !",
+  "prompt": "[warmly] Parfait, c'est exactement ça !"
+ },
+ {
+  "id": "juste-5",
+  "groupe": "juste",
+  "texte": "Super, bien joué !",
+  "prompt": "[excited] Super… bien joué !"
+ },
+ {
+  "id": "faux-1",
+  "groupe": "faux",
+  "texte": "Pas tout à fait… Regardons pourquoi.",
+  "prompt": "[softly] Pas tout à fait… [warmly] Regardons pourquoi."
+ },
+ {
+  "id": "faux-2",
+  "groupe": "faux",
+  "texte": "Presque ! On regarde ensemble ?",
+  "prompt": "[curious] Presque ! [warmly] On regarde ensemble ?"
+ },
+ {
+  "id": "faux-3",
+  "groupe": "faux",
+  "texte": "Ce n'est pas grave, on apprend !",
+  "prompt": "[warmly] Ce n'est pas grave… on apprend !"
+ },
+ {
+  "id": "faux-4",
+  "groupe": "faux",
+  "texte": "Oups ! Ça arrive à tout le monde.",
+  "prompt": "[chuckles] Oups ! [warmly] Ça arrive à tout le monde."
+ },
+ {
+  "id": "faux-5",
+  "groupe": "faux",
+  "texte": "Pas encore… Voici l'explication.",
+  "prompt": "[softly] Pas encore… [pause] Voici l'explication."
+ },
+ {
+  "id": "fin-1",
+  "groupe": "fin",
+  "texte": "Bravo, leçon terminée ! Je suis fière de vous.",
+  "prompt": "[excited] Bravo, leçon terminée ! [warmly] Je suis fière de vous."
+ },
+ {
+  "id": "fin-2",
+  "groupe": "fin",
+  "texte": "Vous avez réussi ! On continue demain ?",
+  "prompt": "[happy] Vous avez réussi ! [mischievously] On continue demain ?"
+ },
+ {
+  "id": "fin-3",
+  "groupe": "fin",
+  "texte": "Encore une leçon de faite. Bravo !",
+  "prompt": "[warmly] Encore une leçon de faite… [excited] Bravo !"
+ },
+ {
+  "id": "finmoy-1",
+  "groupe": "finmoy",
+  "texte": "Bien essayé ! Chaque erreur vous fait avancer.",
+  "prompt": "[warmly] Bien essayé ! [softly] Chaque erreur vous fait avancer."
+ },
+ {
+  "id": "finmoy-2",
+  "groupe": "finmoy",
+  "texte": "C'est fini ! Refaites la leçon pour progresser.",
+  "prompt": "[warmly] C'est fini ! [encouraging] Refaites la leçon pour progresser."
+ },
+ {
+  "id": "bonjour",
+  "groupe": "",
+  "texte": "Bonjour, je suis Plume ! Je vais vous aider à parler français.",
+  "prompt": "[happy] Bonjour, je suis Plume ! [warmly] Je vais vous aider à parler français."
+ },
+ {
+  "id": "devise",
+  "groupe": "",
+  "texte": "On apprend à son rythme, un mot après l'autre !",
+  "prompt": "[warmly] On apprend à son rythme… [happy] un mot après l'autre !"
+ },
+ {
+  "id": "aucune",
+  "groupe": "",
+  "texte": "Aucune erreur à refaire. Bravo, continuez comme ça !",
+  "prompt": "[surprised] Aucune erreur à refaire. [excited] Bravo, continuez comme ça !"
+ },
+ {
+  "id": "astuce",
+  "groupe": "",
+  "texte": "J'ai une astuce pour vous !",
+  "prompt": "[mischievously] J'ai une astuce pour vous !"
+ },
+ {
+  "id": "tuto-1",
+  "groupe": "",
+  "texte": "Bonjour, je suis Plume ! Chaque jour, appuyez sur Continuer. L'appli choisit la leçon pour vous. Une leçon dure 10 minutes.",
+  "prompt": "[happy] Bonjour, je suis Plume ! [warmly] Chaque jour, appuyez sur Continuer. L'appli choisit la leçon pour vous. [short pause] Une leçon dure 10 minutes."
+ },
+ {
+  "id": "tuto-2",
+  "groupe": "",
+  "texte": "Vous pouvez tout écouter. Touchez le haut-parleur. Les consignes sont lues à voix haute.",
+  "prompt": "[warmly] Vous pouvez tout écouter. [short pause] Touchez le haut-parleur. Les consignes sont lues à voix haute."
+ },
+ {
+  "id": "tuto-3",
+  "groupe": "",
+  "texte": "Vos erreurs reviennent. Dans Réviser, refaites vos erreurs. Réussies 2 fois, elles sont corrigées.",
+  "prompt": "[mischievously] Vos erreurs reviennent… [warmly] Dans Réviser, refaites vos erreurs. Réussies 2 fois, elles sont corrigées."
+ }
 ]
