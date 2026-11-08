@@ -16,6 +16,7 @@ Les priorités sont décidées par Eric. Rien n'est commencé sans un plan valid
 | v8 (bêta) | 2026-11-06 | Version bêta, 3 nouveaux types d'exercices, réserve d'exercices tirés au hasard, S'entraîner, Mes erreurs. Thème 1 complet (25 exercices par leçon) |
 | v9 (bêta) | 2026-11-07 | Un seul parcours de 10 unités, 3 onglets, exercices un écran à la fois avec « Vérifier », consignes et énoncés lus à voix haute, tuto |
 | v10 (bêta) | 2026-11-08 | Tout s'écoute (consignes, pourquoi, règles), 52 leçons en FALC, 1 212 exercices |
+| v11 (bêta) | 2026-11-08 | Plume la mascotte (5 attitudes animées), couleurs de Plume, police Nunito |
 
 ## Maintenant
 
@@ -23,7 +24,8 @@ Les priorités sont décidées par Eric. Rien n'est commencé sans un plan valid
 - [x] Exercices en plus pour tous les thèmes (23 par leçon, v10 bêta)
 - [x] Écouter les consignes et les énoncés des exercices (v9 bêta)
 - [x] Réécrire en FALC les règles, astuces et explications, puis les rendre écoutables (v10 bêta)
-- [ ] Plume, la mascotte : maquettes, charte graphique plus chaleureuse, voix dédiée
+- [x] Plume, la mascotte : images, animations, couleurs (v11 bêta)
+- [ ] La voix de Plume : une vraie voix humaine (ElevenLabs, autre service ou enregistrement)
 - [x] Petit tuto au premier lancement (v9 bêta) ; « À quoi ça sert ? » = le but de chaque unité
 - [x] Refonte de l'ergonomie : un seul parcours qui s'ouvre petit à petit (v9 bêta)
 - [ ] Passer la bêta validée en version normale pour les parents

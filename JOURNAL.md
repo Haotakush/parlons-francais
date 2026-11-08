@@ -4,6 +4,21 @@ Une entrée par séance de travail, la plus récente en haut. Pour chaque séanc
 
 ---
 
+## 2026-11-08 — v11 (bêta) : Plume, la mascotte, et les couleurs de Plume
+
+**Demande d'Eric**
+- Plume est une chatte bleue (béret, lunettes dorées, foulard rouge). 5 attitudes fournies : coucou, complice, réflexion, bravo, joie.
+- Remplacer le vert par les couleurs de Plume, l'intégrer dans certaines situations, l'animer. Sa voix : plus tard, une vraie voix humaine (forfait payant ou ElevenLabs si besoin).
+
+**Fait (dans la bêta)**
+- Images détourées et allégées (WebP, moins de 36 Ko chacune) dans `beta/img/` : 5 attitudes en pied + 5 « têtes ».
+- Nouvelle palette : bleu profond (couleur principale), fond crème, doré (astuces, sélection, étoiles), rouge du foulard (accents). Le vert reste seulement pour « juste ».
+- Police plus ronde et chaleureuse : Nunito.
+- Plume apparaît : au premier lancement (« Bonjour, je suis Plume ! »), dans le tuto (3 attitudes), sur l'accueil avec sa devise, dans le bandeau de réponse (bravo / réflexion), dans « L'astuce de Plume », à la fin d'une leçon (elle saute de joie), et quand il n'y a plus d'erreurs.
+- Animations douces (respiration, coucou, réflexion, saut) ; coupées si le téléphone demande moins d'animations.
+
+---
+
 ## 2026-11-08 — v10 (bêta) : tout s'écoute, textes en FALC, 1 212 exercices
 
 **Retours d'Eric**
