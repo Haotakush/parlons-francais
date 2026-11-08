@@ -15,8 +15,13 @@ Une entrée par séance de travail, la plus récente en haut. Pour chaque séanc
 - `tools/construire_plume.py` → `beta/js/plume.js`. L'appli joue `audio/plume/<id>.mp3` quand il existe, sinon la voix Google.
 - Le bandeau de réponse et la fin de leçon choisissent une réplique de Plume au hasard.
 
-**À faire**
-- Générer les 22 fichiers avec ElevenLabs (les générations gratuites étaient occupées).
+**Fait ensuite**
+- Les 22 répliques sont générées. Les 15 dernières en une seule prise (idée d'Eric), découpée avec `tools/plume/decouper.py` :
+  Whisper transcrit la prise et donne l'horaire des mots ; on coupe dans le silence avant chaque réplique. Chaque morceau a été re-transcrit pour vérifier.
+
+**Appris**
+- Le forfait gratuit d'ElevenLabs est souvent « occupé » : une seule grosse prise passe mieux que 22 petites.
+- [long pause] ne donne pas un silence assez net pour couper sur les silences seuls.
 
 ---
 
