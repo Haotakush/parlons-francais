@@ -1,7 +1,7 @@
 // Service worker de la version BÊTA (adresse /beta/). Il ne touche pas aux copies de la version normale.
 // Service worker : garde l'appli en mémoire pour qu'elle marche sans internet.
 // Après chaque modification de l'appli, augmenter le numéro de version ci-dessous (v5 -> v6...).
-const CACHE = "parlons-beta-v3";
+const CACHE = "parlons-beta-v4";
 const AUDIO_CACHE = "parlons-audio-v3"; // les fichiers audio ne changent pas : on les garde
 const FILES = ["./", "./index.html", "./css/style.css", "./js/contenu.js", "./js/lecons.js", "./js/app.js", "./manifest.webmanifest", "./js/exercices.js", "./js/parcours.js", "../audio/index.js"];
 

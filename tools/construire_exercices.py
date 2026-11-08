@@ -13,6 +13,17 @@ global.window = {}; eval(require("fs").readFileSync(process.argv[1], "utf8").rep
 const o = {}; THEMES.forEach(t => t.lecons.forEach(l => o[l.id] = l.exercices)); console.log(JSON.stringify(o));
 """, os.path.join(RACINE, "beta", "js", "lecons.js")]))
 
+def md(t):
+    # « / » sépare les lignes (une idée par ligne), comme dans tools/falc/
+    parts = [x.strip() for x in t.split(" / ")]
+    out, liste = [], []
+    for x in parts:
+        if x.startswith("- "): liste.append(x); continue
+        if liste: out.append("\n".join(liste)); liste = []
+        out.append(x)
+    if liste: out.append("\n".join(liste))
+    return "\n\n".join(out)
+
 erreurs, tout, par_type = [], {}, {}
 def err(lid, i, msg): erreurs.append(f"{lid} n°{i + 1} : {msg}")
 def cle(e): return e["type"] + "|" + json.dumps(e.get("paires") or e.get("phrase") or e.get("juste"), ensure_ascii=False)
@@ -49,6 +60,7 @@ for f in sorted(glob.glob(os.path.join(RACINE, "tools", "exercices", "*.json")))
             k = cle(e)
             if k in vus: err(lid, i, "exercice en double")
             vus.add(k)
+        for e in exos: e["expl"] = md(e.get("expl", ""))
         tout[lid] = exos
 
 if erreurs:

@@ -329,3 +329,5 @@ a.hero-btn{color:#166534}
 .err-btn svg{width:18px;height:18px;fill:currentColor}
 .avatar.grey{background:var(--line);color:var(--muted)}
 .tile.small{min-height:110px}
+.spk.hero-spk{background:#15803D;color:#FFFFFF}
+.sheet-why .md p,.sheet-why .md li{font-size:17px;line-height:1.45;margin:4px 0 0}

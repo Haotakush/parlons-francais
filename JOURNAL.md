@@ -4,6 +4,25 @@ Une entrée par séance de travail, la plus récente en haut. Pour chaque séanc
 
 ---
 
+## 2026-11-08 — v10 (bêta) : tout s'écoute, textes en FALC, 1 212 exercices
+
+**Retours d'Eric**
+- Toutes les consignes ne sont pas lues (par exemple « Touchez un mot à gauche… »), le « Pourquoi ? » non plus.
+- Le reste va bien : faire les exercices de tous les thèmes, l'audio, le FALC, et publier la bêta complète.
+
+**Fait (dans la bêta)**
+- Tout s'écoute : la sous-consigne d'« associer », le « Pourquoi ? » (lu après la réponse, et avec son haut-parleur), la règle et l'astuce en début de leçon, le guide de l'unité, le but de l'unité.
+- Les 52 leçons réécrites en FALC (règle, astuce, 8 explications) : une idée par ligne, phrases courtes, mots simples. Source : `tools/falc/*.json`.
+- 796 exercices en plus (15 par leçon) : 1 212 exercices en tout, 6 types. Source : `tools/exercices/*.json`.
+- Nouveau script `tools/construire_beta.py` : js/lecons.js + FALC → beta/js/lecons.js, puis vérifie et construit les exercices.
+- Audio généré pour tous les nouveaux textes (2 voix).
+
+**Décidé**
+- Le document « programme » et `js/lecons.js` de la version normale restent tels quels ; les textes FALC vivent dans `tools/falc/` jusqu'au passage de la bêta en version normale.
+- Plume, la mascotte proposée par Eric : plan et maquettes d'abord, après cette version.
+
+---
+
 ## 2026-11-07 — v9 (bêta) : un seul parcours, exercices un écran à la fois, consignes lues
 
 **Retours d'Eric**

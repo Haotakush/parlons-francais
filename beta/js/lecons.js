@@ -1,4 +1,4 @@
-/* Les 8 thèmes et leurs 52 leçons. Généré depuis le document de programme (tools/ ne contient pas ce script : modifier directement ici). */
+/* Leçons de la bêta : js/lecons.js + textes FALC de tools/falc/. Généré par tools/construire_beta.py, ne pas modifier ici. */
 const THEMES = [
  {
   "id": "phrases",
@@ -11,8 +11,8 @@ const THEMES = [
     "titre": "L'ordre des mots",
     "mots": [],
     "tableau": null,
-    "regle": "En français, on dit d'abord **qui**, puis **ce qu'il fait**, puis le reste (quoi, où, quand).",
-    "astuce": "Qui ? → Fait quoi ? → Quoi, où, quand ?",
+    "regle": "D'abord : **qui ?**\n\nPuis : **l'action**.\n\nPuis : le reste. Quoi ? Où ? Quand ?\n\n**Je** répare la voiture.",
+    "astuce": "Qui ? → Action ? → Quoi, où, quand ?",
     "retenir": "« **Qui fait quoi** », comme au cinéma : d'abord l'acteur, puis l'action, puis le décor.",
     "exemples": [
      "**Je** répare la voiture.",
@@ -27,21 +27,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Je répare la voiture.",
       "faux": "Répare je la voiture.",
-      "expl": "« Je » fait l'action (qui ?), « répare » est l'action (fait quoi ?), « la voiture » dit ce qu'on répare (quoi ?). Le verbe ne passe jamais devant « je » dans une phrase normale."
+      "expl": "**Qui ?** → Je\n\n**L'action** → répare\n\n**Quoi ?** → la voiture"
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Mon fils va à l'école.",
       "faux": "Va mon fils à l'école.",
-      "expl": "Qui va à l'école ? « Mon fils ». Il vient donc en premier, puis le verbe « va », puis le lieu « à l'école »."
+      "expl": "**Qui ?** → Mon fils\n\n**L'action** → va\n\n**Où ?** → à l'école"
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "La pharmacie ferme à 19 heures.",
       "faux": "Ferme la pharmacie à 19 heures.",
-      "expl": "« La pharmacie » (qui ?) + « ferme » (fait quoi ?) + « à 19 heures » (quand ?). Le moment se place à la fin."
+      "expl": "**Qui ?** → La pharmacie\n\n**L'action** → ferme\n\n**Quand ?** → à 19 heures"
      },
      {
       "type": "completer",
@@ -52,7 +52,7 @@ const THEMES = [
        "travailler",
        "travaillé"
       ],
-      "expl": "Après une personne (mon mari = il), le verbe se conjugue : il travaille. « Travailler » est la forme du dictionnaire, « travaillé » sert au passé."
+      "expl": "Mon mari, c'est **il**.\n\nOn dit : il **travaille**."
      },
      {
       "type": "completer",
@@ -63,7 +63,7 @@ const THEMES = [
        "Notre",
        "Nos"
       ],
-      "expl": "« Nous » est la personne qui fait l'action (nous allons). « Notre » et « nos » vont devant un nom : notre maison, nos enfants."
+      "expl": "**Nous** fait l'action.\n\nNous allons."
      },
      {
       "type": "completer",
@@ -74,17 +74,17 @@ const THEMES = [
        "est",
        "es"
       ],
-      "expl": "« Les enfants » = ils, donc « sont ». « Est » va avec il ou elle, « es » avec tu."
+      "expl": "Les enfants, c'est **ils**.\n\nOn dit : ils **sont**."
      },
      {
       "type": "ordre",
       "phrase": "Le bus arrive à huit heures.",
-      "expl": "Qui ? le bus. Fait quoi ? arrive. Quand ? à huit heures."
+      "expl": "**Qui ?** → Le bus\n\n**L'action** → arrive\n\n**Quand ?** → à huit heures"
      },
      {
       "type": "ordre",
       "phrase": "Ma fille aime la musique.",
-      "expl": "Qui ? ma fille. Fait quoi ? aime. Quoi ? la musique."
+      "expl": "**Qui ?** → Ma fille\n\n**L'action** → aime\n\n**Quoi ?** → la musique"
      }
     ]
    },
@@ -93,8 +93,8 @@ const THEMES = [
     "titre": "Dire non",
     "mots": [],
     "tableau": null,
-    "regle": "Pour dire non, on met **ne** avant le verbe et **pas** après. Devant une voyelle, ne devient **n'**. D'autres façons de dire non : ne… **plus** (plus maintenant), ne… **jamais** (à aucun moment), ne… **rien** (aucune chose), ne… **personne** (aucune personne).",
-    "astuce": "À l'oral, on entend souvent seulement « pas » (« je sais pas »). À l'écrit, il faut toujours ne… pas.",
+    "regle": "Pour dire non :\n\n**ne** avant le verbe.\n\n**pas** après le verbe.\n\nJe **ne** sais **pas**.\n\nAvant a, e, i, o, u : ne devient **n'**.\n\nCe **n'**est **pas** grave.\n\nAutres façons de dire non :\n\n- ne… **plus** : plus maintenant\n- ne… **jamais** : à aucun moment\n- ne… **rien** : aucune chose\n- ne… **personne** : aucune personne",
+    "astuce": "À l'oral, on dit souvent juste « pas ».\n\nÀ l'écrit, il faut **ne** et **pas**.",
     "retenir": "Le verbe est « pris en sandwich » : **ne** + verbe + **pas**. Le pain du dessus, le pain du dessous, le verbe au milieu.",
     "exemples": [
      "Je **ne** sais **pas**.",
@@ -110,21 +110,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Je ne comprends pas.",
       "faux": "Je ne pas comprends.",
-      "expl": "Le sandwich : ne + comprends + pas. « Pas » vient toujours après le verbe, jamais avant."
+      "expl": "**ne** avant le verbe.\n\n**pas** après le verbe.\n\nJe **ne** comprends **pas**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Ce n'est pas loin.",
       "faux": "Ce ne est pas loin.",
-      "expl": "« Est » commence par une voyelle (e), donc ne devient n' : ce n'est pas."
+      "expl": "« est » commence par **e**.\n\nDonc ne devient **n'**.\n\nCe **n'**est pas loin."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Il n'a rien mangé.",
       "faux": "Il a ne rien mangé.",
-      "expl": "Au passé composé, le sandwich entoure le petit verbe « a » : il n'a rien, puis mangé."
+      "expl": "Au passé : ne… rien autour de **a**.\n\nIl **n'**a **rien** mangé."
      },
      {
       "type": "completer",
@@ -135,7 +135,7 @@ const THEMES = [
        "n'",
        "pas"
       ],
-      "expl": "« Suis » commence par une consonne (s), donc on garde ne : je ne suis pas."
+      "expl": "« suis » commence par **s**.\n\nOn garde **ne**.\n\nJe **ne** suis pas d'accord."
      },
      {
       "type": "completer",
@@ -146,7 +146,7 @@ const THEMES = [
        "rien",
        "personne"
       ],
-      "expl": "Elle habitait ici avant, mais plus maintenant : on utilise ne… plus."
+      "expl": "Avant, elle habitait ici.\n\nPlus maintenant.\n\nOn dit : ne… **plus**."
      },
      {
       "type": "completer",
@@ -157,17 +157,17 @@ const THEMES = [
        "jamais",
        "plus"
       ],
-      "expl": "On parle de gens : aucune personne, donc ne… personne."
+      "expl": "On parle des gens.\n\nAucune personne : ne… **personne**."
      },
      {
       "type": "ordre",
       "phrase": "Je ne parle pas bien français.",
-      "expl": "Ne + parle + pas : le sandwich, puis le reste de la phrase."
+      "expl": "Je **ne** parle **pas** bien français."
      },
      {
       "type": "ordre",
       "phrase": "Il n'y a plus de pain.",
-      "expl": "« Il y a » devient « il n'y a » : ne devient n' devant « y ». Avant il y avait du pain, maintenant non : ne… plus."
+      "expl": "Il y a devient il **n'**y a.\n\nIl n'y a **plus** de pain : avant oui, maintenant non."
      }
     ]
    },
@@ -176,8 +176,8 @@ const THEMES = [
     "titre": "Poser une question",
     "mots": [],
     "tableau": null,
-    "regle": "Il y a trois façons de poser une question.\n\n- La voix qui monte : Tu viens demain ?\n- « Est-ce que » au début : Est-ce que tu viens demain ?\n- Un mot question : **où** (un lieu), **quand** (un moment), **comment** (la manière), **combien** (une quantité, un prix), **pourquoi** (une raison), **qui** (une personne), **quel / quelle** (un choix).",
-    "astuce": "Pour répondre à « pourquoi ? », on commence par « parce que ».",
+    "regle": "3 façons de poser une question :\n\n- La voix monte : Tu viens demain ?\n- **Est-ce que** au début : Est-ce que tu viens ?\n- Un mot question au début.\n\nLes mots question :\n\n- **où** : un lieu\n- **quand** : un moment\n- **comment** : la manière\n- **combien** : un prix, une quantité\n- **pourquoi** : une raison\n- **qui** : une personne",
+    "astuce": "Pourquoi ? On répond : **parce que**.",
     "retenir": "Les mots question répondent à un besoin. **Où** = la carte, **quand** = la montre, **combien** = le porte-monnaie, **comment** = le mode d'emploi, **pourquoi** = la raison (« parce que »).",
     "exemples": [
      "Tu viens demain ?",
@@ -193,21 +193,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Est-ce que vous avez une place demain ?",
       "faux": "Est-ce vous avez une place demain ?",
-      "expl": "« Est-ce que » s'écrit toujours en entier, avec deux tirets. Ensuite la phrase reste normale : vous avez une place."
+      "expl": "On écrit **est-ce que** en entier.\n\nEst-ce que vous avez une place ?"
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Pourquoi il est absent ?",
       "faux": "Parce que il est absent ?",
-      "expl": "« Pourquoi » pose la question, « parce que » donne la réponse. On ne commence pas une question par « parce que »."
+      "expl": "**Pourquoi** pose la question.\n\n**Parce que** donne la réponse."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Où est l'arrêt de bus ?",
       "faux": "Où l'arrêt de bus ?",
-      "expl": "Il faut un verbe dans la question : où **est** l'arrêt de bus ?"
+      "expl": "Il faut un verbe.\n\nOù **est** l'arrêt de bus ?"
      },
      {
       "type": "completer",
@@ -218,7 +218,7 @@ const THEMES = [
        "Comment",
        "Quand"
       ],
-      "expl": "On demande un prix, donc « combien » (le porte-monnaie)."
+      "expl": "On demande un prix.\n\nOn dit : **combien**."
      },
      {
       "type": "completer",
@@ -229,7 +229,7 @@ const THEMES = [
        "Où",
        "Qui"
       ],
-      "expl": "On demande un moment, donc « quand » (la montre)."
+      "expl": "On demande un moment.\n\nOn dit : **quand**."
      },
      {
       "type": "completer",
@@ -240,17 +240,17 @@ const THEMES = [
        "Combien",
        "Pourquoi"
       ],
-      "expl": "On demande le prénom, la façon de l'appeler, donc « comment »."
+      "expl": "On demande le prénom.\n\nOn dit : **comment**."
      },
      {
       "type": "ordre",
       "phrase": "Est-ce que vous parlez français ?",
-      "expl": "Est-ce que + la phrase normale (vous parlez français) + le point d'interrogation."
+      "expl": "**Est-ce que** + la phrase normale.\n\nEst-ce que vous parlez français ?"
      },
      {
       "type": "ordre",
       "phrase": "Où est la salle d'attente ?",
-      "expl": "Où (le lieu) + est (le verbe) + la salle d'attente (la chose qu'on cherche)."
+      "expl": "**Où** + est + la chose.\n\nOù est la salle d'attente ?"
      }
     ]
    },
@@ -259,8 +259,8 @@ const THEMES = [
     "titre": "Demander poliment",
     "mots": [],
     "tableau": null,
-    "regle": "Pour être poli, on dit **je voudrais**, **pourriez-vous**, **est-ce que je peux**, et on finit par **s'il vous plaît**. On dit **vous** aux inconnus, au médecin, au professeur et aux clients. On dit **tu** à la famille, aux amis et aux enfants.",
-    "astuce": "« Je veux » est trop direct avec un inconnu. Dites « je voudrais ».",
+    "regle": "Pour être poli :\n\n- **je voudrais**\n- **pourriez-vous**\n- **est-ce que je peux**\n- et à la fin : **s'il vous plaît**\n\nOn dit **vous** : au médecin, à la maîtresse, aux clients, aux inconnus.\n\nOn dit **tu** : à la famille, aux amis, aux enfants.",
+    "astuce": "« Je veux » est trop direct.\n\nDites : **je voudrais**.",
     "retenir": "Les mots magiques « **je voudrais** » et « **s'il vous plaît** » ouvrent toutes les portes. Et pour choisir entre tu et vous : **vous pour le bureau, tu pour la maison**.",
     "exemples": [
      "**Je voudrais** un rendez-vous, s'il vous plaît.",
@@ -276,21 +276,21 @@ const THEMES = [
       "consigne": "la plus polie",
       "juste": "Je voudrais un kilo de pommes, s'il vous plaît.",
       "faux": "Je veux un kilo de pommes.",
-      "expl": "Les deux phrases sont correctes, mais « je voudrais » est plus doux que « je veux », et « s'il vous plaît » montre le respect."
+      "expl": "**Je voudrais** est plus doux que je veux.\n\n**S'il vous plaît** montre le respect."
      },
      {
       "type": "choisir",
       "consigne": "chez le médecin",
       "juste": "Bonjour docteur, vous allez bien ?",
       "faux": "Salut docteur, tu vas bien ?",
-      "expl": "Le médecin n'est pas un ami ou un membre de la famille : on dit « vous » et « bonjour », pas « tu » et « salut »."
+      "expl": "Le médecin n'est pas un ami.\n\nOn dit **bonjour** et **vous**."
      },
      {
       "type": "choisir",
       "consigne": "la plus polie",
       "juste": "Pourriez-vous parler plus lentement ?",
       "faux": "Parle plus lentement !",
-      "expl": "« Pourriez-vous » pose une question polie. « Parle ! » est un ordre, qui peut paraître impoli."
+      "expl": "**Pourriez-vous** est une question polie.\n\n« Parle ! » est un ordre."
      },
      {
       "type": "completer",
@@ -301,7 +301,7 @@ const THEMES = [
        "veux",
        "vouloir"
       ],
-      "expl": "Je voudrais + un verbe à l'infinitif, la forme du dictionnaire (prendre, parler, payer) : c'est la forme polie de « je veux »."
+      "expl": "**Je voudrais** + un verbe.\n\nJe voudrais prendre rendez-vous."
      },
      {
       "type": "completer",
@@ -312,7 +312,7 @@ const THEMES = [
        "peut",
        "pouvoir"
       ],
-      "expl": "Avec « je », on écrit « peux » (avec x). « Peut » va avec il ou elle."
+      "expl": "Avec **je**, on écrit **peux**.\n\nAvec il ou elle : **peut**."
      },
      {
       "type": "completer",
@@ -323,17 +323,17 @@ const THEMES = [
        "bon",
        "bien"
       ],
-      "expl": "« Journée » est un mot féminin (une journée), donc « bonne » avec -ne. On dit « bon » pour un mot masculin : bon week-end."
+      "expl": "**Une** journée : c'est féminin.\n\nOn dit : **bonne** journée."
      },
      {
       "type": "ordre",
       "phrase": "Je voudrais parler au directeur, s'il vous plaît.",
-      "expl": "Je voudrais + parler + au directeur, puis la formule de politesse à la fin, après une virgule."
+      "expl": "Je voudrais parler au directeur.\n\nÀ la fin : **s'il vous plaît**."
      },
      {
       "type": "ordre",
       "phrase": "Est-ce que je peux vous poser une question ?",
-      "expl": "Est-ce que + je peux + vous poser une question : « vous » se place avant « poser »."
+      "expl": "Est-ce que je peux…\n\n**vous** va avant poser."
      }
     ]
    },
@@ -342,8 +342,8 @@ const THEMES = [
     "titre": "Relier deux idées",
     "mots": [],
     "tableau": null,
-    "regle": "De petits mots relient deux phrases pour n'en faire qu'une.\n\n- **et** : ajouter\n- **mais** : dire le contraire\n- **ou** : choisir\n- **donc, alors** : la conséquence\n- **parce que** : la raison\n- **quand** : le moment\n- **si** : la condition",
-    "astuce": "Devant une voyelle, « parce que » devient « parce qu' » : parce qu'il, parce qu'elle.",
+    "regle": "Des petits mots relient deux idées :\n\n- **et** : ajouter\n- **mais** : le contraire\n- **ou** : choisir\n- **donc**, **alors** : la conséquence\n- **parce que** : la raison\n- **quand** : le moment\n- **si** : la condition",
+    "astuce": "Avant a, e, i, o, u :\n\nparce que devient **parce qu'**.\n\nParce qu'il est malade.",
     "retenir": "« **Mais où est donc Ornicar ?** », la phrase célèbre des écoliers français, rassemble les petits mots qui relient : mais, ou, et, donc, or, ni, car.",
     "exemples": [
      "Il a mal à la tête **et** il tousse.",
@@ -359,21 +359,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Il est absent parce qu'il est malade.",
       "faux": "Il est absent parce que il est malade.",
-      "expl": "« Il » commence par une voyelle, donc « parce que » perd son e : parce qu'il."
+      "expl": "« il » commence par **i**.\n\nDonc : parce **qu'**il."
      },
      {
       "type": "choisir",
       "consigne": "la phrase logique",
       "juste": "J'ai faim, donc je mange.",
       "faux": "J'ai faim, mais je mange.",
-      "expl": "Avoir faim est la raison, manger est la conséquence : on utilise « donc ». « Mais » sert pour deux idées qui s'opposent."
+      "expl": "J'ai faim. Alors je mange.\n\nC'est la conséquence : **donc**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Tu veux du thé ou du café ?",
       "faux": "Tu veux du thé où du café ?",
-      "expl": "Ici on choisit entre deux boissons : « ou » sans accent. « Où » avec un accent parle d'un lieu."
+      "expl": "On choisit entre deux boissons.\n\n**ou** sans accent."
      },
      {
       "type": "completer",
@@ -384,7 +384,7 @@ const THEMES = [
        "mais",
        "ou"
       ],
-      "expl": "La pluie est la raison, le parapluie est la conséquence : « donc »."
+      "expl": "Il pleut. Alors je prends le parapluie.\n\nLa conséquence : **donc**."
      },
      {
       "type": "completer",
@@ -395,7 +395,7 @@ const THEMES = [
        "donc",
        "parce que"
       ],
-      "expl": "Vieille, et pourtant elle roule bien : deux idées contraires, donc « mais »."
+      "expl": "Vieille, et elle roule bien.\n\nDeux idées contraires : **mais**."
      },
      {
       "type": "completer",
@@ -406,17 +406,17 @@ const THEMES = [
        "Et",
        "Mais"
       ],
-      "expl": "« Si » pose une condition : peut-être que tu auras besoin d'aide. Si oui, appelle-moi."
+      "expl": "Peut-être que tu as besoin d'aide.\n\nLa condition : **si**."
      },
      {
       "type": "ordre",
       "phrase": "Je reste à la maison parce que je suis fatiguée.",
-      "expl": "Première idée (je reste à la maison) + parce que + la raison (je suis fatiguée)."
+      "expl": "Je reste à la maison.\n\n**Parce que** donne la raison."
      },
      {
       "type": "ordre",
       "phrase": "Il travaille le matin et il étudie le soir.",
-      "expl": "Deux actions de la même personne, reliées par « et »."
+      "expl": "Deux actions.\n\nOn les relie avec **et**."
      }
     ]
    },
@@ -425,8 +425,8 @@ const THEMES = [
     "titre": "Dire quand et où",
     "mots": [],
     "tableau": null,
-    "regle": "**Pour le moment**\n\n- **hier, aujourd'hui, demain**\n- **il y a** + durée : dans le passé (il y a deux jours)\n- **dans** + durée : dans le futur (dans deux jours)\n- **depuis** : ça a commencé et ça continue (depuis trois ans)\n- **pendant** : une durée (pendant une heure)\n\n**Pour le lieu**\n\n- **à** + ville : à Lyon\n- **en** + pays féminin : en France, en Algérie. **au** + pays masculin : au Maroc\n- **à la, au, aux** + lieu : à la mairie, au garage, aux urgences\n- **chez** + personne : chez le médecin, chez moi",
-    "astuce": "« Chez », c'est pour une personne. « à », c'est pour un lieu. On dit « chez le médecin », mais « à l'hôpital ».",
+    "regle": "**Quand ?**\n\n- **il y a** deux jours : dans le passé\n- **dans** deux jours : dans le futur\n- **depuis** trois ans : ça continue encore\n- **pendant** une heure : une durée\n\n**Où ?**\n\n- **à** + une ville : à Lyon\n- **en** + un pays féminin : en France\n- **au** + un pays masculin : au Maroc\n- **chez** + une personne : chez le médecin",
+    "astuce": "**Chez** : pour une personne.\n\n**À** : pour un lieu.\n\nChez le médecin, à l'hôpital.",
     "retenir": "**Il y a** regarde derrière (le passé), **dans** regarde devant (le futur), **depuis** n'est pas fini. Et « **chez** », c'est toujours chez **quelqu'un**.",
     "exemples": [
      "J'habite **à** Lyon **depuis** trois ans.",
@@ -442,21 +442,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Je vais chez le médecin.",
       "faux": "Je vais au médecin.",
-      "expl": "Le médecin est une personne, donc « chez ». « Au médecin » s'entend à l'oral, mais c'est du langage familier."
+      "expl": "Le médecin est une personne.\n\nOn dit : **chez** le médecin."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "J'habite en France.",
       "faux": "J'habite à France.",
-      "expl": "La France est un pays féminin (la France), donc « en ». « À » sert pour une ville : à Lyon."
+      "expl": "La France est un pays féminin.\n\nOn dit : **en** France."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Je suis arrivé il y a deux jours.",
       "faux": "Je suis arrivé dans deux jours.",
-      "expl": "C'est déjà arrivé (je suis arrivé), donc on regarde derrière : « il y a »."
+      "expl": "C'est déjà passé.\n\nOn dit : **il y a** deux jours."
      },
      {
       "type": "completer",
@@ -467,7 +467,7 @@ const THEMES = [
        "dans",
        "pendant"
       ],
-      "expl": "J'habite ici et j'y habite encore : ce n'est pas fini, donc « depuis »."
+      "expl": "J'habite ici et ça continue.\n\nOn dit : **depuis**."
      },
      {
       "type": "completer",
@@ -478,7 +478,7 @@ const THEMES = [
        "il y a",
        "depuis"
       ],
-      "expl": "Le bus n'est pas encore là, il arrivera plus tard : « dans »."
+      "expl": "Le bus n'est pas encore là.\n\nOn dit : **dans** dix minutes."
      },
      {
       "type": "completer",
@@ -489,17 +489,17 @@ const THEMES = [
        "au",
        "en"
       ],
-      "expl": "On dit « la mairie », donc « à la mairie ». « Au » remplace « à le » pour un mot masculin : au garage."
+      "expl": "**La** mairie.\n\nOn dit : **à la** mairie."
      },
      {
       "type": "ordre",
       "phrase": "Nous partons en vacances dans une semaine.",
-      "expl": "Qui ? nous. Fait quoi ? partons. Où ? en vacances. Quand ? dans une semaine."
+      "expl": "**Qui ?** → Nous\n\n**L'action** → partons\n\n**Quand ?** → dans une semaine"
      },
      {
       "type": "ordre",
       "phrase": "Je travaille au garage depuis deux ans.",
-      "expl": "Je travaille + où (au garage) + depuis quand (depuis deux ans, et je continue)."
+      "expl": "Je travaille au garage.\n\nÇa continue : **depuis** deux ans."
      }
     ]
    },
@@ -508,8 +508,8 @@ const THEMES = [
     "titre": "Des phrases plus longues (qui, que, où)",
     "mots": [],
     "tableau": null,
-    "regle": "Qui, que et où permettent d'ajouter une précision sans répéter le mot.\n\n- **qui** : ce mot fait l'action. Le garçon **qui** joue est mon fils.\n- **que** : quelqu'un d'autre fait l'action. La voiture **que** je répare est rouge.\n- **où** : un lieu ou un moment. La ville **où** j'habite.",
-    "astuce": "Après « qui », il y a souvent un verbe. Après « que », il y a souvent je, tu, il, nous…",
+    "regle": "Ces petits mots évitent de répéter un nom.\n\n- **qui** : ce mot fait l'action. Le garçon **qui** joue.\n- **que** : quelqu'un d'autre fait l'action. La voiture **que** je répare.\n- **où** : un lieu ou un moment. La ville **où** j'habite.",
+    "astuce": "Après **qui**, il y a souvent un verbe.\n\nAprès **que**, il y a souvent je, tu, il, nous.",
     "retenir": "**Qui** est suivi d'un **verbe** (qui joue, qui parle), **que** est suivi d'une **personne** (que je, que tu, que vous). Et « **où** » a un accent comme une petite flèche qui montre le lieu.",
     "exemples": [
      "J'ai un fils **qui** va à l'école.",
@@ -525,21 +525,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Le livre que je lis est intéressant.",
       "faux": "Le livre qui je lis est intéressant.",
-      "expl": "Après le mot, il y a « je » : c'est moi qui lis le livre, donc « que »."
+      "expl": "Après, il y a **je**.\n\nDonc : **que**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "L'homme qui parle est mon voisin.",
       "faux": "L'homme que parle est mon voisin.",
-      "expl": "Après le mot, il y a directement le verbe « parle » : c'est l'homme qui fait l'action, donc « qui »."
+      "expl": "Après, il y a le verbe **parle**.\n\nDonc : **qui**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "La maison où j'habite est grande.",
       "faux": "La maison que j'habite dedans est grande.",
-      "expl": "On parle d'un lieu, la maison : « où ». On n'ajoute pas « dedans » : « où » le dit déjà."
+      "expl": "La maison est un lieu.\n\nDonc : **où**."
      },
      {
       "type": "completer",
@@ -550,7 +550,7 @@ const THEMES = [
        "qui",
        "que"
       ],
-      "expl": "Le garage est un lieu, donc « où »."
+      "expl": "Le garage est un lieu.\n\nDonc : **où**."
      },
      {
       "type": "completer",
@@ -561,7 +561,7 @@ const THEMES = [
        "que",
        "où"
       ],
-      "expl": "Juste après, il y a le verbe « arrive » : c'est la dame qui arrive, donc « qui »."
+      "expl": "Après, il y a le verbe **arrive**.\n\nDonc : **qui**."
      },
      {
       "type": "completer",
@@ -572,17 +572,17 @@ const THEMES = [
        "qui",
        "où"
       ],
-      "expl": "Juste après, il y a « tu » : c'est toi qui prépares le plat, donc « que »."
+      "expl": "Après, il y a **tu**.\n\nDonc : **que**."
      },
      {
       "type": "ordre",
       "phrase": "J'ai une voisine qui parle kabyle.",
-      "expl": "J'ai une voisine + qui (elle fait l'action) + parle kabyle."
+      "expl": "La voisine parle.\n\nElle fait l'action : **qui**."
      },
      {
       "type": "ordre",
       "phrase": "C'est la pharmacie où j'achète mes médicaments.",
-      "expl": "C'est la pharmacie + où (le lieu) + j'achète mes médicaments."
+      "expl": "La pharmacie est un lieu.\n\nDonc : **où**."
      }
     ]
    },
@@ -591,8 +591,8 @@ const THEMES = [
     "titre": "Remplacer un mot (le, la, lui, y, en)",
     "mots": [],
     "tableau": null,
-    "regle": "Pour ne pas répéter, on remplace un mot par un petit mot placé **avant le verbe**.\n\n- **le, la, l', les** : une chose ou une personne. Je répare la voiture → Je **la** répare.\n- **lui, leur** : à une personne. Je parle au client → Je **lui** parle.\n- **y** : un lieu. Je vais à la mairie → J'**y** vais.\n- **en** : une quantité, après du, de la, des. Je veux du pain → J'**en** veux.",
-    "astuce": "Le petit mot va toujours avant le verbe. On dit « je la répare », pas « je répare la ».",
+    "regle": "Pour ne pas répéter, on met un petit mot **avant le verbe**.\n\n- **le, la, les** : une chose ou une personne. Je **la** répare.\n- **lui, leur** : à une personne. Je **lui** parle.\n- **y** : un lieu. J'**y** vais.\n- **en** : une quantité. J'**en** veux.",
+    "astuce": "Le petit mot va **avant** le verbe.\n\nJe **la** répare.",
     "retenir": "Le petit mot est **timide**, il se cache **devant le verbe**. Et pour choisir : **y = là-bas** (un lieu), **en = un peu de** (une quantité), **lui = à lui ou à elle**.",
     "exemples": [
      "Votre voiture ? Je **la** répare demain.",
@@ -608,21 +608,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Je la répare demain.",
       "faux": "Je répare la demain.",
-      "expl": "« La » remplace « la voiture » et se place devant le verbe « répare »."
+      "expl": "**La** remplace la voiture.\n\nIl va avant le verbe."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "J'y vais demain.",
       "faux": "Je y vais demain.",
-      "expl": "« Y » commence par une voyelle, donc je devient j' : j'y vais."
+      "expl": "**y** commence par une voyelle.\n\nJe devient **j'** : j'y vais."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Je lui téléphone.",
       "faux": "Je le téléphone.",
-      "expl": "On téléphone **à** quelqu'un : avec « à », on utilise « lui » et pas « le »."
+      "expl": "On téléphone **à** quelqu'un.\n\nAvec **à**, on dit **lui**."
      },
      {
       "type": "completer",
@@ -633,7 +633,7 @@ const THEMES = [
        "lui",
        "y"
       ],
-      "expl": "On achète le pain : « le » devient l' devant « achète », qui commence par une voyelle."
+      "expl": "Le pain : **le**.\n\nAvant une voyelle : **l'**."
      },
      {
       "type": "completer",
@@ -644,7 +644,7 @@ const THEMES = [
        "la",
        "en"
       ],
-      "expl": "On écrit **à** sa sœur, donc « lui ». « Lui » sert pour un homme ou pour une femme."
+      "expl": "On écrit **à** sa sœur.\n\nAvec **à**, on dit **lui**."
      },
      {
       "type": "completer",
@@ -655,17 +655,17 @@ const THEMES = [
        "y",
        "les"
       ],
-      "expl": "On parle d'une quantité (des tomates, deux kilos), donc « en »."
+      "expl": "Une quantité de tomates.\n\nOn dit : **en**."
      },
      {
       "type": "ordre",
       "phrase": "Je les cherche depuis ce matin.",
-      "expl": "« Les » remplace une chose au pluriel (les clés, par exemple) et se place devant « cherche »."
+      "expl": "**Les** remplace les clés.\n\nIl va avant le verbe."
      },
      {
       "type": "ordre",
       "phrase": "Nous y allons ensemble.",
-      "expl": "« Y » remplace un lieu déjà cité et se place devant « allons »."
+      "expl": "**Y** remplace un lieu.\n\nIl va avant le verbe."
      }
     ]
    }
@@ -731,8 +731,8 @@ const THEMES = [
      ]
     ],
     "tableau": null,
-    "regle": "Pour dire où on fait quelque chose, on dit **dans** + la pièce : dans la cuisine, dans la chambre.",
-    "astuce": "On dit toujours **les** toilettes, au pluriel, même s'il n'y en a qu'une.",
+    "regle": "Pour dire où : **dans** + la pièce.\n\nDans la cuisine.\n\nDans la chambre.",
+    "astuce": "On dit toujours **les** toilettes.\n\nMême s'il y en a une seule.",
     "retenir": "Chaque pièce a son verbe. **Cuisiner** dans la cuisine, **se laver** dans la salle de bain, **dormir** dans la chambre, **se reposer** dans le salon.",
     "exemples": [
      "Le **chauffage** ne marche pas.",
@@ -746,21 +746,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Je prépare le repas dans la cuisine.",
       "faux": "Je prépare le repas dans la chambre.",
-      "expl": "Les repas se préparent dans la cuisine. On dort dans la chambre."
+      "expl": "On prépare le repas dans la **cuisine**.\n\nOn dort dans la **chambre**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Il fait froid, j'allume le chauffage.",
       "faux": "Il fait froid, j'ouvre la fenêtre.",
-      "expl": "Quand il fait froid, on chauffe : on allume le chauffage. Ouvrir la fenêtre ferait entrer le froid."
+      "expl": "Il fait froid.\n\nOn allume le **chauffage**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Je paie le loyer au propriétaire.",
       "faux": "Je paie le propriétaire au loyer.",
-      "expl": "On paie quelque chose (le loyer) à quelqu'un (au propriétaire). Au = à + le."
+      "expl": "On paie **le loyer**.\n\nOn le paie **au propriétaire**."
      },
      {
       "type": "completer",
@@ -771,7 +771,7 @@ const THEMES = [
        "le lit",
        "le salon"
       ],
-      "expl": "On ferme la porte à clé : la clé sert à la porte."
+      "expl": "La clé sert pour **la porte**."
      },
      {
       "type": "completer",
@@ -782,7 +782,7 @@ const THEMES = [
        "la cuisine",
        "le salon"
       ],
-      "expl": "La douche est dans la salle de bain, la pièce où on se lave."
+      "expl": "La douche est dans **la salle de bain**."
      },
      {
       "type": "completer",
@@ -793,17 +793,17 @@ const THEMES = [
        "la toilette",
        "le toilette"
       ],
-      "expl": "Toilettes se dit toujours au pluriel : les toilettes, des toilettes."
+      "expl": "On dit toujours **les toilettes**."
      },
      {
       "type": "ordre",
       "phrase": "Le chauffage ne marche pas depuis hier.",
-      "expl": "Qui ? le chauffage. Fait quoi ? ne marche pas. Depuis quand ? depuis hier."
+      "expl": "**Qui ?** → Le chauffage\n\n**Quoi ?** → ne marche pas\n\n**Depuis quand ?** → depuis hier"
      },
      {
       "type": "ordre",
       "phrase": "J'ai perdu la clé de la maison.",
-      "expl": "J'ai perdu + quoi ? la clé + de quoi ? de la maison."
+      "expl": "J'ai perdu la clé.\n\nLa clé **de la maison**."
      }
     ]
    },
@@ -865,8 +865,8 @@ const THEMES = [
      ]
     ],
     "tableau": null,
-    "regle": "En France, on prend le petit-déjeuner le matin, on **déjeune** à midi et on **dîne** le soir. Le nom du repas donne le verbe : le déjeuner → déjeuner, le dîner → dîner.",
-    "astuce": "On dit « mettre la table » pour poser les assiettes, les verres et les couverts avant le repas.",
+    "regle": "Le matin : le **petit-déjeuner**.\n\nÀ midi : on **déjeune**.\n\nLe soir : on **dîne**.",
+    "astuce": "**Mettre la table** :\n\nposer les assiettes, les verres et les couverts.",
     "retenir": "Fourchette, assiette, serviette… les mots en **-ette** sont presque toujours féminins : **la** fourchette, **l'**assiette, **la** serviette.",
     "exemples": [
      "On **déjeune** à midi et demi.",
@@ -880,21 +880,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Le matin, je prends le petit-déjeuner.",
       "faux": "Le matin, je prends le dîner.",
-      "expl": "Le matin, c'est le petit-déjeuner. Le dîner, c'est le soir."
+      "expl": "Le matin, c'est le **petit-déjeuner**.\n\nLe dîner, c'est le soir."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Je coupe le pain avec un couteau.",
       "faux": "Je coupe le pain avec un verre.",
-      "expl": "Le couteau sert à couper. Le verre sert à boire."
+      "expl": "On coupe avec un **couteau**.\n\nLe verre sert à boire."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Je mange la soupe avec une cuillère.",
       "faux": "Je mange la soupe avec une fourchette.",
-      "expl": "La soupe est liquide : avec une fourchette, elle tomberait. On prend une cuillère."
+      "expl": "La soupe est liquide.\n\nOn prend une **cuillère**."
      },
      {
       "type": "completer",
@@ -905,7 +905,7 @@ const THEMES = [
        "le four",
        "la poêle"
       ],
-      "expl": "Les yaourts doivent rester au froid, donc dans le frigo. Le four, lui, chauffe."
+      "expl": "Les yaourts restent au froid.\n\nDans le **frigo**."
      },
      {
       "type": "completer",
@@ -916,7 +916,7 @@ const THEMES = [
        "le verre",
        "l'assiette"
       ],
-      "expl": "Les œufs cuisent dans la poêle. L'assiette et le verre servent à manger et à boire."
+      "expl": "Les œufs cuisent dans **la poêle**."
      },
      {
       "type": "completer",
@@ -927,17 +927,17 @@ const THEMES = [
        "déjeunons",
        "goûtons"
       ],
-      "expl": "Le repas du soir s'appelle le dîner, et le verbe est dîner : nous dînons."
+      "expl": "Le repas du soir : le dîner.\n\nNous **dînons**."
      },
      {
       "type": "ordre",
       "phrase": "Les enfants prennent le goûter après l'école.",
-      "expl": "Qui ? les enfants. Fait quoi ? prennent le goûter. Quand ? après l'école."
+      "expl": "**Qui ?** → Les enfants\n\n**Quoi ?** → prennent le goûter\n\n**Quand ?** → après l'école"
      },
      {
       "type": "ordre",
       "phrase": "Je mets la table pour le dîner.",
-      "expl": "Mettre la table + pour quel repas ? pour le dîner."
+      "expl": "On met la table **pour le dîner**."
      }
     ]
    },
@@ -995,8 +995,8 @@ const THEMES = [
      ]
     ],
     "tableau": null,
-    "regle": "Pour dire où on a mal, on dit **j'ai mal à la** (mot féminin), **au** (mot masculin) ou **aux** (pluriel).",
-    "astuce": "On dit « **avoir** de la fièvre », pas « être » : il a de la fièvre.",
+    "regle": "Pour dire où on a mal :\n\n- **à la** : à la tête\n- **au** : au ventre\n- **aux** : aux dents",
+    "astuce": "On dit **avoir** de la fièvre.\n\nIl **a** de la fièvre.",
     "retenir": "**Au** = à + le, **aux** = à + les. Le dos → j'ai mal **au** dos. La tête → j'ai mal **à la** tête. Les dents → j'ai mal **aux** dents.",
     "exemples": [
      "J'ai mal **à la tête** depuis ce matin.",
@@ -1010,21 +1010,21 @@ const THEMES = [
       "consigne": "",
       "juste": "J'ai mal au ventre.",
       "faux": "J'ai mal à le ventre.",
-      "expl": "On ne dit jamais « à le » : à + le devient « au ». Le ventre → au ventre."
+      "expl": "On ne dit pas « à le ».\n\nOn dit **au** ventre."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Elle a mal aux dents.",
       "faux": "Elle a mal à les dents.",
-      "expl": "On ne dit jamais « à les » : à + les devient « aux ». Les dents → aux dents."
+      "expl": "On ne dit pas « à les ».\n\nOn dit **aux** dents."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Mon fils a de la fièvre.",
       "faux": "Mon fils est de la fièvre.",
-      "expl": "La fièvre est quelque chose qu'on a, comme on a faim ou froid : il a de la fièvre."
+      "expl": "La fièvre, on l'**a**.\n\nIl **a** de la fièvre."
      },
      {
       "type": "completer",
@@ -1035,7 +1035,7 @@ const THEMES = [
        "au",
        "aux"
       ],
-      "expl": "Tête est féminin (la tête), donc on garde « à la »."
+      "expl": "**La** tête.\n\nOn dit **à la** tête."
      },
      {
       "type": "completer",
@@ -1046,7 +1046,7 @@ const THEMES = [
        "le rhume",
        "la gorge"
       ],
-      "expl": "L'ordonnance est la feuille écrite par le médecin : on la donne à la pharmacie pour avoir les médicaments."
+      "expl": "Le médecin écrit **l'ordonnance**.\n\nOn la donne à la pharmacie."
      },
      {
       "type": "completer",
@@ -1057,17 +1057,17 @@ const THEMES = [
        "le pied",
        "la jambe"
       ],
-      "expl": "Quand on tousse, c'est souvent la gorge qui fait mal. La gorge est féminin, donc « à la gorge »."
+      "expl": "Il tousse.\n\nIl a mal à **la gorge**."
      },
      {
       "type": "ordre",
       "phrase": "J'ai mal au dos depuis trois jours.",
-      "expl": "J'ai mal + au dos (où ?) + depuis trois jours (depuis quand ?)."
+      "expl": "J'ai mal **au dos**.\n\nDepuis trois jours."
      },
      {
       "type": "ordre",
       "phrase": "Le médecin m'a donné une ordonnance.",
-      "expl": "Qui ? le médecin. Fait quoi ? m'a donné. Quoi ? une ordonnance."
+      "expl": "**Qui ?** → Le médecin\n\n**Quoi ?** → m'a donné une ordonnance"
      }
     ]
    },
@@ -1125,8 +1125,8 @@ const THEMES = [
      ]
     ],
     "tableau": null,
-    "regle": "Trois verbes à bien distinguer. **Mettre** : je l'enfile. **Porter** : je l'ai sur moi. **Enlever** : je le retire.",
-    "astuce": "Pour un vêtement, on demande la **taille**. Pour une chaussure, on demande la **pointure**.",
+    "regle": "3 verbes :\n\n- **mettre** : je le mets sur moi\n- **porter** : je l'ai sur moi\n- **enlever** : je le retire",
+    "astuce": "Vêtement : la **taille**.\n\nChaussure : la **pointure**.",
     "retenir": "Je **mets** mon manteau en sortant, je le **porte** dans la rue, je l'**enlève** en rentrant. Le matin on met, le soir on enlève.",
     "exemples": [
      "**Mets** ton manteau, il fait froid.",
@@ -1140,21 +1140,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Il fait froid, je mets mon manteau.",
       "faux": "Il fait froid, j'enlève mon manteau.",
-      "expl": "Quand il fait froid, on met un vêtement chaud. Enlever, c'est le retirer."
+      "expl": "Il fait froid.\n\nJe **mets** mon manteau."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Vous avez ces chaussures en pointure 42 ?",
       "faux": "Vous avez ces chaussures en taille 42 ?",
-      "expl": "Pour les chaussures, on dit la pointure. La taille, c'est pour les vêtements."
+      "expl": "Pour les chaussures : la **pointure**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Je porte des chaussettes dans mes chaussures.",
       "faux": "Je porte des chaussures dans mes chaussettes.",
-      "expl": "Les chaussettes vont sur les pieds, puis les chaussures par-dessus."
+      "expl": "D'abord les **chaussettes**.\n\nPuis les chaussures."
      },
      {
       "type": "completer",
@@ -1165,7 +1165,7 @@ const THEMES = [
        "un pantalon",
        "une jupe"
       ],
-      "expl": "L'écharpe se met autour du cou. Écharpe est féminin : une écharpe, et l'écharpe (la devient l' devant une voyelle)."
+      "expl": "Autour du cou : **une écharpe**."
      },
      {
       "type": "completer",
@@ -1176,7 +1176,7 @@ const THEMES = [
        "mets",
        "porte"
       ],
-      "expl": "On retire ses chaussures en rentrant : j'enlève. « J' » remplace « je » devant la voyelle e."
+      "expl": "Je retire mes chaussures.\n\nJ'**enlève**."
      },
      {
       "type": "completer",
@@ -1187,17 +1187,17 @@ const THEMES = [
        "une chemise",
        "des chaussettes"
       ],
-      "expl": "Le bonnet se porte sur la tête. La chemise couvre le haut du corps, les chaussettes les pieds."
+      "expl": "Sur la tête : **un bonnet**."
      },
      {
       "type": "ordre",
       "phrase": "Je cherche une veste pour l'hiver.",
-      "expl": "Je cherche + quoi ? une veste + pour quand ? pour l'hiver."
+      "expl": "Je cherche une veste.\n\n**Pour quand ?** → pour l'hiver"
      },
      {
       "type": "ordre",
       "phrase": "Mets ton bonnet, il fait froid.",
-      "expl": "Mets ton bonnet (l'ordre) + la raison après la virgule (il fait froid)."
+      "expl": "Mets ton bonnet.\n\n**Pourquoi ?** → il fait froid"
      }
     ]
    },
@@ -1255,8 +1255,8 @@ const THEMES = [
      ]
     ],
     "tableau": null,
-    "regle": "On **prend** un transport (je prends le bus, le métro, le train). Pour dire comment on se déplace : **à** pied, **à** vélo, **en** bus, **en** voiture.",
-    "astuce": "Dans le bus et le tram, il faut **valider** son ticket : le passer dans la machine.",
+    "regle": "On **prend** le bus, le métro, le train.\n\nOn est dedans : **en** bus, **en** voiture.\n\nOn est dessus : **à** pied, **à** vélo.",
+    "astuce": "Dans le bus, il faut **valider** le ticket.\n\nOn le passe dans la machine.",
     "retenir": "**À** quand on est **dessus** (à pied, à vélo, à moto), **en** quand on est **dedans** (en bus, en voiture, en train).",
     "exemples": [
      "Je **prends le bus** à l'arrêt devant la pharmacie.",
@@ -1270,21 +1270,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Je vais au travail en bus.",
       "faux": "Je vais au travail à bus.",
-      "expl": "On est dedans le bus, donc « en bus »."
+      "expl": "On est dedans.\n\nOn dit : **en** bus."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Mon fils va à l'école à pied.",
       "faux": "Mon fils va à l'école en pied.",
-      "expl": "On marche sur ses pieds, on est dessus, donc « à pied »."
+      "expl": "On est dessus.\n\nOn dit : **à** pied."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Je traverse au passage piéton.",
       "faux": "Je traverse au trottoir.",
-      "expl": "On traverse la rue sur le passage piéton, les bandes blanches. Le trottoir est le bord de la rue."
+      "expl": "On traverse sur le **passage piéton**.\n\nLes bandes blanches."
      },
      {
       "type": "completer",
@@ -1295,7 +1295,7 @@ const THEMES = [
        "la poste",
        "la gare"
       ],
-      "expl": "Le pain s'achète à la boulangerie. La poste sert pour le courrier."
+      "expl": "Le pain : à **la boulangerie**."
      },
      {
       "type": "completer",
@@ -1306,7 +1306,7 @@ const THEMES = [
        "rouge",
        "orange"
       ],
-      "expl": "Vert, on peut passer. Rouge, on attend."
+      "expl": "Vert : on passe.\n\nRouge : on attend."
      },
      {
       "type": "completer",
@@ -1317,17 +1317,17 @@ const THEMES = [
        "monte",
        "vais"
       ],
-      "expl": "Pour un transport, le verbe est « prendre » : je prends le métro. On peut dire aussi « je monte dans le métro », avec « dans »."
+      "expl": "Un transport : on le **prend**.\n\nJe prends le métro."
      },
      {
       "type": "ordre",
       "phrase": "Le bus s'arrête devant la pharmacie.",
-      "expl": "Qui ? le bus. Fait quoi ? s'arrête. Où ? devant la pharmacie."
+      "expl": "**Qui ?** → Le bus\n\n**Quoi ?** → s'arrête\n\n**Où ?** → devant la pharmacie"
      },
      {
       "type": "ordre",
       "phrase": "Je vais à la gare à vélo.",
-      "expl": "Je vais + où ? à la gare + comment ? à vélo (on est dessus)."
+      "expl": "On est dessus.\n\nOn dit : **à** vélo."
      }
     ]
    },
@@ -1385,8 +1385,8 @@ const THEMES = [
      ]
     ],
     "tableau": null,
-    "regle": "On **remplit** un formulaire, on **signe** un papier (la signature est le nom, signer est le verbe), on **apporte** un justificatif.",
-    "astuce": "Avant un rendez-vous à la mairie, on demande toujours « Quels papiers je dois apporter ? ».",
+    "regle": "On **remplit** un formulaire.\n\nOn **signe** un papier.\n\nOn **apporte** un justificatif.",
+    "astuce": "Avant la mairie, demandez :\n\n« Quels papiers je dois apporter ? »",
     "retenir": "Un **justificatif** **justifie**, c'est-à-dire qu'il **prouve**. Le justificatif de domicile prouve où j'habite.",
     "exemples": [
      "Je **signe** le cahier de liaison chaque soir.",
@@ -1400,21 +1400,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Les enfants jouent dans la cour à la récréation.",
       "faux": "Les enfants jouent dans la cour à la cantine.",
-      "expl": "La récréation est la pause pour jouer dans la cour. La cantine, c'est pour manger."
+      "expl": "La **récréation** : on joue dans la cour.\n\nLa cantine : on mange."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Je signe en bas de la page.",
       "faux": "Je signature en bas de la page.",
-      "expl": "« Signature » est un nom (la signature). Pour l'action, on utilise le verbe : je signe."
+      "expl": "Signature est un nom.\n\nL'action : je **signe**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Une facture d'électricité est un justificatif de domicile.",
       "faux": "Une facture d'électricité est une pièce d'identité.",
-      "expl": "Une facture porte votre adresse : elle prouve où vous habitez. La pièce d'identité prouve qui vous êtes."
+      "expl": "La facture montre votre adresse.\n\nC'est un **justificatif de domicile**."
      },
      {
       "type": "completer",
@@ -1425,7 +1425,7 @@ const THEMES = [
        "cantines",
        "signatures"
       ],
-      "expl": "Le travail à faire à la maison s'appelle les devoirs. Le mot est au pluriel : ses devoirs."
+      "expl": "Le travail à la maison : les **devoirs**."
      },
      {
       "type": "completer",
@@ -1436,7 +1436,7 @@ const THEMES = [
        "formulaire",
        "justificatif"
       ],
-      "expl": "Le cahier de liaison sert aux messages entre l'école et les parents."
+      "expl": "Les messages de l'école :\n\nle **cahier de liaison**."
      },
      {
       "type": "completer",
@@ -1447,17 +1447,17 @@ const THEMES = [
        "la cantine",
        "la classe"
       ],
-      "expl": "Les papiers d'identité se demandent à la mairie (souvent sur rendez-vous)."
+      "expl": "Les papiers d'identité :\n\nà **la mairie**."
      },
      {
       "type": "ordre",
       "phrase": "Il faut remplir ce formulaire avant lundi.",
-      "expl": "Il faut + remplir (le verbe à l'infinitif) + ce formulaire + avant lundi (quand ?)."
+      "expl": "Il faut **remplir** le formulaire.\n\n**Quand ?** → avant lundi"
      },
      {
       "type": "ordre",
       "phrase": "La réunion des parents est jeudi soir.",
-      "expl": "Quoi ? la réunion des parents. Quand ? jeudi soir."
+      "expl": "**Quoi ?** → La réunion des parents\n\n**Quand ?** → jeudi soir"
      }
     ]
    },
@@ -1515,8 +1515,8 @@ const THEMES = [
      ]
     ],
     "tableau": null,
-    "regle": "Le **devis** vient avant la réparation (le client accepte le prix), la **facture** vient après (le client paie).",
-    "astuce": "On dit « faire le plein » pour remplir le réservoir, et « la voiture ne démarre pas » quand le moteur ne se lance pas.",
+    "regle": "Le **devis** : avant la réparation.\n\nLe client accepte le prix.\n\nLa **facture** : après la réparation.\n\nLe client paie.",
+    "astuce": "**Faire le plein** : remplir le réservoir.\n\n**Ne démarre pas** : le moteur ne se lance pas.",
     "retenir": "**D**evis = **D**'abord. **F**acture = **F**in.",
     "exemples": [
      "Les **freins** font du bruit.",
@@ -1530,21 +1530,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Je fais le devis avant la réparation.",
       "faux": "Je fais la facture avant la réparation.",
-      "expl": "Devis = d'abord : on donne le prix avant de travailler. La facture vient à la fin."
+      "expl": "Le **devis** vient d'abord.\n\nLa facture vient à la fin."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "La voiture ne démarre pas, la batterie est vide.",
       "faux": "La voiture ne démarre pas, le rétroviseur est vide.",
-      "expl": "Sans batterie, il n'y a pas d'électricité pour démarrer. Le rétroviseur est le petit miroir."
+      "expl": "Sans **batterie**, la voiture ne démarre pas."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "La nuit, j'allume les phares.",
       "faux": "La nuit, j'allume les freins.",
-      "expl": "Les phares éclairent la route la nuit. Les freins servent à s'arrêter."
+      "expl": "La nuit, on allume les **phares**.\n\nLes freins servent à s'arrêter."
      },
      {
       "type": "completer",
@@ -1555,7 +1555,7 @@ const THEMES = [
        "le moteur",
        "la batterie"
       ],
-      "expl": "Le volant dirige la voiture. Le moteur la fait avancer."
+      "expl": "Pour tourner : **le volant**."
      },
      {
       "type": "completer",
@@ -1566,7 +1566,7 @@ const THEMES = [
        "le devis",
        "le rendez-vous"
       ],
-      "expl": "Facture = fin : on la donne quand le travail est fini."
+      "expl": "À la fin du travail : **la facture**."
      },
      {
       "type": "completer",
@@ -1577,17 +1577,17 @@ const THEMES = [
        "pneus",
        "freins"
       ],
-      "expl": "On fait le plein de carburant : d'essence ou de gazole. « De » devient « d' » devant une voyelle."
+      "expl": "On fait le plein d'**essence**."
      },
      {
       "type": "ordre",
       "phrase": "Les freins font du bruit depuis hier.",
-      "expl": "Qui ? les freins. Fait quoi ? font du bruit. Depuis quand ? depuis hier."
+      "expl": "**Qui ?** → Les freins\n\n**Quoi ?** → font du bruit\n\n**Depuis quand ?** → depuis hier"
      },
      {
       "type": "ordre",
       "phrase": "Je vous envoie le devis par SMS.",
-      "expl": "Je vous envoie (à qui ? vous) + quoi ? le devis + comment ? par SMS."
+      "expl": "Je vous envoie **le devis**.\n\n**Comment ?** → par SMS"
      }
     ]
    },
@@ -1645,8 +1645,8 @@ const THEMES = [
      ]
     ],
     "tableau": null,
-    "regle": "En France, après 69, on compte avec 60 et avec des paquets de 20 : 70 = soixante-dix, 80 = quatre-vingts, 90 = quatre-vingt-dix. Pour l'heure, on peut dire 14 h 30 (« quatorze heures trente ») ou « deux heures et demie ».",
-    "astuce": "On paie **par** carte, mais **en** espèces.",
+    "regle": "Après 69, on compte avec 60 et 20 :\n\n- 70 : **soixante-dix**\n- 80 : **quatre-vingts**\n- 90 : **quatre-vingt-dix**\n\nL'heure : 14 h 30 = deux heures **et demie**.",
+    "astuce": "On paie **par** carte.\n\nOn paie **en** espèces.",
     "retenir": "Quatre-vingt**s** prend un **s** quand il est seul (80 euros), mais pas quand un nombre le suit (quatre-vingt-deux). Et pour l'heure : le **quart** est un quart de tour du cadran (15 minutes), la **demie** un demi-tour (30 minutes).",
     "exemples": [
      "Ça fait **soixante-quinze** euros.",
@@ -1660,21 +1660,21 @@ const THEMES = [
       "consigne": "",
       "juste": "72 = soixante-douze",
       "faux": "72 = soixante-deux",
-      "expl": "72 = 60 + 12, donc soixante-douze. Soixante-deux, c'est 62."
+      "expl": "72, c'est 60 + 12.\n\n**Soixante-douze**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "9 h 15 = neuf heures et quart",
       "faux": "9 h 15 = neuf heures et demie",
-      "expl": "15 minutes = un quart d'heure, donc « et quart ». « Et demie », c'est 30 minutes."
+      "expl": "15 minutes : un quart.\n\nNeuf heures **et quart**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Je paie par carte.",
       "faux": "Je paie en carte.",
-      "expl": "Avec la carte, on dit « par carte ». Avec les billets et les pièces, on dit « en espèces »."
+      "expl": "Avec la carte : **par** carte."
      },
      {
       "type": "completer",
@@ -1685,7 +1685,7 @@ const THEMES = [
        "huit-dix",
        "soixante-vingt"
       ],
-      "expl": "80 = 4 × 20 : quatre-vingts, avec un s car aucun nombre ne suit."
+      "expl": "80, c'est 4 fois 20.\n\n**Quatre-vingts**."
      },
      {
       "type": "completer",
@@ -1696,7 +1696,7 @@ const THEMES = [
        "minuit",
        "la demie"
       ],
-      "expl": "12 heures dans la journée = midi. Minuit, c'est le milieu de la nuit."
+      "expl": "12 heures dans la journée : **midi**."
      },
      {
       "type": "completer",
@@ -1707,17 +1707,17 @@ const THEMES = [
        "la demie",
        "quinze"
       ],
-      "expl": "10 h 45, c'est 15 minutes avant 11 heures : onze heures moins le quart."
+      "expl": "10 h 45 : 15 minutes avant 11 heures.\n\nOnze heures **moins le quart**."
      },
      {
       "type": "ordre",
       "phrase": "Le rendez-vous est à dix heures et demie.",
-      "expl": "Le rendez-vous + est + à quelle heure ? à dix heures et demie."
+      "expl": "Le rendez-vous est **à dix heures et demie**."
      },
      {
       "type": "ordre",
       "phrase": "Ça fait quatre-vingt-dix euros.",
-      "expl": "90 = 4 × 20 + 10 : quatre-vingt-dix, sans s car « dix » suit."
+      "expl": "90, c'est 4 fois 20 + 10.\n\n**Quatre-vingt-dix**."
      }
     ]
    }
@@ -1734,8 +1734,8 @@ const THEMES = [
     "titre": "Le présent des verbes en -er",
     "mots": [],
     "tableau": null,
-    "regle": "La plupart des verbes finissent par **-er** (parler, manger, travailler). Au présent, on enlève -er et on ajoute : je parl**e**, tu parl**es**, il parl**e**, nous parl**ons**, vous parl**ez**, ils parl**ent**.",
-    "astuce": "Avec nous, les verbes en -ger gardent un e : nous mang**e**ons. Et devant une voyelle, je devient j' : j'habite, j'aime.",
+    "regle": "Beaucoup de verbes finissent par **-er**.\n\nParler, manger, travailler.\n\nOn enlève -er. On ajoute :\n\n- je parl**e**\n- tu parl**es**\n- il, elle parl**e**\n- nous parl**ons**\n- vous parl**ez**\n- ils, elles parl**ent**",
+    "astuce": "Avant a, e, i, o, u : je devient **j'**.\n\nJ'habite. J'aime.",
     "retenir": "Je parle, tu parles, il parle, ils parlent **se disent tous pareil**. Seuls **nous** (-ons) et **vous** (-ez) s'entendent différemment. Et le -ent à la fin d'un verbe ne se prononce **jamais**.",
     "exemples": [
      "Je **travaille** au garage.",
@@ -1750,21 +1750,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Nous parlons français.",
       "faux": "Nous parlez français.",
-      "expl": "Avec nous, la terminaison est toujours -ons : nous parlons. -ez va avec vous."
+      "expl": "Avec **nous** : **-ons**.\n\nNous parlons."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Ils travaillent le samedi.",
       "faux": "Ils travaillont le samedi.",
-      "expl": "Avec ils ou elles, on ajoute -ent (qu'on n'entend pas) : ils travaillent."
+      "expl": "Avec **ils** : **-ent**.\n\nOn ne l'entend pas.\n\nIls travaillent."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Tu habites ici ?",
       "faux": "Tu habite ici ?",
-      "expl": "Avec tu, on ajoute toujours un -s : tu habites. Il ne s'entend pas, mais il s'écrit."
+      "expl": "Avec **tu** : un **s** à la fin.\n\nTu habites."
      },
      {
       "type": "completer",
@@ -1775,7 +1775,7 @@ const THEMES = [
        "commençons",
        "commencent"
       ],
-      "expl": "Avec vous, la terminaison est -ez : vous commencez."
+      "expl": "Avec **vous** : **-ez**.\n\nVous commencez."
      },
      {
       "type": "completer",
@@ -1786,7 +1786,7 @@ const THEMES = [
        "prépares",
        "préparent"
       ],
-      "expl": "Elle = il : la terminaison est -e, comme avec je. Elle prépare."
+      "expl": "Avec **elle** : **-e**.\n\nElle prépare."
      },
      {
       "type": "completer",
@@ -1797,17 +1797,17 @@ const THEMES = [
        "joue",
        "jouez"
       ],
-      "expl": "Les enfants = ils : jouer devient ils jouent."
+      "expl": "Les enfants, c'est **ils**.\n\nIls **jouent**."
      },
      {
       "type": "ordre",
       "phrase": "Nous habitons à Lyon depuis trois ans.",
-      "expl": "Nous + habitons (-ons) + à Lyon (où ?) + depuis trois ans (depuis quand ?)."
+      "expl": "Nous **habitons**.\n\n**Depuis quand ?** → depuis trois ans"
      },
      {
       "type": "ordre",
       "phrase": "Ils travaillent tous les jours.",
-      "expl": "Ils + travaillent (-ent) + tous les jours (quand ?)."
+      "expl": "Ils **travaillent**.\n\n**Quand ?** → tous les jours"
      }
     ]
    },
@@ -1866,8 +1866,8 @@ const THEMES = [
       "font"
      ]
     ],
-    "regle": "Ce sont les 4 verbes les plus utilisés. Ils ne suivent pas la règle des -er : il faut les apprendre par cœur.",
-    "astuce": "En français, on **a** son âge, on **a** faim, on **a** froid : j'ai trente ans, j'ai faim. Et on **est** malade, fatigué, en retard.",
+    "regle": "4 verbes très utiles :\n\n**être**, **avoir**, **aller**, **faire**.\n\nIls sont différents.\n\nIl faut les apprendre par cœur.",
+    "astuce": "On **a** faim. On **a** trente ans.\n\nOn **est** malade. On **est** en retard.",
     "retenir": "Ils s**ont**, ils **ont**, ils v**ont**, ils f**ont** : avec ils, les 4 verbes finissent par **-ont**, comme une chanson.",
     "exemples": [
      "Je **suis** malade.",
@@ -1882,21 +1882,21 @@ const THEMES = [
       "consigne": "",
       "juste": "J'ai trente ans.",
       "faux": "Je suis trente ans.",
-      "expl": "L'âge se dit avec avoir : j'ai trente ans."
+      "expl": "L'âge : avec **avoir**.\n\nJ'**ai** trente ans."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Vous faites quoi ce soir ?",
       "faux": "Vous faisez quoi ce soir ?",
-      "expl": "Faire est irrégulier : vous faites (comme vous êtes, vous dites). Faisez n'existe pas."
+      "expl": "Avec **vous** : vous **faites**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Ils vont au marché.",
       "faux": "Ils allent au marché.",
-      "expl": "Aller est irrégulier : ils vont. Ils s-ont, ils ont, ils v-ont, ils f-ont."
+      "expl": "Avec **ils** : ils **vont**."
      },
      {
       "type": "completer",
@@ -1907,7 +1907,7 @@ const THEMES = [
        "sont",
        "êtes"
       ],
-      "expl": "Être avec nous : nous sommes."
+      "expl": "Avec **nous** : nous **sommes**."
      },
      {
       "type": "completer",
@@ -1918,7 +1918,7 @@ const THEMES = [
        "est",
        "as"
       ],
-      "expl": "La faim se dit avec avoir : elle a faim. « A » sans accent, car c'est le verbe avoir (elle avait faim)."
+      "expl": "La faim : avec **avoir**.\n\nElle **a** faim."
      },
      {
       "type": "completer",
@@ -1929,17 +1929,17 @@ const THEMES = [
        "va",
        "allons"
       ],
-      "expl": "Aller avec je : je vais."
+      "expl": "Avec **je** : je **vais**."
      },
      {
       "type": "ordre",
       "phrase": "Nous avons rendez-vous à dix heures.",
-      "expl": "Avoir rendez-vous : nous avons + rendez-vous + à dix heures."
+      "expl": "Nous **avons** rendez-vous.\n\n**Quand ?** → à dix heures"
      },
      {
       "type": "ordre",
       "phrase": "Ils font les courses le samedi.",
-      "expl": "Faire les courses : ils font + les courses + le samedi."
+      "expl": "Ils **font** les courses.\n\n**Quand ?** → le samedi"
      }
     ]
    },
@@ -2003,8 +2003,8 @@ const THEMES = [
       "prennent"
      ]
     ],
-    "regle": "**Pouvoir** = être capable ou avoir le droit, **vouloir** = avoir envie, **devoir** = être obligé, **savoir** = connaître. Après ces 4 verbes, le deuxième verbe reste à la forme du dictionnaire (l'infinitif) : je dois **partir**.",
-    "astuce": "Avec tu, c'est comme avec je : tu peux, tu veux, tu dois, tu sais.",
+    "regle": "- **pouvoir** : être capable, avoir le droit\n- **vouloir** : avoir envie\n- **devoir** : être obligé\n- **savoir** : connaître\n\nAprès ces verbes, le 2e verbe ne change pas.\n\nJe dois **partir**.",
+    "astuce": "Avec **tu**, c'est comme avec **je**.\n\nJe peux, tu peux.",
     "retenir": "Je peu**x**, je veu**x** prennent un **x**. Il peu**t**, il veu**t** prennent un **t**. Le x pour moi, le t pour lui.",
     "exemples": [
      "Je **peux** vous aider ?",
@@ -2020,21 +2020,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Je dois partir.",
       "faux": "Je dois pars.",
-      "expl": "Après « dois », le verbe reste à l'infinitif : partir."
+      "expl": "Après **dois**, le verbe ne change pas.\n\nJe dois **partir**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Il peut venir demain.",
       "faux": "Il peux venir demain.",
-      "expl": "Avec il, c'est « peut » avec un t. Le x est pour je et tu."
+      "expl": "Avec **il** : il **peut**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Ils prennent le métro.",
       "faux": "Ils prendent le métro.",
-      "expl": "Prendre est irrégulier : ils prennent, avec deux n."
+      "expl": "Avec **ils** : ils **prennent**.\n\nDeux **n**."
      },
      {
       "type": "completer",
@@ -2045,7 +2045,7 @@ const THEMES = [
        "voulons",
        "veulent"
       ],
-      "expl": "Avec vous : vous voulez (-ez)."
+      "expl": "Avec **vous** : vous **voulez**."
      },
      {
       "type": "completer",
@@ -2056,7 +2056,7 @@ const THEMES = [
        "sait",
        "savons"
       ],
-      "expl": "Avec je : je sais (avec un s). Savoir + infinitif = être capable : je ne sais pas nager."
+      "expl": "Avec **je** : je **sais**."
      },
      {
       "type": "completer",
@@ -2067,17 +2067,17 @@ const THEMES = [
        "venez",
        "viennent"
       ],
-      "expl": "Avec nous : nous venons (-ons)."
+      "expl": "Avec **nous** : nous **venons**."
      },
      {
       "type": "ordre",
       "phrase": "Est-ce que je peux payer par carte ?",
-      "expl": "Est-ce que + je peux + payer (infinitif) + par carte."
+      "expl": "Je **peux** + **payer**.\n\nLe 2e verbe ne change pas."
      },
      {
       "type": "ordre",
       "phrase": "Ils doivent apporter leurs papiers.",
-      "expl": "Ils doivent (obligation) + apporter (infinitif) + leurs papiers."
+      "expl": "Ils **doivent** + **apporter**.\n\nLe 2e verbe ne change pas."
      }
     ]
    },
@@ -2086,8 +2086,8 @@ const THEMES = [
     "titre": "Le passé composé avec avoir",
     "mots": [],
     "tableau": null,
-    "regle": "Pour une action terminée, on utilise **avoir au présent + le participe passé**. Les verbes en -er font **-é** : manger → j'ai mangé. Les autres sont à apprendre : finir → fini, prendre → pris, faire → fait, voir → vu, avoir → eu, être → été.",
-    "astuce": "Pour dire non, le sandwich entoure le petit verbe : je **n'**ai **pas** mangé.",
+    "regle": "Pour une action finie :\n\n**avoir** + le verbe au passé.\n\nManger → j'**ai mangé**.\n\nFinir → j'ai **fini**.\n\nPrendre → j'ai **pris**.\n\nFaire → j'ai **fait**.\n\nVoir → j'ai **vu**.",
+    "astuce": "Pour dire non :\n\nje **n'**ai **pas** mangé.",
     "retenir": "Le passé composé est « composé » de **deux morceaux** : le petit verbe (ai, as, a, avons, avez, ont) + le participe (mangé, fini, pris).",
     "exemples": [
      "J'**ai mangé** à midi.",
@@ -2102,21 +2102,21 @@ const THEMES = [
       "consigne": "",
       "juste": "J'ai fini mon travail.",
       "faux": "J'ai finir mon travail.",
-      "expl": "Après « ai », il faut le participe passé (fini), pas l'infinitif (finir)."
+      "expl": "Après **ai** : **fini**.\n\nPas finir."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Elle a pris le bus.",
       "faux": "Elle a prendu le bus.",
-      "expl": "Le participe de prendre est « pris ». Prendu n'existe pas."
+      "expl": "Prendre au passé : **pris**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Nous avons mangé.",
       "faux": "Nous avons manger.",
-      "expl": "Après « avons », on met le participe : mangé, avec un é. Astuce : on peut dire « nous avons vendu », donc c'est -é."
+      "expl": "Après **avons** : **mangé**.\n\nAvec **é**."
      },
      {
       "type": "completer",
@@ -2127,7 +2127,7 @@ const THEMES = [
        "est",
        "as"
       ],
-      "expl": "Téléphoner se conjugue avec avoir : il a téléphoné."
+      "expl": "Il **a** téléphoné."
      },
      {
       "type": "completer",
@@ -2138,7 +2138,7 @@ const THEMES = [
        "fermer",
        "fermez"
       ],
-      "expl": "Après « avez », le participe : fermé."
+      "expl": "Après **avez** : **fermé**."
      },
      {
       "type": "completer",
@@ -2149,17 +2149,17 @@ const THEMES = [
        "faire",
        "faisé"
       ],
-      "expl": "Le participe de faire est « fait »."
+      "expl": "Faire au passé : **fait**."
      },
      {
       "type": "ordre",
       "phrase": "J'ai réparé la voiture ce matin.",
-      "expl": "J'ai réparé (les deux morceaux) + la voiture + ce matin."
+      "expl": "J'**ai réparé**.\n\n**Quand ?** → ce matin"
      },
      {
       "type": "ordre",
       "phrase": "Nous avons vu le médecin hier.",
-      "expl": "Nous avons vu (avoir + participe de voir) + le médecin + hier."
+      "expl": "Nous **avons vu**.\n\n**Quand ?** → hier"
      }
     ]
    },
@@ -2168,8 +2168,8 @@ const THEMES = [
     "titre": "Le passé composé avec être",
     "mots": [],
     "tableau": null,
-    "regle": "Une quinzaine de verbes de **mouvement** utilisent **être** au lieu d'avoir : aller, venir, arriver, partir, entrer, sortir, monter, descendre, naître, mourir, rester, tomber, retourner, revenir, devenir. Les verbes en « se » aussi : il s'est levé.",
-    "astuce": "Avec être, le participe s'accorde comme un adjectif : il est parti, elle est parti**e**, ils sont parti**s**, elles sont parti**es**.",
+    "regle": "Certains verbes utilisent **être** au passé.\n\nCe sont des verbes de mouvement :\n\naller, venir, arriver, partir,\n\nentrer, sortir, monter, descendre,\n\nrester, tomber, naître.\n\nJe **suis allé** à la mairie.",
+    "astuce": "Avec être, on accorde :\n\nil est parti.\n\nelle est parti**e**.\n\nils sont parti**s**.",
     "retenir": "Imagine **la maison d'être**. On y **naît**, on **arrive**, on **entre**, on **monte** l'escalier, on **descend**, on **tombe**, on **reste**, on **sort**, on **part**, on **revient**… Tout ce qu'on fait en bougeant dans la maison se dit avec être.",
     "exemples": [
      "Je **suis allé** à la mairie.",
@@ -2184,21 +2184,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Elle est partie à huit heures.",
       "faux": "Elle a partie à huit heures.",
-      "expl": "Partir est un verbe de mouvement : avec être. Elle est partie, avec un -e car c'est une femme."
+      "expl": "Partir : avec **être**.\n\nUne femme : parti**e**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Nous sommes arrivés hier.",
       "faux": "Nous avons arrivés hier.",
-      "expl": "Arriver se conjugue avec être : nous sommes arrivés, avec un -s car nous sommes plusieurs."
+      "expl": "Arriver : avec **être**.\n\nNous : arrivé**s**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Ils sont restés à la maison.",
       "faux": "Ils sont resté à la maison.",
-      "expl": "Avec être, on accorde : ils sont plusieurs, donc resté**s**."
+      "expl": "Plusieurs personnes : resté**s**."
      },
      {
       "type": "completer",
@@ -2209,7 +2209,7 @@ const THEMES = [
        "a",
        "ai"
       ],
-      "expl": "Tomber se conjugue avec être : il est tombé."
+      "expl": "Tomber : avec **être**.\n\nIl **est** tombé."
      },
      {
       "type": "completer",
@@ -2220,7 +2220,7 @@ const THEMES = [
        "allé",
        "aller"
       ],
-      "expl": "Aller avec être, et elle est une femme : allée, avec -e."
+      "expl": "Une femme : allé**e**."
      },
      {
       "type": "completer",
@@ -2231,17 +2231,17 @@ const THEMES = [
        "ai",
        "es"
       ],
-      "expl": "Naître se conjugue avec être : je suis né (je suis née pour une femme)."
+      "expl": "Naître : avec **être**.\n\nJe **suis** né."
      },
      {
       "type": "ordre",
       "phrase": "Elle est arrivée en France en 2015.",
-      "expl": "Elle est arrivée (être + participe accordé) + où ? en France + quand ? en 2015."
+      "expl": "Elle **est arrivée**.\n\n**Où ?** → en France\n\n**Quand ?** → en 2015"
      },
      {
       "type": "ordre",
       "phrase": "Nous sommes allés au marché.",
-      "expl": "Nous sommes allés (être + -s) + où ? au marché."
+      "expl": "Nous **sommes allés**.\n\n**Où ?** → au marché"
      }
     ]
    },
@@ -2250,8 +2250,8 @@ const THEMES = [
     "titre": "Le futur proche",
     "mots": [],
     "tableau": null,
-    "regle": "Pour ce qui va arriver, on utilise **aller au présent + l'infinitif** : je vais manger, nous allons partir.",
-    "astuce": "Il existe un autre futur (je mangerai), mais à l'oral, le futur proche suffit presque toujours.",
+    "regle": "Pour demain :\n\n**aller** + un verbe.\n\nJe **vais manger**.\n\nNous **allons partir**.",
+    "astuce": "C'est le futur le plus simple.\n\nOn l'utilise beaucoup à l'oral.",
     "retenir": "« Je **vais** », c'est comme si je marchais vers l'action. Je vais … manger, je vais … appeler.",
     "exemples": [
      "Je **vais appeler** le médecin.",
@@ -2266,21 +2266,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Je vais téléphoner ce soir.",
       "faux": "Je vais téléphone ce soir.",
-      "expl": "Après « vais », le deuxième verbe reste à l'infinitif : téléphoner."
+      "expl": "Après **vais**, le verbe ne change pas.\n\nJe vais **téléphoner**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Ils vont arriver demain.",
       "faux": "Ils allent arriver demain.",
-      "expl": "Aller avec ils : ils vont. Allent n'existe pas."
+      "expl": "Avec **ils** : ils **vont**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Elle va être en retard.",
       "faux": "Elle va est en retard.",
-      "expl": "Après « va », on garde l'infinitif : être."
+      "expl": "Après **va** : **être**."
      },
      {
       "type": "completer",
@@ -2291,7 +2291,7 @@ const THEMES = [
        "allez",
        "vont"
       ],
-      "expl": "Aller avec nous : nous allons."
+      "expl": "Avec **nous** : nous **allons**."
      },
      {
       "type": "completer",
@@ -2302,7 +2302,7 @@ const THEMES = [
        "prends",
        "pris"
       ],
-      "expl": "Après « vas », l'infinitif : prendre."
+      "expl": "Après **vas** : **prendre**."
      },
      {
       "type": "completer",
@@ -2313,17 +2313,17 @@ const THEMES = [
        "vais",
        "vont"
       ],
-      "expl": "La réunion = elle : elle va."
+      "expl": "La réunion, c'est **elle**.\n\nElle **va**."
      },
      {
       "type": "ordre",
       "phrase": "Je vais préparer le dîner.",
-      "expl": "Je vais (aller) + préparer (infinitif) + le dîner."
+      "expl": "Je **vais préparer** le dîner."
      },
      {
       "type": "ordre",
       "phrase": "Votre voiture va être prête demain.",
-      "expl": "Votre voiture + va être (futur proche) + prête + demain."
+      "expl": "Votre voiture **va être** prête demain."
      }
     ]
    },
@@ -2332,8 +2332,8 @@ const THEMES = [
     "titre": "L'imparfait",
     "mots": [],
     "tableau": null,
-    "regle": "L'imparfait sert à **décrire le passé** ou à parler d'une **habitude** d'avant. On prend le verbe avec nous (nous parl-ons), on enlève -ons et on ajoute : -ais, -ais, -ait, -ions, -iez, -aient. Seule exception : être → j'étais.",
-    "astuce": "Les terminaisons sont les mêmes pour **tous** les verbes : je parlais, je faisais, j'avais, j'allais.",
+    "regle": "L'imparfait :\n\npour décrire le passé,\n\nou pour une habitude d'avant.\n\nLes fins :\n\n- je, tu : **-ais**\n- il, elle : **-ait**\n- nous : **-ions**\n- vous : **-iez**\n- ils, elles : **-aient**\n\nÊtre : j'**étais**.",
+    "astuce": "Les fins sont les mêmes pour tous les verbes.\n\nJe parlais. Je faisais. J'avais.",
     "retenir": "L'imparfait, c'est **le vieil album photo** : « Avant… », « Quand j'étais petit… », « Tous les jours, on… ».",
     "exemples": [
      "Quand j'**étais** petit, j'**habitais** à la campagne.",
@@ -2348,21 +2348,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Avant, je travaillais en usine.",
       "faux": "Avant, je travaillé en usine.",
-      "expl": "« Avant » indique une habitude : imparfait, je travaillais (-ais)."
+      "expl": "**Avant** : une habitude.\n\nJe travaill**ais**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Il faisait beau.",
       "faux": "Il faisé beau.",
-      "expl": "On décrit le temps qu'il faisait : imparfait de faire, il faisait."
+      "expl": "On décrit le temps.\n\nIl fais**ait** beau."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Nous habitions à Paris.",
       "faux": "Nous habitaient à Paris.",
-      "expl": "Avec nous, la terminaison est -ions : nous habitions. -aient va avec ils."
+      "expl": "Avec **nous** : **-ions**.\n\nNous habit**ions**."
      },
      {
       "type": "completer",
@@ -2373,7 +2373,7 @@ const THEMES = [
        "étions",
        "était"
       ],
-      "expl": "Être à l'imparfait avec je : j'étais."
+      "expl": "Être avec **je** : j'**étais**."
      },
      {
       "type": "completer",
@@ -2384,7 +2384,7 @@ const THEMES = [
        "dormait",
        "dormons"
       ],
-      "expl": "Les enfants = ils : -aient. Ils dormaient."
+      "expl": "Les enfants, c'est **ils**.\n\nIls dorm**aient**."
      },
      {
       "type": "completer",
@@ -2395,17 +2395,17 @@ const THEMES = [
        "fumais",
        "fument"
       ],
-      "expl": "Une habitude d'avant, avec il : -ait. Il fumait."
+      "expl": "Une habitude d'avant.\n\nIl fum**ait**."
      },
      {
       "type": "ordre",
       "phrase": "Quand il était jeune, il jouait au football.",
-      "expl": "Quand il était jeune (le décor) + il jouait au football (l'habitude)."
+      "expl": "Il **était** jeune : le décor.\n\nIl **jouait** : l'habitude."
      },
      {
       "type": "ordre",
       "phrase": "Il faisait froid ce matin.",
-      "expl": "Il faisait froid (description) + ce matin (quand ?)."
+      "expl": "Il **faisait** froid : on décrit."
      }
     ]
    },
@@ -2414,8 +2414,8 @@ const THEMES = [
     "titre": "Choisir le bon temps",
     "mots": [],
     "tableau": null,
-    "regle": "Chaque moment a son temps.\n\n- **Maintenant** : le présent. Je travaille.\n- **Hier, une action finie** : le passé composé. J'ai appelé.\n- **Avant, une habitude ou un décor** : l'imparfait. J'habitais, il pleuvait.\n- **Demain** : le futur proche. Je vais signer.\n\nDans une même phrase, on mélange souvent les deux passés : **Il pleuvait** (le décor) **quand je suis sorti** (l'action).",
-    "astuce": "Les mots du temps aident à choisir. Hier, la semaine dernière → passé composé. Avant, autrefois, tous les jours → imparfait. Demain, bientôt → futur proche.",
+    "regle": "Chaque moment a son temps :\n\n- **maintenant** : je travaille\n- **hier**, action finie : j'**ai appelé**\n- **avant**, habitude : j'**habitais**\n- **demain** : je **vais signer**",
+    "astuce": "Hier → **passé composé**.\n\nAvant, tous les jours → **imparfait**.\n\nDemain → **futur proche**.",
     "retenir": "L'imparfait est **le décor du film**, le passé composé est **l'action qui arrive**.",
     "exemples": [
      "Hier, j'**ai appelé** le garage.",
@@ -2430,21 +2430,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Hier, j'ai vu le médecin.",
       "faux": "Hier, je vais voir le médecin.",
-      "expl": "« Hier » + une action finie : passé composé, j'ai vu."
+      "expl": "**Hier**, action finie.\n\nJ'**ai vu**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Demain, nous allons partir.",
       "faux": "Demain, nous sommes partis.",
-      "expl": "« Demain » : futur proche, nous allons partir."
+      "expl": "**Demain**.\n\nNous **allons partir**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Il dormait quand le téléphone a sonné.",
       "faux": "Il a dormi quand le téléphone sonnait.",
-      "expl": "Dormir est le décor (imparfait), la sonnerie est l'action qui arrive (passé composé)."
+      "expl": "Il **dormait** : le décor.\n\nLe téléphone **a sonné** : l'action."
      },
      {
       "type": "completer",
@@ -2455,7 +2455,7 @@ const THEMES = [
        "vais aller",
        "vais"
       ],
-      "expl": "« Hier » + une action finie : passé composé. Aller se conjugue avec être : je suis allé."
+      "expl": "**Hier**, action finie.\n\nJe **suis allé**."
      },
      {
       "type": "completer",
@@ -2466,7 +2466,7 @@ const THEMES = [
        "allons habiter",
        "habitons"
       ],
-      "expl": "« Avant » + une habitude qui a duré : imparfait, nous habitions."
+      "expl": "**Avant**, une habitude.\n\nNous **habitions**."
      },
      {
       "type": "completer",
@@ -2477,17 +2477,17 @@ const THEMES = [
        "suis",
        "ai"
       ],
-      "expl": "« Demain » : futur proche, je vais + téléphoner."
+      "expl": "**Demain**.\n\nJe **vais** te téléphoner."
      },
      {
       "type": "ordre",
       "phrase": "Hier soir, nous avons regardé un film.",
-      "expl": "Hier soir (quand ?) + nous avons regardé (passé composé) + un film."
+      "expl": "**Hier soir**.\n\nNous **avons regardé**."
      },
      {
       "type": "ordre",
       "phrase": "Demain, je vais aller à la mairie.",
-      "expl": "Demain (quand ?) + je vais aller (futur proche) + à la mairie."
+      "expl": "**Demain**.\n\nJe **vais aller**."
      }
     ]
    }
@@ -2504,8 +2504,8 @@ const THEMES = [
     "titre": "Le, la, l', les",
     "mots": [],
     "tableau": null,
-    "regle": "Devant un nom précis, on met **le** (masculin), **la** (féminin), **les** (pluriel). Devant une voyelle ou un h muet, le et la deviennent **l'** : l'école, l'hôpital.",
-    "astuce": "Avec l', on n'entend plus si le mot est masculin ou féminin. Apprenez-le avec un ou une : **une** école, **un** hôpital.",
+    "regle": "Pour une chose précise :\n\n- **le** : masculin. Le garage.\n- **la** : féminin. La voiture.\n- **les** : plusieurs. Les enfants.\n\nAvant a, e, i, o, u, h : **l'**. L'école.",
+    "astuce": "Avec **l'**, on n'entend pas masculin ou féminin.\n\nApprenez avec **un** ou **une**.\n\n**Une** école. **Un** hôpital.",
     "retenir": "L' **avale sa voyelle** pour que deux voyelles ne se cognent pas : la + école → l'école.",
     "exemples": [
      "**Le** garage ferme à 18 heures.",
@@ -2519,21 +2519,21 @@ const THEMES = [
       "consigne": "",
       "juste": "l'école",
       "faux": "la école",
-      "expl": "École commence par une voyelle : la devient l'."
+      "expl": "École commence par **é**.\n\nLa devient **l'**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "les clés",
       "faux": "le clés",
-      "expl": "Clés est au pluriel (avec un s) : les."
+      "expl": "Clés : plusieurs.\n\nOn dit **les**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "l'hôpital",
       "faux": "le hôpital",
-      "expl": "Le h d'hôpital ne se prononce pas : le devient l'."
+      "expl": "Le **h** ne s'entend pas.\n\nLe devient **l'**."
      },
      {
       "type": "completer",
@@ -2544,7 +2544,7 @@ const THEMES = [
        "Le",
        "L'"
       ],
-      "expl": "Pharmacie est féminin et commence par une consonne : la."
+      "expl": "Pharmacie : féminin.\n\nOn dit **la**."
      },
      {
       "type": "completer",
@@ -2555,7 +2555,7 @@ const THEMES = [
        "Le",
        "La"
       ],
-      "expl": "Hiver commence par un h muet : l'hiver."
+      "expl": "Hiver commence par un **h** muet.\n\nOn dit **l'**."
      },
      {
       "type": "completer",
@@ -2566,17 +2566,17 @@ const THEMES = [
        "Le",
        "La"
       ],
-      "expl": "Plusieurs enfants : les."
+      "expl": "Plusieurs enfants.\n\nOn dit **les**."
      },
      {
       "type": "ordre",
       "phrase": "Les enfants sont à l'école.",
-      "expl": "Les enfants (pluriel) + sont + à l'école (où ?)."
+      "expl": "**Les** enfants.\n\n**Où ?** → à l'école"
      },
      {
       "type": "ordre",
       "phrase": "La voiture est au garage.",
-      "expl": "La voiture (féminin) + est + au garage (à + le = au)."
+      "expl": "**La** voiture.\n\n**Où ?** → au garage"
      }
     ]
    },
@@ -2585,8 +2585,8 @@ const THEMES = [
     "titre": "Un, une, des",
     "mots": [],
     "tableau": null,
-    "regle": "Pour une chose dont on parle pour la première fois, ou qui n'est pas précise, on met **un** (masculin), **une** (féminin), **des** (pluriel). Avec ne… pas, ils deviennent **de** : je n'ai pas **de** voiture.",
-    "astuce": "J'ai **une** voiture (je la présente). **La** voiture est rouge (on sait laquelle).",
+    "regle": "Pour une chose pas précise :\n\n- **un** : masculin. Un fils.\n- **une** : féminin. Une fille.\n- **des** : plusieurs. Des enfants.\n\nAvec ne… pas : **de**.\n\nJe n'ai pas **de** voiture.",
+    "astuce": "J'ai **une** voiture : je la présente.\n\n**La** voiture est rouge : on sait laquelle.",
     "retenir": "**Un / une** la première fois, **le / la** quand on en a déjà parlé.",
     "exemples": [
      "J'ai **un** fils et **une** fille.",
@@ -2600,21 +2600,21 @@ const THEMES = [
       "consigne": "",
       "juste": "J'ai une voiture. La voiture est rouge.",
       "faux": "J'ai la voiture. Une voiture est rouge.",
-      "expl": "On présente la voiture avec une, puis on en reparle avec la."
+      "expl": "D'abord **une** voiture.\n\nPuis **la** voiture."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Je n'ai pas de voiture.",
       "faux": "Je n'ai pas une voiture.",
-      "expl": "Après ne… pas, un et une deviennent de : pas de voiture."
+      "expl": "Avec ne… pas : **de**.\n\nPas **de** voiture."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Il y a des pommes.",
       "faux": "Il y a un pommes.",
-      "expl": "Pommes est au pluriel : des pommes."
+      "expl": "Plusieurs pommes.\n\nOn dit **des**."
      },
      {
       "type": "completer",
@@ -2625,7 +2625,7 @@ const THEMES = [
        "un",
        "des"
       ],
-      "expl": "Boulangerie est féminin, et on ne sait pas laquelle : une boulangerie."
+      "expl": "Boulangerie : féminin.\n\nOn dit **une**."
      },
      {
       "type": "completer",
@@ -2636,7 +2636,7 @@ const THEMES = [
        "un",
        "une"
       ],
-      "expl": "Plusieurs enfants, pas précis : des enfants."
+      "expl": "Plusieurs enfants.\n\nOn dit **des**."
      },
      {
       "type": "completer",
@@ -2647,17 +2647,17 @@ const THEMES = [
        "une",
        "des"
       ],
-      "expl": "Garçon est masculin : un garçon."
+      "expl": "Garçon : masculin.\n\nOn dit **un**."
      },
      {
       "type": "ordre",
       "phrase": "J'ai un rendez-vous demain.",
-      "expl": "J'ai + un rendez-vous (première fois qu'on en parle) + demain."
+      "expl": "J'ai **un** rendez-vous.\n\n**Quand ?** → demain"
      },
      {
       "type": "ordre",
       "phrase": "Il y a des enfants dans le parc.",
-      "expl": "Il y a + des enfants (plusieurs) + dans le parc (où ?)."
+      "expl": "Il y a **des** enfants.\n\n**Où ?** → dans le parc"
      }
     ]
    },
@@ -2666,8 +2666,8 @@ const THEMES = [
     "titre": "Le féminin des noms",
     "mots": [],
     "tableau": null,
-    "regle": "Souvent, on ajoute **-e** : un ami → une ami**e**, un voisin → une voisin**e**. D'autres changent la fin : -eur → **-euse** (vendeur, vendeuse), -teur → **-trice** (directeur, directrice), -ien → **-ienne** (pharmacien, pharmacienne), -er → **-ère** (boulanger, boulangère).",
-    "astuce": "Certains mots changent complètement : un homme / une femme, un père / une mère, un garçon / une fille. D'autres ne changent pas : un ou une élève, un ou une secrétaire.",
+    "regle": "Pour le féminin, souvent : **-e**.\n\nUn ami, une ami**e**.\n\nD'autres fins changent :\n\n- **-eur** devient **-euse** : vendeuse\n- **-teur** devient **-trice** : directrice\n- **-ien** devient **-ienne** : pharmacienne\n- **-er** devient **-ère** : boulangère",
+    "astuce": "Certains mots changent tout :\n\nun homme, une femme.\n\nun père, une mère.",
     "retenir": "Le -e du féminin **fait entendre la dernière lettre** : voisin (on n'entend pas le n) → voisine (on entend n).",
     "exemples": [
      "Mon **voisin** et ma **voisine** sont gentils.",
@@ -2681,21 +2681,21 @@ const THEMES = [
       "consigne": "",
       "juste": "une amie",
       "faux": "une ami",
-      "expl": "On ajoute -e : une amie. Le son ne change pas, mais l'écriture oui."
+      "expl": "On ajoute **-e**.\n\nUne ami**e**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "une vendeuse",
       "faux": "une vendeure",
-      "expl": "-eur devient -euse : vendeur, vendeuse."
+      "expl": "**-eur** devient **-euse**.\n\nVendeuse."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "la directrice",
       "faux": "la directeuse",
-      "expl": "-teur devient -trice : directeur, directrice."
+      "expl": "**-teur** devient **-trice**.\n\nDirectrice."
      },
      {
       "type": "completer",
@@ -2706,7 +2706,7 @@ const THEMES = [
        "boulangeuse",
        "boulangerie"
       ],
-      "expl": "-er devient -ère : boulanger, boulangère. La boulangerie est le magasin."
+      "expl": "**-er** devient **-ère**.\n\nBoulangère."
      },
      {
       "type": "completer",
@@ -2717,7 +2717,7 @@ const THEMES = [
        "Algérine",
        "Algériene"
       ],
-      "expl": "-ien devient -ienne, avec deux n : Algérienne."
+      "expl": "**-ien** devient **-ienne**.\n\nAlgérienne."
      },
      {
       "type": "completer",
@@ -2728,17 +2728,17 @@ const THEMES = [
        "cuisinieuse",
        "cuisinère"
       ],
-      "expl": "-ier devient -ière : cuisinier, cuisinière."
+      "expl": "**-ier** devient **-ière**.\n\nCuisinière."
      },
      {
       "type": "ordre",
       "phrase": "Ma voisine travaille à la pharmacie.",
-      "expl": "Ma voisine (féminin) + travaille + à la pharmacie."
+      "expl": "**Ma** voisine : féminin."
      },
      {
       "type": "ordre",
       "phrase": "La directrice veut nous voir.",
-      "expl": "La directrice + veut + nous voir."
+      "expl": "**La** directrice : féminin."
      }
     ]
    },
@@ -2747,8 +2747,8 @@ const THEMES = [
     "titre": "Le pluriel des noms",
     "mots": [],
     "tableau": null,
-    "regle": "En général, on ajoute **-s** : une maison → des maison**s**. Les mots en -eau et -eu prennent **-x** : un gâteau → des gâteau**x**. Les mots en -al deviennent **-aux** : un journal → des journ**aux**. Les mots qui finissent déjà par -s, -x ou -z ne changent pas : un bras → des bras.",
-    "astuce": "Le s du pluriel ne s'entend pas. C'est le petit mot devant (les, des) qui dit à l'oreille que c'est pluriel.",
+    "regle": "Pour le pluriel, souvent : **-s**.\n\nUne maison, des maison**s**.\n\n- **-eau** prend **-x** : des gâteau**x**\n- **-al** devient **-aux** : des journ**aux**\n- **-s, -x, -z** ne changent pas : des bras",
+    "astuce": "Le **s** ne s'entend pas.\n\nOn entend **les** ou **des**.",
     "retenir": "Les mots en -ou prennent un s, **sauf 7 mots** qui prennent un x : **bijou, caillou, chou, genou, hibou, joujou, pou**. Les enfants français l'apprennent comme une comptine.",
     "exemples": [
      "Les **enfants** jouent avec leurs **jouets**.",
@@ -2762,21 +2762,21 @@ const THEMES = [
       "consigne": "",
       "juste": "des gâteaux",
       "faux": "des gâteaus",
-      "expl": "Les mots en -eau prennent un x : des gâteaux."
+      "expl": "**-eau** prend un **x**.\n\nDes gâteaux."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "des journaux",
       "faux": "des journals",
-      "expl": "Les mots en -al deviennent -aux : des journaux."
+      "expl": "**-al** devient **-aux**.\n\nDes journaux."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "les prix",
       "faux": "les prixs",
-      "expl": "Prix finit déjà par x : il ne change pas."
+      "expl": "Prix finit déjà par **x**.\n\nIl ne change pas."
      },
      {
       "type": "completer",
@@ -2787,7 +2787,7 @@ const THEMES = [
        "chevals",
        "chevaus"
       ],
-      "expl": "Cheval finit par -al : des chevaux."
+      "expl": "**-al** devient **-aux**.\n\nDes chevaux."
      },
      {
       "type": "completer",
@@ -2798,7 +2798,7 @@ const THEMES = [
        "genous",
        "genou"
       ],
-      "expl": "Genou fait partie des 7 mots en -ou qui prennent un x."
+      "expl": "Genou prend un **x**.\n\nDes genoux."
      },
      {
       "type": "completer",
@@ -2809,17 +2809,17 @@ const THEMES = [
        "fenêtre",
        "fenêtrex"
       ],
-      "expl": "Cas général : on ajoute un s."
+      "expl": "On ajoute un **s**.\n\nDes fenêtres."
      },
      {
       "type": "ordre",
       "phrase": "Les gâteaux sont dans le four.",
-      "expl": "Les gâteaux (pluriel en x) + sont + dans le four."
+      "expl": "**Les** gâteau**x**.\n\nAvec un **x**."
      },
      {
       "type": "ordre",
       "phrase": "J'ai mal aux genoux.",
-      "expl": "J'ai mal + aux (à + les) + genoux (x)."
+      "expl": "**Aux** genou**x**.\n\nAvec un **x**."
      }
     ]
    },
@@ -2828,8 +2828,8 @@ const THEMES = [
     "titre": "Accorder les adjectifs",
     "mots": [],
     "tableau": null,
-    "regle": "L'adjectif (le mot qui décrit) prend la même forme que le nom : **-e** au féminin, **-s** au pluriel. Un petit garçon, une petit**e** fille, des petit**s** garçons, des petit**es** filles.",
-    "astuce": "Les adjectifs qui finissent déjà par -e ne changent pas au féminin (rouge, facile, malade). Quelques-uns changent beaucoup : beau / belle, nouveau / nouvelle, vieux / vieille, blanc / blanche, gentil / gentille.",
+    "regle": "Le mot qui décrit suit le nom.\n\n- Féminin : **-e**. Une petit**e** fille.\n- Pluriel : **-s**. Des petit**s** garçons.\n- Féminin pluriel : **-es**. Des petit**es** filles.",
+    "astuce": "Déjà un **e** à la fin ? Pas de changement.\n\nRouge, facile, malade.\n\nCertains changent beaucoup :\n\nbeau, belle.\n\ngentil, gentille.",
     "retenir": "La plupart des adjectifs se mettent **après** le nom (une voiture rouge). Les petits adjectifs du quotidien se mettent **devant** : **beau, bon, grand, petit, jeune, vieux, nouveau** (une belle maison, un bon repas).",
     "exemples": [
      "Une voiture **rouge**.",
@@ -2843,21 +2843,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Elle est fatiguée.",
       "faux": "Elle est fatigué.",
-      "expl": "Elle = féminin, donc fatigué + e."
+      "expl": "**Elle** : féminin.\n\nFatigué**e**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "une grande maison",
       "faux": "une maison grande",
-      "expl": "Grand fait partie des petits adjectifs qui se mettent devant le nom."
+      "expl": "**Grand** va avant le nom.\n\nUne grande maison."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "des chaussures noires",
       "faux": "des chaussures noir",
-      "expl": "Chaussures est féminin pluriel : noir + e + s = noires."
+      "expl": "Chaussures : féminin, plusieurs.\n\nNoir**es**."
      },
      {
       "type": "completer",
@@ -2868,7 +2868,7 @@ const THEMES = [
        "gentil",
        "gentils"
       ],
-      "expl": "Gentil au féminin double le l : gentille."
+      "expl": "Gentil au féminin : gentil**le**."
      },
      {
       "type": "completer",
@@ -2879,7 +2879,7 @@ const THEMES = [
        "vert",
        "verte"
       ],
-      "expl": "Pommes est féminin pluriel : vert + e + s = vertes."
+      "expl": "Pommes : féminin, plusieurs.\n\nVert**es**."
      },
      {
       "type": "completer",
@@ -2890,17 +2890,17 @@ const THEMES = [
        "nouveau",
        "nouveaux"
       ],
-      "expl": "Voiture est féminin : nouveau devient nouvelle."
+      "expl": "Voiture : féminin.\n\n**Nouvelle**."
      },
      {
       "type": "ordre",
       "phrase": "Mon fils a une petite chambre.",
-      "expl": "Une petite (féminin, devant le nom) + chambre."
+      "expl": "**Une petite** chambre."
      },
      {
       "type": "ordre",
       "phrase": "Les enfants sont très contents.",
-      "expl": "Les enfants (pluriel) + sont + contents (avec s)."
+      "expl": "Les enfants : plusieurs.\n\nContent**s**."
      }
     ]
    },
@@ -2909,8 +2909,8 @@ const THEMES = [
     "titre": "Du, de la, au, aux",
     "mots": [],
     "tableau": null,
-    "regle": "Pour une partie ou une quantité qu'on ne compte pas, on dit **du** (masculin), **de la** (féminin), **de l'** (devant une voyelle), **des** (pluriel) : du pain, de la soupe, de l'eau. Après une quantité ou ne… pas, on dit seulement **de** : un kilo de pommes, pas de lait.",
-    "astuce": "« À le » et « de le » n'existent pas. À + le = **au**, à + les = **aux**, de + le = **du**, de + les = **des**. Je vais au marché, je viens du marché.",
+    "regle": "Pour une partie :\n\n- **du** : du pain\n- **de la** : de la soupe\n- **de l'** : de l'eau\n\nAprès une quantité ou ne… pas : **de**.\n\nUn kilo **de** pommes.\n\nPas **de** lait.",
+    "astuce": "À le n'existe pas : **au**.\n\nÀ les : **aux**.\n\nDe le : **du**.",
     "retenir": "**Du** pain, **de la** confiture, **de l'**eau : je n'en prends qu'**un morceau**, pas tout le pain du monde.",
     "exemples": [
      "Je bois **de l'**eau.",
@@ -2926,21 +2926,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Je mange du pain.",
       "faux": "Je mange de le pain.",
-      "expl": "De + le devient du : du pain."
+      "expl": "De le devient **du**.\n\nDu pain."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Je n'ai pas de lait.",
       "faux": "Je n'ai pas du lait.",
-      "expl": "Après ne… pas, on dit seulement de : pas de lait."
+      "expl": "Avec ne… pas : **de**.\n\nPas de lait."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Je viens du marché.",
       "faux": "Je viens de le marché.",
-      "expl": "De + le devient du : je viens du marché."
+      "expl": "De le devient **du**.\n\nDu marché."
      },
      {
       "type": "completer",
@@ -2951,7 +2951,7 @@ const THEMES = [
        "du",
        "de la"
       ],
-      "expl": "Eau commence par une voyelle : de l'eau."
+      "expl": "Eau commence par **e**.\n\n**De l'**eau."
      },
      {
       "type": "completer",
@@ -2962,7 +2962,7 @@ const THEMES = [
        "des",
        "du"
       ],
-      "expl": "Après une quantité (un kilo), on dit seulement de."
+      "expl": "Un kilo : une quantité.\n\nOn dit **de**."
      },
      {
       "type": "completer",
@@ -2973,17 +2973,17 @@ const THEMES = [
        "au",
        "à les"
       ],
-      "expl": "À + les devient aux : je parle aux voisins."
+      "expl": "À les devient **aux**."
      },
      {
       "type": "ordre",
       "phrase": "Je prends du café avec du lait.",
-      "expl": "Je prends + du café (une partie) + avec du lait."
+      "expl": "**Du** café.\n\n**Du** lait."
      },
      {
       "type": "ordre",
       "phrase": "Nous allons au parc avec les enfants.",
-      "expl": "Nous allons + au parc (à + le) + avec les enfants."
+      "expl": "À le devient **au**.\n\nAu parc."
      }
     ]
    }
@@ -3000,8 +3000,8 @@ const THEMES = [
     "titre": "a / à, et / est",
     "mots": [],
     "tableau": null,
-    "regle": "**A** est le verbe avoir (il a faim). **à** indique un lieu ou un moment (à Lyon, à midi). **est** est le verbe être (il est malade). **et** relie deux choses (du pain et du lait).",
-    "astuce": "Remplacez par le passé. Si on peut dire « avait », on écrit **a**. Si on peut dire « était », on écrit **est**.",
+    "regle": "- **a** : le verbe avoir. Il **a** faim.\n- **à** : un lieu ou un moment. **À** Lyon. **À** midi.\n- **est** : le verbe être. Il **est** malade.\n- **et** : pour relier. Du pain **et** du lait.",
+    "astuce": "Dites la phrase au passé.\n\nAvait ? On écrit **a**.\n\nÉtait ? On écrit **est**.",
     "retenir": "**A = avait**, **est = était**, **et = et puis**. Le à avec accent, lui, ne change jamais.",
     "exemples": [
      "Il **a** faim.",
@@ -3016,21 +3016,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Il a un chien.",
       "faux": "Il à un chien.",
-      "expl": "On peut dire « il avait un chien » : c'est le verbe avoir, a sans accent."
+      "expl": "Il **avait** un chien.\n\nDonc : **a**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Elle est contente.",
       "faux": "Elle et contente.",
-      "expl": "On peut dire « elle était contente » : c'est le verbe être, est."
+      "expl": "Elle **était** contente.\n\nDonc : **est**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Je vais à Lyon.",
       "faux": "Je vais a Lyon.",
-      "expl": "Lyon est un lieu : à avec accent. On ne peut pas dire « je vais avait Lyon »."
+      "expl": "Lyon est un lieu.\n\nDonc : **à**."
      },
      {
       "type": "completer",
@@ -3040,7 +3040,7 @@ const THEMES = [
        "a",
        "à"
       ],
-      "expl": "Mon fils avait huit ans : c'est avoir, a."
+      "expl": "Mon fils **avait** huit ans.\n\nDonc : **a**."
      },
      {
       "type": "completer",
@@ -3050,7 +3050,7 @@ const THEMES = [
        "est",
        "et"
       ],
-      "expl": "Il était en retard : c'est être, est."
+      "expl": "Il **était** en retard.\n\nDonc : **est**."
      },
      {
       "type": "completer",
@@ -3060,17 +3060,17 @@ const THEMES = [
        "et",
        "est"
       ],
-      "expl": "Du thé et puis du café : on relie deux choses, et."
+      "expl": "On relie deux choses.\n\nDonc : **et**."
      },
      {
       "type": "ordre",
       "phrase": "Il a rendez-vous à midi.",
-      "expl": "Il a (avait) rendez-vous + à (moment) midi."
+      "expl": "Il **a** : il avait.\n\n**À** midi : un moment."
      },
      {
       "type": "ordre",
       "phrase": "Elle est malade et fatiguée.",
-      "expl": "Elle est (était) malade + et (et puis) fatiguée."
+      "expl": "Elle **est** : elle était.\n\n**Et** : on relie."
      }
     ]
    },
@@ -3079,8 +3079,8 @@ const THEMES = [
     "titre": "son / sont, on / ont",
     "mots": [],
     "tableau": null,
-    "regle": "**Sont** est le verbe être avec ils (ils sont partis). **son** dit à qui est la chose (son fils = le fils de lui ou d'elle). **ont** est le verbe avoir avec ils (ils ont fini). **on** veut dire « nous » ou « quelqu'un » (on mange à midi).",
-    "astuce": "Si on peut dire « étaient », c'est **sont**. Si on peut dire « avaient », c'est **ont**. Si on peut dire « mon », c'est **son**. Si on peut dire « il », c'est **on**.",
+    "regle": "- **sont** : le verbe être. Ils **sont** partis.\n- **son** : à lui, à elle. **Son** fils.\n- **ont** : le verbe avoir. Ils **ont** fini.\n- **on** : nous, quelqu'un. **On** mange.",
+    "astuce": "Étaient ? **sont**.\n\nAvaient ? **ont**.\n\nMon ? **son**.\n\nIl ? **on**.",
     "retenir": "**Sont** et **ont** finissent par un **t**, comme les verbes au pluriel : ils sont, ils ont, ils vont, ils font.",
     "exemples": [
      "**Son** fils est là.",
@@ -3094,21 +3094,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Ils sont fatigués.",
       "faux": "Ils son fatigués.",
-      "expl": "Ils étaient fatigués : c'est être, sont."
+      "expl": "Ils **étaient** fatigués.\n\nDonc : **sont**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "On va au marché.",
       "faux": "Ont va au marché.",
-      "expl": "Il va au marché : on peut remplacer par il, donc on."
+      "expl": "**Il** va au marché.\n\nDonc : **on**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Elle cherche son sac.",
       "faux": "Elle cherche sont sac.",
-      "expl": "Elle cherche mon sac : on peut dire mon, donc son."
+      "expl": "Elle cherche **mon** sac.\n\nDonc : **son**."
      },
      {
       "type": "completer",
@@ -3118,7 +3118,7 @@ const THEMES = [
        "sont",
        "son"
       ],
-      "expl": "Les enfants étaient à l'école : sont."
+      "expl": "Les enfants **étaient** à l'école.\n\nDonc : **sont**."
      },
      {
       "type": "completer",
@@ -3128,7 +3128,7 @@ const THEMES = [
        "ont",
        "on"
       ],
-      "expl": "Ils avaient un rendez-vous : ont."
+      "expl": "Ils **avaient** un rendez-vous.\n\nDonc : **ont**."
      },
      {
       "type": "completer",
@@ -3138,17 +3138,17 @@ const THEMES = [
        "Son",
        "Sont"
       ],
-      "expl": "Mon frère habite à Paris : son."
+      "expl": "**Mon** frère habite à Paris.\n\nDonc : **son**."
      },
      {
       "type": "ordre",
       "phrase": "Ils ont perdu leurs clés.",
-      "expl": "Ils ont (avaient) + perdu + leurs clés."
+      "expl": "Ils **ont** : ils avaient."
      },
      {
       "type": "ordre",
       "phrase": "On mange avec son frère.",
-      "expl": "On (il) mange + avec son (mon) frère."
+      "expl": "**On** : il.\n\n**Son** : mon."
      }
     ]
    },
@@ -3157,8 +3157,8 @@ const THEMES = [
     "titre": "ou / où, la / là / l'a",
     "mots": [],
     "tableau": null,
-    "regle": "**Où** parle d'un lieu (où est la gare ?). **ou** veut dire « ou bien », pour choisir. **là** parle d'un lieu (il est là). **la** se met devant un nom féminin (la voiture). **l'a** veut dire « l'avait » (il l'a réparée).",
-    "astuce": "Si on peut dire « ou bien », c'est **ou** sans accent. Si on peut dire « l'avait », c'est **l'a**.",
+    "regle": "- **où** : un lieu. **Où** est la gare ?\n- **ou** : ou bien. Thé **ou** café ?\n- **là** : un lieu. Il est **là**.\n- **la** : devant un nom. **La** voiture.\n- **l'a** : l'avait. Il **l'a** réparée.",
+    "astuce": "Ou bien ? **ou** sans accent.\n\nL'avait ? **l'a**.",
     "retenir": "L'accent de **où** et de **là** est une **petite flèche** qui montre l'endroit.",
     "exemples": [
      "**Où** est la gare ?",
@@ -3172,21 +3172,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Où habitez-vous ?",
       "faux": "Ou habitez-vous ?",
-      "expl": "On demande un lieu : où avec accent."
+      "expl": "On demande un lieu.\n\n**Où** avec un accent."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Tu veux du thé ou du café ?",
       "faux": "Tu veux du thé où du café ?",
-      "expl": "On choisit, on peut dire « ou bien » : ou sans accent."
+      "expl": "On choisit : ou bien.\n\n**Ou** sans accent."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Le bus est là.",
       "faux": "Le bus est la.",
-      "expl": "On parle de l'endroit : là avec accent."
+      "expl": "Un endroit.\n\n**Là** avec un accent."
      },
      {
       "type": "completer",
@@ -3196,7 +3196,7 @@ const THEMES = [
        "l'a",
        "là"
       ],
-      "expl": "Il l'avait perdue : l'a."
+      "expl": "Il **l'avait** perdue.\n\nDonc : **l'a**."
      },
      {
       "type": "completer",
@@ -3206,7 +3206,7 @@ const THEMES = [
        "Où",
        "Ou"
       ],
-      "expl": "On demande un lieu : où."
+      "expl": "On demande un lieu.\n\nDonc : **où**."
      },
      {
       "type": "completer",
@@ -3216,17 +3216,17 @@ const THEMES = [
        "la",
        "là"
       ],
-      "expl": "Boîte est un nom féminin : la boîte."
+      "expl": "La boîte : un nom.\n\nDonc : **la**."
      },
      {
       "type": "ordre",
       "phrase": "Où est la boulangerie ?",
-      "expl": "Où (lieu) + est + la boulangerie."
+      "expl": "**Où** : un lieu."
      },
      {
       "type": "ordre",
       "phrase": "Je prends le bus ou le tram.",
-      "expl": "Le bus ou bien le tram : ou."
+      "expl": "Ou bien : **ou**."
      }
     ]
    },
@@ -3235,8 +3235,8 @@ const THEMES = [
     "titre": "ce / se, ces / ses, c'est / s'est",
     "mots": [],
     "tableau": null,
-    "regle": "**Se** va devant un verbe (il se lève). **ce** va devant un nom (ce matin). **ces** montre (ces chaussures-là). **ses** dit à qui sont les choses (ses enfants = les enfants de lui ou d'elle). **c'est** veut dire « cela est ». **s'est** est un verbe en se au passé (il s'est trompé).",
-    "astuce": "Si on peut dire « cela est », c'est **c'est**. Si on peut dire « mes », c'est **ses**.",
+    "regle": "- **se** : avant un verbe. Il **se** lave.\n- **ce** : avant un nom. **Ce** matin.\n- **ces** : pour montrer. **Ces** chaussures.\n- **ses** : à lui, à elle. **Ses** enfants.\n- **c'est** : cela est. **C'est** prêt.\n- **s'est** : un verbe avec se, au passé. Il **s'est** trompé.",
+    "astuce": "Cela est ? **c'est**.\n\nMes ? **ses**.",
     "retenir": "Avec un **s** (se, ses, s'est), on parle de **soi** : sa personne, ses affaires. Avec un **c** (ce, ces, c'est), on **montre** : **c**ela.",
     "exemples": [
      "**Ce** matin, il pleut.",
@@ -3252,21 +3252,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Il se réveille tôt.",
       "faux": "Il ce réveille tôt.",
-      "expl": "Devant le verbe réveiller : se."
+      "expl": "Avant le verbe réveiller.\n\nDonc : **se**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "C'est mon fils.",
       "faux": "S'est mon fils.",
-      "expl": "Cela est mon fils : c'est."
+      "expl": "**Cela est** mon fils.\n\nDonc : **c'est**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Elle s'est levée tôt.",
       "faux": "Elle c'est levée tôt.",
-      "expl": "C'est le verbe se lever au passé : elle s'est levée."
+      "expl": "Se lever, au passé.\n\nDonc : **s'est**."
      },
      {
       "type": "completer",
@@ -3276,7 +3276,7 @@ const THEMES = [
        "Ce",
        "Se"
       ],
-      "expl": "Devant le nom soir : ce."
+      "expl": "Avant le nom soir.\n\nDonc : **ce**."
      },
      {
       "type": "completer",
@@ -3286,7 +3286,7 @@ const THEMES = [
        "ses",
        "ces"
       ],
-      "expl": "Il range mes affaires (on peut dire mes) : ses."
+      "expl": "Il range **mes** affaires.\n\nDonc : **ses**."
      },
      {
       "type": "completer",
@@ -3296,17 +3296,17 @@ const THEMES = [
        "C'est",
        "S'est"
       ],
-      "expl": "Cela est combien ? : c'est."
+      "expl": "**Cela est** combien ?\n\nDonc : **c'est**."
      },
      {
       "type": "ordre",
       "phrase": "Ce matin, il s'est levé tôt.",
-      "expl": "Ce (devant matin) + il s'est levé (verbe se lever au passé)."
+      "expl": "**Ce** matin : un nom.\n\n**S'est** levé : un verbe."
      },
      {
       "type": "ordre",
       "phrase": "C'est la voiture de ses parents.",
-      "expl": "C'est (cela est) + la voiture + de ses parents (à lui)."
+      "expl": "**C'est** : cela est.\n\n**Ses** parents : à lui."
      }
     ]
    },
@@ -3315,8 +3315,8 @@ const THEMES = [
     "titre": "mais / mes, peu / peut / peux",
     "mots": [],
     "tableau": null,
-    "regle": "**Mes** dit que les choses sont à moi (mes clés). **mais** oppose deux idées. **peux** et **peut** sont le verbe pouvoir (je peux, il peut). **peu** veut dire « pas beaucoup ».",
-    "astuce": "Si on peut dire « pouvait », c'est **peut** ou **peux** : peux avec je et tu, peut avec il et elle.",
+    "regle": "- **mes** : à moi. **Mes** clés.\n- **mais** : le contraire. Gentil, **mais** rapide.\n- **peux** : je peux, tu peux.\n- **peut** : il peut, elle peut.\n- **peu** : pas beaucoup. Un **peu** de sel.",
+    "astuce": "Pouvait ? C'est le verbe pouvoir.\n\nJe, tu : **peux**.\n\nIl, elle : **peut**.",
     "retenir": "**Mes = mon au pluriel** (ma clé → mes clés). **Peu = pas beaucoup**.",
     "exemples": [
      "Je cherche **mes** lunettes.",
@@ -3331,21 +3331,21 @@ const THEMES = [
       "consigne": "",
       "juste": "J'ai perdu mes clés.",
       "faux": "J'ai perdu mais clés.",
-      "expl": "Ce sont les clés à moi : mes."
+      "expl": "Les clés à moi.\n\nDonc : **mes**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Il peut venir demain.",
       "faux": "Il peu venir demain.",
-      "expl": "Il pouvait venir : c'est le verbe pouvoir, avec il, peut."
+      "expl": "Il **pouvait** venir.\n\nAvec il : **peut**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Je mange un peu.",
       "faux": "Je mange un peut.",
-      "expl": "Pas beaucoup : peu."
+      "expl": "Pas beaucoup.\n\nDonc : **peu**."
      },
      {
       "type": "completer",
@@ -3355,7 +3355,7 @@ const THEMES = [
        "mais",
        "mes"
       ],
-      "expl": "Deux idées opposées (cher et bon) : mais."
+      "expl": "Cher, et pourtant bon.\n\nLe contraire : **mais**."
      },
      {
       "type": "completer",
@@ -3365,7 +3365,7 @@ const THEMES = [
        "peux",
        "peu"
       ],
-      "expl": "Tu pouvais m'aider : verbe pouvoir avec tu, peux."
+      "expl": "Tu **pouvais**.\n\nAvec tu : **peux**."
      },
      {
       "type": "completer",
@@ -3375,17 +3375,17 @@ const THEMES = [
        "Mes",
        "Mais"
       ],
-      "expl": "Les enfants à moi : mes."
+      "expl": "Les enfants à moi.\n\nDonc : **mes**."
      },
      {
       "type": "ordre",
       "phrase": "Je peux venir, mais un peu en retard.",
-      "expl": "Je peux (pouvoir) + venir + mais (opposition) + un peu (pas beaucoup) en retard."
+      "expl": "Je **peux** : pouvoir.\n\n**Mais** : le contraire.\n\nUn **peu** : pas beaucoup."
      },
      {
       "type": "ordre",
       "phrase": "Mes parents habitent en Algérie.",
-      "expl": "Mes (à moi) parents + habitent + en Algérie."
+      "expl": "Les parents à moi.\n\nDonc : **mes**."
      }
     ]
    },
@@ -3394,8 +3394,8 @@ const THEMES = [
     "titre": "-er, -é, -ez",
     "mots": [],
     "tableau": null,
-    "regle": "Ces trois fins se disent pareil. **-er** : le verbe à l'infinitif (je vais manger). **-é** : le participe passé, après avoir ou être (j'ai mangé). **-ez** : avec vous (vous mangez).",
-    "astuce": "Avec être, le participe s'accorde : elle est arrivé**e**.",
+    "regle": "Ces 3 fins se disent pareil :\n\n- **-er** : je vais mang**er**\n- **-é** : j'ai mang**é**\n- **-ez** : vous mang**ez**",
+    "astuce": "Remplacez par **vendre** ou **vendu**.\n\nVendre ? **-er**.\n\nVendu ? **-é**.",
     "retenir": "Remplacez par **vendre**. Si on peut dire « vendre » → **-er**. Si on peut dire « vendu » → **-é**. Avec **vous** → **-ez**.",
     "exemples": [
      "Je vais **manger**.",
@@ -3410,21 +3410,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Je vais téléphoner.",
       "faux": "Je vais téléphoné.",
-      "expl": "Je vais vendre : on peut dire vendre, donc -er."
+      "expl": "Je vais **vendre**.\n\nDonc : **-er**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "J'ai réparé la voiture.",
       "faux": "J'ai réparer la voiture.",
-      "expl": "J'ai vendu la voiture : on peut dire vendu, donc -é."
+      "expl": "J'ai **vendu**.\n\nDonc : **-é**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Vous parlez français ?",
       "faux": "Vous parlé français ?",
-      "expl": "Avec vous : -ez."
+      "expl": "Avec **vous** : **-ez**."
      },
      {
       "type": "completer",
@@ -3435,7 +3435,7 @@ const THEMES = [
        "é",
        "ez"
       ],
-      "expl": "Il doit vendre : -er."
+      "expl": "Il doit **vendre**.\n\nDonc : **-er**."
      },
      {
       "type": "completer",
@@ -3446,7 +3446,7 @@ const THEMES = [
        "er",
        "ez"
       ],
-      "expl": "Elle est vendue : -é, plus un -e car c'est une femme avec être."
+      "expl": "Elle est **vendue**.\n\nDonc : **-ée**."
      },
      {
       "type": "completer",
@@ -3457,17 +3457,17 @@ const THEMES = [
        "er",
        "é"
       ],
-      "expl": "Avec vous : -ez."
+      "expl": "Avec **vous** : **-ez**."
      },
      {
       "type": "ordre",
       "phrase": "Je dois réparer la voiture.",
-      "expl": "Je dois + réparer (je dois vendre : -er)."
+      "expl": "Je dois **vendre**.\n\nDonc : réparer, **-er**."
      },
      {
       "type": "ordre",
       "phrase": "Vous avez terminé ?",
-      "expl": "Vous avez + terminé (vous avez vendu : -é)."
+      "expl": "Vous avez **vendu**.\n\nDonc : terminé, **-é**."
      }
     ]
    }
@@ -3484,8 +3484,8 @@ const THEMES = [
     "titre": "-é ou -er ?",
     "mots": [],
     "tableau": null,
-    "regle": "Après **avoir** ou **être**, on écrit le participe en **-é** (j'ai commencé, il est allé). Après **un autre verbe**, ou après **à, de, pour, sans**, on écrit l'infinitif en **-er** (je dois partir, c'est facile à préparer).",
-    "astuce": "Dans une même phrase, on peut avoir les deux : j'ai **commencé** à **travailler**.",
+    "regle": "Après **avoir** ou **être** : **-é**.\n\nJ'ai commenc**é**. Il est all**é**.\n\nAprès un autre verbe : **-er**.\n\nJe dois part**ir**. Je vais mang**er**.\n\nAprès **à, de, pour, sans** : **-er**.\n\nFacile à prépar**er**.",
+    "astuce": "Remplacez par **vendre** ou **vendu**.\n\nVendu ? **-é**.\n\nVendre ? **-er**.",
     "retenir": "**Avoir / être → -é**. **Un verbe, à, de, pour → -er**. Et si on hésite : vendu → -é, vendre → -er.",
     "exemples": [
      "J'ai **commencé** à **travailler**.",
@@ -3499,21 +3499,21 @@ const THEMES = [
       "consigne": "",
       "juste": "J'ai commencé à travailler.",
       "faux": "J'ai commencer à travaillé.",
-      "expl": "Après « ai » : commencé (-é). Après « à » : travailler (-er)."
+      "expl": "Après **ai** : commenc**é**.\n\nAprès **à** : travaill**er**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Il est allé chercher le pain.",
       "faux": "Il est aller chercher le pain.",
-      "expl": "Après « est » : allé (-é). Après le verbe allé : chercher (-er)."
+      "expl": "Après **est** : all**é**.\n\nAprès allé : cherch**er**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "J'ai oublié de fermer la porte.",
       "faux": "J'ai oublier de fermé la porte.",
-      "expl": "Après « ai » : oublié. Après « de » : fermer."
+      "expl": "Après **ai** : oubli**é**.\n\nAprès **de** : ferm**er**."
      },
      {
       "type": "completer",
@@ -3524,7 +3524,7 @@ const THEMES = [
        "é",
        "ez"
       ],
-      "expl": "Après « à » : l'infinitif, préparer."
+      "expl": "Après **à** : prépar**er**."
      },
      {
       "type": "completer",
@@ -3535,7 +3535,7 @@ const THEMES = [
        "er",
        "ez"
       ],
-      "expl": "Après « avons » : le participe, mangé."
+      "expl": "Après **avons** : mang**é**."
      },
      {
       "type": "completer",
@@ -3546,17 +3546,17 @@ const THEMES = [
        "é",
        "ez"
       ],
-      "expl": "Après le verbe « faut » : l'infinitif, passer."
+      "expl": "Après **faut** : pass**er**."
      },
      {
       "type": "ordre",
       "phrase": "J'ai essayé de vous appeler.",
-      "expl": "J'ai essayé (-é après ai) + de vous appeler (-er après de)."
+      "expl": "J'ai essay**é**.\n\nDe vous appel**er**."
      },
      {
       "type": "ordre",
       "phrase": "Il est venu pour réparer la voiture.",
-      "expl": "Il est venu (participe) + pour réparer (-er après pour) + la voiture."
+      "expl": "Il est venu.\n\nPour répar**er**."
      }
     ]
    },
@@ -3594,8 +3594,8 @@ const THEMES = [
       "être"
      ]
     ],
-    "regle": "Les verbes en -er font tous -é. Les autres participes sont à apprendre, mais ils se rangent en quelques familles : -i, -u, -is, -it.",
-    "astuce": "La dernière lettre muette s'entend au féminin : pris → pris**e**, fait → fait**e**, écrit → écrit**e**.",
+    "regle": "Les verbes en -er : **-é**. Mangé, parlé.\n\nLes autres sont à apprendre :\n\n- **-i** : fini, parti, dormi\n- **-u** : vu, lu, bu, attendu\n- **-is** : pris, mis, compris\n- **-it** : fait, dit, écrit",
+    "astuce": "Au féminin, on entend la dernière lettre.\n\nPris, pri**se**.\n\nFait, fai**te**.",
     "retenir": "Mettez le participe **au féminin** : si on entend une lettre de plus (prise, faite), c'est elle qui se cache au masculin (pris, fait).",
     "exemples": [
      "J'ai **pris** le bus.",
@@ -3610,21 +3610,21 @@ const THEMES = [
       "consigne": "",
       "juste": "J'ai pris mes médicaments.",
       "faux": "J'ai prendu mes médicaments.",
-      "expl": "Le participe de prendre est pris (au féminin : prise)."
+      "expl": "Prendre au passé : **pris**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Il a écrit un SMS.",
       "faux": "Il a écri un SMS.",
-      "expl": "Écrit avec un t : on entend le t au féminin, écrite."
+      "expl": "Écrire au passé : **écrit**, avec un **t**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Nous avons attendu.",
       "faux": "Nous avons attendi.",
-      "expl": "Attendre fait attendu, avec -u."
+      "expl": "Attendre au passé : **attendu**."
      },
      {
       "type": "completer",
@@ -3635,7 +3635,7 @@ const THEMES = [
        "mit",
        "mettu"
       ],
-      "expl": "Mettre fait mis (au féminin : mise)."
+      "expl": "Mettre au passé : **mis**."
      },
      {
       "type": "completer",
@@ -3646,7 +3646,7 @@ const THEMES = [
        "lit",
        "lis"
       ],
-      "expl": "Lire fait lu, avec -u."
+      "expl": "Lire au passé : **lu**."
      },
      {
       "type": "completer",
@@ -3657,17 +3657,17 @@ const THEMES = [
        "dis",
        "disé"
       ],
-      "expl": "Dire fait dit (au féminin : dite)."
+      "expl": "Dire au passé : **dit**."
      },
      {
       "type": "ordre",
       "phrase": "J'ai mis la lettre dans la boîte.",
-      "expl": "J'ai mis (participe de mettre) + la lettre + dans la boîte."
+      "expl": "J'ai **mis** la lettre.\n\n**Où ?** → dans la boîte"
      },
      {
       "type": "ordre",
       "phrase": "Nous avons attendu le bus longtemps.",
-      "expl": "Nous avons attendu (participe en -u) + le bus + longtemps."
+      "expl": "Nous avons **attendu** le bus."
      }
     ]
    },
@@ -3676,8 +3676,8 @@ const THEMES = [
     "titre": "Avec être, on accorde",
     "mots": [],
     "tableau": null,
-    "regle": "Quand le passé composé se fait avec **être**, le participe s'accorde avec la personne, comme un adjectif : **-e** pour une femme, **-s** pour plusieurs, **-es** pour plusieurs femmes.",
-    "astuce": "Posez la question « qui ? ». Qui est parti ? Ma fille → partie.",
+    "regle": "Avec **être**, on accorde :\n\n- une femme : **-e**. Elle est parti**e**.\n- plusieurs : **-s**. Ils sont parti**s**.\n- plusieurs femmes : **-es**. Elles sont parti**es**.",
+    "astuce": "Posez la question : qui ?\n\nQui est parti ? Ma fille.\n\nDonc : parti**e**.",
     "retenir": "**Être est un miroir** : le participe prend la forme de la personne qui est devant.",
     "exemples": [
      "Ma fille est **née** en 2015.",
@@ -3691,21 +3691,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Elle est rentrée tard.",
       "faux": "Elle est rentré tard.",
-      "expl": "Elle = une femme : rentré + e."
+      "expl": "Elle : une femme.\n\nRentré**e**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Les enfants sont partis.",
       "faux": "Les enfants sont parti.",
-      "expl": "Les enfants = plusieurs : parti + s."
+      "expl": "Les enfants : plusieurs.\n\nParti**s**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Mes sœurs sont venues.",
       "faux": "Mes sœurs sont venus.",
-      "expl": "Mes sœurs = plusieurs femmes : venu + es."
+      "expl": "Mes sœurs : plusieurs femmes.\n\nVenu**es**."
      },
      {
       "type": "completer",
@@ -3716,7 +3716,7 @@ const THEMES = [
        "arrivé",
        "arrivés"
       ],
-      "expl": "Ma mère = une femme : arrivée."
+      "expl": "Ma mère : une femme.\n\nArrivé**e**."
      },
      {
       "type": "completer",
@@ -3727,7 +3727,7 @@ const THEMES = [
        "resté",
        "restées"
       ],
-      "expl": "Deux hommes = plusieurs, masculin : restés."
+      "expl": "Deux hommes : plusieurs.\n\nResté**s**."
      },
      {
       "type": "completer",
@@ -3738,17 +3738,17 @@ const THEMES = [
        "allés",
        "allée"
       ],
-      "expl": "Elles = plusieurs femmes : allées."
+      "expl": "Elles : plusieurs femmes.\n\nAllé**es**."
      },
      {
       "type": "ordre",
       "phrase": "Ma fille est née au mois de mai.",
-      "expl": "Ma fille + est née (accord au féminin) + au mois de mai."
+      "expl": "Ma fille : une femme.\n\nNé**e**."
      },
      {
       "type": "ordre",
       "phrase": "Les invités sont arrivés à midi.",
-      "expl": "Les invités + sont arrivés (accord au pluriel) + à midi."
+      "expl": "Les invités : plusieurs.\n\nArrivé**s**."
      }
     ]
    },
@@ -3757,8 +3757,8 @@ const THEMES = [
     "titre": "Avec avoir, on n'accorde pas",
     "mots": [],
     "tableau": null,
-    "regle": "Quand le passé composé se fait avec **avoir**, le participe **ne change pas** selon la personne : elle a mangé, ils ont mangé.",
-    "astuce": "Il existe un cas plus difficile, quand la chose est dite avant (la voiture que j'ai réparée). On le verra plus tard, ce n'est pas utile tout de suite.",
+    "regle": "Avec **avoir**, on n'accorde pas.\n\nElle a mang**é**.\n\nIls ont mang**é**.",
+    "astuce": "Avec avoir : jamais de **-e** ou de **-s** en plus.",
     "retenir": "**Avoir ne regarde pas qui fait l'action**. Elle a mangé, nous avons mangé, ils ont mangé : toujours pareil.",
     "exemples": [
      "Elle a **mangé**.",
@@ -3772,21 +3772,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Elle a mangé.",
       "faux": "Elle a mangée.",
-      "expl": "Avec avoir, pas d'accord, même pour une femme : mangé."
+      "expl": "Avec **avoir** : pas d'accord.\n\nMangé."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Ils ont fini.",
       "faux": "Ils ont finis.",
-      "expl": "Avec avoir, pas d'accord, même au pluriel : fini."
+      "expl": "Avec **avoir** : pas d'accord.\n\nFini."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Ma fille a dessiné une maison.",
       "faux": "Ma fille a dessinée une maison.",
-      "expl": "Avec avoir : dessiné, sans e."
+      "expl": "Avec **avoir** : pas d'accord.\n\nDessiné."
      },
      {
       "type": "completer",
@@ -3797,7 +3797,7 @@ const THEMES = [
        "joués",
        "jouées"
       ],
-      "expl": "Avec avoir : joué, sans s."
+      "expl": "Avec **avoir** : pas d'accord.\n\nJoué."
      },
      {
       "type": "completer",
@@ -3808,7 +3808,7 @@ const THEMES = [
        "préparée",
        "préparés"
       ],
-      "expl": "Avec avoir : préparé, sans e."
+      "expl": "Avec **avoir** : pas d'accord.\n\nPréparé."
      },
      {
       "type": "completer",
@@ -3819,17 +3819,17 @@ const THEMES = [
        "prises",
        "pri"
       ],
-      "expl": "Avec avoir : pris, qui garde toujours son s."
+      "expl": "Pris garde toujours son **s**."
      },
      {
       "type": "ordre",
       "phrase": "Ma femme a acheté des fruits.",
-      "expl": "Ma femme + a acheté (pas d'accord) + des fruits."
+      "expl": "Avec **avoir** : acheté."
      },
      {
       "type": "ordre",
       "phrase": "Les enfants ont fait leurs devoirs.",
-      "expl": "Les enfants + ont fait (pas d'accord) + leurs devoirs."
+      "expl": "Avec **avoir** : fait."
      }
     ]
    },
@@ -3838,8 +3838,8 @@ const THEMES = [
     "titre": "Elle s'est levée (les verbes en se)",
     "mots": [],
     "tableau": null,
-    "regle": "Certains verbes ont un « se » devant : se lever, se laver, se réveiller, s'habiller, se coucher, se promener, se tromper. Au présent : je **me** lève, tu **te** lèves, il **se** lève, nous **nous** levons, vous **vous** levez, ils **se** lèvent. Au passé composé, ils prennent **être** et s'accordent : elle s'est levé**e**.",
-    "astuce": "Devant une voyelle, me, te, se deviennent m', t', s' : je m'habille, il s'est trompé.",
+    "regle": "Certains verbes ont **se** devant :\n\nse lever, se laver, s'habiller, se coucher.\n\n- je **me** lève\n- tu **te** lèves\n- il **se** lève\n- nous **nous** levons\n- vous **vous** levez\n\nAu passé, avec **être** :\n\nelle s'est lev**ée**.",
+    "astuce": "Avant a, e, i, o, u :\n\nme devient **m'**. Se devient **s'**.\n\nJe m'habille.",
     "retenir": "Le verbe en se fait l'action **sur soi-même** : je **me** lave = je lave **moi**. Au passé, il va dans la maison d'être.",
     "exemples": [
      "Je **me lève** à sept heures.",
@@ -3853,21 +3853,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Je me lève tôt.",
       "faux": "Je se lève tôt.",
-      "expl": "Avec je, se devient me : je me lève."
+      "expl": "Avec **je** : **me**.\n\nJe me lève."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Elle s'est levée à six heures.",
       "faux": "Elle s'a levée à six heures.",
-      "expl": "Les verbes en se prennent être au passé : elle s'est levée, jamais s'a."
+      "expl": "Au passé : avec **être**.\n\nElle **s'est** levée."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Nous nous sommes promenés.",
       "faux": "Nous se sommes promenés.",
-      "expl": "Avec nous, se devient nous : nous nous sommes promenés."
+      "expl": "Avec **nous** : **nous**.\n\nNous nous sommes promenés."
      },
      {
       "type": "completer",
@@ -3878,7 +3878,7 @@ const THEMES = [
        "se",
        "me"
       ],
-      "expl": "Avec tu, se devient te : tu te couches."
+      "expl": "Avec **tu** : **te**.\n\nTu te couches."
      },
      {
       "type": "completer",
@@ -3889,7 +3889,7 @@ const THEMES = [
        "lavé",
        "laver"
       ],
-      "expl": "Avec être, on accorde : les enfants sont plusieurs, lavés."
+      "expl": "Les enfants : plusieurs.\n\nLavé**s**."
      },
      {
       "type": "completer",
@@ -3900,17 +3900,17 @@ const THEMES = [
        "se",
        "te"
       ],
-      "expl": "Avec je : je me suis trompé."
+      "expl": "Avec **je** : **me**.\n\nJe me suis trompé."
      },
      {
       "type": "ordre",
       "phrase": "Les enfants se sont couchés tôt.",
-      "expl": "Les enfants + se sont couchés (être + accord) + tôt."
+      "expl": "Les enfants se sont couché**s**."
      },
      {
       "type": "ordre",
       "phrase": "Je me réveille à sept heures.",
-      "expl": "Je + me réveille (me avec je) + à sept heures."
+      "expl": "Avec **je** : je **me** réveille."
      }
     ]
    }
@@ -3927,8 +3927,8 @@ const THEMES = [
     "titre": "Les accents é, è, ê",
     "mots": [],
     "tableau": null,
-    "regle": "**É** se prononce bouche peu ouverte (école, café). **è** se prononce bouche plus ouverte, souvent devant une consonne suivie d'un e muet (mère, père, après). **ê** se prononce comme è (fête, forêt).",
-    "astuce": "À, où et là portent un accent pour les distinguer de a, ou et la (voir le thème 5).",
+    "regle": "- **é** : bouche peu ouverte. École, café.\n- **è** : bouche plus ouverte. Mère, père.\n- **ê** : comme è. Fête, tête.",
+    "astuce": "Avant **-re** à la fin, souvent **è**.\n\nPère, mère, frère.",
     "retenir": "Le **ê** cache souvent un **s** disparu. On le retrouve dans un mot de la même famille : forêt → fore**s**tier, fête → fe**s**tival, hôpital → ho**s**pitalier.",
     "exemples": [
      "J'ai réservé une table.",
@@ -3942,21 +3942,21 @@ const THEMES = [
       "consigne": "",
       "juste": "l'école",
       "faux": "l'ècole",
-      "expl": "Au début du mot, le son est fermé : école avec é."
+      "expl": "Au début du mot : **é**.\n\nÉcole."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "ma mère",
       "faux": "ma mére",
-      "expl": "Devant une consonne suivie d'un e muet (-re), on écrit è : mère."
+      "expl": "Avant **-re** : **è**.\n\nMère."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "la fenêtre",
       "faux": "la fenètre",
-      "expl": "Fenêtre s'écrit avec ê, comme tête et fête."
+      "expl": "Fenêtre s'écrit avec **ê**."
      },
      {
       "type": "completer",
@@ -3967,7 +3967,7 @@ const THEMES = [
        "é",
        "ê"
       ],
-      "expl": "Devant -re, on écrit è : frère, comme père et mère."
+      "expl": "Avant **-re** : **è**.\n\nFrère."
      },
      {
       "type": "completer",
@@ -3978,7 +3978,7 @@ const THEMES = [
        "é",
        "è"
       ],
-      "expl": "Tête s'écrit avec ê (on retrouve le s disparu dans « testa », en latin)."
+      "expl": "Tête s'écrit avec **ê**."
      },
      {
       "type": "completer",
@@ -3989,17 +3989,17 @@ const THEMES = [
        "è",
        "ê"
       ],
-      "expl": "À la fin du mot, le son est fermé : café."
+      "expl": "À la fin du mot : **é**.\n\nCafé."
      },
      {
       "type": "ordre",
       "phrase": "Mon père travaille à l'hôpital.",
-      "expl": "Mon père (è) + travaille + à l'hôpital (ô)."
+      "expl": "Père : **è**.\n\nHôpital : **ô**."
      },
      {
       "type": "ordre",
       "phrase": "Nous allons à la fête de l'école.",
-      "expl": "Nous allons + à la fête (ê) + de l'école (é)."
+      "expl": "Fête : **ê**.\n\nÉcole : **é**."
      }
     ]
    },
@@ -4008,8 +4008,8 @@ const THEMES = [
     "titre": "s, ss, c, ç",
     "mots": [],
     "tableau": null,
-    "regle": "Entre deux voyelles, un seul **s** se prononce « z » (maison, rose). Pour entendre « s » entre deux voyelles, on écrit **ss** (poisson, tasse). Le **c** se prononce « s » devant e, i (merci, ceci), mais « k » devant a, o, u. Pour entendre « s » devant a, o, u, on écrit **ç** (garçon, leçon, ça).",
-    "astuce": "Poisson (le poisson qu'on mange) et poison (le produit dangereux) ne veulent pas dire la même chose.",
+    "regle": "Entre deux voyelles :\n\n- un **s** fait « z » : maison\n- **ss** fait « s » : poisson\n\nLe **c** fait « s » avant e, i : merci.\n\nAvant a, o, u, on écrit **ç** : garçon, leçon.",
+    "astuce": "Poisson : on le mange.\n\nPoison : c'est dangereux.",
     "retenir": "La **cédille** du ç est une **petite queue** qui dit « je fais s » devant a, o, u.",
     "exemples": [
      "Un **poisson**, du **poison**.",
@@ -4023,21 +4023,21 @@ const THEMES = [
       "consigne": "",
       "juste": "un garçon",
       "faux": "un garcon",
-      "expl": "Devant o, il faut la cédille pour entendre « s » : garçon."
+      "expl": "Avant **o** : **ç**.\n\nGarçon."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "une tasse de café",
       "faux": "une tase de café",
-      "expl": "Entre deux voyelles, il faut ss pour entendre « s ». Avec un seul s, on lirait « taze »."
+      "expl": "Entre deux voyelles : **ss**.\n\nTasse."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "merci",
       "faux": "merçi",
-      "expl": "Devant i, le c fait déjà « s » : pas besoin de cédille."
+      "expl": "Avant **i** : **c** suffit.\n\nMerci."
      },
      {
       "type": "completer",
@@ -4048,7 +4048,7 @@ const THEMES = [
        "c",
        "ss"
       ],
-      "expl": "Devant u, il faut ç pour entendre « s » : reçu."
+      "expl": "Avant **u** : **ç**.\n\nReçu."
      },
      {
       "type": "completer",
@@ -4059,7 +4059,7 @@ const THEMES = [
        "s",
        "ç"
       ],
-      "expl": "Entre deux voyelles, ss pour entendre « s » : boisson."
+      "expl": "Entre deux voyelles : **ss**.\n\nBoisson."
      },
      {
       "type": "completer",
@@ -4070,17 +4070,17 @@ const THEMES = [
        "ç",
        "ss"
       ],
-      "expl": "Devant i, le c fait « s » tout seul : cinéma."
+      "expl": "Avant **i** : **c**.\n\nCinéma."
      },
      {
       "type": "ordre",
       "phrase": "Le garçon apprend sa leçon.",
-      "expl": "Le garçon (ç) + apprend + sa leçon (ç)."
+      "expl": "Garçon et leçon : **ç**."
      },
      {
       "type": "ordre",
       "phrase": "Je voudrais une tasse de café.",
-      "expl": "Je voudrais + une tasse (ss) + de café."
+      "expl": "Tasse : **ss**."
      }
     ]
    },
@@ -4089,8 +4089,8 @@ const THEMES = [
     "titre": "g, ge, gu",
     "mots": [],
     "tableau": null,
-    "regle": "Le **g** se prononce « j » devant e, i (rouge, girafe) et « g » dur devant a, o, u (garage, gomme). Pour entendre « g » dur devant e ou i, on écrit **gu** (guitare, langue). Pour entendre « j » devant a ou o, on écrit **ge** (nous mangeons).",
-    "astuce": "C'est pour ça que les verbes en -ger gardent un e avec nous : nous mange**o**ns, nous nage**o**ns.",
+    "regle": "Le **g** fait « j » avant e, i : rouge.\n\nLe **g** fait « g » avant a, o, u : garage.\n\nPour « g » avant e, i : **gu**. Guitare.\n\nPour « j » avant a, o : **ge**. Nous mangeons.",
+    "astuce": "Les verbes en **-ger** gardent le **e** avec nous.\n\nNous mange**o**ns.",
     "retenir": "**Gu** = le g qui reste **dur**. **ge** = le g qui devient **doux**, comme un j.",
     "exemples": [
      "Nous **mangeons**.",
@@ -4104,21 +4104,21 @@ const THEMES = [
       "consigne": "",
       "juste": "nous mangeons",
       "faux": "nous mangons",
-      "expl": "Devant o, il faut ge pour garder le son « j » : mangeons."
+      "expl": "Avant **o** : **ge**.\n\nMangeons."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "une guitare",
       "faux": "une gitare",
-      "expl": "Devant i, il faut gu pour entendre « g » dur. Avec gi, on lirait « jitare »."
+      "expl": "Avant **i** : **gu**.\n\nGuitare."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "le garage",
       "faux": "le guarage",
-      "expl": "Devant a, le g est déjà dur : pas besoin de u."
+      "expl": "Avant **a** : **g** suffit.\n\nGarage."
      },
      {
       "type": "completer",
@@ -4129,7 +4129,7 @@ const THEMES = [
        "g",
        "gu"
       ],
-      "expl": "Devant o, ge pour entendre « j » : nageons."
+      "expl": "Avant **o** : **ge**.\n\nNageons."
      },
      {
       "type": "completer",
@@ -4140,7 +4140,7 @@ const THEMES = [
        "g",
        "ge"
       ],
-      "expl": "Devant e, gu pour entendre « g » : langues."
+      "expl": "Avant **e** : **gu**.\n\nLangues."
      },
      {
       "type": "completer",
@@ -4151,17 +4151,17 @@ const THEMES = [
        "gu",
        "ge"
       ],
-      "expl": "Devant â, le g est déjà dur : gâteau."
+      "expl": "Avant **â** : **g** suffit.\n\nGâteau."
      },
      {
       "type": "ordre",
       "phrase": "Nous mangeons au restaurant.",
-      "expl": "Nous mangeons (ge devant o) + au restaurant."
+      "expl": "Mangeons : **ge** avant o."
      },
      {
       "type": "ordre",
       "phrase": "Il joue de la guitare.",
-      "expl": "Il joue + de la guitare (gu devant i)."
+      "expl": "Guitare : **gu** avant i."
      }
     ]
    },
@@ -4170,8 +4170,8 @@ const THEMES = [
     "titre": "m devant b et p",
     "mots": [],
     "tableau": null,
-    "regle": "Devant **m**, **b** et **p**, on écrit **m** au lieu de n : important, ensemble, tomber, emmener.",
-    "astuce": "Il y a très peu d'exceptions à connaître au quotidien (bonbon, bonbonne).",
+    "regle": "Avant **m**, **b** et **p**, on écrit **m**.\n\nPas **n**.\n\nImportant. Ensemble. Tomber.",
+    "astuce": "M, B, P : ils vont ensemble.",
     "retenir": "**M, b, p** sont trois lettres qui se disent **les lèvres fermées**. Devant elles, n devient m, parce que la bouche est déjà fermée.",
     "exemples": [
      "C'est **important**.",
@@ -4185,21 +4185,21 @@ const THEMES = [
       "consigne": "",
       "juste": "ensemble",
       "faux": "ensenble",
-      "expl": "Devant b : m. Ensemble."
+      "expl": "Avant **b** : **m**.\n\nEnsemble."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "important",
       "faux": "inportant",
-      "expl": "Devant p : m. Important."
+      "expl": "Avant **p** : **m**.\n\nImportant."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "une chambre",
       "faux": "une chanbre",
-      "expl": "Devant b : m. Chambre."
+      "expl": "Avant **b** : **m**.\n\nChambre."
      },
      {
       "type": "completer",
@@ -4209,7 +4209,7 @@ const THEMES = [
        "m",
        "n"
       ],
-      "expl": "Devant b : m. Tombé."
+      "expl": "Avant **b** : **m**.\n\nTombé."
      },
      {
       "type": "completer",
@@ -4219,7 +4219,7 @@ const THEMES = [
        "n",
        "m"
       ],
-      "expl": "Devant v, on garde n : conversation. La règle ne marche que devant m, b, p."
+      "expl": "Avant **v** : on garde **n**.\n\nConversation."
      },
      {
       "type": "completer",
@@ -4229,17 +4229,17 @@ const THEMES = [
        "m",
        "n"
       ],
-      "expl": "Devant p : m. Compte."
+      "expl": "Avant **p** : **m**.\n\nCompte."
      },
      {
       "type": "ordre",
       "phrase": "Nous mangeons ensemble ce soir.",
-      "expl": "Nous mangeons + ensemble (m devant b) + ce soir."
+      "expl": "Ensemble : **m** avant b."
      },
      {
       "type": "ordre",
       "phrase": "Il est tombé dans la chambre.",
-      "expl": "Il est tombé (m devant b) + dans la chambre (m devant b)."
+      "expl": "Tombé, chambre : **m** avant b."
      }
     ]
    },
@@ -4248,8 +4248,8 @@ const THEMES = [
     "titre": "Les lettres qu'on n'entend pas",
     "mots": [],
     "tableau": null,
-    "regle": "Beaucoup de mots finissent par une lettre muette : peti**t**, gran**d**, lai**t**, den**t**. Le **h** du début est aussi souvent muet : l'homme, l'hôpital.",
-    "astuce": "Au féminin, la lettre muette s'entend : petit → petite, grand → grande.",
+    "regle": "Beaucoup de mots ont une lettre muette à la fin.\n\nOn ne l'entend pas.\n\nPeti**t**, gran**d**, lai**t**.\n\nLe **h** du début ne s'entend pas souvent.\n\nL'homme, l'hôpital.",
+    "astuce": "Pour trouver la lettre : pensez au féminin.\n\nPetit, peti**te**. Grand, gran**de**.",
     "retenir": "Pour trouver la lettre cachée à la fin, cherchez **un mot de la même famille** : le lai**t** → le lai**t**ier, la den**t** → le den**t**iste, le spor**t** → spor**t**if.",
     "exemples": [
      "Un **petit** garçon.",
@@ -4263,21 +4263,21 @@ const THEMES = [
       "consigne": "",
       "juste": "un enfant",
       "faux": "un enfan",
-      "expl": "On trouve le t dans la même famille : enfance, enfantin."
+      "expl": "Enfant : pensez à **enfance**.\n\nDonc : **t**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "le lait",
       "faux": "le lai",
-      "expl": "On trouve le t dans le laitier, la laiterie."
+      "expl": "Lait : pensez à **laitier**.\n\nDonc : **t**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "un gros chat",
       "faux": "un gro chat",
-      "expl": "Au féminin, on entend le s : grosse."
+      "expl": "Au féminin : gro**sse**.\n\nDonc : **s**."
      },
      {
       "type": "completer",
@@ -4288,7 +4288,7 @@ const THEMES = [
        "s",
        "x"
       ],
-      "expl": "La dent → le dentiste : t. Et au pluriel, on ajoute s : dents."
+      "expl": "Dent : pensez à **dentiste**.\n\nPlusieurs : **ts**."
      },
      {
       "type": "completer",
@@ -4299,7 +4299,7 @@ const THEMES = [
        "t",
        "s"
       ],
-      "expl": "Au féminin, on entend le d : grande."
+      "expl": "Au féminin : gran**de**.\n\nDonc : **d**."
      },
      {
       "type": "completer",
@@ -4310,17 +4310,17 @@ const THEMES = [
        "s",
        "d"
       ],
-      "expl": "On entend le t dans sportif."
+      "expl": "Sport : pensez à **sportif**.\n\nDonc : **t**."
      },
      {
       "type": "ordre",
       "phrase": "Le petit garçon boit du lait.",
-      "expl": "Le petit (t muet) garçon + boit + du lait (t muet)."
+      "expl": "Peti**t** et lai**t** : lettres muettes."
      },
      {
       "type": "ordre",
       "phrase": "Il fait un grand bruit.",
-      "expl": "Il fait + un grand (d muet) + bruit (t muet, comme dans bruiter)."
+      "expl": "Gran**d** et brui**t** : lettres muettes."
      }
     ]
    },
@@ -4329,8 +4329,8 @@ const THEMES = [
     "titre": "Les mots difficiles du quotidien",
     "mots": [],
     "tableau": null,
-    "regle": "Certains mots très fréquents ne suivent pas de règle simple : on les apprend par cœur. Aujourd'hui, beaucoup, toujours, longtemps, quelqu'un, peut-être, rendez-vous, s'il vous plaît, d'accord, maintenant.",
-    "astuce": "« Peut-être » avec un tiret veut dire « possiblement ». Sans tiret, « peut être » est le verbe pouvoir + être (il peut être en retard).",
+    "regle": "Certains mots sont à apprendre par cœur :\n\n- aujourd'hui\n- beaucoup\n- toujours\n- quelqu'un\n- peut-être\n- rendez-vous\n- d'accord\n- maintenant",
+    "astuce": "**Peut-être**, avec un tiret : possible.\n\nIl **peut être** en retard : le verbe pouvoir.",
     "retenir": "**Aujourd'hui** = « au jour d'hui », des morceaux collés, d'où l'apostrophe. **beaucoup** = **beau + coup**. **toujours** = **tous les jours**, avec un s.",
     "exemples": [
      "**Aujourd'hui**, il fait beau.",
@@ -4344,21 +4344,21 @@ const THEMES = [
       "consigne": "",
       "juste": "aujourd'hui",
       "faux": "aujourdhui",
-      "expl": "Aujourd'hui s'écrit avec une apostrophe : au jour d'hui."
+      "expl": "Aujourd'hui : avec une **apostrophe**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "beaucoup",
       "faux": "beaucou",
-      "expl": "Beaucoup = beau + coup, avec un p muet."
+      "expl": "Beaucoup : un **p** à la fin."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "d'accord",
       "faux": "dacord",
-      "expl": "D'accord s'écrit avec une apostrophe et deux c."
+      "expl": "D'accord : une **apostrophe**, deux **c**."
      },
      {
       "type": "completer",
@@ -4369,7 +4369,7 @@ const THEMES = [
        "toujour",
        "toujous"
       ],
-      "expl": "Toujours vient de « tous les jours » : il garde le s."
+      "expl": "Toujours : un **s** à la fin."
      },
      {
       "type": "completer",
@@ -4380,7 +4380,7 @@ const THEMES = [
        "rendevous",
        "rendez vous"
       ],
-      "expl": "Rendez-vous s'écrit avec un tiret."
+      "expl": "Rendez-vous : avec un **tiret**."
      },
      {
       "type": "completer",
@@ -4391,17 +4391,17 @@ const THEMES = [
        "beaucoups",
        "boucoup"
       ],
-      "expl": "Beaucoup ne prend jamais de s."
+      "expl": "Beaucoup : jamais de **s**."
      },
      {
       "type": "ordre",
       "phrase": "Je suis d'accord avec vous.",
-      "expl": "Je suis + d'accord (apostrophe) + avec vous."
+      "expl": "D'accord : avec une **apostrophe**."
      },
      {
       "type": "ordre",
       "phrase": "Aujourd'hui, il fait beau.",
-      "expl": "Aujourd'hui (apostrophe) + il fait beau."
+      "expl": "Aujourd'hui : avec une **apostrophe**."
      }
     ]
    }
@@ -4418,8 +4418,8 @@ const THEMES = [
     "titre": "Le point et la majuscule",
     "mots": [],
     "tableau": null,
-    "regle": "Une phrase commence par une **majuscule** et finit par un **point**. On met aussi une majuscule aux prénoms, aux villes et aux pays (Lyon, la France). On n'en met **pas** aux jours, aux mois et aux langues (lundi, janvier, le français).",
-    "astuce": "On écrit « il parle français » (la langue, sans majuscule) mais « les Français » (les personnes, avec majuscule).",
+    "regle": "Une phrase commence par une **majuscule**.\n\nElle finit par un **point**.\n\nMajuscule aussi pour :\n\n- les prénoms : Adam\n- les villes : Lyon\n- les pays : la France\n\nPas de majuscule pour :\n\n- les jours : lundi\n- les mois : janvier\n- les langues : le français",
+    "astuce": "Il parle **f**rançais : la langue.\n\nLes **F**rançais : les personnes.",
     "retenir": "Une phrase est une **maison**. La majuscule est la **porte d'entrée**, le point est la **porte de sortie**.",
     "exemples": [
      "J'habite à **L**yon.",
@@ -4433,21 +4433,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Je vais à Lyon lundi.",
       "faux": "je vais à lyon Lundi.",
-      "expl": "Majuscule au début de la phrase et à Lyon (une ville), mais pas à lundi (un jour)."
+      "expl": "Majuscule au début et à **Lyon**.\n\nPas à lundi."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Nous sommes en janvier.",
       "faux": "Nous sommes en Janvier.",
-      "expl": "Les mois s'écrivent sans majuscule : janvier."
+      "expl": "Les mois : pas de majuscule.\n\n**j**anvier."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Il parle français.",
       "faux": "Il parle Français.",
-      "expl": "La langue s'écrit sans majuscule : français."
+      "expl": "La langue : pas de majuscule.\n\n**f**rançais."
      },
      {
       "type": "completer",
@@ -4458,7 +4458,7 @@ const THEMES = [
        "france",
        "FRANCE"
       ],
-      "expl": "Un pays prend une majuscule : France."
+      "expl": "Un pays : une majuscule.\n\n**F**rance."
      },
      {
       "type": "completer",
@@ -4469,7 +4469,7 @@ const THEMES = [
        "Mardi",
        "MARDI"
       ],
-      "expl": "Un jour s'écrit sans majuscule : mardi."
+      "expl": "Un jour : pas de majuscule.\n\n**m**ardi."
      },
      {
       "type": "completer",
@@ -4480,17 +4480,17 @@ const THEMES = [
        "mon",
        "MON"
       ],
-      "expl": "C'est le début de la phrase : Mon, avec une majuscule."
+      "expl": "Début de la phrase : **M**on."
      },
      {
       "type": "ordre",
       "phrase": "Ma fille habite à Paris.",
-      "expl": "Ma (majuscule au début) fille habite à Paris (majuscule à la ville) + le point final."
+      "expl": "Majuscule au début et à **P**aris.\n\nUn point à la fin."
      },
      {
       "type": "ordre",
       "phrase": "Le marché ouvre le samedi.",
-      "expl": "Le (majuscule au début) marché ouvre le samedi (sans majuscule) + le point final."
+      "expl": "Majuscule au début.\n\n**s**amedi : pas de majuscule."
      }
     ]
    },
@@ -4499,8 +4499,8 @@ const THEMES = [
     "titre": "La virgule",
     "mots": [],
     "tableau": null,
-    "regle": "La virgule marque une petite pause. On la met entre les éléments d'une liste (du pain, du lait et des œufs), après un mot de début de phrase (Hier, il a plu), après le nom de la personne à qui on écrit (Bonjour Madame,), et avant mais ou donc.",
-    "astuce": "Dans une liste, on ne met **pas** de virgule avant le dernier « et ».",
+    "regle": "La virgule : une petite pause.\n\nOn la met :\n\n- dans une liste : du pain, du lait\n- après un mot du début : Hier, il a plu.\n- après Bonjour Madame\n- avant **mais**",
+    "astuce": "Pas de virgule avant le dernier **et**.\n\nDu pain, du lait **et** des œufs.",
     "retenir": "La virgule est une **petite respiration**. Là où la voix fait une petite pause, on peut mettre une virgule.",
     "exemples": [
      "J'achète du pain, du lait et des œufs.",
@@ -4514,21 +4514,21 @@ const THEMES = [
       "consigne": "",
       "juste": "J'achète du pain, du lait et du beurre.",
       "faux": "J'achète du pain, du lait, et, du beurre.",
-      "expl": "Une virgule entre les éléments, pas de virgule avant le dernier « et »."
+      "expl": "Une virgule entre les choses.\n\nPas avant le dernier **et**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Hier, je suis allé au marché.",
       "faux": "Hier je, suis allé au marché.",
-      "expl": "La pause se fait après « Hier », le mot du début."
+      "expl": "La pause après **Hier**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "C'est loin, mais j'y vais.",
       "faux": "C'est loin mais, j'y vais.",
-      "expl": "La virgule se met avant « mais », pas après."
+      "expl": "La virgule va **avant** mais."
      },
      {
       "type": "completer",
@@ -4539,7 +4539,7 @@ const THEMES = [
        ".",
        "?"
       ],
-      "expl": "Après le nom de la personne à qui on écrit : une virgule."
+      "expl": "Après Bonjour Madame : **une virgule**."
      },
      {
       "type": "completer",
@@ -4550,7 +4550,7 @@ const THEMES = [
        ".",
        "?"
       ],
-      "expl": "Après le mot du début de phrase : une virgule."
+      "expl": "Après **Demain** : une virgule."
      },
      {
       "type": "completer",
@@ -4561,17 +4561,17 @@ const THEMES = [
        ".",
        "?"
       ],
-      "expl": "Entre les éléments d'une liste : une virgule."
+      "expl": "Dans une liste : **une virgule**."
      },
      {
       "type": "ordre",
       "phrase": "Ce matin, il fait froid.",
-      "expl": "Ce matin (le début) + virgule + il fait froid."
+      "expl": "Ce matin**,** il fait froid."
      },
      {
       "type": "ordre",
       "phrase": "Il est fatigué, mais il travaille.",
-      "expl": "Il est fatigué + virgule avant mais + il travaille."
+      "expl": "Une virgule **avant** mais."
      }
     ]
    },
@@ -4580,8 +4580,8 @@ const THEMES = [
     "titre": "Les signes ? et !",
     "mots": [],
     "tableau": null,
-    "regle": "Le **point d'interrogation (?)** termine une question. Le **point d'exclamation (!)** montre une émotion, une surprise ou un ordre. En français, on met **un espace avant** ? ! : et ;.",
-    "astuce": "Sur le téléphone, le correcteur ajoute souvent cet espace tout seul. Sinon, tapez espace puis le signe.",
+    "regle": "- **?** : une question. Vous venez ?\n- **!** : une émotion ou un ordre. Attention !\n\nEn français, on met **un espace** avant ? et !",
+    "astuce": "Le téléphone ajoute souvent l'espace tout seul.",
     "retenir": "Les signes **hauts** (? ! : ;) ont besoin d'**un espace avant**, comme pour prendre leur respiration.",
     "exemples": [
      "Vous venez demain ?",
@@ -4595,21 +4595,21 @@ const THEMES = [
       "consigne": "",
       "juste": "Où habitez-vous ?",
       "faux": "Où habitez-vous.",
-      "expl": "C'est une question : point d'interrogation."
+      "expl": "Une question : **?**"
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Attention, c'est chaud !",
       "faux": "Attention, c'est chaud ?",
-      "expl": "C'est un avertissement, une émotion : point d'exclamation."
+      "expl": "Un avertissement : **!**"
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Combien ça coûte ?",
       "faux": "Combien ça coûte !",
-      "expl": "On demande un prix, c'est une question : point d'interrogation."
+      "expl": "On demande un prix : **?**"
      },
      {
       "type": "completer",
@@ -4620,7 +4620,7 @@ const THEMES = [
        "?",
        "."
       ],
-      "expl": "On montre sa joie : point d'exclamation."
+      "expl": "On est content : **!**"
      },
      {
       "type": "completer",
@@ -4631,7 +4631,7 @@ const THEMES = [
        "!",
        "."
       ],
-      "expl": "On pose une question : point d'interrogation."
+      "expl": "Une question : **?**"
      },
      {
       "type": "completer",
@@ -4642,17 +4642,17 @@ const THEMES = [
        "?",
        "!"
       ],
-      "expl": "C'est une information simple : un point."
+      "expl": "Une information simple : **un point**."
      },
      {
       "type": "ordre",
       "phrase": "Est-ce que vous parlez anglais ?",
-      "expl": "Est-ce que (la question) + vous parlez anglais + espace + ?"
+      "expl": "Une question : **?** à la fin."
      },
      {
       "type": "ordre",
       "phrase": "Bravo, c'est parfait !",
-      "expl": "Bravo (une émotion) + virgule + c'est parfait + espace + !"
+      "expl": "Une émotion : **!** à la fin."
      }
     ]
    },
@@ -4661,8 +4661,8 @@ const THEMES = [
     "titre": "L'apostrophe (l', j', n')",
     "mots": [],
     "tableau": null,
-    "regle": "Devant une voyelle ou un h muet, les petits mots **le, la, je, me, te, se, de, ne, que** perdent leur voyelle et prennent une apostrophe : l', j', m', t', s', d', n', qu'.",
-    "astuce": "Devant une consonne, on garde le mot entier : je mange, mais j'habite.",
+    "regle": "Avant a, e, i, o, u, h :\n\nles petits mots perdent leur voyelle.\n\n- je devient **j'** : j'ai\n- le, la deviennent **l'** : l'école\n- ne devient **n'** : il n'a pas\n- de devient **d'** : d'accord\n- que devient **qu'** : qu'est-ce que",
+    "astuce": "Avant une consonne, on garde le mot entier.\n\nJe mange. J'habite.",
     "retenir": "L'apostrophe **empêche deux voyelles de se cogner** : je ai → j'ai, la école → l'école.",
     "exemples": [
      "**J'**ai faim.",
@@ -4677,21 +4677,21 @@ const THEMES = [
       "consigne": "",
       "juste": "J'habite à Lyon.",
       "faux": "Je habite à Lyon.",
-      "expl": "Habite commence par un h muet : je devient j'."
+      "expl": "Habite commence par **h**.\n\nJe devient **j'**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Il n'aime pas le café.",
       "faux": "Il ne aime pas le café.",
-      "expl": "Aime commence par une voyelle : ne devient n'."
+      "expl": "Aime commence par **a**.\n\nNe devient **n'**."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "l'hôpital",
       "faux": "le hôpital",
-      "expl": "Le h d'hôpital est muet : le devient l'."
+      "expl": "Le **h** ne s'entend pas.\n\nLe devient **l'**."
      },
      {
       "type": "completer",
@@ -4702,7 +4702,7 @@ const THEMES = [
        "se",
        "sa"
       ],
-      "expl": "Habille commence par un h muet : se devient s'."
+      "expl": "Habille commence par **h**.\n\nSe devient **s'**."
      },
      {
       "type": "completer",
@@ -4713,7 +4713,7 @@ const THEMES = [
        "de",
        "du"
       ],
-      "expl": "Omar commence par une voyelle : de devient d'."
+      "expl": "Omar commence par **O**.\n\nDe devient **d'**."
      },
      {
       "type": "completer",
@@ -4724,17 +4724,17 @@ const THEMES = [
        "Que",
        "Quoi"
       ],
-      "expl": "Est commence par une voyelle : que devient qu'."
+      "expl": "Est commence par **e**.\n\nQue devient **qu'**."
      },
      {
       "type": "ordre",
       "phrase": "J'ai rendez-vous à l'hôpital.",
-      "expl": "J'ai (je + ai) + rendez-vous + à l'hôpital (le + hôpital)."
+      "expl": "**J'**ai.\n\n**L'**hôpital."
      },
      {
       "type": "ordre",
       "phrase": "Il n'est pas encore arrivé.",
-      "expl": "Il n'est (ne + est) + pas encore arrivé."
+      "expl": "Il **n'**est pas."
      }
     ]
    },
@@ -4743,8 +4743,8 @@ const THEMES = [
     "titre": "Écrire un message propre",
     "mots": [],
     "tableau": null,
-    "regle": "Un message à l'école, à un client ou à l'administration suit toujours le même plan. 1. **Bonjour** + la personne (Bonjour Madame,). 2. **Le message**, en phrases courtes et complètes. 3. **La formule de fin** (Merci, Bonne journée, Cordialement). 4. **La signature** (prénom et nom, ou le nom du garage).",
-    "astuce": "Pas d'abréviations dans un message sérieux (écrivez « s'il vous plaît », pas « stp » ou « svp »).",
+    "regle": "Un message sérieux a 4 parties :\n\n- **Bonjour** Madame,\n- le message, en phrases courtes\n- la fin : Merci, Bonne journée, Cordialement\n- la signature : prénom et nom",
+    "astuce": "Pas d'abréviations.\n\nÉcrivez « s'il vous plaît », pas « svp ».",
     "retenir": "Un bon message, c'est **B-M-S** : **B**onjour, **M**essage, **S**ignature.",
     "exemples": [
      "Bonjour Madame, mon fils est malade aujourd'hui. Il ne viendra pas à l'école. Merci. [Prénom Nom]",
@@ -4757,21 +4757,21 @@ const THEMES = [
       "consigne": "le meilleur début pour la maîtresse",
       "juste": "Bonjour Madame,",
       "faux": "Salut !",
-      "expl": "À la maîtresse, on dit bonjour et vous. Salut, c'est pour les amis."
+      "expl": "À la maîtresse : **Bonjour Madame**.\n\nSalut, c'est pour les amis."
      },
      {
       "type": "choisir",
       "consigne": "la meilleure fin pour un client",
       "juste": "Bonne journée, le garage Martin.",
       "faux": "Bye.",
-      "expl": "Un message à un client finit par une formule polie et le nom du garage."
+      "expl": "À un client : une fin polie.\n\nEt le nom du garage."
      },
      {
       "type": "choisir",
       "consigne": "",
       "juste": "Mon fils est malade, il ne viendra pas aujourd'hui.",
       "faux": "mon fils malade il vient pas",
-      "expl": "Une phrase complète : majuscule, verbes conjugués, ne… pas à l'écrit, et un point."
+      "expl": "Une phrase complète :\n\nmajuscule, ne… pas, et un point."
      },
      {
       "type": "completer",
@@ -4782,7 +4782,7 @@ const THEMES = [
        "Coucou",
        "Salut"
       ],
-      "expl": "Un message sérieux commence par bonjour."
+      "expl": "Un message commence par **Bonjour**."
      },
      {
       "type": "completer",
@@ -4793,7 +4793,7 @@ const THEMES = [
        "Bisous",
        "À plus"
       ],
-      "expl": "Pour un message sérieux, on finit par cordialement. Bisous, c'est pour la famille."
+      "expl": "Message sérieux : **Cordialement**."
      },
      {
       "type": "completer",
@@ -4804,17 +4804,17 @@ const THEMES = [
        "ma",
        "mes"
       ],
-      "expl": "Fils est masculin, et il est à moi : mon fils."
+      "expl": "Mon fils : **mon**."
      },
      {
       "type": "ordre",
       "phrase": "Bonjour Madame, mon fils est malade aujourd'hui.",
-      "expl": "Bonjour Madame (le B) + virgule + le message (le M)."
+      "expl": "D'abord **Bonjour Madame**.\n\nPuis le message."
      },
      {
       "type": "ordre",
       "phrase": "Votre voiture est prête, bonne journée.",
-      "expl": "Le message + virgule + la formule de fin."
+      "expl": "Le message.\n\nPuis **bonne journée**."
      }
     ]
    }

@@ -1,0 +1,884 @@
+{
+ "genre-1": [
+  {
+   "type": "ecouter",
+   "phrase": "La voiture est prête.",
+   "faux": [
+    "Les voitures sont prêtes.",
+    "Le camion est prêt."
+   ],
+   "expl": "On entend **la voiture**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Les enfants jouent.",
+   "faux": [
+    "L'enfant joue.",
+    "Les parents jouent."
+   ],
+   "expl": "On entend **les enfants**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Le garage ferme à 18 heures.",
+   "faux": [
+    "Le garage ouvre à 18 heures.",
+    "La boutique ferme à 18 heures."
+   ],
+   "expl": "On entend **le garage ferme**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "L'école est à côté.",
+   "vrai": true,
+   "expl": "École commence par **é**. / On dit **l'**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "La hôpital est grand.",
+   "vrai": false,
+   "correction": "L'hôpital est grand.",
+   "expl": "Le **h** ne s'entend pas. / On dit **l'**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Les clés sont sur la table.",
+   "vrai": true,
+   "expl": "Plusieurs clés : **les**."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le mot et le bon petit mot",
+   "paires": [
+    [
+     "voiture",
+     "la voiture"
+    ],
+    [
+     "garage",
+     "le garage"
+    ],
+    [
+     "école",
+     "l'école"
+    ],
+    [
+     "enfants",
+     "les enfants"
+    ]
+   ],
+   "expl": "le, la, l', les."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le mot et le bon petit mot",
+   "paires": [
+    [
+     "pharmacie",
+     "la pharmacie"
+    ],
+    [
+     "médecin",
+     "le médecin"
+    ],
+    [
+     "hiver",
+     "l'hiver"
+    ],
+    [
+     "papiers",
+     "les papiers"
+    ]
+   ],
+   "expl": "Avant une voyelle ou un **h** muet : **l'**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "L'enfant dort.",
+   "faux": "Le enfant dort.",
+   "expl": "Enfant commence par **e**. / On dit **l'**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "La porte est fermée.",
+   "faux": "Le porte est fermée.",
+   "expl": "Porte : féminin. / On dit **la**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Les magasins sont ouverts.",
+   "faux": "Le magasins sont ouverts.",
+   "expl": "Plusieurs magasins : **les**."
+  },
+  {
+   "type": "completer",
+   "phrase": "___ bus arrive.",
+   "reponse": "Le",
+   "choix": [
+    "Le",
+    "La",
+    "Les"
+   ],
+   "expl": "Bus : masculin. / On dit **le**."
+  },
+  {
+   "type": "completer",
+   "phrase": "___ ordonnance est sur la table.",
+   "reponse": "L'",
+   "choix": [
+    "L'",
+    "La",
+    "Le"
+   ],
+   "expl": "Ordonnance commence par **o**. / On dit **l'**."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Le médecin arrive à dix heures.",
+   "expl": "**Le** médecin. / **Quand ?** → à dix heures"
+  },
+  {
+   "type": "ordre",
+   "phrase": "Les papiers sont dans le tiroir.",
+   "expl": "**Les** papiers. / **Où ?** → dans le tiroir"
+  }
+ ],
+ "genre-2": [
+  {
+   "type": "ecouter",
+   "phrase": "J'ai un fils et une fille.",
+   "faux": [
+    "J'ai deux fils.",
+    "J'ai un fils et deux filles."
+   ],
+   "expl": "On entend **un fils** et **une fille**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Je cherche une pharmacie.",
+   "faux": [
+    "Je cherche la pharmacie.",
+    "Je cherche un pharmacien."
+   ],
+   "expl": "On entend **une pharmacie**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Je n'ai pas de voiture.",
+   "faux": [
+    "J'ai une voiture.",
+    "Je n'ai pas la voiture."
+   ],
+   "expl": "On entend **pas de voiture**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Il y a des enfants dans la cour.",
+   "vrai": true,
+   "expl": "Plusieurs enfants : **des**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Je n'ai pas un stylo.",
+   "vrai": false,
+   "correction": "Je n'ai pas de stylo.",
+   "expl": "Avec ne… pas : **de**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "J'ai une question.",
+   "vrai": true,
+   "expl": "Question : féminin. / **Une** question."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le mot et le bon petit mot",
+   "paires": [
+    [
+     "fils",
+     "un fils"
+    ],
+    [
+     "fille",
+     "une fille"
+    ],
+    [
+     "enfants",
+     "des enfants"
+    ],
+    [
+     "ami",
+     "un ami"
+    ]
+   ],
+   "expl": "un, une, des."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez la phrase et la phrase avec pas",
+   "paires": [
+    [
+     "J'ai une voiture.",
+     "Je n'ai pas de voiture."
+    ],
+    [
+     "Il a des enfants.",
+     "Il n'a pas d'enfants."
+    ],
+    [
+     "Elle a un chien.",
+     "Elle n'a pas de chien."
+    ],
+    [
+     "J'ai du travail.",
+     "Je n'ai pas de travail."
+    ]
+   ],
+   "expl": "Avec ne… pas : **de** ou **d'**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Je voudrais un rendez-vous.",
+   "faux": "Je voudrais une rendez-vous.",
+   "expl": "Rendez-vous : masculin. / **Un** rendez-vous."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Il n'y a pas de pain.",
+   "faux": "Il n'y a pas des pains.",
+   "expl": "Avec ne… pas : **de**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Elle achète des tomates.",
+   "faux": "Elle achète un tomates.",
+   "expl": "Plusieurs tomates : **des**."
+  },
+  {
+   "type": "completer",
+   "phrase": "J'ai ___ idée.",
+   "reponse": "une",
+   "choix": [
+    "une",
+    "un",
+    "des"
+   ],
+   "expl": "Idée : féminin. / **Une** idée."
+  },
+  {
+   "type": "completer",
+   "phrase": "Nous n'avons pas ___ enfants.",
+   "reponse": "d'",
+   "choix": [
+    "d'",
+    "des",
+    "les"
+   ],
+   "expl": "Avec ne… pas : **de**. / Avant **e** : **d'**."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Je cherche un appartement en ville.",
+   "expl": "Je cherche **un** appartement. / Pas précis."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Il n'y a pas de place.",
+   "expl": "Avec ne… pas : **de** place."
+  }
+ ],
+ "genre-3": [
+  {
+   "type": "ecouter",
+   "phrase": "Mon voisin et ma voisine sont gentils.",
+   "faux": [
+    "Mon voisin est gentil.",
+    "Mes voisins sont gentils."
+   ],
+   "expl": "On entend **voisin** et **voisine**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "La directrice de l'école m'a appelée.",
+   "faux": [
+    "Le directeur de l'école m'a appelée.",
+    "La maîtresse de l'école m'a appelée."
+   ],
+   "expl": "On entend **la directrice**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Elle est pharmacienne.",
+   "faux": [
+    "Il est pharmacien.",
+    "Elle est infirmière."
+   ],
+   "expl": "On entend **pharmacienne**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "La vendeuse est souriante.",
+   "vrai": true,
+   "expl": "**-eur** devient **-euse**. / Vendeuse."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Ma sœur est une bonne infirmier.",
+   "vrai": false,
+   "correction": "Ma sœur est une bonne infirmière.",
+   "expl": "**-ier** devient **-ière**. / Infirmière."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Elle est élève dans cette école.",
+   "vrai": true,
+   "expl": "Élève ne change pas. / Un élève, une élève."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le masculin et le féminin",
+   "paires": [
+    [
+     "un vendeur",
+     "une vendeuse"
+    ],
+    [
+     "un directeur",
+     "une directrice"
+    ],
+    [
+     "un boulanger",
+     "une boulangère"
+    ],
+    [
+     "un pharmacien",
+     "une pharmacienne"
+    ]
+   ],
+   "expl": "Les fins changent au féminin."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le masculin et le féminin",
+   "paires": [
+    [
+     "un homme",
+     "une femme"
+    ],
+    [
+     "un père",
+     "une mère"
+    ],
+    [
+     "un garçon",
+     "une fille"
+    ],
+    [
+     "un frère",
+     "une sœur"
+    ]
+   ],
+   "expl": "Ces mots changent complètement."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Ma cousine habite à Paris.",
+   "faux": "Ma cousin habite à Paris.",
+   "expl": "Une femme : cousin**e**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "C'est une bonne coiffeuse.",
+   "faux": "C'est une bonne coiffeure.",
+   "expl": "**-eur** devient **-euse**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Elle est infirmière.",
+   "faux": "Elle est infirmier.",
+   "expl": "Une femme : infirm**ière**."
+  },
+  {
+   "type": "completer",
+   "phrase": "un chanteur → une ___",
+   "reponse": "chanteuse",
+   "choix": [
+    "chanteuse",
+    "chantrice",
+    "chanteure"
+   ],
+   "expl": "**-eur** devient **-euse**."
+  },
+  {
+   "type": "completer",
+   "phrase": "un acteur → une ___",
+   "reponse": "actrice",
+   "choix": [
+    "actrice",
+    "acteuse",
+    "acteure"
+   ],
+   "expl": "**-teur** devient **-trice**."
+  },
+  {
+   "type": "ordre",
+   "phrase": "La boulangère ouvre à sept heures.",
+   "expl": "**La** boulangère : féminin."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Ma voisine est infirmière.",
+   "expl": "**Ma** voisine. / Infirm**ière**."
+  }
+ ],
+ "genre-4": [
+  {
+   "type": "ecouter",
+   "phrase": "Les prix ont augmenté.",
+   "faux": [
+    "Le prix a augmenté.",
+    "Les prix ont baissé."
+   ],
+   "expl": "On entend **les prix ont**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Il y a deux hôpitaux en ville.",
+   "faux": [
+    "Il y a un hôpital en ville.",
+    "Il y a deux écoles en ville."
+   ],
+   "expl": "On entend **deux hôpitaux**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Les enfants jouent avec leurs jouets.",
+   "faux": [
+    "L'enfant joue avec son jouet.",
+    "Les enfants jouent avec le chien."
+   ],
+   "expl": "On entend **les enfants**, **leurs jouets**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "J'ai acheté des gâteaux.",
+   "vrai": true,
+   "expl": "**-eau** prend un **x**. / Des gâteaux."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Je lis des journals.",
+   "vrai": false,
+   "correction": "Je lis des journaux.",
+   "expl": "**-al** devient **-aux**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Mes bras sont fatigués.",
+   "vrai": true,
+   "expl": "Bras finit par **s**. / Il ne change pas."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez un et plusieurs",
+   "paires": [
+    [
+     "un gâteau",
+     "des gâteaux"
+    ],
+    [
+     "un journal",
+     "des journaux"
+    ],
+    [
+     "un bras",
+     "des bras"
+    ],
+    [
+     "une maison",
+     "des maisons"
+    ]
+   ],
+   "expl": "Le pluriel : **-s**, **-x** ou **-aux**."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez un et plusieurs",
+   "paires": [
+    [
+     "un animal",
+     "des animaux"
+    ],
+    [
+     "un jeu",
+     "des jeux"
+    ],
+    [
+     "un prix",
+     "des prix"
+    ],
+    [
+     "un chou",
+     "des choux"
+    ]
+   ],
+   "expl": "**-al** → **-aux**. / **-eu** → **-x**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Les bureaux sont fermés.",
+   "faux": "Les bureaus sont fermés.",
+   "expl": "**-eau** prend un **x**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "J'ai deux enfants.",
+   "faux": "J'ai deux enfant.",
+   "expl": "Plusieurs : on ajoute **-s**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Les animaux sont dans le jardin.",
+   "faux": "Les animals sont dans le jardin.",
+   "expl": "**-al** devient **-aux**."
+  },
+  {
+   "type": "completer",
+   "phrase": "un cadeau → des ___",
+   "reponse": "cadeaux",
+   "choix": [
+    "cadeaux",
+    "cadeaus",
+    "cadeau"
+   ],
+   "expl": "**-eau** prend un **x**."
+  },
+  {
+   "type": "completer",
+   "phrase": "un nez → des ___",
+   "reponse": "nez",
+   "choix": [
+    "nez",
+    "nezs",
+    "nezx"
+   ],
+   "expl": "Nez finit par **z**. / Il ne change pas."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Les journaux sont sur la table.",
+   "expl": "Les journ**aux**. / **Où ?** → sur la table"
+  },
+  {
+   "type": "ordre",
+   "phrase": "Mes enfants aiment les jeux.",
+   "expl": "Les je**ux** : avec un **x**."
+  }
+ ],
+ "genre-5": [
+  {
+   "type": "ecouter",
+   "phrase": "Un petit garçon et une petite fille.",
+   "faux": [
+    "Deux petits garçons.",
+    "Une petite fille et un grand garçon."
+   ],
+   "expl": "On entend **petit** et **petite**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Elle est contente.",
+   "faux": [
+    "Il est content.",
+    "Elle est fatiguée."
+   ],
+   "expl": "On entend **contente**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "C'est une belle maison.",
+   "faux": [
+    "C'est un beau jardin.",
+    "C'est une grande maison."
+   ],
+   "expl": "On entend **belle maison**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Les enfants sont fatigués.",
+   "vrai": true,
+   "expl": "Plusieurs enfants : fatigué**s**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Ma fille est malade.",
+   "vrai": true,
+   "expl": "Malade finit par **e**. / Il ne change pas."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Elle a une robe blanc.",
+   "vrai": false,
+   "correction": "Elle a une robe blanche.",
+   "expl": "Blanc au féminin : **blanche**."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le masculin et le féminin",
+   "paires": [
+    [
+     "beau",
+     "belle"
+    ],
+    [
+     "nouveau",
+     "nouvelle"
+    ],
+    [
+     "vieux",
+     "vieille"
+    ],
+    [
+     "blanc",
+     "blanche"
+    ]
+   ],
+   "expl": "Ces mots changent beaucoup."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le début et la fin",
+   "paires": [
+    [
+     "un garçon",
+     "content"
+    ],
+    [
+     "une fille",
+     "contente"
+    ],
+    [
+     "des garçons",
+     "contents"
+    ],
+    [
+     "des filles",
+     "contentes"
+    ]
+   ],
+   "expl": "Féminin : **-e**. / Plusieurs : **-s**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "La soupe est chaude.",
+   "faux": "La soupe est chaud.",
+   "expl": "Soupe : féminin. / Chaud**e**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "J'ai un vieux vélo.",
+   "faux": "J'ai un vieille vélo.",
+   "expl": "Vélo : masculin. / **Vieux**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Mes filles sont grandes.",
+   "faux": "Mes filles sont grands.",
+   "expl": "Filles : féminin, plusieurs. / Grand**es**."
+  },
+  {
+   "type": "completer",
+   "phrase": "La maîtresse est très ___.",
+   "reponse": "gentille",
+   "choix": [
+    "gentille",
+    "gentil",
+    "gentils"
+   ],
+   "expl": "Féminin : gentil**le**."
+  },
+  {
+   "type": "completer",
+   "phrase": "Les chemises sont ___.",
+   "reponse": "propres",
+   "choix": [
+    "propres",
+    "propre",
+    "propresse"
+   ],
+   "expl": "Propre finit par **e**. / Plusieurs : **-s**."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Nous avons une nouvelle voiture.",
+   "expl": "Voiture : féminin. / **Nouvelle**."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Les rues sont très propres.",
+   "expl": "Plusieurs rues : propre**s**."
+  }
+ ],
+ "genre-6": [
+  {
+   "type": "ecouter",
+   "phrase": "Je bois de l'eau.",
+   "faux": [
+    "Je bois du lait.",
+    "Je bois de la soupe."
+   ],
+   "expl": "On entend **de l'eau**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Je viens du travail.",
+   "faux": [
+    "Je vais au travail.",
+    "Je viens de l'école."
+   ],
+   "expl": "On entend **du travail**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Il parle aux enfants.",
+   "faux": [
+    "Il parle à l'enfant.",
+    "Il parle des enfants."
+   ],
+   "expl": "On entend **aux enfants**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Tu veux du café ?",
+   "vrai": true,
+   "expl": "Café : masculin. / **Du** café."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Je vais à le marché.",
+   "vrai": false,
+   "correction": "Je vais au marché.",
+   "expl": "À le devient **au**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Un kilo de tomates, s'il vous plaît.",
+   "vrai": true,
+   "expl": "Un kilo : une quantité. / **De** tomates."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le mot et le bon petit mot",
+   "paires": [
+    [
+     "pain",
+     "du pain"
+    ],
+    [
+     "soupe",
+     "de la soupe"
+    ],
+    [
+     "eau",
+     "de l'eau"
+    ],
+    [
+     "frites",
+     "des frites"
+    ]
+   ],
+   "expl": "du, de la, de l', des."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez les deux mots et le mot qui les remplace",
+   "paires": [
+    [
+     "à + le",
+     "au"
+    ],
+    [
+     "à + les",
+     "aux"
+    ],
+    [
+     "de + le",
+     "du"
+    ],
+    [
+     "de + les",
+     "des"
+    ]
+   ],
+   "expl": "À le, de le n'existent pas."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Je mets du sel dans la soupe.",
+   "faux": "Je mets de le sel dans la soupe.",
+   "expl": "De le devient **du**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Je téléphone au médecin.",
+   "faux": "Je téléphone à le médecin.",
+   "expl": "À le devient **au**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Une bouteille de lait.",
+   "faux": "Une bouteille du lait.",
+   "expl": "Une quantité : **de** lait."
+  },
+  {
+   "type": "completer",
+   "phrase": "Je voudrais ___ confiture.",
+   "reponse": "de la",
+   "choix": [
+    "de la",
+    "du",
+    "des"
+   ],
+   "expl": "Confiture : féminin. / **De la** confiture."
+  },
+  {
+   "type": "completer",
+   "phrase": "Les enfants vont ___ toilettes.",
+   "reponse": "aux",
+   "choix": [
+    "aux",
+    "au",
+    "à la"
+   ],
+   "expl": "Les toilettes : plusieurs. / **Aux** toilettes."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Je rentre du marché avec des légumes.",
+   "expl": "**Du** marché. / **Des** légumes."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Il n'y a plus de sucre.",
+   "expl": "Avec ne… plus : **de** sucre."
+  }
+ ]
+}

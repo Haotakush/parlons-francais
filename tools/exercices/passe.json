@@ -1,0 +1,739 @@
+{
+ "passe-1": [
+  {
+   "type": "ecouter",
+   "phrase": "J'ai commencé à travailler.",
+   "faux": [
+    "J'ai commencer à travaillé.",
+    "J'ai commencé à travaillé."
+   ],
+   "expl": "Après **ai** : **-é**. / Après **à** : **-er**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "C'est facile à préparer.",
+   "faux": [
+    "C'est facile à préparé.",
+    "C'est facile à préparez."
+   ],
+   "expl": "Après **à** : **-er**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Il est allé chercher le pain.",
+   "faux": [
+    "Il est aller chercher le pain.",
+    "Il est allé cherché le pain."
+   ],
+   "expl": "Après **est** : **-é**. / Après allé : **-er**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "J'ai oublié de fermer la porte.",
+   "vrai": true,
+   "expl": "Oubli**é** : après ai. / Ferm**er** : après de."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Je vais téléphoné au garage.",
+   "vrai": false,
+   "correction": "Je vais téléphoner au garage.",
+   "expl": "Après **vais** : **-er**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Nous avons parlé avec la maîtresse.",
+   "vrai": true,
+   "expl": "Après **avons** : **-é**."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le début et la fin",
+   "paires": [
+    [
+     "J'ai",
+     "mangé."
+    ],
+    [
+     "Je vais",
+     "manger."
+    ],
+    [
+     "Il faut",
+     "payer."
+    ],
+    [
+     "Il a",
+     "payé."
+    ]
+   ],
+   "expl": "Après avoir : **-é**. / Après un verbe : **-er**."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le petit mot et le bon verbe",
+   "paires": [
+    [
+     "j'ai",
+     "mangé"
+    ],
+    [
+     "pour",
+     "manger"
+    ],
+    [
+     "il est",
+     "allé"
+    ],
+    [
+     "sans",
+     "payer"
+    ]
+   ],
+   "expl": "Avoir, être : **-é**. / À, de, pour, sans : **-er**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Je suis venu pour aider.",
+   "faux": "Je suis venu pour aidé.",
+   "expl": "Après **pour** : **-er**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Elle a acheté du pain.",
+   "faux": "Elle a acheter du pain.",
+   "expl": "Après **a** : **-é**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Il est parti sans payer.",
+   "faux": "Il est parti sans payé.",
+   "expl": "Après **sans** : **-er**."
+  },
+  {
+   "type": "completer",
+   "phrase": "J'ai envie de mang___.",
+   "reponse": "er",
+   "choix": [
+    "er",
+    "é",
+    "ez"
+   ],
+   "expl": "Après **de** : **-er**."
+  },
+  {
+   "type": "completer",
+   "phrase": "Le client a pay___ la facture.",
+   "reponse": "é",
+   "choix": [
+    "é",
+    "er",
+    "ez"
+   ],
+   "expl": "Après **a** : **-é**."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Nous avons décidé de rester.",
+   "expl": "Décid**é** : après avons. / Rest**er** : après de."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Il faut changer les pneus.",
+   "expl": "Après **faut** : chang**er**."
+  }
+ ],
+ "passe-2": [
+  {
+   "type": "ecouter",
+   "phrase": "J'ai pris le bus.",
+   "faux": [
+    "Je prends le bus.",
+    "J'ai perdu le bus."
+   ],
+   "expl": "On entend **j'ai pris**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Elle a écrit une lettre.",
+   "faux": [
+    "Elle écrit une lettre.",
+    "Elle a lu une lettre."
+   ],
+   "expl": "On entend **a écrit**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Ils ont bu de l'eau.",
+   "faux": [
+    "Ils boivent de l'eau.",
+    "Ils ont vu de l'eau."
+   ],
+   "expl": "On entend **ont bu**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Il a mis son manteau.",
+   "vrai": true,
+   "expl": "Mettre au passé : **mis**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "J'ai comprendu la leçon.",
+   "vrai": false,
+   "correction": "J'ai compris la leçon.",
+   "expl": "Comprendre au passé : **compris**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Nous avons reçu une lettre.",
+   "vrai": true,
+   "expl": "Recevoir au passé : **reçu**."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le verbe et sa forme au passé",
+   "paires": [
+    [
+     "prendre",
+     "pris"
+    ],
+    [
+     "mettre",
+     "mis"
+    ],
+    [
+     "dire",
+     "dit"
+    ],
+    [
+     "écrire",
+     "écrit"
+    ]
+   ],
+   "expl": "Les fins **-is** et **-it**."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le verbe et sa forme au passé",
+   "paires": [
+    [
+     "lire",
+     "lu"
+    ],
+    [
+     "venir",
+     "venu"
+    ],
+    [
+     "finir",
+     "fini"
+    ],
+    [
+     "dormir",
+     "dormi"
+    ]
+   ],
+   "expl": "Les fins **-u** et **-i**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "J'ai dormi huit heures.",
+   "faux": "J'ai dormu huit heures.",
+   "expl": "Dormir au passé : **dormi**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Il a vu le médecin.",
+   "faux": "Il a voyé le médecin.",
+   "expl": "Voir au passé : **vu**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Vous avez fait vos courses ?",
+   "faux": "Vous avez faisé vos courses ?",
+   "expl": "Faire au passé : **fait**."
+  },
+  {
+   "type": "completer",
+   "phrase": "J'ai ___ ton message.",
+   "reponse": "lu",
+   "choix": [
+    "lu",
+    "lis",
+    "lire"
+   ],
+   "expl": "Lire au passé : **lu**."
+  },
+  {
+   "type": "completer",
+   "phrase": "Nous avons ___ la réponse.",
+   "reponse": "attendu",
+   "choix": [
+    "attendu",
+    "attendi",
+    "attendé"
+   ],
+   "expl": "Attendre au passé : **attendu**."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Elle a dit merci au médecin.",
+   "expl": "Dire au passé : **dit**."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Mon fils a fini ses devoirs.",
+   "expl": "Finir au passé : **fini**."
+  }
+ ],
+ "passe-3": [
+  {
+   "type": "ecouter",
+   "phrase": "Ma fille est née en 2015.",
+   "faux": [
+    "Ma fille est né en 2015.",
+    "Ma fille a né en 2015."
+   ],
+   "expl": "Une femme : né**e**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Les enfants sont rentrés.",
+   "faux": [
+    "Les enfants sont rentré.",
+    "Les enfants ont rentrés."
+   ],
+   "expl": "Plusieurs : rentré**s**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Ma femme et ma fille sont arrivées.",
+   "faux": [
+    "Ma femme et ma fille sont arrivés.",
+    "Ma femme et ma fille sont arrivée."
+   ],
+   "expl": "Plusieurs femmes : arrivé**es**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Il est tombé.",
+   "vrai": true,
+   "expl": "Un homme : tombé. / Pas de **e**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Elle est parti hier.",
+   "vrai": false,
+   "correction": "Elle est partie hier.",
+   "expl": "Une femme : parti**e**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Mes parents sont venus.",
+   "vrai": true,
+   "expl": "Plusieurs : venu**s**."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez la personne et la bonne fin",
+   "paires": [
+    [
+     "Il est",
+     "sorti."
+    ],
+    [
+     "Elle est",
+     "sortie."
+    ],
+    [
+     "Ils sont",
+     "sortis."
+    ],
+    [
+     "Elles sont",
+     "sorties."
+    ]
+   ],
+   "expl": "Avec **être**, on accorde."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez la personne et la bonne fin",
+   "paires": [
+    [
+     "ma mère",
+     "arrivée"
+    ],
+    [
+     "mon père",
+     "arrivé"
+    ],
+    [
+     "mes fils",
+     "arrivés"
+    ],
+    [
+     "mes filles",
+     "arrivées"
+    ]
+   ],
+   "expl": "Femme : **-e**. / Plusieurs : **-s**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Ma sœur est restée chez elle.",
+   "faux": "Ma sœur est resté chez elle.",
+   "expl": "Une femme : resté**e**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Nous sommes allés au parc.",
+   "faux": "Nous sommes allé au parc.",
+   "expl": "Plusieurs : allé**s**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Mes filles sont montées.",
+   "faux": "Mes filles sont montés.",
+   "expl": "Plusieurs femmes : monté**es**."
+  },
+  {
+   "type": "completer",
+   "phrase": "La maîtresse est ___ à huit heures.",
+   "reponse": "arrivée",
+   "choix": [
+    "arrivée",
+    "arrivé",
+    "arrivés"
+   ],
+   "expl": "Une femme : arrivé**e**."
+  },
+  {
+   "type": "completer",
+   "phrase": "Les garçons sont ___ dehors.",
+   "reponse": "sortis",
+   "choix": [
+    "sortis",
+    "sorti",
+    "sorties"
+   ],
+   "expl": "Plusieurs garçons : sorti**s**."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Ma voisine est partie en vacances.",
+   "expl": "Une femme : parti**e**."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Nos amis sont venus dîner.",
+   "expl": "Plusieurs : venu**s**."
+  }
+ ],
+ "passe-4": [
+  {
+   "type": "ecouter",
+   "phrase": "Elle a mangé.",
+   "faux": [
+    "Elle est mangée.",
+    "Elle mange."
+   ],
+   "expl": "On entend **a mangé**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Les enfants ont joué.",
+   "faux": [
+    "Les enfants jouent.",
+    "Les enfants sont joués."
+   ],
+   "expl": "On entend **ont joué**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Ma femme a acheté du pain.",
+   "faux": [
+    "Ma femme achète du pain.",
+    "Ma femme va acheter du pain."
+   ],
+   "expl": "On entend **a acheté**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Ils ont fini.",
+   "vrai": true,
+   "expl": "Avec **avoir** : pas d'accord."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Elle a parlée avec le médecin.",
+   "vrai": false,
+   "correction": "Elle a parlé avec le médecin.",
+   "expl": "Avec **avoir** : pas de **-e**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Les clients ont payés.",
+   "vrai": false,
+   "correction": "Les clients ont payé.",
+   "expl": "Avec **avoir** : pas de **-s**."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le début et la fin",
+   "paires": [
+    [
+     "Elle a",
+     "mangé."
+    ],
+    [
+     "Elle est",
+     "partie."
+    ],
+    [
+     "Ils ont",
+     "mangé du pain."
+    ],
+    [
+     "Ils sont",
+     "partis."
+    ]
+   ],
+   "expl": "Avec **avoir** : pas d'accord. / Avec **être** : on accorde."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le verbe et la règle",
+   "paires": [
+    [
+     "avec avoir",
+     "pas d'accord"
+    ],
+    [
+     "avec être",
+     "on accorde"
+    ],
+    [
+     "elle a",
+     "dansé"
+    ],
+    [
+     "elle est",
+     "tombée"
+    ]
+   ],
+   "expl": "Avoir : pas d'accord. / Être : accord."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Ma mère a téléphoné.",
+   "faux": "Ma mère a téléphonée.",
+   "expl": "Avec **avoir** : pas de **-e**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Nous avons regardé un film.",
+   "faux": "Nous avons regardés un film.",
+   "expl": "Avec **avoir** : pas de **-s**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Les filles ont chanté.",
+   "faux": "Les filles ont chantées.",
+   "expl": "Avec **avoir** : pas d'accord."
+  },
+  {
+   "type": "completer",
+   "phrase": "Mes sœurs ont ___ le repas.",
+   "reponse": "préparé",
+   "choix": [
+    "préparé",
+    "préparées",
+    "préparés"
+   ],
+   "expl": "Avec **avoir** : pas d'accord."
+  },
+  {
+   "type": "completer",
+   "phrase": "Elle a ___ la porte.",
+   "reponse": "ouvert",
+   "choix": [
+    "ouvert",
+    "ouverte",
+    "ouverts"
+   ],
+   "expl": "Avec **avoir** : pas d'accord."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Ma fille a dessiné un chat.",
+   "expl": "Avec **avoir** : dessiné."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Les voisins ont fait du bruit.",
+   "expl": "Avec **avoir** : fait."
+  }
+ ],
+ "passe-5": [
+  {
+   "type": "ecouter",
+   "phrase": "Je me lève à sept heures.",
+   "faux": [
+    "Je se lève à sept heures.",
+    "Je me lave à sept heures."
+   ],
+   "expl": "Avec **je** : **me**. / On entend **lève**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Elle s'est habillée vite.",
+   "faux": [
+    "Elle s'habille vite.",
+    "Elle c'est habillée vite."
+   ],
+   "expl": "Au passé : **s'est**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Les enfants se sont couchés tôt.",
+   "faux": [
+    "Les enfants se couchent tôt.",
+    "Les enfants ont couché tôt."
+   ],
+   "expl": "On entend **se sont couchés**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Je me suis trompé.",
+   "vrai": true,
+   "expl": "Avec **je** : **me**. / Au passé : avec **être**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Tu se réveilles à quelle heure ?",
+   "vrai": false,
+   "correction": "Tu te réveilles à quelle heure ?",
+   "expl": "Avec **tu** : **te**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Ma fille s'a lavée.",
+   "vrai": false,
+   "correction": "Ma fille s'est lavée.",
+   "expl": "Au passé : avec **être**. / S'est."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez la personne et le bon petit mot",
+   "paires": [
+    [
+     "je",
+     "me lève"
+    ],
+    [
+     "tu",
+     "te lèves"
+    ],
+    [
+     "il",
+     "se lève"
+    ],
+    [
+     "vous",
+     "vous levez"
+    ]
+   ],
+   "expl": "Le petit mot change avec la personne."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le verbe et son sens",
+   "paires": [
+    [
+     "se lever",
+     "sortir du lit"
+    ],
+    [
+     "se coucher",
+     "aller au lit"
+    ],
+    [
+     "s'habiller",
+     "mettre ses vêtements"
+    ],
+    [
+     "se laver",
+     "prendre une douche"
+    ]
+   ],
+   "expl": "Les verbes avec **se**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Nous nous promenons au parc.",
+   "faux": "Nous se promenons au parc.",
+   "expl": "Avec **nous** : **nous**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Il s'est réveillé tard.",
+   "faux": "Il c'est réveillé tard.",
+   "expl": "Se réveiller, au passé : **s'est**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Je m'habille vite.",
+   "faux": "Je me habille vite.",
+   "expl": "Avant **h** muet : **m'**."
+  },
+  {
+   "type": "completer",
+   "phrase": "Vous ___ couchez tard ?",
+   "reponse": "vous",
+   "choix": [
+    "vous",
+    "se",
+    "nous"
+   ],
+   "expl": "Avec **vous** : **vous**."
+  },
+  {
+   "type": "completer",
+   "phrase": "Elle s'est ___ à six heures.",
+   "reponse": "levée",
+   "choix": [
+    "levée",
+    "levé",
+    "levés"
+   ],
+   "expl": "Une femme : levé**e**."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Mon mari se rase le matin.",
+   "expl": "Mon mari : **se** rase."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Nous nous sommes trompés de rue.",
+   "expl": "Nous : **nous**. / Au passé : **sommes**, avec un **s**."
+  }
+ ]
+}

@@ -1,0 +1,884 @@
+{
+ "orthographe-1": [
+  {
+   "type": "ecouter",
+   "phrase": "Mon père et ma mère.",
+   "faux": [
+    "Mon pére et ma mére.",
+    "Mon pêre et ma mêre."
+   ],
+   "expl": "Avant **-re** : **è**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "C'est la fête.",
+   "faux": [
+    "C'est la fète.",
+    "C'est la féte."
+   ],
+   "expl": "Fête : avec **ê**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "J'ai réservé une table.",
+   "faux": [
+    "J'ai rèservè une table.",
+    "J'ai reserve une table."
+   ],
+   "expl": "Réservé : deux **é**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Mon frère est à l'école.",
+   "vrai": true,
+   "expl": "Frère : **è**. / École : **é**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "J'ai mal à la téte.",
+   "vrai": false,
+   "correction": "J'ai mal à la tête.",
+   "expl": "Tête : avec **ê**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Le café est très chaud.",
+   "vrai": true,
+   "expl": "Café : **é**. / Très : **è**."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le mot et son accent",
+   "paires": [
+    [
+     "école",
+     "é, accent aigu"
+    ],
+    [
+     "mère",
+     "è, accent grave"
+    ],
+    [
+     "fête",
+     "ê, accent circonflexe"
+    ],
+    [
+     "hôpital",
+     "ô, accent circonflexe"
+    ]
+   ],
+   "expl": "Chaque mot a son accent."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le mot et le mot de la même famille",
+   "paires": [
+    [
+     "père",
+     "mère"
+    ],
+    [
+     "fête",
+     "tête"
+    ],
+    [
+     "café",
+     "thé"
+    ],
+    [
+     "frère",
+     "sœur"
+    ]
+   ],
+   "expl": "Ces mots vont ensemble."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "une fenêtre",
+   "faux": "une fenètre",
+   "expl": "Fenêtre : avec **ê**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "après",
+   "faux": "aprés",
+   "expl": "Après : avec **è**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "l'été",
+   "faux": "l'èté",
+   "expl": "Été : deux **é**."
+  },
+  {
+   "type": "completer",
+   "phrase": "Ma m___re est là.",
+   "reponse": "è",
+   "choix": [
+    "è",
+    "é",
+    "ê"
+   ],
+   "expl": "Avant **-re** : **è**. / Mère."
+  },
+  {
+   "type": "completer",
+   "phrase": "Le b___bé dort.",
+   "reponse": "é",
+   "choix": [
+    "é",
+    "è",
+    "ê"
+   ],
+   "expl": "Bébé : **é**."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Ma mère prépare la fête.",
+   "expl": "Mère : **è**. / Fête : **ê**."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Mon frère est très gentil.",
+   "expl": "Frère : **è**. / Très : **è**."
+  }
+ ],
+ "orthographe-2": [
+  {
+   "type": "ecouter",
+   "phrase": "Le garçon a fait sa leçon.",
+   "faux": [
+    "Le garcon a fait sa lecon.",
+    "Le garsson a fait sa lesson."
+   ],
+   "expl": "Garçon, leçon : **ç**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Merci beaucoup.",
+   "faux": [
+    "Merçi beaucoup.",
+    "Mersi beaucoup."
+   ],
+   "expl": "Avant **i** : **c**. / Merci."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "La maison est grande.",
+   "faux": [
+    "La maisson est grande.",
+    "La maizon est grande."
+   ],
+   "expl": "Un **s** entre deux voyelles fait « z ». / Maison."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Je bois une tasse de thé.",
+   "vrai": true,
+   "expl": "Tasse : **ss**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "J'ai recu votre lettre.",
+   "vrai": false,
+   "correction": "J'ai reçu votre lettre.",
+   "expl": "Avant **u** : **ç**. / Reçu."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Ça va bien ?",
+   "vrai": true,
+   "expl": "Avant **a** : **ç**. / Ça."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le mot et la bonne lettre",
+   "paires": [
+    [
+     "garçon",
+     "avec c cédille"
+    ],
+    [
+     "poisson",
+     "avec deux s"
+    ],
+    [
+     "maison",
+     "avec un seul s"
+    ],
+    [
+     "merci",
+     "avec un c"
+    ]
+   ],
+   "expl": "ç, ss, s, c."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le mot et son sens",
+   "paires": [
+    [
+     "poisson",
+     "on le mange"
+    ],
+    [
+     "poison",
+     "c'est dangereux"
+    ],
+    [
+     "dessert",
+     "à la fin du repas"
+    ],
+    [
+     "désert",
+     "il y a du sable"
+    ]
+   ],
+   "expl": "**ss** ou **s** : le sens change."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "une boisson",
+   "faux": "une boison",
+   "expl": "Entre deux voyelles : **ss**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "le français",
+   "faux": "le francais",
+   "expl": "Avant **a** : **ç**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "la piscine",
+   "faux": "la pisçine",
+   "expl": "Avant **i** : **c** suffit."
+  },
+  {
+   "type": "completer",
+   "phrase": "Nous commen___ons demain.",
+   "reponse": "ç",
+   "choix": [
+    "ç",
+    "c",
+    "ss"
+   ],
+   "expl": "Avant **o** : **ç**."
+  },
+  {
+   "type": "completer",
+   "phrase": "Une cha___ure",
+   "reponse": "uss",
+   "choix": [
+    "uss",
+    "us",
+    "uç"
+   ],
+   "expl": "Chaussure : **ss**."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Le garçon mange du poisson.",
+   "expl": "Garçon : **ç**. / Poisson : **ss**."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Nous commençons la leçon.",
+   "expl": "Commençons, leçon : **ç**."
+  }
+ ],
+ "orthographe-3": [
+  {
+   "type": "ecouter",
+   "phrase": "Nous mangeons.",
+   "faux": [
+    "Nous mangons.",
+    "Nous mangions."
+   ],
+   "expl": "Avant **o** : **ge**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Une guitare.",
+   "faux": [
+    "Une gitare.",
+    "Une ghitare."
+   ],
+   "expl": "Avant **i** : **gu**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Une langue étrangère.",
+   "faux": [
+    "Une lange étrangère.",
+    "Une langue étranguère."
+   ],
+   "expl": "Langue : **gu**. / Étrangère : **g**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Le garage est grand.",
+   "vrai": true,
+   "expl": "Avant **a** : **g** suffit."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Nous nagons à la piscine.",
+   "vrai": false,
+   "correction": "Nous nageons à la piscine.",
+   "expl": "Avant **o** : **ge**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "La voiture rouge est là.",
+   "vrai": true,
+   "expl": "Rouge : **g** fait « j » avant e."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le mot et le son du g",
+   "paires": [
+    [
+     "garage",
+     "g dur"
+    ],
+    [
+     "rouge",
+     "j"
+    ],
+    [
+     "guitare",
+     "g dur avec u"
+    ],
+    [
+     "mangeons",
+     "j avec e"
+    ]
+   ],
+   "expl": "Le **g** change de son."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le verbe et nous",
+   "paires": [
+    [
+     "manger",
+     "nous mangeons"
+    ],
+    [
+     "nager",
+     "nous nageons"
+    ],
+    [
+     "changer",
+     "nous changeons"
+    ],
+    [
+     "ranger",
+     "nous rangeons"
+    ]
+   ],
+   "expl": "Les verbes en **-ger** gardent le **e**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "un gâteau",
+   "faux": "un guâteau",
+   "expl": "Avant **â** : **g** suffit."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Nous rangeons la chambre.",
+   "faux": "Nous rangons la chambre.",
+   "expl": "Avant **o** : **ge**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "la guerre",
+   "faux": "la gerre",
+   "expl": "Avant **e**, pour « g » dur : **gu**."
+  },
+  {
+   "type": "completer",
+   "phrase": "Nous chan___ons les pneus.",
+   "reponse": "ge",
+   "choix": [
+    "ge",
+    "g",
+    "gu"
+   ],
+   "expl": "Avant **o** : **ge**."
+  },
+  {
+   "type": "completer",
+   "phrase": "Une ba___e en or.",
+   "reponse": "gu",
+   "choix": [
+    "gu",
+    "g",
+    "ge"
+   ],
+   "expl": "Avant **e**, pour « g » dur : **gu**. / Bague."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Nous mangeons des légumes.",
+   "expl": "Mangeons : **ge**. / Légumes : **g** avant u."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Mon fils joue de la guitare.",
+   "expl": "Guitare : **gu**."
+  }
+ ],
+ "orthographe-4": [
+  {
+   "type": "ecouter",
+   "phrase": "C'est important.",
+   "faux": [
+    "C'est inportant.",
+    "C'est imporrtant."
+   ],
+   "expl": "Avant **p** : **m**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Nous partons ensemble.",
+   "faux": [
+    "Nous partons ensenble.",
+    "Nous partons emsemble."
+   ],
+   "expl": "Avant **b** : **m**. / Ensemble."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Attention, ne tombe pas.",
+   "faux": [
+    "Attention, ne tonbe pas.",
+    "Atention, ne tombe pas."
+   ],
+   "expl": "Avant **b** : **m**. / Tombe."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "La chambre est propre.",
+   "vrai": true,
+   "expl": "Avant **b** : **m**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Il fait le conpte.",
+   "vrai": false,
+   "correction": "Il fait le compte.",
+   "expl": "Avant **p** : **m**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Je suis content.",
+   "vrai": true,
+   "expl": "Avant **t** : on garde **n**."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le début et la fin du mot",
+   "paires": [
+    [
+     "cham",
+     "bre"
+    ],
+    [
+     "im",
+     "portant"
+    ],
+    [
+     "en",
+     "semble"
+    ],
+    [
+     "tom",
+     "ber"
+    ]
+   ],
+   "expl": "Avant **b** ou **p** : **m**."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le mot et la bonne lettre",
+   "paires": [
+    [
+     "important",
+     "m avant p"
+    ],
+    [
+     "content",
+     "n avant t"
+    ],
+    [
+     "jambe",
+     "m avant b"
+    ],
+    [
+     "manger",
+     "n avant g"
+    ]
+   ],
+   "expl": "**m** seulement avant m, b, p."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "la jambe",
+   "faux": "la janbe",
+   "expl": "Avant **b** : **m**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "un timbre",
+   "faux": "un tinbre",
+   "expl": "Avant **b** : **m**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "emmener",
+   "faux": "enmener",
+   "expl": "Avant **m** : **m**."
+  },
+  {
+   "type": "completer",
+   "phrase": "J'ai mal à la ja___be.",
+   "reponse": "m",
+   "choix": [
+    "m",
+    "n",
+    "mm"
+   ],
+   "expl": "Avant **b** : **m**."
+  },
+  {
+   "type": "completer",
+   "phrase": "Je suis co___tent.",
+   "reponse": "n",
+   "choix": [
+    "n",
+    "m",
+    "nn"
+   ],
+   "expl": "Avant **t** : on garde **n**."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Mon fils est tombé à l'école.",
+   "expl": "Tombé : **m** avant b."
+  },
+  {
+   "type": "ordre",
+   "phrase": "C'est un rendez-vous important.",
+   "expl": "Important : **m** avant p."
+  }
+ ],
+ "orthographe-5": [
+  {
+   "type": "ecouter",
+   "phrase": "Un petit garçon.",
+   "faux": [
+    "Un peti garçon.",
+    "Un petis garçon."
+   ],
+   "expl": "Petit : un **t** muet."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Du lait chaud.",
+   "faux": [
+    "Du lai chaud.",
+    "Du laie chaud."
+   ],
+   "expl": "Lait : un **t** muet."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Un grand bruit.",
+   "faux": [
+    "Un gran bruit.",
+    "Un grand brui."
+   ],
+   "expl": "Grand : **d**. / Bruit : **t**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "J'ai mal aux dents.",
+   "vrai": true,
+   "expl": "Dent : pensez à dentiste. / **t**, et **s** au pluriel."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Mon enfan dort.",
+   "vrai": false,
+   "correction": "Mon enfant dort.",
+   "expl": "Enfant : pensez à **enfance**. / **t**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Il est à l'hôpital.",
+   "vrai": true,
+   "expl": "Le **h** ne s'entend pas."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le mot et le mot qui aide",
+   "paires": [
+    [
+     "petit",
+     "petite"
+    ],
+    [
+     "grand",
+     "grande"
+    ],
+    [
+     "lait",
+     "laitier"
+    ],
+    [
+     "sport",
+     "sportif"
+    ]
+   ],
+   "expl": "Un mot de la famille montre la lettre muette."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le mot et sa lettre muette",
+   "paires": [
+    [
+     "dent",
+     "un t muet"
+    ],
+    [
+     "gros",
+     "un s muet"
+    ],
+    [
+     "froid",
+     "un d muet"
+    ],
+    [
+     "tabac",
+     "un c muet"
+    ]
+   ],
+   "expl": "On ne les entend pas, mais on les écrit."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Il fait froid.",
+   "faux": "Il fait froi.",
+   "expl": "Froid : pensez à **froide**. / **d**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "un gros chien",
+   "faux": "un gro chien",
+   "expl": "Au féminin : gro**sse**. / **s**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "un homme",
+   "faux": "un omme",
+   "expl": "Homme : avec un **h** muet."
+  },
+  {
+   "type": "completer",
+   "phrase": "Un lon___ voyage.",
+   "reponse": "g",
+   "choix": [
+    "g",
+    "d",
+    "t"
+   ],
+   "expl": "Au féminin : lon**gue**. / **g**."
+  },
+  {
+   "type": "completer",
+   "phrase": "Un ri___ de lait.",
+   "reponse": "z",
+   "choix": [
+    "z",
+    "s",
+    "t"
+   ],
+   "expl": "Riz : avec un **z** muet."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Mon petit frère a froid.",
+   "expl": "Peti**t**, froi**d** : lettres muettes."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Le chat boit du lait.",
+   "expl": "Cha**t**, lai**t** : lettres muettes."
+  }
+ ],
+ "orthographe-6": [
+  {
+   "type": "ecouter",
+   "phrase": "Aujourd'hui, il fait beau.",
+   "faux": [
+    "Aujourdhui, il fait beau.",
+    "Aujourd'hui, il fait bau."
+   ],
+   "expl": "Aujourd'hui : avec une **apostrophe**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "D'accord, à demain.",
+   "faux": [
+    "Dacord, à demain.",
+    "D'acord, à demain."
+   ],
+   "expl": "D'accord : apostrophe et deux **c**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Peut-être demain.",
+   "faux": [
+    "Peut être demain.",
+    "Peu-être demain."
+   ],
+   "expl": "Possible : **peut-être**, avec un tiret."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Merci beaucoup.",
+   "vrai": true,
+   "expl": "Beaucoup : un **p** à la fin."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Il est toujour en retard.",
+   "vrai": false,
+   "correction": "Il est toujours en retard.",
+   "expl": "Toujours : un **s** à la fin."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Quelqu'un a appelé.",
+   "vrai": true,
+   "expl": "Quelqu'un : avec une **apostrophe**."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le mot et ce qu'il a de spécial",
+   "paires": [
+    [
+     "aujourd'hui",
+     "une apostrophe"
+    ],
+    [
+     "rendez-vous",
+     "un tiret"
+    ],
+    [
+     "beaucoup",
+     "un p muet"
+    ],
+    [
+     "toujours",
+     "un s muet"
+    ]
+   ],
+   "expl": "Ces mots sont à apprendre par cœur."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le mot et son sens",
+   "paires": [
+    [
+     "maintenant",
+     "en ce moment"
+    ],
+    [
+     "longtemps",
+     "pendant une longue durée"
+    ],
+    [
+     "toujours",
+     "tout le temps"
+    ],
+    [
+     "peut-être",
+     "c'est possible"
+    ]
+   ],
+   "expl": "Des mots très utiles."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "J'ai rendez-vous lundi.",
+   "faux": "J'ai rendez vous lundi.",
+   "expl": "Rendez-vous : avec un **tiret**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Il attend depuis longtemps.",
+   "faux": "Il attend depuis lontemps.",
+   "expl": "Longtemps : un **g** muet."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Je pars maintenant.",
+   "faux": "Je pars maintenent.",
+   "expl": "Maintenant : **-ant** à la fin."
+  },
+  {
+   "type": "completer",
+   "phrase": "Il y a ___ à la porte.",
+   "reponse": "quelqu'un",
+   "choix": [
+    "quelqu'un",
+    "quelquun",
+    "quelque un"
+   ],
+   "expl": "Quelqu'un : avec une **apostrophe**."
+  },
+  {
+   "type": "completer",
+   "phrase": "Je suis ___ avec vous.",
+   "reponse": "d'accord",
+   "choix": [
+    "d'accord",
+    "dacord",
+    "d'acord"
+   ],
+   "expl": "D'accord : apostrophe et deux **c**."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Aujourd'hui, je travaille beaucoup.",
+   "expl": "Aujourd'hui, beaucoup : à apprendre par cœur."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Il est peut-être malade.",
+   "expl": "Possible : **peut-être**, avec un tiret."
+  }
+ ]
+}

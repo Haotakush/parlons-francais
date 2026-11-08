@@ -187,7 +187,8 @@ function allSpeechTexts(){
   if(typeof ALL_LECONS !== "undefined") ALL_LECONS.forEach(l => {
     l.mots.forEach(([m]) => add(m));
     l.exemples.forEach(x => add(x));
-    l.pool.forEach(e => exoAudio(e).forEach(t => add(speakable(t))));
+    l.pool.forEach(e => { exoAudio(e).forEach(t => add(speakable(t))); add(lu(e.expl)); });
+    add(lu(l.regle)); if(l.astuce) add(lu(l.astuce));
   });
   if(typeof TEXTES_FIXES !== "undefined") TEXTES_FIXES.forEach(add);
   if(typeof UNITES !== "undefined") UNITES.forEach(u => u.but.forEach(add));
@@ -460,6 +461,9 @@ function exoTexte(e){
   return e.phrase;
 }
 const speakable = t => t.replace(/\s*→\s*/g, ", ");
+/* Texte d'une règle ou d'une explication (avec **gras**, listes, lignes) → texte à lire à voix haute */
+const lu = md => (md || "").split("\n").map(l => l.replace(/^\s*-\s+/, "").replace(/\*\*/g, "").replace(/\s*→\s*/g, ", ").replace(/\s+=\s+/g, ", ").trim())
+  .filter(Boolean).map(l => /[.!?:;…]$/.test(l) ? l : l + ".").join(" ");
 /* Tous les textes lus pendant un exercice (pour la liste des fichiers audio) */
 function exoTextes(e){
   if(e.type === "associer") return e.paires.flat();
@@ -486,152 +490,6 @@ function tableBlock(rows){
     el("thead", null, el("tr", null, rows[0].map(c => el("th", {html: fmt(c)})))),
     el("tbody", null, rows.slice(1).map(r => el("tr", null, r.map((c, i) => el(i ? "td" : "th", {html: fmt(c)})))))));
 }
-
-/* Un exercice : choisir / compléter / remettre dans l'ordre.
-   onAnswer(juste) est appelé une fois, après la réponse. */
-function exercice(e, onAnswer){
-  const full = exoTexte(e);
-  exoTextes(e).forEach(t => pageTexts.add(speakable(t)));
-  const fb = el("div", {class:"stack", style:"gap:10px"});
-  const feedback = (good, msg) => {
-    fb.replaceChildren(
-      el("div", {class: "note" + (good ? "" : " ko")}, ic(good ? "info" : "alert"),
-        el("span", {html: msg || (good ? "Bravo, c'est juste !" : "La bonne réponse : « " + esc(full) + " »")})),
-      el("div", {class:"card expl"}, el("b", null, "Pourquoi ?"), el("p", {html: nbsp(fmt(e.expl))})));
-    if(full) speak(speakable(full));
-    noterReponse(e, good);
-    onAnswer(good);
-  };
-  /* Boutons de réponse : un seul choix possible, la bonne réponse s'affiche en vert */
-  const boutons = (opts, right, cls, onPick) => {
-    let answered = false;
-    const list = opts.map(c => {
-      const b = el("button", {class:"choice" + (cls ? " " + cls : ""), type:"button"}, typeof c === "string" ? c : c.node);
-      b.dataset.v = typeof c === "string" ? c : c.v;
-      b.addEventListener("click", () => {
-        if(answered) return; answered = true;
-        const good = b.dataset.v === right;
-        b.classList.add(good ? "ok" : "ko");
-        if(!good) list.find(x => x.dataset.v === right).classList.add("ok");
-        onPick(good);
-      });
-      return b;
-    });
-    return list;
-  };
-  if(e.type === "ecouter"){
-    const right = e.phrase;
-    setTimeout(() => speak(e.phrase), 350);
-    return el("div", {class:"stack"},
-      el("h1", {style:"font-size:24px"}, "Écoutez, puis choisissez la phrase"),
-      el("button", {class:"listen", type:"button", "aria-label":"Écouter la phrase", onclick:() => speak(e.phrase)}, el("span", {html: ICON.sound}), "Écouter"),
-      el("div", {class:"stack", style:"gap:10px"}, boutons(shuffle([e.phrase, ...e.faux]), right, "long", good => feedback(good))),
-      fb);
-  }
-  if(e.type === "vraifaux"){
-    const right = e.vrai ? "vrai" : "faux";
-    const msg = good => e.vrai
-      ? (good ? "Bravo, la phrase est juste !" : "Cette phrase est juste.")
-      : (good ? "Bravo ! La phrase juste : « " + esc(e.correction) + " »" : "La phrase est fausse. La phrase juste : « " + esc(e.correction) + " »");
-    return el("div", {class:"stack"},
-      el("h1", {style:"font-size:24px"}, "Cette phrase est-elle juste ?"),
-      el("div", {class:"card row", style:"gap:12px"},
-        el("button", {class:"iconbtn", type:"button", "aria-label":"Écouter", html: ICON.sound, onclick:() => speak(e.phrase)}),
-        el("div", {class:"qsentence grow", style:"font-size:21px"}, e.phrase)),
-      el("div", {class:"choices"}, boutons([{v:"vrai", node: el("span", {class:"row", style:"gap:8px;justify-content:center"}, el("span", {html: ICON.checkSm}), "Juste")},
-        {v:"faux", node: el("span", {class:"row", style:"gap:8px;justify-content:center"}, el("span", {html: ICON.x}), "Fausse")}], right, "", good => feedback(good, msg(good)))),
-      fb);
-  }
-  if(e.type === "associer"){
-    const gauche = shuffle(e.paires.map((p, k) => ({t: p[0], k}))), droite = shuffle(e.paires.map((p, k) => ({t: p[1], k})));
-    let pick = null, faits = 0, fautes = 0;
-    const btn = (x, cote) => {
-      const b = el("button", {class:"pair", type:"button"}, x.t);
-      b.addEventListener("click", () => {
-        if(b.classList.contains("ok")) return;
-        speak(x.t);
-        if(!pick || pick.cote === cote){
-          if(pick) pick.b.classList.remove("sel");
-          pick = {x, cote, b}; b.classList.add("sel"); return;
-        }
-        if(pick.x.k === x.k){
-          b.classList.add("ok"); pick.b.classList.remove("sel"); pick.b.classList.add("ok"); pick = null; faits++;
-          if(faits === e.paires.length) feedback(fautes === 0, fautes === 0 ? "Bravo, tout est juste !" : "C'est fini ! " + pluriel(fautes, "erreur") + " en chemin.");
-        } else {
-          fautes++;
-          const a = pick.b; a.classList.remove("sel"); pick = null;
-          [a, b].forEach(z => { z.classList.add("ko"); setTimeout(() => z.classList.remove("ko"), 600); });
-        }
-      });
-      return b;
-    };
-    return el("div", {class:"stack"},
-      el("h1", {style:"font-size:24px"}, e.consigne || "Reliez les paires"),
-      el("p", {class:"soft", style:"margin:0"}, "Touchez un mot à gauche, puis le mot qui va avec à droite."),
-      el("div", {class:"assoc"}, el("div", {class:"stack", style:"gap:10px"}, gauche.map(x => btn(x, "g"))), el("div", {class:"stack", style:"gap:10px"}, droite.map(x => btn(x, "d")))),
-      fb);
-  }
-  if(e.type === "choisir" || e.type === "completer"){
-    let answered = false, choices;
-    const opts = e.type === "choisir" ? shuffle([e.juste, e.faux]) : shuffle(e.choix);
-    const right = e.type === "choisir" ? e.juste : e.reponse;
-    choices = opts.map(c => {
-      const b = el("button", {class:"choice" + (e.type === "choisir" ? " long" : ""), type:"button"}, c);
-      b.addEventListener("click", () => {
-        if(answered) return; answered = true;
-        const good = c === right;
-        b.classList.add(good ? "ok" : "ko");
-        if(!good) choices.find(x => x.textContent === right).classList.add("ok");
-        feedback(good);
-      });
-      return b;
-    });
-    const parts = e.type === "completer" ? e.phrase.split("___") : null;
-    return el("div", {class:"stack"},
-      el("h1", {style:"font-size:24px"}, e.type === "choisir" ? (!e.consigne ? "Quelle phrase est juste ?" : /^(la|le|les)\b/.test(e.consigne) ? "Choisissez " + e.consigne : "Quelle phrase est juste, " + e.consigne + " ?") : "Complétez la phrase"),
-      parts ? el("div", {class:"card"}, el("div", {class:"qsentence"}, parts[0], el("span", {class:"blank"}, "?"), parts[1] || "")) : null,
-      el("div", {class: e.type === "choisir" ? "stack" : "choices", style: e.type === "choisir" ? "gap:10px" : null}, choices),
-      fb);
-  }
-  // remettre dans l'ordre
-  const tokenize = s => s.split(" ").reduce((acc, w) => {
-    if(/^[?!:;,.]$/.test(w) && acc.length) acc[acc.length - 1] += " " + w; else acc.push(w);
-    return acc;
-  }, []);
-  const words = tokenize(e.phrase);
-  let bank = shuffle(words.map((w, k) => ({w, k})));
-  if(words.length > 1 && bank.every((b, k) => b.k === k)) bank.reverse();
-  let answer = [], done = false;
-  const ansBox = el("div", {class:"answer"}), bankBox = el("div", {class:"bank"}), row = el("div", {class:"stats"});
-  function draw(){
-    ansBox.replaceChildren(...answer.map((b, idx) => el("button", {class:"word", type:"button", onclick:() => { if(done) return; answer.splice(idx, 1); bank.push(b); draw(); }}, b.w)));
-    bankBox.replaceChildren(...bank.map((b, idx) => el("button", {class:"word", type:"button", onclick:() => { if(done) return; bank.splice(idx, 1); answer.push(b); draw(); }}, b.w)));
-  }
-  let essais = 0;
-  function check(){
-    if(bank.length){ fb.replaceChildren(el("div", {class:"note warm"}, ic("info"), "Placez tous les mots.")); return; }
-    const good = answer.map(b => b.w).join(" ") === words.join(" ");
-    essais++;
-    if(good || essais >= 2){
-      done = true;
-      if(!good){ answer = words.map((w, k) => ({w, k})); bank = []; draw(); }
-      ansBox.className = "answer " + (good ? "ok" : "ko");
-      row.replaceChildren();
-      feedback(good);
-    } else {
-      ansBox.className = "answer"; void ansBox.offsetWidth; ansBox.className = "answer ko";
-      fb.replaceChildren(el("div", {class:"note ko"}, ic("alert"), "Pas tout à fait. Écoutez la phrase et réessayez."));
-    }
-  }
-  row.append(
-    el("button", {class:"btn outline", type:"button", onclick:() => speak(e.phrase)}, el("span", {html: ICON.sound}), "Écouter"),
-    el("button", {class:"btn", type:"button", onclick: check}, "Vérifier"));
-  draw();
-  return el("div", {class:"stack"},
-    el("h1", {style:"font-size:24px"}, "Remettez les mots dans l'ordre"),
-    ansBox, bankBox, row, fb);
-}
-
 
 /* =========================================================
    LE PARCOURS (unités de js/parcours.js)
@@ -678,7 +536,8 @@ function cheminUnite(u){
    LES EXERCICES, UN ÉCRAN À LA FOIS (comme Duolingo)
    Consigne lue à voix haute, bouton Vérifier en bas, bandeau vert ou rouge.
    ========================================================= */
-const TEXTES_FIXES = ["Bravo !", "Pas tout à fait.",
+const ASTUCE = "Astuce.", HINT_ASSOC = "Touchez un mot à gauche, puis le mot qui va avec à droite.", ECOUTEZ = "Écoutez, puis répétez.";
+const TEXTES_FIXES = ["Bravo !", "Pas tout à fait.", ASTUCE, HINT_ASSOC, ECOUTEZ,
   "Touchez la phrase juste.", "Touchez le mot qui manque.", "Écoutez. Remettez les mots dans l'ordre.",
   "Écoutez. Touchez la bonne phrase.", "Écoutez. Cette phrase est-elle juste ?",
   "Chaque jour, appuyez sur Continuer.", "L'appli choisit la leçon pour vous.", "Une leçon dure 10 minutes.",
@@ -695,7 +554,8 @@ function consigneDe(e){
   }
   return "";
 }
-const enonceDe = e => e.type === "completer" ? e.phrase.replace("___", "…").replace(/(['’]) /g, "$1")
+/* Énoncé lu : la phrase avec un blanc. Si le blanc est au milieu d'un mot (fr___re), on lit le mot entier. */
+const enonceDe = e => e.type === "completer" ? (/[\p{L}]___|___[\p{L}]/u.test(e.phrase) ? exoTexte(e) : e.phrase.replace("___", "…").replace(/(['’]) /g, "$1"))
   : ["ordre", "ecouter", "vraifaux"].includes(e.type) ? e.phrase : null;
 /* Tous les textes qu'on peut entendre pendant un exercice (pour générer l'audio) */
 function exoAudio(e){
@@ -708,7 +568,7 @@ const spkBtn = (onclick, label, cls) => el("button", {class:"spk" + (cls ? " " +
 function exo(e, cb){
   const consigne = consigneDe(e), enonce = enonceDe(e);
   exoAudio(e).forEach(t => pageTexts.add(speakable(t)));
-  const lire = () => speakSeq([consigne, enonce].filter(Boolean));
+  const lire = () => speakSeq([consigne, e.type === "associer" ? HINT_ASSOC : enonce].filter(Boolean));
   const tete = el("div", {class:"row", style:"justify-content:space-between;align-items:flex-start;gap:12px"},
     el("h1", {class:"consigne"}, consigne), spkBtn(lire, "Écouter la consigne"));
   let choix = null, fige = false;
@@ -731,6 +591,7 @@ function exo(e, cb){
     return choix === right;
   };
   const res = {consigne, enonce, auto: false, autoEnonce: e.type === "ecouter" || e.type === "vraifaux"};
+  if(e.type === "associer"){ res.enonce = HINT_ASSOC; res.autoEnonce = true; }
 
   if(e.type === "choisir"){
     res.node = el("div", {class:"stack"}, tete, el("div", {class:"stack", style:"gap:10px"}, options(shuffle([e.juste, e.faux]), "long", true)));
@@ -780,7 +641,7 @@ function exo(e, cb){
       return b;
     };
     res.node = el("div", {class:"stack"}, tete,
-      el("p", {class:"soft", style:"margin:0"}, "Touchez un mot à gauche, puis le mot qui va avec à droite."),
+      el("p", {class:"falc", style:"margin:0"}, HINT_ASSOC),
       el("div", {class:"assoc"}, el("div", {class:"stack", style:"gap:10px"}, gauche.map(x => btn(x, "g"))), el("div", {class:"stack", style:"gap:10px"}, droite.map(x => btn(x, "d")))));
   } else { // ordre
     const tokenize = t => t.split(" ").reduce((acc, w) => { if(/^[?!:;,.]$/.test(w) && acc.length) acc[acc.length - 1] += " " + w; else acc.push(w); return acc; }, []);
@@ -835,16 +696,19 @@ function serie(exos, o){
       noterReponse(e, good);
       const full = exoTexte(e);
       const dire = [good ? "Bravo !" : "Pas tout à fait.", full].filter(Boolean);
+      const pourquoi = lu(e.expl);
       foot.className = "footer exo-foot sheet " + (good ? "ok" : "ko");
       foot.replaceChildren(...[
         el("div", {class:"row", style:"justify-content:space-between;gap:12px"},
           el("b", {class:"sheet-t"}, el("span", {class:"sheet-ic", html: good ? ICON.checkSm : ICON.x}), good ? "Bravo !" : "Pas tout à fait"),
-          spkBtn(() => speakSeq(dire), "Écouter")),
+          spkBtn(() => speakSeq([...dire, pourquoi]), "Écouter")),
         msg || (!good && full) ? el("div", {class:"sheet-m", html: msg || "La bonne réponse : <b>" + esc(full) + "</b>"}) : null,
-        el("div", {class:"sheet-why"}, el("span", {class:"k"}, "Pourquoi ?"), el("p", {html: nbsp(fmt(e.expl))})),
+        el("div", {class:"sheet-why"},
+          el("div", {class:"row", style:"justify-content:space-between;gap:10px"}, el("span", {class:"k"}, "Pourquoi ?"), spkBtn(() => speak(pourquoi), "Écouter le pourquoi", "sm")),
+          mdBlock(e.expl)),
         !good ? el("p", {class:"sheet-note"}, "Cet exercice reviendra dans Réviser.") : null,
         el("button", {class:"btn", type:"button", onclick:() => { idx++; draw(); }}, idx === exos.length - 1 ? "Terminer" : "Continuer")].filter(Boolean));
-      speakSeq(dire);
+      speakSeq(pget("lireConsignes", true) ? [...dire, pourquoi] : dire);
     };
     const x = exo(e, {ready: r => { verif.disabled = !r; }, fini: resultat});
     verif.addEventListener("click", () => { const r = x.verifier(); if(r) resultat(r.good, r.msg); });
@@ -999,7 +863,9 @@ const PAGES = {
         el("div", {class:"row", style:"justify-content:space-between;gap:10px"},
           el("span", {class:"hero-k"}, "Unité " + (u.n + 1) + " · " + u.titre),
           el("a", {href:"#/guide/" + u.n, class:"hero-guide"}, el("span", {html: ICON.bookOpen}), "Le guide")),
-        el("span", {class:"hero-d"}, u.but.flatMap((t, i) => i ? [el("br"), t] : [t])),
+        el("div", {class:"row", style:"gap:10px;align-items:flex-start"},
+          el("span", {class:"hero-d grow"}, u.but.flatMap((t, i) => i ? [el("br"), t] : [t])),
+          spkBtn(() => speakSeq(u.but), "Écouter", "sm hero-spk")),
         el("div", {class:"hero-bar", "aria-label": faits + " étapes sur " + total}, el("div", {style:"width:" + Math.round(faits / total * 100) + "%"})),
         cur ? el("a", {href: cur.href, class:"hero-btn"}, el("span", {html: ICON.play}), "Continuer")
           : el("span", {class:"hero-btn"}, "Tout est fini, bravo !")),
@@ -1061,8 +927,8 @@ const PAGES = {
     return {kids:[pageHead("Le guide"), el("h1", null, "Unité " + (u.n + 1) + " · " + u.titre),
       el("p", {class:"muted", style:"margin:0"}, "Les règles de l'unité, à relire quand vous voulez."),
       ...ls.map(l => el("div", {class:"card stack", style:"gap:10px"},
-        el("div", {class:"row", style:"justify-content:space-between;gap:10px"}, el("h2", null, l.titre),
-          el("a", {href:"#/lecont/" + l.id, class:"soft", style:"font-weight:600"}, "Leçon")),
+        el("div", {class:"row", style:"justify-content:space-between;gap:10px"}, el("h2", {class:"grow"}, l.titre),
+          spkBtn(() => speakSeq([lu(l.regle), ...(l.astuce ? [ASTUCE, lu(l.astuce)] : [])]), "Écouter la règle", "sm")),
         mdBlock(l.regle),
         l.astuce ? el("div", {class:"note warm"}, ic("info"), el("div", null, el("b", null, "Astuce : "), mdBlock(l.astuce))) : null))]};
   },
@@ -1435,7 +1301,10 @@ const PAGES = {
       const kicker = txt => el("span", {class:"muted", style:"font-size:14px;font-weight:600"}, txt);
       let body = [], label;
       if(etape === 0){
-        body = [kicker("La règle"), el("h1", {style:"font-size:27px"}, l.titre)];
+        const regleLue = [lu(l.regle), ...(l.astuce ? [ASTUCE, lu(l.astuce)] : [])];
+        body = [kicker("La règle"), el("div", {class:"row", style:"justify-content:space-between;align-items:flex-start;gap:12px"},
+          el("h1", {style:"font-size:27px"}, l.titre), spkBtn(() => speakSeq(regleLue), "Écouter la règle"))];
+        if(pget("lireConsignes", true)) setTimeout(() => speakSeq(regleLue), 400);
         if(l.mots.length) body.push(el("div", {class:"list"}, l.mots.map(([m, d]) => {
           pageTexts.add(m);
           return el("button", {type:"button", onclick:() => speak(m)}, ic("soundSm", "lic"),
@@ -1446,7 +1315,8 @@ const PAGES = {
         if(l.astuce) body.push(el("div", {class:"note warm"}, ic("info"), el("div", null, el("b", null, "Astuce : "), mdBlock(l.astuce))));
         label = "Voir les exemples";
       } else {
-        body = [kicker("Les exemples"), el("h1", {style:"font-size:27px"}, "Écoutez, puis répétez"),
+        body = [kicker("Les exemples"), el("div", {class:"row", style:"justify-content:space-between;align-items:flex-start;gap:12px"},
+          el("h1", {style:"font-size:27px"}, "Écoutez, puis répétez"), spkBtn(() => speakSeq([ECOUTEZ, ...l.exemples.map(x => x.replace(/\*\*/g, ""))]), "Écouter les exemples")),
           el("div", {class:"card"}, l.exemples.map(x => exLine(x))),
           el("p", {class:"soft", style:"margin:0"}, "Touchez une phrase pour l'écouter.")];
         label = "Commencer les exercices";

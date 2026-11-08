@@ -42,7 +42,9 @@ beta/                 La version BÊTA (adresse /beta/) : copie de index.html, c
                       beta/js/parcours.js : les 10 unités du parcours (UNITES). Onglets de la bêta : Parcours, Réviser, Profil.
                       Exercices : exo() + serie() (un écran à la fois, Vérifier, bandeau). Consignes : consigneDe().
 tools/                Scripts Python : lister les textes, générer l'audio, découper un enregistrement,
-                      construire_exercices.py (vérifie tools/exercices/*.json et écrit beta/js/exercices.js)
+                      construire_beta.py : js/lecons.js + tools/falc/*.json (textes FALC) → beta/js/lecons.js,
+                      puis construire_exercices.py (vérifie tools/exercices/*.json → beta/js/exercices.js).
+                      Dans ces JSON, « / » sépare les lignes (une idée par ligne), « - » fait une liste.
 docs/                 CONTENU.md (ajouter du contenu), AUDIO.md (les voix)
 ```
 
@@ -72,6 +74,9 @@ Navigation par « hash » (`#/sons`, `#/cat/garage`, `#/lecon`…). Chaque page 
 
 **Contenu**
 - Ajouter ou modifier du texte **uniquement dans `js/contenu.js` ou `js/lecons.js`** (format : `docs/CONTENU.md`).
+  Pour la bêta : `tools/falc/` et `tools/exercices/`, puis `python3 tools/construire_beta.py`.
+- **Écrire en FALC** (Facile à lire et à comprendre) : une idée par ligne, phrases courtes, mots de tous les jours,
+  pas de parenthèses, un exemple tiré de la vie des parents. Tout texte affiché doit pouvoir s'écouter.
 - Chaque leçon de thème suit toujours le même modèle : règle, astuce, pour retenir, exemples, 8 exercices (choisir / compléter / ordre), chacun avec une explication. Ne pas inventer un nouveau type d'exercice sans l'accord d'Eric.
 - Après un changement de texte prononcé : régénérer l'audio (`docs/AUDIO.md`). Sinon, l'appli utilise la voix du téléphone, qui est moins bonne.
 

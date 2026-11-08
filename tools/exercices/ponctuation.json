@@ -1,0 +1,738 @@
+{
+ "ponctuation-1": [
+  {
+   "type": "ecouter",
+   "phrase": "Le rendez-vous est lundi.",
+   "faux": [
+    "Le rendez-vous est mardi.",
+    "Le rendez-vous est jeudi."
+   ],
+   "expl": "On entend **lundi**. / Pas de majuscule."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Il parle français.",
+   "faux": [
+    "Il parle anglais.",
+    "Il parle arabe."
+   ],
+   "expl": "On entend **français**. / Pas de majuscule."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "J'habite à Lyon.",
+   "faux": [
+    "J'habite à Lille.",
+    "J'habite à Nice."
+   ],
+   "expl": "On entend **Lyon**. / Une ville : majuscule."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Mon fils s'appelle Adam.",
+   "vrai": true,
+   "expl": "Majuscule au début et au prénom."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Nous partons en Juillet.",
+   "vrai": false,
+   "correction": "Nous partons en juillet.",
+   "expl": "Les mois : pas de majuscule."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "ma fille est à l'école.",
+   "vrai": false,
+   "correction": "Ma fille est à l'école.",
+   "expl": "Début de la phrase : **majuscule**."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le mot et la règle",
+   "paires": [
+    [
+     "Lyon",
+     "majuscule : une ville"
+    ],
+    [
+     "lundi",
+     "pas de majuscule : un jour"
+    ],
+    [
+     "Adam",
+     "majuscule : un prénom"
+    ],
+    [
+     "janvier",
+     "pas de majuscule : un mois"
+    ]
+   ],
+   "expl": "Majuscule : prénoms, villes, pays."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le mot et ce qu'il est",
+   "paires": [
+    [
+     "la France",
+     "un pays"
+    ],
+    [
+     "le français",
+     "une langue"
+    ],
+    [
+     "les Français",
+     "les personnes"
+    ],
+    [
+     "Paris",
+     "une ville"
+    ]
+   ],
+   "expl": "La langue : pas de majuscule."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Ma sœur habite en Algérie.",
+   "faux": "ma sœur habite en algérie.",
+   "expl": "Majuscule au début et au pays."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Le marché est ouvert le dimanche.",
+   "faux": "Le marché est ouvert le Dimanche.",
+   "expl": "Les jours : pas de majuscule."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "J'apprends le français.",
+   "faux": "J'apprends le Français.",
+   "expl": "La langue : pas de majuscule."
+  },
+  {
+   "type": "completer",
+   "phrase": "Mon anniversaire est en ___.",
+   "reponse": "mars",
+   "choix": [
+    "mars",
+    "Mars",
+    "MARS"
+   ],
+   "expl": "Les mois : pas de majuscule."
+  },
+  {
+   "type": "completer",
+   "phrase": "Nous allons à ___ samedi.",
+   "reponse": "Marseille",
+   "choix": [
+    "Marseille",
+    "marseille",
+    "MARSEILLE"
+   ],
+   "expl": "Une ville : majuscule."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Mon mari travaille à Lyon.",
+   "expl": "Majuscule au début et à **Lyon**."
+  },
+  {
+   "type": "ordre",
+   "phrase": "La réunion est jeudi.",
+   "expl": "**jeudi** : pas de majuscule. / Un point à la fin."
+  }
+ ],
+ "ponctuation-2": [
+  {
+   "type": "ecouter",
+   "phrase": "Hier, il a plu.",
+   "faux": [
+    "Hier, il a neigé.",
+    "Demain, il va pleuvoir."
+   ],
+   "expl": "On entend **hier** puis une petite pause."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "C'est cher, mais c'est bon.",
+   "faux": [
+    "C'est cher, donc c'est bon.",
+    "C'est cher et c'est bon."
+   ],
+   "expl": "On entend **mais**. / Une virgule avant mais."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "J'achète du pain, du lait et des œufs.",
+   "faux": [
+    "J'achète du pain et du lait.",
+    "J'achète du pain, du riz et des œufs."
+   ],
+   "expl": "Une liste : des virgules. / Pas avant **et**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Ce soir, je travaille.",
+   "vrai": true,
+   "expl": "Une virgule après **Ce soir**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Il pleut mais, je sors.",
+   "vrai": false,
+   "correction": "Il pleut, mais je sors.",
+   "expl": "La virgule va **avant** mais."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Je prends des pommes, des poires et des bananes.",
+   "vrai": true,
+   "expl": "Des virgules dans la liste. / Pas avant le dernier **et**."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le début et la fin",
+   "paires": [
+    [
+     "Demain,",
+     "je travaille."
+    ],
+    [
+     "Bonjour Madame,",
+     "je vous écris."
+    ],
+    [
+     "C'est loin,",
+     "mais j'y vais."
+    ],
+    [
+     "Du pain,",
+     "du lait et du sucre."
+    ]
+   ],
+   "expl": "La virgule : une petite pause."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez où va la virgule",
+   "paires": [
+    [
+     "dans une liste",
+     "entre les choses"
+    ],
+    [
+     "Hier",
+     "après le mot"
+    ],
+    [
+     "mais",
+     "avant le mot"
+    ],
+    [
+     "et",
+     "jamais avant le dernier"
+    ]
+   ],
+   "expl": "Les règles de la virgule."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Ce matin, j'ai vu le médecin.",
+   "faux": "Ce matin j'ai, vu le médecin.",
+   "expl": "La pause après **Ce matin**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Bonjour Monsieur, votre voiture est prête.",
+   "faux": "Bonjour, Monsieur votre voiture est prête.",
+   "expl": "Une virgule après **Bonjour Monsieur**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Il est malade, donc il reste au lit.",
+   "faux": "Il est malade donc, il reste au lit.",
+   "expl": "La virgule va **avant** donc."
+  },
+  {
+   "type": "completer",
+   "phrase": "Lundi___ je vais à la mairie.",
+   "reponse": ",",
+   "choix": [
+    ",",
+    ".",
+    "?"
+   ],
+   "expl": "Après **Lundi** : une virgule."
+  },
+  {
+   "type": "completer",
+   "phrase": "J'ai acheté des tomates, des oignons ___ des carottes.",
+   "reponse": "et",
+   "choix": [
+    "et",
+    ", et",
+    ","
+   ],
+   "expl": "Avant le dernier : **et**, sans virgule."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Hier, nous sommes allés au parc.",
+   "expl": "**Hier** + une virgule."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Je suis fatigué, mais content.",
+   "expl": "Une virgule **avant** mais."
+  }
+ ],
+ "ponctuation-3": [
+  {
+   "type": "ecouter",
+   "phrase": "Vous venez demain ?",
+   "faux": [
+    "Vous venez demain.",
+    "Vous venez lundi ?"
+   ],
+   "expl": "La voix monte : c'est une question. / **?**"
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Attention !",
+   "faux": [
+    "Attention.",
+    "À demain !"
+   ],
+   "expl": "La voix est forte : **!**"
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Combien ça coûte ?",
+   "faux": [
+    "Ça coûte combien.",
+    "Combien ça coûte."
+   ],
+   "expl": "La voix monte : **?**"
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Quelle belle journée !",
+   "vrai": true,
+   "expl": "On est content : **!**"
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Où est la gare.",
+   "vrai": false,
+   "correction": "Où est la gare ?",
+   "expl": "Une question : **?**"
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Le magasin ouvre à neuf heures.",
+   "vrai": true,
+   "expl": "Une information : **un point**."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez la phrase et le bon signe",
+   "paires": [
+    [
+     "Tu as faim",
+     "? point d'interrogation"
+    ],
+    [
+     "Bravo",
+     "! point d'exclamation"
+    ],
+    [
+     "Il fait beau",
+     ". un point"
+    ],
+    [
+     "Bonjour Madame",
+     ", une virgule"
+    ]
+   ],
+   "expl": "Question : **?** / Émotion : **!** / Information : **.**"
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le signe et son rôle",
+   "paires": [
+    [
+     "? point d'interrogation",
+     "une question"
+    ],
+    [
+     "! point d'exclamation",
+     "une émotion"
+    ],
+    [
+     ". un point",
+     "une information"
+    ],
+    [
+     ", une virgule",
+     "une petite pause"
+    ]
+   ],
+   "expl": "Chaque signe a un rôle."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Tu viens avec moi ?",
+   "faux": "Tu viens avec moi !",
+   "expl": "On demande : **?**"
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Merci beaucoup !",
+   "faux": "Merci beaucoup ?",
+   "expl": "On remercie avec joie : **!**"
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Est-ce que le médecin est là ?",
+   "faux": "Est-ce que le médecin est là.",
+   "expl": "Est-ce que : une question. / **?**"
+  },
+  {
+   "type": "completer",
+   "phrase": "Comment tu t'appelles ___",
+   "reponse": "?",
+   "choix": [
+    "?",
+    "!",
+    "."
+   ],
+   "expl": "Une question : **?**"
+  },
+  {
+   "type": "completer",
+   "phrase": "Joyeux anniversaire ___",
+   "reponse": "!",
+   "choix": [
+    "!",
+    "?",
+    "."
+   ],
+   "expl": "Une émotion : **!**"
+  },
+  {
+   "type": "ordre",
+   "phrase": "Pourquoi tu pleures ?",
+   "expl": "Une question : **?** à la fin."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Fais attention à la route !",
+   "expl": "Un ordre : **!** à la fin."
+  }
+ ],
+ "ponctuation-4": [
+  {
+   "type": "ecouter",
+   "phrase": "J'ai faim.",
+   "faux": [
+    "Je ai faim.",
+    "J'ai froid."
+   ],
+   "expl": "Avant **a** : je devient **j'**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Il n'a pas le temps.",
+   "faux": [
+    "Il ne a pas le temps.",
+    "Il a le temps."
+   ],
+   "expl": "Avant **a** : ne devient **n'**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Qu'est-ce que c'est ?",
+   "faux": [
+    "Que est-ce que c'est ?",
+    "Qu'est-ce que tu dis ?"
+   ],
+   "expl": "Avant **e** : que devient **qu'**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "L'hôpital est loin.",
+   "vrai": true,
+   "expl": "Le **h** ne s'entend pas : **l'**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Je aime le thé.",
+   "vrai": false,
+   "correction": "J'aime le thé.",
+   "expl": "Avant **a** : je devient **j'**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "D'accord, je viens.",
+   "vrai": true,
+   "expl": "D'accord : avec **d'**."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le mot et sa forme avec apostrophe",
+   "paires": [
+    [
+     "je",
+     "j'ai"
+    ],
+    [
+     "le",
+     "l'école"
+    ],
+    [
+     "ne",
+     "il n'a pas"
+    ],
+    [
+     "que",
+     "qu'est-ce que"
+    ]
+   ],
+   "expl": "Avant une voyelle, on met une apostrophe."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez le début et la fin",
+   "paires": [
+    [
+     "J'",
+     "habite ici."
+    ],
+    [
+     "L'",
+     "école est fermée."
+    ],
+    [
+     "Il n'",
+     "aime pas ça."
+    ],
+    [
+     "Je",
+     "mange."
+    ]
+   ],
+   "expl": "Avant une consonne : on garde **je**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Elle s'appelle Nora.",
+   "faux": "Elle se appelle Nora.",
+   "expl": "Avant **a** : se devient **s'**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Je n'ai pas de voiture.",
+   "faux": "Je ne ai pas de voiture.",
+   "expl": "Avant **a** : ne devient **n'**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Je mange à midi.",
+   "faux": "J'mange à midi.",
+   "expl": "Avant **m** : on garde **je**."
+  },
+  {
+   "type": "completer",
+   "phrase": "___ enfant joue dehors.",
+   "reponse": "L'",
+   "choix": [
+    "L'",
+    "Le",
+    "La"
+   ],
+   "expl": "Avant **e** : **l'**."
+  },
+  {
+   "type": "completer",
+   "phrase": "Je ___ en ai pas.",
+   "reponse": "n'",
+   "choix": [
+    "n'",
+    "ne",
+    "pas"
+   ],
+   "expl": "Avant **e** : ne devient **n'**."
+  },
+  {
+   "type": "ordre",
+   "phrase": "J'attends l'autobus avec mon fils.",
+   "expl": "**J'**attends. / **L'**autobus."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Qu'est-ce qu'il veut ?",
+   "expl": "**Qu'**est-ce. / **Qu'**il."
+  }
+ ],
+ "ponctuation-5": [
+  {
+   "type": "ecouter",
+   "phrase": "Bonjour Madame, mon fils est malade aujourd'hui.",
+   "faux": [
+    "Bonjour Madame, mon fils est absent demain.",
+    "Salut, mon fils est malade."
+   ],
+   "expl": "On entend **Bonjour Madame** et **malade aujourd'hui**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Votre voiture est prête. Bonne journée.",
+   "faux": [
+    "Votre voiture n'est pas prête.",
+    "Votre voiture est prête demain."
+   ],
+   "expl": "On entend **est prête**."
+  },
+  {
+   "type": "ecouter",
+   "phrase": "Je voudrais prendre rendez-vous.",
+   "faux": [
+    "Je voudrais annuler le rendez-vous.",
+    "Je veux un rendez-vous."
+   ],
+   "expl": "On entend **prendre rendez-vous**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Bonjour Madame, ma fille ne viendra pas demain. Merci.",
+   "vrai": true,
+   "expl": "Bonjour, le message, Merci. / C'est un bon message."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Slt, mon fils vient pas.",
+   "vrai": false,
+   "correction": "Bonjour, mon fils ne viendra pas.",
+   "expl": "Pas d'abréviation. / À l'écrit : **ne… pas**."
+  },
+  {
+   "type": "vraifaux",
+   "phrase": "Cordialement, Ali Benali.",
+   "vrai": true,
+   "expl": "Une fin polie et la signature."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez la partie et l'exemple",
+   "paires": [
+    [
+     "le début",
+     "Bonjour Madame,"
+    ],
+    [
+     "le message",
+     "Mon fils est malade."
+    ],
+    [
+     "la fin",
+     "Cordialement,"
+    ],
+    [
+     "la signature",
+     "Prénom Nom"
+    ]
+   ],
+   "expl": "Un message sérieux a 4 parties."
+  },
+  {
+   "type": "associer",
+   "consigne": "Reliez l'abréviation et le mot entier",
+   "paires": [
+    [
+     "svp",
+     "s'il vous plaît"
+    ],
+    [
+     "stp",
+     "s'il te plaît"
+    ],
+    [
+     "rdv",
+     "rendez-vous"
+    ],
+    [
+     "slt",
+     "salut"
+    ]
+   ],
+   "expl": "Dans un message sérieux, on écrit le mot entier."
+  },
+  {
+   "type": "choisir",
+   "consigne": "à la maîtresse",
+   "juste": "Bonjour Madame, pouvez-vous me rappeler ?",
+   "faux": "Salut, tu peux me rappeler ?",
+   "expl": "À la maîtresse : **Bonjour Madame**, **vous**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "à un client",
+   "juste": "Bonjour, votre devis est prêt. Cordialement.",
+   "faux": "Coucou, ton devis est prêt. Bisous.",
+   "expl": "À un client : **Bonjour**, **votre**, **Cordialement**."
+  },
+  {
+   "type": "choisir",
+   "consigne": "",
+   "juste": "Merci de votre réponse.",
+   "faux": "Merci de votre réponse svp.",
+   "expl": "Pas d'abréviation."
+  },
+  {
+   "type": "completer",
+   "phrase": "___ Madame, je vous écris pour mon fils.",
+   "reponse": "Bonjour",
+   "choix": [
+    "Bonjour",
+    "Salut",
+    "Coucou"
+   ],
+   "expl": "Un message sérieux : **Bonjour**."
+  },
+  {
+   "type": "completer",
+   "phrase": "Merci beaucoup. ___ journée !",
+   "reponse": "Bonne",
+   "choix": [
+    "Bonne",
+    "Bon",
+    "Bonnes"
+   ],
+   "expl": "Une journée : **bonne**."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Bonjour Monsieur, je voudrais un rendez-vous.",
+   "expl": "D'abord **Bonjour Monsieur**. / Puis le message."
+  },
+  {
+   "type": "ordre",
+   "phrase": "Merci et bonne journée.",
+   "expl": "La fin du message : **Merci**."
+  }
+ ]
+}
