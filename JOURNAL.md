@@ -4,6 +4,18 @@ Une entrée par séance de travail, la plus récente en haut. Pour chaque séanc
 
 ---
 
+## 2026-11-09 — Plume animée mise en réserve
+
+**Fait**
+- Les 3 vidéos d'Eric (bonjour, réfléchis, bravo) sont détourées et converties en WebP animé (marche aussi sur iPhone, contrairement au WebM transparent ; plus propre et plus léger qu'un GIF).
+- Rangées dans `tools/plume/animations/` (3 secondes chacune, environ 600 Ko).
+
+**Décidé**
+- Pas dans l'appli pour le moment : on les garde en réserve.
+- Idées d'accueil (menu avec tuiles, façon jeu mobile) : abandonnées pour le moment, on y reviendra plus tard.
+
+---
+
 ## 2026-11-09 — v12 (bêta) : le voyage de Plume et les petites animations
 
 **Demande d'Eric**
