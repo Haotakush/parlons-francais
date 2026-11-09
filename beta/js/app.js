@@ -62,9 +62,13 @@ const VOIX = {femme:{id:"kore", label:"👩 Femme"}, homme:{id:"charon", label:"
 let voix = store.get("voix", "femme");
 if(!VOIX[voix]) voix = "femme";
 let player = null, playToken = 0;
+/* Le haut-parleur touché montre des ondes tant que le son joue */
+let parleEl = null;
+function finParle(){ if(parleEl){ parleEl.classList.remove("parle"); parleEl = null; } }
 
 function stopAll(){
   playToken++;
+  finParle();
   if(player){ player.pause(); player = null; }
   if("speechSynthesis" in window) speechSynthesis.cancel();
 }
@@ -111,13 +115,14 @@ function playOne(text, done, token){
   player = a;
   a.play().catch(() => { if(token === playToken && !text.startsWith("rec:")) speakDevice(clean, done); });
 }
-function speak(text){ stopAll(); playOne(text, null, playToken); }
+function speak(text){ stopAll(); const token = playToken; playOne(text, () => { if(token === playToken) finParle(); }, token); }
 function speakSeq(texts){
   stopAll();
   const token = playToken;
   let i = 0;
   const next = () => {
-    if(token !== playToken || i >= texts.length) return;
+    if(token !== playToken) return;
+    if(i >= texts.length){ finParle(); return; }
     const t = texts[i++];
     playOne(t, () => setTimeout(next, 350), token);
   };
@@ -507,7 +512,7 @@ UNITES.forEach((u, n) => {
       if(c) u.noeuds.push({k:"situation", id: sid, titre: c.titre, href: "#/situ/" + sid});
     });
   });
-  u.noeuds.push({k:"revision", id: "u" + n, titre: "Révision de l'unité", href: "#/revision/" + n});
+  u.noeuds.push({k:"revision", id: "u" + n, titre: "Révision de l'étape", href: "#/revision/" + n});
   u.noeuds.forEach(x => { x.u = u; NOEUDS.push(x); });
 });
 const CLE_NOEUD = {situation: "situations", revision: "revisions"};
@@ -531,6 +536,46 @@ function cheminUnite(u){
       el("span", {class:"dot", html: icone}),
       !estCur ? el("span", {class:"lab"}, x.titre) : null);
   }));
+}
+
+/* ---------- Le voyage de Plume : une ville par étape ---------- */
+const uniteFaite = u => u.noeuds.every(noeudFait);
+const villeImg = u => "img/villes/" + u.ville + ".webp";
+/* Plume posée dans le décor, avec son ombre au sol */
+const plumePosee = (att, anim, cls) => el("span", {class:"plume-posee " + (cls || "")}, el("span", {class:"sol"}), plume(att, anim));
+function carteVille(u, i, uc, revele){
+  const etat = uniteFaite(u) ? "fait" : u === uc ? "cur" : "lock";
+  const badge = {fait:"Visitée", cur:"Vous êtes ici", lock:"Bientôt"}[etat];
+  const faits = u.noeuds.filter(noeudFait).length;
+  const kids = [
+    el("span", {class:"photo", style:"background-image:url(" + villeImg(u) + ")"}),
+    el("span", {class:"voile"}),
+    el("span", {class:"badge-ville"}, etat === "fait" ? el("span", {html: ICON.checkSm}) : etat === "lock" ? el("span", {html: ICON.cadenas}) : null, badge),
+    el("span", {class:"infos"},
+      el("span", {class:"etape"}, "Étape " + (u.n + 1) + (etat === "cur" ? " · " + faits + " / " + u.noeuds.length : "")),
+      el("span", {class:"ville"}, VILLES[u.ville]),
+      el("span", {class:"theme"}, u.titre)),
+    etat === "cur" ? plumePosee("coucou", "coucou", "carte-plume") : null];
+  const cls = "carte-ville " + etat + (revele === u.n ? " revele" : "");
+  const style = "animation-delay:" + (Math.min(i, 6) * 0.06).toFixed(2) + "s";
+  const label = "Étape " + (u.n + 1) + ", " + VILLES[u.ville] + ", " + u.titre + " : " + badge;
+  if(etat === "lock") return el("button", {type:"button", class: cls, style, "aria-label": label, onclick: ev => {
+    const b = ev.currentTarget; b.classList.remove("non"); void b.offsetWidth; b.classList.add("non");
+    toast("Finissez d'abord l'étape " + (uc.n + 1) + ".");
+  }}, ...kids);
+  return el("a", {href:"#/unite/" + u.n, class: cls, style, "aria-label": label}, ...kids);
+}
+/* Fin d'une étape : la ville suivante prend ses couleurs, le tampon tombe, Plume saute */
+function arrivee(u, suiv, score, total){
+  const ligne = auHasard(PLUME.fin);
+  setTimeout(() => speak(ligne), 600);
+  return [
+    el("div", {class:"scene arrivee", style:"background-image:url(" + villeImg(suiv) + ")"},
+      el("div", {class:"tampon"}, el("small", null, "Prochaine étape"), el("b", null, VILLES[suiv.ville])),
+      plumePosee("joie", "saute", "arrivee-plume")),
+    el("p", {class:"fin-dit"}, ligne),
+    el("h1", {style:"text-align:center"}, "Étape " + (u.n + 1) + " finie !"),
+    el("div", {class:"score"}, score + " / " + total)];
 }
 
 /* =========================================================
@@ -582,7 +627,35 @@ function exoAudio(e){
   if(e.type === "choisir") t.push(e.faux);
   return t.filter(Boolean);
 }
-const spkBtn = (onclick, label, cls) => el("button", {class:"spk" + (cls ? " " + cls : ""), type:"button", "aria-label": label || "Écouter", html: ICON.sound, onclick});
+const spkBtn = (onclick, label, cls) => el("button", {class:"spk" + (cls ? " " + cls : ""), type:"button", "aria-label": label || "Écouter", html: ICON.sound,
+  onclick: ev => { const b = ev.currentTarget; onclick(ev); parleEl = b; b.classList.add("parle"); }});
+
+const MARQUE_OK = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="trace" d="M5 12l5 5L20 7"/></svg>';
+const MARQUE_KO = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path class="trace" d="M18 6L6 18M6 6l12 12"/></svg>';
+/* Petits éclats dorés autour d'un point (barre de progression qui avance) */
+function eclats(cible){
+  if(!cible || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const r = cible.getBoundingClientRect();
+  for(let i = 0; i < 10; i++){
+    const a = Math.PI * 2 * i / 10, s = el("span", {class:"eclat"});
+    s.style.left = (r.right) + "px"; s.style.top = (r.top + r.height / 2 + window.scrollY) + "px";
+    s.style.setProperty("--dx", Math.cos(a) * 34 + "px"); s.style.setProperty("--dy", Math.sin(a) * 34 + "px");
+    if(i % 2) s.style.background = "var(--primary)";
+    document.body.append(s); setTimeout(() => s.remove(), 700);
+  }
+}
+/* Confettis à l'arrivée dans une nouvelle ville */
+function confettis(){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const cols = ["#F7C548", "#E85D75", "#2F3E8C", "#7DB84A"];
+  for(let i = 0; i < 26; i++){
+    const c = el("span", {class:"confetti"});
+    c.style.left = Math.random() * 100 + "vw"; c.style.background = cols[i % 4];
+    c.style.setProperty("--dx", (Math.random() * 80 - 40) + "px"); c.style.setProperty("--r", (Math.random() * 720 - 360) + "deg");
+    c.style.animationDuration = (1.8 + Math.random() * 1.4) + "s"; c.style.animationDelay = Math.random() * .5 + "s";
+    document.body.append(c); setTimeout(() => c.remove(), 3800);
+  }
+}
 
 function exo(e, cb){
   const consigne = consigneDe(e), enonce = enonceDe(e);
@@ -606,7 +679,9 @@ function exo(e, cb){
   });
   const juger = right => {
     fige = true;
-    boxes.forEach(b => { b.classList.remove("sel"); if(b.dataset.v === right) b.classList.add("ok"); else if(b.dataset.v === choix) b.classList.add("ko"); });
+    boxes.forEach(b => { b.classList.remove("sel");
+      if(b.dataset.v === right){ b.classList.add("ok"); b.append(el("span", {class:"marque ok", html: MARQUE_OK})); }
+      else if(b.dataset.v === choix){ b.classList.add("ko"); b.append(el("span", {class:"marque ko", html: MARQUE_KO})); } });
     return choix === right;
   };
   const res = {consigne, enonce, auto: false, autoEnonce: e.type === "ecouter" || e.type === "vraifaux"};
@@ -713,6 +788,8 @@ function serie(exos, o){
     const resultat = (good, msg) => {
       if(good) score++;
       noterReponse(e, good);
+      const barre = wrap.querySelector(".bar.big>div");
+      if(barre){ barre.style.width = Math.round((idx + 1) / exos.length * 100) + "%"; if(good) setTimeout(() => eclats(barre), 450); }
       const full = exoTexte(e);
       const verdict = auHasard(good ? PLUME.juste : PLUME.faux);
       const dire = [verdict, full].filter(Boolean);
@@ -871,36 +948,24 @@ const PAGES = {
 
   accueil(){
     if(!pget("tuto", false)){ setTimeout(() => go("#/tuto")); return {kids:[]}; }
-    const cur = noeudCourant(), u = uniteCourante();
-    const faits = u.noeuds.filter(noeudFait).length, total = u.noeuds.length;
-    const suivante = UNITES[u.n + 1], nE = listeErreurs().length;
+    const uc = uniteCourante(), nE = listeErreurs().length;
+    const visitees = UNITES.filter(uniteFaite).length;
+    const revele = pget("revele", null);
+    if(revele != null) pset("revele", null);
+    if(uc.n > 1) setTimeout(() => { const c = document.querySelector(".carte-ville.cur"); if(c) c.scrollIntoView({block:"center"}); }, 80);
     return {kids:[
       el("div", {class:"row", style:"justify-content:space-between;align-items:center;gap:10px"},
         el("div", {class:"stack", style:"gap:4px"},
-          el("h1", {style:"font-size:27px;letter-spacing:-.5px"}, "Bonjour " + nomProfil()),
+          el("h1", {style:"font-size:28px;letter-spacing:-.5px"}, "Mon voyage"),
           window.BETA ? el("span", {class:"badge warm"}, "Version bêta") : null),
-        streak() ? el("span", {class:"streak", "aria-label": pluriel(streak(), "jour") + " de suite"}, el("span", {html: ICON.flameFill}), pluriel(streak(), "jour")) : null),
+        streak() ? el("span", {class:"streak", "aria-label": pluriel(streak(), "jour") + " de suite"}, el("span", {class:"flamme", html: ICON.flameFill}), pluriel(streak(), "jour")) : null),
+      el("p", {class:"muted", style:"margin:-6px 0 0;font-weight:700"}, "Bonjour " + nomProfil() + ". " + visitees + " ville" + (visitees > 1 ? "s" : "") + " sur " + UNITES.length + "."),
       genreProfil() ? null : el("a", {href:"#/reglage/genre", class:"note warm", style:"color:inherit"}, ic("info"), "Dites-nous si vous êtes une femme ou un homme."),
-      plumeDit("complice", PL_DEVISE, "entre"),
-      el("div", {class:"hero"},
-        el("div", {class:"row", style:"justify-content:space-between;gap:10px"},
-          el("span", {class:"hero-k"}, "Unité " + (u.n + 1) + " · " + u.titre),
-          el("a", {href:"#/guide/" + u.n, class:"hero-guide"}, el("span", {html: ICON.bookOpen}), "Le guide")),
-        el("div", {class:"row", style:"gap:10px;align-items:flex-start"},
-          el("span", {class:"hero-d grow"}, u.but.flatMap((t, i) => i ? [el("br"), t] : [t])),
-          spkBtn(() => speakSeq(u.but), "Écouter", "sm hero-spk")),
-        el("div", {class:"hero-bar", "aria-label": faits + " étapes sur " + total}, el("div", {style:"width:" + Math.round(faits / total * 100) + "%"})),
-        cur ? el("a", {href: cur.href, class:"hero-btn"}, el("span", {html: ICON.play}), "Continuer")
-          : el("span", {class:"hero-btn"}, "Tout est fini, bravo !")),
       nE ? el("a", {href:"#/entrainer/erreurs", class:"card row", style:"color:var(--fg);gap:14px"},
           el("span", {class:"tile-ic err-ic", html: ICON.replay}),
           el("span", {class:"grow stack", style:"gap:3px"}, el("b", {style:"font-size:18px"}, pluriel(nE, "erreur") + " à refaire"),
             el("span", {class:"soft"}, "Dans Réviser.")), ic("chev", "chev")) : null,
-      cheminUnite(u),
-      suivante ? el("div", {class:"card row locked", style:"gap:12px"},
-        el("span", {class:"tile-ic", html: ICON.cadenas}),
-        el("span", {class:"stack", style:"gap:2px"}, el("b", null, "Unité " + (u.n + 2) + " · " + suivante.titre),
-          el("span", {class:"soft"}, "S'ouvre après l'unité " + (u.n + 1)))) : null
+      el("div", {class:"voyage"}, UNITES.map((u, i) => carteVille(u, i, uc, revele)))
     ]};
   },
 
@@ -937,9 +1002,30 @@ const PAGES = {
   unite(n){
     const u = UNITES[Number(n)];
     if(!u) return PAGES.accueil();
-    return {kids:[pageHead("Unité " + (u.n + 1) + " · " + u.titre),
-      el("p", {class:"falc", style:"margin:0"}, u.but.flatMap((t, i) => i ? [el("br"), t] : [t])),
-      el("a", {href:"#/guide/" + u.n, class:"btn outline"}, el("span", {html: ICON.bookOpen}), "Le guide de l'unité"),
+    const cur = noeudCourant(), ici = cur && cur.u === u;
+    const faits = u.noeuds.filter(noeudFait).length, total = u.noeuds.length;
+    const barre = el("div", {style:"width:0"});
+    setTimeout(() => { barre.style.width = Math.round(faits / total * 100) + "%"; }, 250);
+    PL_DEVISE.forEach(t => pageTexts.add(t)); u.but.forEach(t => pageTexts.add(t));
+    return {kids:[
+      el("div", {class:"scene", style:"background-image:url(" + villeImg(u) + ")"},
+        el("div", {class:"scene-haut"},
+          el("a", {href:"#/", class:"pastille rond", "aria-label":"Retour au voyage", html: ICON.back}),
+          el("span", {class:"pastille"}, "Étape " + (u.n + 1) + " · " + VILLES[u.ville])),
+        plumePosee("coucou", "coucou", "scene-plume"),
+        el("div", {class:"bulle-scene"},
+          el("p", null, el("span", {class:"nom"}, "Plume"), ...PL_DEVISE.flatMap((t, i) => i ? [el("br"), t] : [t])),
+          spkBtn(() => parlePlume(PL_DEVISE), "Écouter Plume", "sm"))),
+      el("div", {class:"carte-etape"},
+        el("span", {class:"surtitre"}, u.titre),
+        el("div", {class:"row", style:"gap:10px;align-items:flex-start"},
+          el("span", {class:"etape-but grow"}, u.but.flatMap((t, i) => i ? [el("br"), t] : [t])),
+          spkBtn(() => speakSeq(u.but), "Écouter", "sm")),
+        el("div", {class:"row", style:"gap:10px"},
+          el("div", {class:"bar grow big", "aria-label": faits + " sur " + total}, barre),
+          el("b", {style:"font-size:15px"}, faits + " / " + total)),
+        ici ? el("a", {href: cur.href, class:"btn"}, el("span", {html: ICON.play}), "Continuer") : null,
+        el("a", {href:"#/guide/" + u.n, class:"btn outline"}, el("span", {html: ICON.bookOpen}), "Le guide de l'étape")),
       cheminUnite(u)]};
   },
 
@@ -947,8 +1033,8 @@ const PAGES = {
     const u = UNITES[Number(n)];
     if(!u) return PAGES.accueil();
     const ls = u.noeuds.filter(x => x.k === "lecon").map(x => x.l);
-    return {kids:[pageHead("Le guide"), el("h1", null, "Unité " + (u.n + 1) + " · " + u.titre),
-      el("p", {class:"muted", style:"margin:0"}, "Les règles de l'unité, à relire quand vous voulez."),
+    return {kids:[pageHead("Le guide"), el("h1", null, "Étape " + (u.n + 1) + " · " + u.titre),
+      el("p", {class:"muted", style:"margin:0"}, "Les règles de l'étape, à relire quand vous voulez."),
       ...ls.map(l => el("div", {class:"card stack", style:"gap:10px"},
         el("div", {class:"row", style:"justify-content:space-between;gap:10px"}, el("h2", {class:"grow"}, l.titre),
           spkBtn(() => speakSeq([lu(l.regle), ...(l.astuce ? [ASTUCE, lu(l.astuce)] : [])]), "Écouter la règle", "sm")),
@@ -968,7 +1054,13 @@ const PAGES = {
     const pool = u.noeuds.filter(x => x.k === "lecon").flatMap(x => x.l.pool);
     return {kids:[serie(tirer(pool, 10), {fermer:"#/", fin:(sc, tot) => {
       marquerNoeud("revision", "u" + u.n);
-      return {body: finSerie(sc, tot, "Révision de l'unité " + (u.n + 1) + " terminée."), foot:[boutonSuite()]};
+      const suiv = UNITES[u.n + 1];
+      if(suiv && uniteFaite(u)){
+        pset("revele", suiv.n);
+        setTimeout(confettis, 500);
+        return {body: arrivee(u, suiv, sc, tot), foot:[el("a", {href:"#/unite/" + suiv.n, class:"btn"}, "En route !", el("span", {html: ICON.next}))]};
+      }
+      return {body: finSerie(sc, tot, "Révision de l'étape " + (u.n + 1) + " terminée."), foot:[boutonSuite()]};
     }})]};
   },
 
@@ -982,7 +1074,7 @@ const PAGES = {
             el("span", null, nE ? pluriel(nE, "exercice") + " à refaire" : "Aucune erreur à refaire"))),
         nE ? el("span", {class:"err-btn"}, el("span", {html: ICON.play}), "Commencer") : null,
         corr ? el("span", {style:"font-size:14px"}, "Déjà " + pluriel(corr, "erreur") + " " + (corr > 1 ? "corrigées" : "corrigée") + ". Bravo !") : null),
-      commencees.length ? el("h2", null, "Refaire une unité") : null,
+      commencees.length ? el("h2", null, "Refaire une étape") : null,
       commencees.length ? el("div", {class:"list"}, commencees.map(u => el("a", {href:"#/unite/" + u.n},
         el("span", {class:"avatar sm" + (u.noeuds.every(noeudFait) ? "" : " grey")}, String(u.n + 1)),
         el("span", {class:"grow"}, u.titre), ic("chev", "chev")))) : null,

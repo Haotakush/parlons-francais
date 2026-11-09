@@ -4,6 +4,34 @@ Une entrée par séance de travail, la plus récente en haut. Pour chaque séanc
 
 ---
 
+## 2026-11-09 — v12 (bêta) : le voyage de Plume et les petites animations
+
+**Demande d'Eric**
+- Une ville par étape pour donner un fil conducteur (8 images de villes fournies). Maquettes V4 → V7 validées : Plume mieux intégrée (ombre), fond en dégradé.
+- Des petites animations « pour rendre la chose plus fluide », inspirées d'Uiverse (catalogue validé : « PARFAIT ! »).
+
+**Décidé avec Eric**
+- 10 étapes pour 8 villes : 2 villes servent 2 fois (Toulouse pour « Raconter hier » 1 et 2, Paris au départ et à l'arrivée).
+- La 3e image est Annecy.
+- On dit « étape » au lieu d'« unité ».
+
+**Fait**
+- Accueil « Mon voyage » : une carte par ville. Visitée (badge vert), en cours (halo doré + Plume), bientôt (grise, tremble si on la touche).
+- Écran d'étape : la ville en grand, Plume posée avec son ombre et sa bulle, carte avec le but, la barre et « Continuer », puis le chemin.
+- Fin d'étape : la ville suivante prend ses couleurs, tampon « Prochaine étape », Plume saute, confettis, « En route ! ».
+- Animations : bouton jaune qui s'enfonce, écran qui glisse, flamme qui vacille, ondes sur le haut-parleur pendant le son,
+  réponse qui rebondit, coche ou croix qui se dessine, réponse fausse qui secoue, bandeau qui monte, barre qui avance avec des éclats.
+- Images des villes en WebP (`beta/img/villes/`, 412 Ko), ajoutées au service worker (`parlons-beta-v10`).
+
+**Appris**
+- L'ancienne règle « Réduire les animations » coupait tout. Maintenant, elle ne coupe que les grands mouvements (glissements, sauts, confettis).
+
+**À faire**
+- Eric teste la bêta sur téléphone.
+- Plus tard peut-être : 2 images de villes en plus pour ne plus répéter Toulouse et Paris.
+
+---
+
 ## 2026-11-08 — v11.1 (bêta) : Plume parle (préparation de sa voix)
 
 **Décidé avec Eric**

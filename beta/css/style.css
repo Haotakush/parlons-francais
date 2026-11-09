@@ -167,7 +167,7 @@ body.immersive .tabs{display:none}
 .tab.on span{background:var(--primary-soft)}
 
 .toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:15px;z-index:20;max-width:90vw;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.2)}
-@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+/* « Réduire les animations » : voir la fin du fichier (on coupe seulement les grands mouvements) */
 .field{width:100%;min-height:52px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--bg);color:var(--fg);font:inherit;font-size:18px;padding:0 14px}
 .field:focus{outline:2px solid var(--primary);outline-offset:1px;border-color:var(--primary)}
 
@@ -357,7 +357,7 @@ h1{letter-spacing:-.3px}
 @keyframes plume-pense{0%,100%{transform:rotate(0) translateY(0)}50%{transform:rotate(-2.5deg) translateY(-2px)}}
 @keyframes plume-saute{0%,100%{transform:translateY(0) rotate(0)}30%{transform:translateY(-26px) rotate(-4deg)}55%{transform:translateY(0) rotate(2deg)}70%{transform:translateY(-8px)}85%{transform:translateY(0)}}
 @keyframes plume-tete{from{opacity:0;transform:scale(.6) rotate(-10deg)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion: reduce){.plume,.plume.entre,.plume.coucou,.plume.pense,.plume.saute,.plume.tete,.bulle-plume{animation:none!important}}
+
 
 .avec-plume{display:flex;align-items:flex-end;gap:10px}
 .avec-plume .plume{width:96px;flex-shrink:0}
@@ -373,3 +373,139 @@ h1{letter-spacing:-.3px}
 .astuce-plume b.k{display:block;font-size:13px;letter-spacing:.4px;text-transform:uppercase;margin-bottom:2px}
 .vide-plume{align-self:center;height:200px;width:auto}
 .fin-dit{margin:0;text-align:center;font-size:19px;font-weight:700;color:var(--primary-ink)}
+
+
+/* =========================================================
+   V12 : LE VOYAGE DE PLUME + PETITES ANIMATIONS
+   Couleurs des maquettes V4/V7 : bleu de Plume, boutons jaunes qui s'enfoncent, fond en dégradé.
+   ========================================================= */
+:root{
+  --jaune:#F7C548; --jaune-ombre:#D99B1E; --jaune-ink:#3D2C08;
+  --fond-haut:#FBE7D6; --fond-milieu:#F7EFE4; --fond-bas:#EEF3FA;
+  --verdure:rgba(125,184,74,.14); --soleil:rgba(247,197,72,.20);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --jaune:#F2C14E; --jaune-ombre:#A8770F; --jaune-ink:#2B1F05;
+    --fond-haut:#1E1B33; --fond-milieu:#15182E; --fond-bas:#111528;
+    --verdure:rgba(125,184,74,.08); --soleil:rgba(247,197,72,.08);
+  }
+}
+body{background:
+  radial-gradient(120% 50% at 0% 100%, var(--verdure), transparent 60%),
+  radial-gradient(90% 45% at 100% 85%, var(--soleil), transparent 60%),
+  linear-gradient(180deg, var(--fond-haut) 0%, var(--fond-milieu) 38%, var(--fond-bas) 100%) fixed;
+  background-color:var(--fond-milieu);min-height:100vh}
+
+/* L'écran qui glisse en arrivant */
+#app>.stack{animation:ecran-entre .38s cubic-bezier(.2,.8,.2,1) both}
+@keyframes ecran-entre{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:none}}
+
+/* Le bouton jaune qui s'enfonce */
+.btn{background:var(--jaune);color:var(--jaune-ink);font-weight:800;letter-spacing:.2px;box-shadow:0 5px 0 var(--jaune-ombre);transition:transform .08s,box-shadow .08s;border-radius:16px}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--jaune-ombre)}
+.btn.outline{background:var(--card);color:var(--fg);box-shadow:0 4px 0 var(--border)}
+.btn.outline:active{transform:translateY(3px);box-shadow:0 1px 0 var(--border)}
+.sheet.ok .btn{background:#15803D;color:#fff;box-shadow:0 5px 0 #0F5C2C}
+.sheet.ok .btn:active{box-shadow:0 1px 0 #0F5C2C}
+.sheet.ko .btn{background:#B3302E;color:#fff;box-shadow:0 5px 0 #7F1D1D}
+.sheet.ko .btn:active{box-shadow:0 1px 0 #7F1D1D}
+.choice{transition:transform .08s,box-shadow .08s,background .2s,border-color .2s}
+.choice:active{transform:translateY(2px)}
+
+/* La flamme qui vacille */
+.streak .flamme{display:inline-flex;transform-origin:50% 90%;animation:vacille 1.6s ease-in-out infinite}
+@keyframes vacille{0%,100%{transform:scale(1) rotate(0)}30%{transform:scale(1.1,.92) rotate(-5deg)}60%{transform:scale(.95,1.08) rotate(4deg)}}
+
+/* Le haut-parleur qui parle : des ondes tant que le son joue */
+.spk{position:relative}
+.spk::before,.spk::after{content:"";position:absolute;inset:0;border-radius:50%;border:3px solid var(--primary);opacity:0;pointer-events:none}
+.spk.parle::before{animation:onde 1.2s ease-out infinite}
+.spk.parle::after{animation:onde 1.2s ease-out .6s infinite}
+.spk.parle{background:var(--primary);color:var(--primary-fg)}
+@keyframes onde{from{transform:scale(1);opacity:.55}to{transform:scale(1.8);opacity:0}}
+
+/* Réponse choisie qui rebondit, juste = coche dessinée, fausse = elle secoue la tête */
+.choice.sel{animation:rebond .35s cubic-bezier(.34,1.56,.64,1)}
+@keyframes rebond{0%{transform:scale(1)}40%{transform:scale(1.035)}100%{transform:scale(1)}}
+.choice.ko{animation:non .4s}
+@keyframes non{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.choice{position:relative}
+.marque{position:absolute;right:10px;top:50%;width:28px;height:28px;margin-top:-14px;border-radius:50%;display:flex;align-items:center;justify-content:center;animation:pop .35s cubic-bezier(.34,1.56,.64,1) both}
+.marque.ok{background:#16A34A}.marque.ko{background:#DC2626}
+.marque .trace{stroke-dasharray:30;stroke-dashoffset:30;animation:trace .45s .15s ease-out forwards}
+@keyframes trace{to{stroke-dashoffset:0}}
+.choice.ok,.choice.ko{padding-right:46px}
+
+/* Le bandeau qui monte, la barre qui avance avec des éclats */
+.sheet{animation:bandeau .38s cubic-bezier(.2,.8,.2,1) both}
+@keyframes bandeau{from{transform:translateY(100%)}to{transform:none}}
+.bar>div{transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.eclat{position:absolute;z-index:50;width:8px;height:8px;margin:-4px;border-radius:50%;background:var(--jaune);pointer-events:none;animation:eclat .6s ease-out forwards}
+@keyframes eclat{to{transform:translate(var(--dx),var(--dy)) scale(.3);opacity:0}}
+
+/* Mon voyage : les cartes des villes */
+.voyage{display:flex;flex-direction:column;gap:14px;padding-bottom:6px}
+.carte-ville{position:relative;display:block;width:100%;height:124px;border:0;padding:0;border-radius:22px;color:#fff;text-align:left;font:inherit;box-shadow:0 4px 0 rgba(27,31,59,.10);animation:cascade .5s cubic-bezier(.2,.8,.2,1) both}
+.carte-ville .photo{position:absolute;inset:0;border-radius:22px;background-size:cover;background-position:center;transition:filter 1.4s ease}
+.carte-ville .voile{position:absolute;inset:0;border-radius:22px;background:linear-gradient(to top,rgba(20,24,52,.8),rgba(20,24,52,0) 68%)}
+.carte-ville .infos{position:absolute;left:16px;bottom:12px;right:110px;display:flex;flex-direction:column}
+.carte-ville .etape{font-size:13px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;opacity:.92}
+.carte-ville .ville{font-size:21px;font-weight:900;line-height:1.1}
+.carte-ville .theme{font-size:15px;font-weight:700;opacity:.95}
+.badge-ville{position:absolute;left:14px;top:12px;display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:4px 10px;font-size:13px;font-weight:900}
+.badge-ville svg{width:14px;height:14px}
+.carte-ville.fait .badge-ville{background:#15803D;color:#fff}
+.carte-ville.lock .badge-ville{background:rgba(27,31,59,.78);color:#fff}
+.carte-ville.lock .photo{filter:grayscale(1) brightness(.85)}
+.carte-ville.lock.non{animation:non .4s}
+.carte-ville.cur{height:176px;animation:cascade .5s cubic-bezier(.2,.8,.2,1) both,halo 2.4s ease-in-out .6s infinite}
+.carte-ville.cur .badge-ville{background:var(--jaune);color:var(--jaune-ink)}
+.carte-ville.cur .ville{font-size:26px}
+.carte-ville.revele .photo{animation:revele 1.8s .4s ease both}
+@keyframes cascade{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes halo{0%,100%{box-shadow:0 0 0 4px var(--jaune),0 8px 20px rgba(27,31,59,.18)}50%{box-shadow:0 0 0 8px rgba(247,197,72,.7),0 8px 24px rgba(27,31,59,.22)}}
+@keyframes revele{from{filter:grayscale(1) brightness(.85)}to{filter:none}}
+
+/* Plume posée dans le décor, avec son ombre */
+.plume-posee{position:absolute;display:block}
+.plume-posee .plume{position:absolute;left:0;bottom:0;height:100%;width:auto;max-width:none;filter:drop-shadow(5px 9px 7px rgba(60,35,25,.28)) sepia(.08)}
+.plume-posee .sol{position:absolute;left:14%;right:14%;bottom:-4px;height:12px;border-radius:50%;background:radial-gradient(closest-side,rgba(40,25,20,.55),rgba(40,25,20,0))}
+.carte-plume{right:8px;bottom:6px;width:96px;height:158px}
+
+/* L'étape : la ville en grand, Plume, puis la carte */
+.scene{position:relative;height:330px;margin:calc(-20px - env(safe-area-inset-top)) -20px 0;background-size:cover;background-position:center;flex-shrink:0}
+.scene::after{content:"";position:absolute;left:0;right:0;bottom:0;height:60px;background:linear-gradient(to bottom,transparent,var(--fond-haut))}
+.scene-haut{position:absolute;left:16px;right:16px;top:calc(14px + env(safe-area-inset-top));display:flex;justify-content:space-between;align-items:center;z-index:2}
+.pastille{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.94);color:#1F2A66;border-radius:999px;padding:7px 13px;font-weight:800;font-size:15px}
+.pastille.rond{width:44px;height:44px;padding:0;justify-content:center}
+.pastille svg{width:20px;height:20px}
+.scene-plume{left:18px;bottom:44px;width:136px;height:220px;z-index:1}
+.bulle-scene{position:absolute;left:160px;right:16px;top:calc(96px + env(safe-area-inset-top));z-index:2;background:#fff;color:#1B1F3B;border-radius:18px 18px 18px 4px;padding:10px 12px;display:flex;gap:8px;align-items:flex-start;box-shadow:0 4px 0 rgba(31,42,102,.14);animation:bulle-pop .4s .3s cubic-bezier(.34,1.56,.64,1) both}
+.bulle-scene p{margin:0;font-size:16px;line-height:1.35;font-weight:700;flex-grow:1}
+.bulle-scene .nom{display:block;font-size:12px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;color:#B3302E}
+.carte-etape{position:relative;z-index:3;margin-top:-56px;background:var(--card);border-radius:24px;padding:18px;display:flex;flex-direction:column;gap:12px;box-shadow:0 8px 24px rgba(27,31,59,.12);animation:monte .5s .1s cubic-bezier(.2,.8,.2,1) both}
+@keyframes monte{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+.surtitre{font-size:13px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;color:var(--rouge)}
+.etape-but{font-size:20px;font-weight:800;line-height:1.3}
+
+/* L'arrivée : la ville prend ses couleurs, le tampon tombe, Plume saute, confettis */
+.scene.arrivee{margin:0;height:300px;border-radius:24px;overflow:visible;animation:revele 1.6s .2s ease both}
+.scene.arrivee::after{display:none}
+.tampon{position:absolute;left:50%;top:18px;z-index:2;background:#fff;border-radius:14px;padding:8px 18px;text-align:center;border:2px dashed #B3302E;box-shadow:0 6px 16px rgba(27,31,59,.2);animation:tampon .6s .3s cubic-bezier(.34,1.56,.64,1) both}
+.tampon small{display:block;font-size:12px;font-weight:900;letter-spacing:.8px;text-transform:uppercase;color:#B3302E}
+.tampon b{font-size:24px;color:#1F2A66}
+@keyframes tampon{from{opacity:0;transform:translateX(-50%) scale(1.6) rotate(-14deg)}to{opacity:1;transform:translateX(-50%) rotate(-3deg)}}
+.arrivee-plume{left:50%;margin-left:-80px;bottom:-6px;width:160px;height:210px}
+.confetti{position:fixed;top:-20px;z-index:60;width:8px;height:14px;border-radius:2px;pointer-events:none;animation:tombe linear forwards}
+@keyframes tombe{to{transform:translate(var(--dx),110vh) rotate(var(--r))}}
+
+/* « Réduire les animations » : on garde les petits signes utiles (bouton, ondes, coche),
+   on coupe les grands mouvements (glissements, sauts, confettis, cascade). */
+@media (prefers-reduced-motion: reduce){
+  #app>.stack,.carte-ville,.carte-etape,.sheet,.tampon,.plume.saute,.plume.coucou,.plume.entre,.bulle-plume,.bulle-scene{animation:none!important}
+  .carte-ville.cur{animation:halo 2.4s ease-in-out infinite!important}
+  .confetti,.eclat{display:none}
+}
+/* La série d'exercices prend tout l'écran : le bandeau du bas reste collé en bas */
+.serie{min-height:calc(100dvh - 44px - env(safe-area-inset-top))}

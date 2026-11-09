@@ -68,6 +68,9 @@ Navigation par « hash » (`#/sons`, `#/cat/garage`, `#/lecon`…). Chaque page 
 **Design**
 - Style inspiré de shadcn/ui : cartes à bordure fine, gris neutres, onglets segmentés, badges, barres de progression.
 - Couleur principale : le vert (`--primary`). Orange (`--warm`) réservé aux mots qu'on peut changer et aux astuces.
+- Bêta (v12) : couleurs de Plume (bleu `--primary`, rouge `--rouge`), boutons jaunes qui s'enfoncent (`--jaune`), fond en dégradé.
+  Accueil « Mon voyage » : une ville par étape (`ville` dans `beta/js/parcours.js`, images `beta/img/villes/`).
+  Petites animations courtes ; « Réduire les animations » coupe seulement les grands mouvements.
 - Icônes dessinées en SVG (objet `ICON` dans `js/app.js`), **jamais d'emoji** dans l'interface.
 - Zones tactiles d'au moins 44 px, texte d'au moins 15 px, contraste suffisant, vrais `<button>` et `<a>`.
 - Toujours utiliser les variables CSS existantes plutôt que des couleurs en dur.
